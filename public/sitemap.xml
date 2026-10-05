@@ -1,451 +1,455 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://toolora.com/</loc>
+    <loc>https://toolorahub.vercel.app/</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://toolora.com/tools</loc>
+    <loc>https://toolorahub.vercel.app/tools</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://toolora.com/about</loc>
+    <loc>https://toolorahub.vercel.app/about</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://toolora.com/contact</loc>
+    <loc>https://toolorahub.vercel.app/contact</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://toolora.com/privacy</loc>
+    <loc>https://toolorahub.vercel.app/privacy</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://toolora.com/terms</loc>
+    <loc>https://toolorahub.vercel.app/terms</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://toolora.com/disclaimer</loc>
+    <loc>https://toolorahub.vercel.app/disclaimer</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
   </url>
+
   <url>
-    <loc>https://toolora.com/category/image-tools</loc>
+    <loc>https://toolorahub.vercel.app/category/image-tools</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://toolora.com/category/pdf-tools</loc>
+    <loc>https://toolorahub.vercel.app/category/pdf-tools</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://toolora.com/category/student-tools</loc>
+    <loc>https://toolorahub.vercel.app/category/student-tools</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://toolora.com/category/utility-tools</loc>
+    <loc>https://toolorahub.vercel.app/category/utility-tools</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://toolora.com/category/student-utility</loc>
+    <loc>https://toolorahub.vercel.app/category/student-utility</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://toolorahub.vercel.app/tools/image-compressor</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://toolora.com/tools/image-compressor</loc>
+    <loc>https://toolorahub.vercel.app/tools/image-resizer</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://toolora.com/tools/image-resizer</loc>
+    <loc>https://toolorahub.vercel.app/tools/jpg-to-png</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://toolora.com/tools/jpg-to-png</loc>
+    <loc>https://toolorahub.vercel.app/tools/png-to-jpg</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://toolora.com/tools/png-to-jpg</loc>
-    <lastmod>2026-10-05</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://toolora.com/tools/jpg-to-webp</loc>
+    <loc>https://toolorahub.vercel.app/tools/jpg-to-webp</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://toolora.com/tools/png-to-webp</loc>
+    <loc>https://toolorahub.vercel.app/tools/png-to-webp</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://toolora.com/tools/webp-to-jpg</loc>
+    <loc>https://toolorahub.vercel.app/tools/webp-to-jpg</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://toolora.com/tools/webp-to-png</loc>
+    <loc>https://toolorahub.vercel.app/tools/webp-to-png</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://toolora.com/tools/image-to-pdf</loc>
+    <loc>https://toolorahub.vercel.app/tools/image-to-pdf</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://toolora.com/tools/crop-image</loc>
+    <loc>https://toolorahub.vercel.app/tools/crop-image</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://toolora.com/tools/rotate-flip-image</loc>
+    <loc>https://toolorahub.vercel.app/tools/rotate-flip-image</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://toolora.com/tools/add-watermark</loc>
+    <loc>https://toolorahub.vercel.app/tools/add-watermark</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://toolora.com/tools/social-media-resizer</loc>
+    <loc>https://toolorahub.vercel.app/tools/social-media-resizer</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://toolorahub.vercel.app/tools/percentage-calculator</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://toolora.com/tools/percentage-calculator</loc>
+    <loc>https://toolorahub.vercel.app/tools/age-calculator</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://toolorahub.vercel.app/tools/gpa-calculator</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://toolora.com/tools/age-calculator</loc>
-    <lastmod>2026-10-05</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://toolora.com/tools/gpa-calculator</loc>
+    <loc>https://toolorahub.vercel.app/tools/word-counter</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://toolora.com/tools/word-counter</loc>
+    <loc>https://toolorahub.vercel.app/tools/character-counter</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://toolorahub.vercel.app/tools/unit-converter</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://toolora.com/tools/character-counter</loc>
+    <loc>https://toolorahub.vercel.app/tools/study-timer</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://toolora.com/tools/unit-converter</loc>
+    <loc>https://toolorahub.vercel.app/tools/qr-code-generator</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://toolora.com/tools/study-timer</loc>
+    <loc>https://toolorahub.vercel.app/tools/rotate-image</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://toolora.com/tools/qr-code-generator</loc>
+    <loc>https://toolorahub.vercel.app/tools/flip-image</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://toolorahub.vercel.app/tools/image-metadata-viewer</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://toolorahub.vercel.app/tools/passport-photo-resizer</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://toolorahub.vercel.app/tools/photo-size-reducer</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://toolora.com/tools/rotate-image</loc>
+    <loc>https://toolorahub.vercel.app/tools/bmp-to-jpg</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://toolora.com/tools/flip-image</loc>
+    <loc>https://toolorahub.vercel.app/tools/transparent-background-checker</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://toolora.com/tools/image-metadata-viewer</loc>
-    <lastmod>2026-10-05</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://toolora.com/tools/passport-photo-resizer</loc>
-    <lastmod>2026-10-05</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://toolora.com/tools/photo-size-reducer</loc>
+    <loc>https://toolorahub.vercel.app/tools/aspect-ratio-calculator</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://toolora.com/tools/bmp-to-jpg</loc>
-    <lastmod>2026-10-05</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://toolora.com/tools/transparent-background-checker</loc>
-    <lastmod>2026-10-05</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://toolora.com/tools/aspect-ratio-calculator</loc>
+    <loc>https://toolorahub.vercel.app/tools/jpg-to-pdf</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://toolora.com/tools/jpg-to-pdf</loc>
+    <loc>https://toolorahub.vercel.app/tools/png-to-pdf</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://toolorahub.vercel.app/tools/pdf-metadata-viewer</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://toolorahub.vercel.app/tools/percentage-increase-calculator</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://toolora.com/tools/png-to-pdf</loc>
+    <loc>https://toolorahub.vercel.app/tools/percentage-decrease-calculator</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://toolora.com/tools/pdf-metadata-viewer</loc>
-    <lastmod>2026-10-05</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://toolora.com/tools/percentage-increase-calculator</loc>
+    <loc>https://toolorahub.vercel.app/tools/marks-percentage-calculator</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://toolora.com/tools/percentage-decrease-calculator</loc>
-    <lastmod>2026-10-05</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://toolora.com/tools/marks-percentage-calculator</loc>
+    <loc>https://toolorahub.vercel.app/tools/date-difference-calculator</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://toolora.com/tools/date-difference-calculator</loc>
+    <loc>https://toolorahub.vercel.app/tools/reading-time-calculator</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://toolorahub.vercel.app/tools/average-calculator</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://toolorahub.vercel.app/tools/random-number-generator</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://toolorahub.vercel.app/tools/pomodoro-timer</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://toolora.com/tools/reading-time-calculator</loc>
-    <lastmod>2026-10-05</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://toolora.com/tools/average-calculator</loc>
-    <lastmod>2026-10-05</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://toolora.com/tools/random-number-generator</loc>
-    <lastmod>2026-10-05</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://toolora.com/tools/pomodoro-timer</loc>
+    <loc>https://toolorahub.vercel.app/tools/password-generator</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://toolora.com/tools/password-generator</loc>
+    <loc>https://toolorahub.vercel.app/tools/base64-encoder-decoder</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://toolora.com/tools/base64-encoder-decoder</loc>
+    <loc>https://toolorahub.vercel.app/tools/url-encoder-decoder</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://toolorahub.vercel.app/tools/json-formatter</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://toolora.com/tools/url-encoder-decoder</loc>
+    <loc>https://toolorahub.vercel.app/tools/color-converter</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://toolora.com/tools/json-formatter</loc>
+    <loc>https://toolorahub.vercel.app/tools/text-case-converter</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://toolora.com/tools/color-converter</loc>
+    <loc>https://toolorahub.vercel.app/tools/remove-duplicate-lines</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://toolora.com/tools/text-case-converter</loc>
+    <loc>https://toolorahub.vercel.app/tools/merge-pdf</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://toolora.com/tools/remove-duplicate-lines</loc>
-    <lastmod>2026-10-05</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://toolora.com/tools/merge-pdf</loc>
+    <loc>https://toolorahub.vercel.app/tools/split-pdf</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://toolora.com/tools/split-pdf</loc>
+    <loc>https://toolorahub.vercel.app/tools/rotate-pdf</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://toolorahub.vercel.app/tools/pdf-page-counter</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://toolorahub.vercel.app/tools/cgpa-calculator</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://toolora.com/tools/rotate-pdf</loc>
-    <lastmod>2026-10-05</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://toolora.com/tools/pdf-page-counter</loc>
-    <lastmod>2026-10-05</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://toolora.com/tools/cgpa-calculator</loc>
+    <loc>https://toolorahub.vercel.app/tools/grade-calculator</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://toolora.com/tools/grade-calculator</loc>
+    <loc>https://toolorahub.vercel.app/tools/fraction-calculator</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://toolorahub.vercel.app/tools/ratio-calculator</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://toolorahub.vercel.app/tools/scientific-calculator</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://toolora.com/tools/fraction-calculator</loc>
+    <loc>https://toolorahub.vercel.app/tools/sentence-counter</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://toolora.com/tools/ratio-calculator</loc>
+    <loc>https://toolorahub.vercel.app/tools/number-to-words</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://toolora.com/tools/scientific-calculator</loc>
+    <loc>https://toolorahub.vercel.app/tools/uuid-generator</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://toolora.com/tools/sentence-counter</loc>
-    <lastmod>2026-10-05</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://toolora.com/tools/number-to-words</loc>
-    <lastmod>2026-10-05</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://toolora.com/tools/uuid-generator</loc>
+    <loc>https://toolorahub.vercel.app/tools/timestamp-converter</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://toolora.com/tools/timestamp-converter</loc>
-    <lastmod>2026-10-05</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://toolora.com/tools/text-cleaner</loc>
+    <loc>https://toolorahub.vercel.app/tools/text-cleaner</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://toolora.com/tools/random-string-generator</loc>
+    <loc>https://toolorahub.vercel.app/tools/random-string-generator</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://toolora.com/tools/image-dpi-checker</loc>
+    <loc>https://toolorahub.vercel.app/tools/image-dpi-checker</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
