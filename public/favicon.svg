@@ -1,0 +1,37 @@
+<svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="fav-top-grad" x1="18" y1="18" x2="48" y2="18" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stopColor="#38BDF8" />
+      <stop offset="100%" stopColor="#2563EB" />
+    </linearGradient>
+    <linearGradient id="fav-stem-front" x1="28" y1="24" x2="38" y2="52" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stopColor="#2563EB" />
+      <stop offset="100%" stopColor="#3B82F6" />
+    </linearGradient>
+    <linearGradient id="fav-stem-fold" x1="28" y1="24" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stopColor="#1D4ED8" />
+      <stop offset="100%" stopColor="#1E3A8A" />
+    </linearGradient>
+  </defs>
+
+  <!-- Dark rounded squircle from Toolora brand asset -->
+  <rect width="64" height="64" rx="16" fill="#0B132B" />
+
+  <!-- Top horizontal crossbar of 'T' -->
+  <path
+    d="M26 18 L48 18 C49.1 18 50 18.9 50 20 L50 22 C50 23.1 49.1 24 48 24 L22.5 24 C21.4 24 20.8 22.7 21.5 21.8 L24.5 18.6 C24.9 18.2 25.4 18 26 18 Z"
+    fill="url(#fav-top-grad)"
+  />
+
+  <!-- Vertical Stem - Folded ribbon under-crease -->
+  <path
+    d="M29 24 L40 32 L40 44 L29 36 Z"
+    fill="url(#fav-stem-fold)"
+  />
+
+  <!-- Vertical Stem - Front folded ribbon -->
+  <path
+    d="M29 24 L40 32 L40 47 C40 48.1 39.1 49 38 49 L31 49 C29.9 49 29 48.1 29 47 Z"
+    fill="url(#fav-stem-front)"
+  />
+</svg>
