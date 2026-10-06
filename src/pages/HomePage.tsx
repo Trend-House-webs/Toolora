@@ -4,6 +4,7 @@ import { TOOLS, FEATURED_TOOLS, POPULAR_TOOLS, IMAGE_TOOLS, PDF_TOOLS, STUDENT_T
 import { ToolCard } from '../components/common/ToolCard';
 import { SEO } from '../components/common/SEO';
 import { Link, useRouter } from '../context/RouterContext';
+import { SITE_URL } from '../config/site';
 
 interface HomePageProps {
   onOpenSearchModal: () => void;
@@ -48,13 +49,8 @@ export function HomePage({ onOpenSearchModal }: HomePageProps) {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
     name: 'Toolora',
-    url: 'https://toolora.com/',
+    url: `${SITE_URL}/`,
     description: 'Everyday tools, made simple. Fast, free tools for images, files, calculations and everyday tasks.',
-    potentialAction: {
-      '@type': 'SearchAction',
-      target: 'https://toolora.com/tools?q={search_term_string}',
-      'query-input': 'required name=search_term_string',
-    },
   };
 
   return (
@@ -108,7 +104,7 @@ export function HomePage({ onOpenSearchModal }: HomePageProps) {
             <span aria-hidden="true" className="text-slate-300">·</span>
             <span>No sign-up</span>
             <span aria-hidden="true" className="text-slate-300">·</span>
-            <span>100% Client-side privacy</span>
+            <span>Client-side processing</span>
           </div>
         </div>
       </section>
@@ -359,7 +355,7 @@ export function HomePage({ onOpenSearchModal }: HomePageProps) {
               </div>
               <h3 className="text-sm font-bold text-slate-900">100% Free</h3>
               <p className="text-xs text-slate-600 leading-relaxed">
-                All 21 tools are completely free to use. No hidden fees, no subscriptions, and no trial limits.
+                All {TOOLS.length} tools are completely free to use. No hidden fees, no subscriptions, and no trial limits.
               </p>
             </div>
 
@@ -377,9 +373,9 @@ export function HomePage({ onOpenSearchModal }: HomePageProps) {
               <div className="w-10 h-10 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center font-bold">
                 <Shield className="w-5 h-5" />
               </div>
-              <h3 className="text-sm font-bold text-slate-900">Client-Side Privacy</h3>
+              <h3 className="text-sm font-bold text-slate-900">In-Browser Execution</h3>
               <p className="text-xs text-slate-600 leading-relaxed">
-                Your images, essays, and calculations never leave your computer. 100% local processing.
+                Your images, documents, and calculations are processed directly in your browser without server file uploads.
               </p>
             </div>
 

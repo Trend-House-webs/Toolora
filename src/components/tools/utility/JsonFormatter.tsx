@@ -6,7 +6,7 @@ const SAMPLE_JSON = `{
   "platform": "Toolora",
   "tagline": "Everyday tools, made simple.",
   "features": [
-    "100% Client-Side",
+    "Client-Side Execution",
     "No Accounts",
     "Lightning Fast"
   ],

@@ -152,7 +152,7 @@ export function Base64Tool() {
 
       <div className="pt-4 border-t border-slate-100 flex items-center gap-2 text-xs text-slate-500">
         <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
-        <span>100% Client-Side. Strings are encoded and decoded using browser Web APIs without network transmissions.</span>
+        <span>Client-Side Processing. Strings are encoded and decoded locally using browser Web APIs.</span>
       </div>
     </div>
   );

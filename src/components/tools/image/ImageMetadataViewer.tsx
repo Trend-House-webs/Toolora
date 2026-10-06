@@ -196,7 +196,7 @@ export function ImageMetadataViewer() {
 
       <div className="pt-4 border-t border-slate-100 flex items-center gap-2 text-xs text-slate-500">
         <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
-        <span>Inspected 100% locally. File headers and pixel buffers never leave your browser.</span>
+        <span>Inspected locally in your browser memory without server file uploads.</span>
       </div>
     </div>
   );

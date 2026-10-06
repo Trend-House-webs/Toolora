@@ -8,7 +8,18 @@ export const CATEGORIES: CategoryInfo[] = [
     title: 'Image Tools',
     description: 'Compress, convert, resize, crop, rotate, and format photos directly in your browser without uploading to external servers.',
     icon: 'ImageIcon',
-    count: 22,
+    metaTitle: 'Image Tools — Free Browser Photo Editors & Converters | Toolora',
+    metaDescription: 'Explore free client-side image tools: compress, resize, crop, rotate, and convert JPG, PNG, and WebP photos with in-browser processing and no server file uploads.',
+    introParagraph: 'Toolora\'s Image Tools provide comprehensive photo editing, optimization, and conversion directly in your browser. Utilizing modern HTML5 Canvas technology, operations run locally in system memory without transmitting your pictures to any server. Whether you need to compress large photos for faster websites, scale images to exact passport dimensions, or convert formats while preserving alpha transparency, every tool delivers instant results without account registrations or watermarks.',
+    highlights: [
+      'Local in-memory Canvas processing without server file uploads',
+      'Full transparency preservation for PNG and WebP graphics',
+      'Zero compression loss during 90-degree rotations and horizontal/vertical flips',
+      'Batch export support for JPG, PNG, WebP, and multi-page PDF documents',
+    ],
+    get count() {
+      return TOOLS.filter((t) => t.category === 'image').length;
+    },
   },
   {
     id: 'pdf',
@@ -16,7 +27,18 @@ export const CATEGORIES: CategoryInfo[] = [
     title: 'PDF Tools',
     description: 'Merge, split, rotate, convert, and inspect PDF files with high-speed client-side processing.',
     icon: 'FileText',
-    count: 7,
+    metaTitle: 'PDF Tools — Merge, Split & Convert PDFs Privately | Toolora',
+    metaDescription: 'Manage PDF files in your browser: merge multiple documents, extract specific pages, rotate orientation, check page counts, and convert images to PDF.',
+    introParagraph: 'The PDF Tools suite enables private document assembly, inspection, and manipulation without third-party cloud uploads. Powered by client-side WebAssembly and pdf-lib libraries, you can combine multiple contracts into one ordered document, extract specific chapter page ranges, fix inverted page scans, and verify structural metadata without submitting confidential records across the network.',
+    highlights: [
+      'Assemble multi-document PDF packages with drag-and-drop ordering',
+      'Extract custom page ranges and individual sheets into fresh files',
+      'Permanently rotate upside-down scanned pages by 90°, 180°, or 270°',
+      'Compile JPG and PNG photo albums into standard PDF portfolios',
+    ],
+    get count() {
+      return TOOLS.filter((t) => t.category === 'pdf').length;
+    },
   },
   {
     id: 'student',
@@ -24,7 +46,18 @@ export const CATEGORIES: CategoryInfo[] = [
     title: 'Student & Academic Tools',
     description: 'Calculators for CGPA, grades, fractions, ratios, scientific computations, reading durations, and sentence analysis.',
     icon: 'GraduationCapIcon',
-    count: 15,
+    metaTitle: 'Student & Academic Tools — GPA, Grade & Math Solvers | Toolora',
+    metaDescription: 'Free online student calculators: calculate cumulative CGPA, weighted coursework grades, required final exam scores, fractions, ratios, and study intervals.',
+    introParagraph: 'Designed for middle school, high school, and university students, our Academic Tools suite helps you plan your academic progress and solve complex coursework problems. Calculate weighted course grades across semesters, discover the exact target score you need on your final exam, break down multi-fraction arithmetic step-by-step, evaluate mathematical ratios, and manage focused study blocks with Pomodoro timers.',
+    highlights: [
+      'Weighted 4.0, 5.0, and 10.0 scale GPA and cumulative CGPA tracking',
+      'Target final exam score planning based on current weighted assignments',
+      'Fraction arithmetic and ratio reduction with step-by-step GCD solutions',
+      'Structured 25/5 Pomodoro study intervals with gentle audio chimes',
+    ],
+    get count() {
+      return TOOLS.filter((t) => t.category === 'student').length;
+    },
   },
   {
     id: 'utility',
@@ -32,7 +65,18 @@ export const CATEGORIES: CategoryInfo[] = [
     title: 'Daily & Text Utilities',
     description: 'UUID generators, timestamp converters, text cleaners, password creators, Base64/URL encoders, and JSON tools.',
     icon: 'Wrench',
-    count: 11,
+    metaTitle: 'Daily & Text Utilities — UUID, Timestamp & Encoding Tools | Toolora',
+    metaDescription: 'Fast browser utilities for developers and everyday digital work: RFC 4122 UUID generators, Unix timestamp converters, JSON formatters, and text cleaners.',
+    introParagraph: 'A lightweight toolkit of daily utilities for programmers, writers, and technical professionals. Generate cryptographically secure version 4 UUIDs in bulk, convert Unix epoch timestamps between UTC and local time, validate and format nested JSON trees, encode query strings, and clean redundant whitespace from copied lists—all executed instantaneously on your device.',
+    highlights: [
+      'Cryptographically secure RFC 4122 UUID v4 generation in bulk',
+      'Bidirectional Unix epoch timestamp conversion with live clock',
+      'Formatted JSON beautification with syntax error diagnostics',
+      'URL query parameter and UTF-8 Base64 encoding/decoding',
+    ],
+    get count() {
+      return TOOLS.filter((t) => t.category === 'utility').length;
+    },
   },
   {
     id: 'student-utility',
@@ -40,7 +84,20 @@ export const CATEGORIES: CategoryInfo[] = [
     title: 'Student & Utility Tools',
     description: 'Calculators, text analyzers, unit converters, and study timers designed to make daily academic and productivity tasks effortless.',
     icon: 'GraduationCapIcon',
-    count: 34,
+    metaTitle: 'Student & Utility Tools Hub — Academic & Everyday Productivity | Toolora',
+    metaDescription: 'Unified productivity directory combining Toolora\'s student academic calculators, math solvers, and daily text utilities in a single browsable workspace.',
+    introParagraph: 'The Student & Utility Tools Hub serves as the unified productivity index for Toolora\'s academic calculators, math solvers, and everyday text utilities. Whether you need academic formulas for GPA, grades, and fractions or daily utilities for timestamp conversion, text cleaning, formatting, and password generation, this directory allows you to browse and filter all productivity tools in one seamless view.',
+    highlights: [
+      'Unified directory combining student coursework calculators and daily text utilities',
+      'Step-by-step math solvers for percentages, fractions, GPA, and proportions',
+      'Text statistics for word counts, character limits, formatting, and reading duration',
+      'Direct navigation to dedicated Student Tools and Daily Utilities categories',
+    ],
+    get count() {
+      return TOOLS.filter(
+        (t) => t.category === 'student' || t.category === 'utility' || t.category === 'student-utility'
+      ).length;
+    },
   },
 ];
 
@@ -52,9 +109,9 @@ export const TOOLS: ToolItem[] = [
     slug: 'image-compressor',
     category: 'image',
     description: 'Reduce image file size with adjustable compression quality while preserving visual fidelity.',
-    detailedDescription: 'Compress JPG, PNG, and WebP images directly in your browser. Real-time before-and-after comparison with zero server uploads.',
+    detailedDescription: 'Compress JPG, PNG, and WebP images directly in your browser. Real-time before-and-after comparison without server file uploads.',
     metaTitle: 'Free Image Compressor — Compress JPG, PNG & WebP Online',
-    metaDescription: 'Reduce image file sizes instantly in your browser with adjustable quality. Private, fast, and 100% free with no file uploads or sign-up.',
+    metaDescription: 'Reduce image file sizes instantly in your browser with adjustable quality. Fast and free client-side tool with no file uploads or sign-up.',
     icon: 'Minimize2',
     isFeatured: true,
     isPopular: true,
@@ -71,7 +128,7 @@ export const TOOLS: ToolItem[] = [
       { step: 3, title: 'Compare & Download', description: 'Inspect the calculated size reduction percentage and click Download to save your compressed image instantly.' },
     ],
     whyUse: [
-      '100% Private & Secure: Your photos never leave your device or travel across any network.',
+      'In-Browser Processing: Photos are compressed in local browser memory without uploading to Toolora servers.',
       'Lightning Fast: Instant processing powered by your device hardware, avoiding network lag.',
       'Web-Ready Optimization: Drastically speed up website loading times and email attachments without visible quality loss.',
       'Completely Free: No daily quotas, no watermarks, and no registration required.',
@@ -130,7 +187,7 @@ export const TOOLS: ToolItem[] = [
     whyUse: [
       'Exact Fit: Meet strict dimension requirements for application portals, CMS uploads, and social platforms.',
       'Zero Distortion: Proportional auto-scaling ensures photos never appear squished or stretched.',
-      'Device Privacy: Local memory processing guarantees sensitive personal photos are never transmitted.',
+      'Device Processing: Local memory processing ensures personal photos are processed without uploading to Toolora servers.',
       'Saves Bandwidth: Downscaling massive camera photos dramatically cuts storage and loading time.',
     ],
     tips: [
@@ -164,7 +221,7 @@ export const TOOLS: ToolItem[] = [
     description: 'Convert JPG images to lossless PNG format with transparent canvas readiness.',
     detailedDescription: 'Convert any JPG/JPEG graphic into high-definition PNG format. Ideal when you need lossless rendering, crisp text, or preparing images for editing software.',
     metaTitle: 'Free JPG to PNG Converter — Convert JPEG to PNG Online',
-    metaDescription: 'Convert JPG photos to lossless 24-bit PNG format in your browser. Fast, private, zero server uploads, and completely free.',
+    metaDescription: 'Convert JPG photos to lossless 24-bit PNG format in your browser. Fast, client-side, with no server file uploads.',
     icon: 'FileImage',
     isPopular: true,
     features: [
@@ -414,7 +471,7 @@ export const TOOLS: ToolItem[] = [
     description: 'Combine one or multiple images into a clean, downloadable PDF document.',
     detailedDescription: 'Turn photos, scans, receipts, or documents into standard PDF pages. Reorder images, choose page orientation (portrait/landscape), and export immediately.',
     metaTitle: 'Free Image to PDF Converter — Combine Photos into PDF',
-    metaDescription: 'Convert JPG, PNG, and WebP images into a multi-page PDF document online. Set orientation, margins, and reorder pages client-side with 100% privacy.',
+    metaDescription: 'Convert JPG, PNG, and WebP images into a multi-page PDF document online. Set orientation, margins, and reorder pages client-side without server file uploads.',
     icon: 'FileText',
     isFeatured: true,
     isPopular: true,
@@ -432,7 +489,7 @@ export const TOOLS: ToolItem[] = [
     ],
     whyUse: [
       'Document Submission Ready: Perfect for sending multi-page receipts, invoices, assignments, or IDs in one clean PDF.',
-      'Total Privacy: Sensitive IDs and financial scans are compiled strictly in your browser memory and never uploaded.',
+      'In-Browser Assembly: Sensitive IDs and scans are compiled directly in local browser memory without server file uploads.',
       'Zero Watermarks: Clean, professional PDF documents without branding or limitations.',
     ],
     tips: [
@@ -610,7 +667,7 @@ export const TOOLS: ToolItem[] = [
     id: 'percentage-calculator',
     name: 'Percentage Calculator',
     slug: 'percentage-calculator',
-    category: 'student-utility',
+    category: 'student',
     description: 'Calculate percentage increases, decreases, discounts, and common percentage formulas.',
     detailedDescription: 'Perform everyday percentage calculations with instant results. Calculate percentage of a number, percentage increase/decrease, markup, and discounts with explanatory breakdowns.',
     metaTitle: 'Free Percentage Calculator — Increase, Decrease & Discounts',
@@ -648,7 +705,7 @@ export const TOOLS: ToolItem[] = [
         answer: 'Multiply the original price by the discount percentage divided by 100, then subtract that amount from the original price.',
       },
     ],
-    relatedSlugs: ['gpa-calculator', 'age-calculator', 'unit-converter'],
+    relatedSlugs: ['gpa-calculator', 'percentage-increase-calculator', 'percentage-decrease-calculator'],
   },
 
   // 15. AGE CALCULATOR
@@ -656,11 +713,11 @@ export const TOOLS: ToolItem[] = [
     id: 'age-calculator',
     name: 'Age Calculator',
     slug: 'age-calculator',
-    category: 'student-utility',
+    category: 'utility',
     description: 'Calculate exact age in years, months, weeks, days, hours, and minutes from date of birth.',
     detailedDescription: 'Find out your exact chronological age or time elapsed between any two dates. Breakdown includes total years, months, days, and countdown to next birthday.',
     metaTitle: 'Free Age Calculator — Exact Age in Years, Months & Days',
-    metaDescription: 'Calculate your exact age in years, months, weeks, days, and hours from date of birth. Includes countdown to your next birthday with 100% privacy.',
+    metaDescription: 'Calculate your exact age in years, months, weeks, days, and hours from date of birth. Includes countdown to your next birthday with instant client-side calculation.',
     icon: 'Calendar',
     features: [
       'Precise age breakdown in years, months, and days',
@@ -694,7 +751,7 @@ export const TOOLS: ToolItem[] = [
     id: 'gpa-calculator',
     name: 'GPA Calculator',
     slug: 'gpa-calculator',
-    category: 'student-utility',
+    category: 'student',
     description: 'Calculate high school or college Grade Point Average on standard 4.0 scale.',
     detailedDescription: 'Compute your semester or cumulative GPA easily. Add courses, credit hours, and letter grades on the standard 4.0 scale. Save courses locally in your browser.',
     metaTitle: 'Free GPA Calculator — College & High School 4.0 Scale',
@@ -716,7 +773,7 @@ export const TOOLS: ToolItem[] = [
     ],
     whyUse: [
       'Academic Planning: Test hypothetical grades to see what scores you need to hit honors or dean\'s list requirements.',
-      'Privacy First: Your academic grades remain strictly in your local browser storage and are never uploaded.',
+      'Local Browser Storage: Course grades are saved locally in your browser storage so you can return to them anytime.',
     ],
     tips: [
       'Courses with higher credit weights (e.g. 4-credit lab science) have a much larger impact on your cumulative GPA than 1-credit seminars.',
@@ -731,7 +788,7 @@ export const TOOLS: ToolItem[] = [
         answer: 'Yes, it follows the standard North American 4.0 grading system used across universities, colleges, and high schools.',
       },
     ],
-    relatedSlugs: ['percentage-calculator', 'study-timer', 'word-counter'],
+    relatedSlugs: ['cgpa-calculator', 'grade-calculator', 'percentage-calculator'],
   },
 
   // 17. WORD COUNTER
@@ -739,7 +796,7 @@ export const TOOLS: ToolItem[] = [
     id: 'word-counter',
     name: 'Word Counter',
     slug: 'word-counter',
-    category: 'student-utility',
+    category: 'utility',
     description: 'Count words, characters, sentences, paragraphs, and estimated reading time.',
     detailedDescription: 'Analyze text in real time. Count total words, characters with/without spaces, sentences, paragraphs, reading time, and speaking duration.',
     metaTitle: 'Free Word Counter — Count Words, Characters & Reading Time',
@@ -767,10 +824,10 @@ export const TOOLS: ToolItem[] = [
     faq: [
       {
         question: 'Does this tool save or upload my writing?',
-        answer: 'No. All text is analyzed strictly in your browser memory. Your drafts are never uploaded or stored on any server.',
+        answer: 'No. All text is analyzed strictly in your browser memory without being sent to our servers.',
       },
     ],
-    relatedSlugs: ['character-counter', 'study-timer', 'gpa-calculator'],
+    relatedSlugs: ['character-counter', 'sentence-counter', 'reading-time-calculator'],
   },
 
   // 18. CHARACTER COUNTER
@@ -778,7 +835,7 @@ export const TOOLS: ToolItem[] = [
     id: 'character-counter',
     name: 'Character Counter',
     slug: 'character-counter',
-    category: 'student-utility',
+    category: 'utility',
     description: 'Track exact character limits for Twitter/X, SMS, meta descriptions, and bios.',
     detailedDescription: 'Count characters with and without whitespace. Features built-in limit meters for Twitter/X (280 chars), SMS messages (160 chars), and SEO title tags (60 chars).',
     metaTitle: 'Free Character Counter — Track Character Limits & Spaces',
@@ -807,7 +864,7 @@ export const TOOLS: ToolItem[] = [
         answer: 'Characters with spaces count every letter, number, punctuation mark, and blank space. Without spaces excludes spaces and line breaks.',
       },
     ],
-    relatedSlugs: ['word-counter', 'percentage-calculator', 'qr-code-generator'],
+    relatedSlugs: ['word-counter', 'sentence-counter', 'text-cleaner'],
   },
 
   // 19. UNIT CONVERTER
@@ -815,7 +872,7 @@ export const TOOLS: ToolItem[] = [
     id: 'unit-converter',
     name: 'Unit Converter',
     slug: 'unit-converter',
-    category: 'student-utility',
+    category: 'utility',
     description: 'Convert length, weight, temperature, area, volume, and digital storage units.',
     detailedDescription: 'Quickly convert between metric and imperial measurement systems. Supports length (km, miles, ft, m), mass (kg, lbs, oz), temperature (°C, °F, K), volume, and digital storage.',
     metaTitle: 'Free Unit Converter — Length, Weight, Temperature & More',
@@ -846,7 +903,7 @@ export const TOOLS: ToolItem[] = [
         answer: 'All conversions follow internationally standardized conversion factors (e.g. exact 1 inch = 25.4 mm).',
       },
     ],
-    relatedSlugs: ['percentage-calculator', 'age-calculator', 'study-timer'],
+    relatedSlugs: ['percentage-calculator', 'aspect-ratio-calculator', 'average-calculator'],
   },
 
   // 20. STUDY TIMER
@@ -854,7 +911,7 @@ export const TOOLS: ToolItem[] = [
     id: 'study-timer',
     name: 'Study Timer (Pomodoro)',
     slug: 'study-timer',
-    category: 'student-utility',
+    category: 'student',
     description: 'Focus timer with 25-minute Pomodoro study intervals and relaxing break alerts.',
     detailedDescription: 'Boost focus and prevent burnout with the Pomodoro technique. Features configurable study intervals, short and long breaks, audio alerts, and session tracking.',
     metaTitle: 'Free Study Timer — Pomodoro Focus & Break Timer Online',
@@ -888,7 +945,7 @@ export const TOOLS: ToolItem[] = [
         answer: 'Yes, modern browser background timers continue to track time accurately even when you switch tabs.',
       },
     ],
-    relatedSlugs: ['gpa-calculator', 'word-counter', 'percentage-calculator'],
+    relatedSlugs: ['pomodoro-timer', 'gpa-calculator', 'word-counter'],
   },
 
   // 21. QR CODE GENERATOR
@@ -896,7 +953,7 @@ export const TOOLS: ToolItem[] = [
     id: 'qr-code-generator',
     name: 'QR Code Generator',
     slug: 'qr-code-generator',
-    category: 'student-utility',
+    category: 'utility',
     description: 'Create customizable QR codes for websites, Wi-Fi networks, text, emails, and phone numbers.',
     detailedDescription: 'Generate high-resolution QR codes instantly. Customize foreground and background colors, choose data type (URL, Wi-Fi, Plain Text, Email, Phone), and download as crisp PNG graphics.',
     metaTitle: 'Free QR Code Generator — Create Custom QR Codes Online',
@@ -935,7 +992,7 @@ export const TOOLS: ToolItem[] = [
         answer: 'Yes! Both modern iOS and Android camera apps automatically recognize standard QR codes without needing any special app.',
       },
     ],
-    relatedSlugs: ['image-compressor', 'image-to-pdf', 'percentage-calculator'],
+    relatedSlugs: ['url-encoder-decoder', 'uuid-generator', 'image-compressor'],
   },
   ...ADDITIONAL_TOOLS,
 ];

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Search, Menu, X, Layers, Image as ImageIcon, GraduationCap, Wrench } from 'lucide-react';
+import { Search, Menu, X, Layers, Image as ImageIcon, GraduationCap, Wrench, BookOpen } from 'lucide-react';
 import { Link, useRouter } from '../../context/RouterContext';
 import { TooloraLogo } from '../common/Logo';
 
@@ -17,6 +17,7 @@ export function Navbar({ onOpenSearch }: NavbarProps) {
     { label: 'PDF Tools', href: '/category/pdf-tools' },
     { label: 'Student Tools', href: '/category/student-tools' },
     { label: 'Utilities', href: '/category/utility-tools' },
+    { label: 'Guides', href: '/guides' },
   ];
 
   return (
@@ -114,6 +115,14 @@ export function Navbar({ onOpenSearch }: NavbarProps) {
             >
               <GraduationCap className="w-4 h-4 text-slate-400" />
               Student & Utility Tools
+            </Link>
+            <Link
+              to="/guides"
+              onClick={() => setMobileMenuOpen(false)}
+              className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50 hover:text-blue-600"
+            >
+              <BookOpen className="w-4 h-4 text-slate-400" />
+              Guides & Tutorials
             </Link>
             <Link
               to="/about"

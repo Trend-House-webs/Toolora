@@ -4,10 +4,16 @@ import { TOOLS } from '../data/tools';
 import { Breadcrumbs } from '../components/common/Breadcrumbs';
 import { ToolCard } from '../components/common/ToolCard';
 import { SEO } from '../components/common/SEO';
+import { SITE_URL } from '../config/site';
 
 export function AllToolsPage() {
-  const [filter, setFilter] = useState<'all' | 'image' | 'student-utility'>('all');
+  const [filter, setFilter] = useState<'all' | 'image' | 'pdf' | 'student' | 'utility'>('all');
   const [search, setSearch] = useState('');
+
+  const imageCount = TOOLS.filter((t) => t.category === 'image').length;
+  const pdfCount = TOOLS.filter((t) => t.category === 'pdf').length;
+  const studentCount = TOOLS.filter((t) => t.category === 'student').length;
+  const utilityCount = TOOLS.filter((t) => t.category === 'utility').length;
 
   const filtered = TOOLS.filter((t) => {
     if (filter !== 'all' && t.category !== filter) return false;
@@ -20,13 +26,33 @@ export function AllToolsPage() {
     );
   });
 
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: `${SITE_URL}/`,
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'All Tools Directory',
+        item: `${SITE_URL}/tools`,
+      },
+    ],
+  };
+
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 space-y-8">
       {/* SEO & Structured Data */}
       <SEO
-        title="All 21 Free Online Tools Directory — Toolora"
-        description="Browse the complete index of 21 free online browser utilities. Fast, client-side, with zero sign-up or payments."
+        title="All Free Online Tools Directory — Toolora"
+        description="Browse our complete directory of free online browser utilities. Fast, client-side, with zero sign-up or payments."
         canonicalPath="/tools"
+        schema={breadcrumbSchema}
       />
 
       <Breadcrumbs items={[{ label: 'All Tools Directory' }]} />
@@ -40,18 +66,18 @@ export function AllToolsPage() {
             All Free Online Tools ({TOOLS.length})
           </h1>
           <p className="text-sm sm:text-base text-slate-600 mt-2 leading-relaxed max-w-2xl">
-            Browse our full catalog of 21 free online browser utilities. Fast, client-side, with zero sign-ups or payments.
+            Browse our full catalog of free online browser utilities. Fast, client-side, with zero sign-ups or payments.
           </p>
         </div>
 
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
           {/* Category tabs */}
-          <div className="flex items-center gap-1 p-1 bg-slate-100 rounded-xl" role="tablist">
+          <div className="flex items-center gap-1 p-1 bg-slate-100 rounded-xl overflow-x-auto" role="tablist">
             <button
               role="tab"
               aria-selected={filter === 'all'}
               onClick={() => setFilter('all')}
-              className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors cursor-pointer ${
+              className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors cursor-pointer whitespace-nowrap ${
                 filter === 'all' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600 hover:text-slate-900'
               }`}
             >
@@ -61,21 +87,41 @@ export function AllToolsPage() {
               role="tab"
               aria-selected={filter === 'image'}
               onClick={() => setFilter('image')}
-              className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors cursor-pointer ${
+              className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors cursor-pointer whitespace-nowrap ${
                 filter === 'image' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600 hover:text-slate-900'
               }`}
             >
-              Image (13)
+              Image ({imageCount})
             </button>
             <button
               role="tab"
-              aria-selected={filter === 'student-utility'}
-              onClick={() => setFilter('student-utility')}
-              className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors cursor-pointer ${
-                filter === 'student-utility' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600 hover:text-slate-900'
+              aria-selected={filter === 'pdf'}
+              onClick={() => setFilter('pdf')}
+              className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors cursor-pointer whitespace-nowrap ${
+                filter === 'pdf' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600 hover:text-slate-900'
               }`}
             >
-              Utility (8)
+              PDF ({pdfCount})
+            </button>
+            <button
+              role="tab"
+              aria-selected={filter === 'student'}
+              onClick={() => setFilter('student')}
+              className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors cursor-pointer whitespace-nowrap ${
+                filter === 'student' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600 hover:text-slate-900'
+              }`}
+            >
+              Student ({studentCount})
+            </button>
+            <button
+              role="tab"
+              aria-selected={filter === 'utility'}
+              onClick={() => setFilter('utility')}
+              className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors cursor-pointer whitespace-nowrap ${
+                filter === 'utility' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600 hover:text-slate-900'
+              }`}
+            >
+              Utility ({utilityCount})
             </button>
           </div>
 

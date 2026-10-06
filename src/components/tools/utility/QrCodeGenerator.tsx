@@ -2,10 +2,11 @@ import React, { useState, useEffect, useRef } from 'react';
 import QRCode from 'qrcode';
 import { Download, Copy, Check, QrCode as QrIcon, RefreshCw, Trash2 } from 'lucide-react';
 import { downloadBlob } from '../../../utils/fileHelpers';
+import { SITE_URL } from '../../../config/site';
 
 export function QrCodeGenerator() {
   const [qrType, setQrType] = useState<'url' | 'text' | 'wifi' | 'email' | 'phone'>('url');
-  const [urlVal, setUrlVal] = useState<string>('https://toolora.com');
+  const [urlVal, setUrlVal] = useState<string>(SITE_URL);
   const [textVal, setTextVal] = useState<string>('Hello from Toolora!');
   const [wifiSsid, setWifiSsid] = useState<string>('MyHomeWiFi');
   const [wifiPass, setWifiPass] = useState<string>('SuperSecret123');

@@ -1,11 +1,14 @@
 import { useEffect } from 'react';
 import { FAQItem } from '../../types';
+import { SITE_URL, getCanonicalUrl, DEFAULT_OG_IMAGE } from '../../config/site';
 
 export interface SEOProps {
   title: string;
   description: string;
   canonicalPath: string;
   ogType?: 'website' | 'article';
+  ogImage?: string;
+  noindex?: boolean;
   schema?: Record<string, any> | Array<Record<string, any>>;
   faqItems?: FAQItem[];
 }
@@ -15,6 +18,8 @@ export function SEO({
   description,
   canonicalPath,
   ogType = 'website',
+  ogImage,
+  noindex = false,
   schema,
   faqItems,
 }: SEOProps) {
@@ -38,31 +43,42 @@ export function SEO({
       let el = document.querySelector(`link[rel="${rel}"]`);
       if (!el) {
         el = document.createElement('link');
-        el.setAttribute('rel', rel);
+        el.setAttribute(rel, rel);
         document.head.appendChild(el);
       }
       el.setAttribute('href', href);
     };
 
-    const origin = typeof window !== 'undefined' ? window.location.origin : 'https://toolora.com';
-    const cleanPath = canonicalPath.startsWith('/') ? canonicalPath : `/${canonicalPath}`;
-    const canonicalUrl = `${origin}${cleanPath}`;
+    const canonicalUrl = getCanonicalUrl(canonicalPath);
+    const socialImage = ogImage || DEFAULT_OG_IMAGE;
 
-    // 2. Primary Meta Tags
+    // 2. Primary Meta & Canonical Tags
     setMeta('name', 'description', description);
     setLink('canonical', canonicalUrl);
 
+    // Robots indexing control
+    if (noindex) {
+      setMeta('name', 'robots', 'noindex, nofollow');
+    } else {
+      const robotsEl = document.querySelector('meta[name="robots"]');
+      if (robotsEl) {
+        robotsEl.remove();
+      }
+    }
+
     // 3. Open Graph Tags
+    setMeta('property', 'og:site_name', 'Toolora');
     setMeta('property', 'og:title', title);
     setMeta('property', 'og:description', description);
     setMeta('property', 'og:type', ogType);
     setMeta('property', 'og:url', canonicalUrl);
-    setMeta('property', 'og:site_name', 'Toolora');
+    setMeta('property', 'og:image', socialImage);
 
     // 4. Twitter Card Tags
     setMeta('name', 'twitter:card', 'summary_large_image');
     setMeta('name', 'twitter:title', title);
     setMeta('name', 'twitter:description', description);
+    setMeta('name', 'twitter:image', socialImage);
 
     // 5. Schema.org Structured Data
     const schemas: Array<Record<string, any>> = [];
@@ -115,8 +131,14 @@ export function SEO({
       if (scriptTag) {
         scriptTag.textContent = '';
       }
+      if (noindex) {
+        const robotsEl = document.querySelector('meta[name="robots"]');
+        if (robotsEl) {
+          robotsEl.remove();
+        }
+      }
     };
-  }, [title, description, canonicalPath, ogType, schema, faqItems]);
+  }, [title, description, canonicalPath, ogType, ogImage, noindex, schema, faqItems]);
 
   return null;
 }

@@ -130,7 +130,7 @@ export function PdfPageCounter() {
               {isLoading ? 'Counting pages & analyzing...' : 'Click or drop a PDF file to count pages'}
             </p>
             <p className="text-xs text-slate-500 mt-1">
-              Supports any PDF document regardless of size. 100% private.
+              Supports any PDF document regardless of size. Local client-side inspection.
             </p>
           </div>
         </div>
@@ -223,7 +223,7 @@ export function PdfPageCounter() {
       {/* Security Guarantee */}
       <div className="flex items-center gap-2 pt-4 border-t border-slate-200 text-xs text-slate-500">
         <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
-        <span>100% Client-Side. The file is read locally using your browser JavaScript engine without server upload.</span>
+        <span>Client-Side Processing. The file is read locally using your browser JavaScript engine without server file upload.</span>
       </div>
     </div>
   );

@@ -8,9 +8,22 @@ import { CategoryPage } from './pages/CategoryPage';
 import { AllToolsPage } from './pages/AllToolsPage';
 import { ToolPageWrapper } from './pages/ToolPageWrapper';
 import { AboutPage, PrivacyPage, TermsPage, DisclaimerPage, ContactPage } from './pages/StaticPages';
+import { GuidesPage } from './pages/GuidesPage';
+import { GuideDetailPage } from './pages/GuideDetailPage';
 import { getToolBySlug, getCategoryBySlug, TOOLS } from './data/tools';
+import { getGuideBySlug } from './data/guides';
 import { Link } from './context/RouterContext';
 import { ArrowLeft, Search } from 'lucide-react';
+import { SEO } from './components/common/SEO';
+
+function RedirectToTools({ slug }: { slug: string }) {
+  const { navigate } = useRouter();
+  useEffect(() => {
+    navigate(`/tools/${slug}`);
+  }, [slug, navigate]);
+
+  return null;
+}
 
 function AppContent() {
   const { currentPath, navigate } = useRouter();
@@ -49,6 +62,18 @@ function AppContent() {
     if (path === '/disclaimer') return <DisclaimerPage />;
     if (path === '/contact') return <ContactPage />;
 
+    // Guides routes: /guides or /guides/:slug
+    if (path === '/guides') {
+      return <GuidesPage />;
+    }
+    if (path.startsWith('/guides/')) {
+      const slug = path.replace('/guides/', '');
+      const guide = getGuideBySlug(slug);
+      if (guide) {
+        return <GuideDetailPage guide={guide} />;
+      }
+    }
+
     // Category routes: /category/:slug
     if (path.startsWith('/category/')) {
       const slug = path.replace('/category/', '');
@@ -68,15 +93,18 @@ function AppContent() {
     }
     if (path.startsWith('/tool/')) {
       const slug = path.replace('/tool/', '');
-      const tool = getToolBySlug(slug);
-      if (tool) {
-        return <ToolPageWrapper tool={tool} />;
-      }
+      return <RedirectToTools slug={slug} />;
     }
 
     // 404 Not Found fallback
     return (
       <div className="max-w-2xl mx-auto px-4 py-24 text-center space-y-6">
+        <SEO
+          title="Page Not Found — Toolora"
+          description="The tool or page you are looking for doesn't exist on Toolora."
+          canonicalPath="/404"
+          noindex={true}
+        />
         <div className="w-16 h-16 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center font-mono font-bold text-2xl mx-auto">
           404
         </div>

@@ -39,4 +39,8 @@ export interface CategoryInfo {
   description: string;
   icon: string;
   count: number;
+  metaTitle?: string;
+  metaDescription?: string;
+  introParagraph?: string;
+  highlights?: string[];
 }

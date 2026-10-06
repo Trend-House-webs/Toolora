@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
-import { Search } from 'lucide-react';
+import { Search, CheckCircle2, ArrowRight, Layers, GraduationCap, Wrench, Image as ImageIcon, FileText, BookOpen, Clock } from 'lucide-react';
 import { getCategoryBySlug, TOOLS } from '../data/tools';
+import { getGuidesByCategory } from '../data/guides';
 import { Breadcrumbs } from '../components/common/Breadcrumbs';
 import { ToolCard } from '../components/common/ToolCard';
 import { SEO } from '../components/common/SEO';
+import { SITE_URL } from '../config/site';
+import { Link } from '../context/RouterContext';
 
 interface CategoryPageProps {
   categorySlug: string;
@@ -12,6 +15,7 @@ interface CategoryPageProps {
 export function CategoryPage({ categorySlug }: CategoryPageProps) {
   const category = getCategoryBySlug(categorySlug);
   const [filterQuery, setFilterQuery] = useState('');
+  const [studentUtilityTab, setStudentUtilityTab] = useState<'all' | 'student' | 'utility'>('all');
 
   if (!category) {
     return (
@@ -19,86 +23,218 @@ export function CategoryPage({ categorySlug }: CategoryPageProps) {
         <SEO
           title="Category Not Found — Toolora"
           description="The category you requested does not exist on Toolora."
-          canonicalPath="/category/not-found"
+          canonicalPath={`/category/${categorySlug}`}
+          noindex={true}
         />
         <h1 className="text-2xl font-bold text-slate-900">Category Not Found</h1>
         <p className="text-slate-500 mt-2">The category you requested does not exist.</p>
+        <div className="mt-6">
+          <Link
+            to="/tools"
+            className="inline-flex items-center gap-2 px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white text-xs sm:text-sm font-semibold rounded-xl transition-colors"
+          >
+            Browse All Tools
+          </Link>
+        </div>
       </div>
     );
   }
 
-  const categoryTools = TOOLS.filter((t) =>
+  // Get tools belonging to this category
+  const baseCategoryTools = TOOLS.filter((t) =>
     category.id === 'student-utility'
       ? t.category === 'student' || t.category === 'utility' || t.category === 'student-utility'
       : t.category === category.id
   );
+
+  // If on student-utility, allow sub-filtering by academic vs utility
+  const categoryTools =
+    category.id === 'student-utility' && studentUtilityTab !== 'all'
+      ? baseCategoryTools.filter((t) => t.category === studentUtilityTab)
+      : baseCategoryTools;
+
+  const categoryGuides = getGuidesByCategory(category.slug);
+
+  // Filter tools by search keyword
   const filteredTools = categoryTools.filter(
     (t) =>
       t.name.toLowerCase().includes(filterQuery.toLowerCase()) ||
       t.description.toLowerCase().includes(filterQuery.toLowerCase())
   );
 
+  const studentCount = baseCategoryTools.filter((t) => t.category === 'student').length;
+  const utilityCount = baseCategoryTools.filter((t) => t.category === 'utility').length;
+
   const collectionSchema = {
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
     name: `${category.title} — Toolora`,
     description: category.description,
-    url: `https://toolora.com/category/${category.slug}`,
+    url: `${SITE_URL}/category/${category.slug}`,
     mainEntity: {
       '@type': 'ItemList',
-      itemListElement: categoryTools.map((t, idx) => ({
+      itemListElement: baseCategoryTools.map((t, idx) => ({
         '@type': 'ListItem',
         position: idx + 1,
-        url: `https://toolora.com/tools/${t.slug}`,
+        url: `${SITE_URL}/tools/${t.slug}`,
         name: t.name,
       })),
     },
+  };
+
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: `${SITE_URL}/`,
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: category.title,
+        item: `${SITE_URL}/category/${category.slug}`,
+      },
+    ],
   };
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 space-y-8">
       {/* SEO & Structured Data */}
       <SEO
-        title={`${category.title} — Free Online Utilities | Toolora`}
-        description={category.description}
+        title={category.metaTitle || `${category.title} — Free Online Utilities | Toolora`}
+        description={category.metaDescription || category.description}
         canonicalPath={`/category/${category.slug}`}
-        schema={collectionSchema}
+        schema={[collectionSchema, breadcrumbSchema]}
       />
 
       {/* Breadcrumbs */}
       <Breadcrumbs items={[{ label: category.title }]} />
 
-      {/* Header */}
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-slate-200">
-        <div className="max-w-2xl">
-          <div className="flex items-center gap-2 text-xs font-semibold text-blue-600 uppercase tracking-wider mb-2">
-            <span>Directory</span>
-            <span aria-hidden="true" className="text-slate-300">·</span>
-            <span>{categoryTools.length} Free Browser Tools</span>
+      {/* Header with clear single H1 */}
+      <div className="pb-6 border-b border-slate-200">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+          <div className="max-w-3xl">
+            <div className="flex items-center gap-2 text-xs font-semibold text-blue-600 uppercase tracking-wider mb-2">
+              <span>Directory</span>
+              <span aria-hidden="true" className="text-slate-300">·</span>
+              <span>{baseCategoryTools.length} Free Browser Tools</span>
+            </div>
+
+            <h1 className="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+              {category.title}
+            </h1>
+
+            <p className="text-sm sm:text-base text-slate-600 mt-2 leading-relaxed">
+              {category.description}
+            </p>
           </div>
 
-          <h1 className="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
-            {category.title}
-          </h1>
-
-          <p className="text-sm sm:text-base text-slate-600 mt-2 leading-relaxed">
-            {category.description}
-          </p>
+          {/* Filter input */}
+          <div className="relative w-full md:w-72 shrink-0">
+            <Search className="w-4 h-4 text-slate-400 absolute left-3 top-3" />
+            <input
+              type="text"
+              value={filterQuery}
+              onChange={(e) => setFilterQuery(e.target.value)}
+              placeholder={`Search ${category.title}...`}
+              className="w-full pl-9 pr-3 py-2 bg-white border border-slate-300 rounded-xl text-xs sm:text-sm text-slate-800 placeholder:text-slate-400 focus:outline-hidden focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
+              aria-label={`Search ${category.title}`}
+            />
+          </div>
         </div>
 
-        {/* Filter input */}
-        <div className="relative w-full md:w-72 shrink-0">
-          <Search className="w-4 h-4 text-slate-400 absolute left-3 top-3" />
-          <input
-            type="text"
-            value={filterQuery}
-            onChange={(e) => setFilterQuery(e.target.value)}
-            placeholder={`Filter ${category.title}...`}
-            className="w-full pl-9 pr-3 py-2 bg-white border border-slate-300 rounded-xl text-xs sm:text-sm text-slate-800 placeholder:text-slate-400 focus:outline-hidden focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
-            aria-label={`Filter ${category.title}`}
-          />
-        </div>
+        {/* Distinct purpose banner and sub-tabs for student-utility */}
+        {category.id === 'student-utility' && (
+          <div className="mt-6 pt-6 border-t border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div className="flex items-center gap-2" role="tablist">
+              <button
+                role="tab"
+                aria-selected={studentUtilityTab === 'all'}
+                onClick={() => setStudentUtilityTab('all')}
+                className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors cursor-pointer ${
+                  studentUtilityTab === 'all'
+                    ? 'bg-blue-600 text-white shadow-xs'
+                    : 'bg-slate-100 text-slate-600 hover:text-slate-900 hover:bg-slate-200/70'
+                }`}
+              >
+                All Productivity ({baseCategoryTools.length})
+              </button>
+              <button
+                role="tab"
+                aria-selected={studentUtilityTab === 'student'}
+                onClick={() => setStudentUtilityTab('student')}
+                className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors cursor-pointer ${
+                  studentUtilityTab === 'student'
+                    ? 'bg-blue-600 text-white shadow-xs'
+                    : 'bg-slate-100 text-slate-600 hover:text-slate-900 hover:bg-slate-200/70'
+                }`}
+              >
+                Academic Solvers ({studentCount})
+              </button>
+              <button
+                role="tab"
+                aria-selected={studentUtilityTab === 'utility'}
+                onClick={() => setStudentUtilityTab('utility')}
+                className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors cursor-pointer ${
+                  studentUtilityTab === 'utility'
+                    ? 'bg-blue-600 text-white shadow-xs'
+                    : 'bg-slate-100 text-slate-600 hover:text-slate-900 hover:bg-slate-200/70'
+                }`}
+              >
+                Daily Utilities ({utilityCount})
+              </button>
+            </div>
+
+            <div className="flex items-center gap-3 text-xs text-slate-500">
+              <span>Dedicated sections:</span>
+              <Link
+                to="/category/student-tools"
+                className="text-blue-600 hover:underline font-semibold flex items-center gap-1"
+              >
+                Student Tools <ArrowRight className="w-3 h-3" />
+              </Link>
+              <span>·</span>
+              <Link
+                to="/category/utility-tools"
+                className="text-blue-600 hover:underline font-semibold flex items-center gap-1"
+              >
+                Daily Utilities <ArrowRight className="w-3 h-3" />
+              </Link>
+            </div>
+          </div>
+        )}
       </div>
+
+      {/* Visible Category Introduction & Capabilities */}
+      {(category.introParagraph || (category.highlights && category.highlights.length > 0)) && (
+        <div className="bg-white rounded-2xl border border-slate-200/90 p-6 sm:p-8 space-y-5">
+          {category.introParagraph && (
+            <p className="text-sm sm:text-base text-slate-700 leading-relaxed">
+              {category.introParagraph}
+            </p>
+          )}
+
+          {category.highlights && category.highlights.length > 0 && (
+            <div className="pt-2 border-t border-slate-100">
+              <h2 className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-3">
+                Key Capabilities in this Suite
+              </h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                {category.highlights.map((highlight, idx) => (
+                  <div key={idx} className="flex items-start gap-2 text-xs sm:text-sm text-slate-700">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-600 mt-0.5 shrink-0" />
+                    <span>{highlight}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      )}
 
       {/* Tools Grid */}
       {filteredTools.length > 0 ? (
@@ -108,11 +244,156 @@ export function CategoryPage({ categorySlug }: CategoryPageProps) {
           ))}
         </div>
       ) : (
-        <div className="py-16 text-center text-slate-500">
+        <div className="py-16 text-center text-slate-500 bg-white rounded-2xl border border-slate-200">
           <p className="text-base font-semibold">No tools found matching "{filterQuery}"</p>
-          <p className="text-xs text-slate-400 mt-1">Try another search keyword.</p>
+          <p className="text-xs text-slate-400 mt-1">Try another search keyword or clear your filter.</p>
+          <button
+            onClick={() => setFilterQuery('')}
+            className="mt-4 px-4 py-2 text-xs font-semibold text-blue-600 bg-blue-50 hover:bg-blue-100 rounded-lg transition-colors cursor-pointer"
+          >
+            Clear Filter
+          </button>
         </div>
       )}
+
+      {/* Helpful Guides for Category */}
+      {categoryGuides.length > 0 && (
+        <section className="pt-10 border-t border-slate-200">
+          <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
+            <div>
+              <div className="inline-flex items-center gap-1.5 text-xs font-bold text-blue-700 uppercase tracking-wider mb-1">
+                <BookOpen className="w-3.5 h-3.5" />
+                <span>Helpful Guides & Tutorials</span>
+              </div>
+              <h2 className="text-xl font-bold text-slate-900 tracking-tight sm:text-2xl">
+                Practical Guides for {category.title}
+              </h2>
+              <p className="text-xs sm:text-sm text-slate-600 mt-1">
+                Step-by-step walk-throughs and format comparisons to help you get the best results.
+              </p>
+            </div>
+            <Link
+              to="/guides"
+              className="text-xs sm:text-sm font-semibold text-blue-600 hover:text-blue-700 hover:underline flex items-center gap-1"
+            >
+              All Guides <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {categoryGuides.map((g) => (
+              <Link
+                key={g.slug}
+                to={`/guides/${g.slug}`}
+                className="group p-5 rounded-xl bg-white border border-slate-200 hover:border-blue-300 hover:shadow-xs transition-all flex flex-col justify-between"
+              >
+                <div>
+                  <div className="flex items-center justify-between text-2xs text-slate-500 mb-2">
+                    <span className="font-semibold text-blue-600">{g.categoryName}</span>
+                    <span className="flex items-center gap-1">
+                      <Clock className="w-3 h-3" />
+                      {g.readTime}
+                    </span>
+                  </div>
+                  <h3 className="text-sm font-bold text-slate-900 group-hover:text-blue-600 transition-colors leading-snug">
+                    {g.title}
+                  </h3>
+                  <p className="text-xs text-slate-600 mt-2 line-clamp-2 leading-relaxed">
+                    {g.summary}
+                  </p>
+                </div>
+                <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-blue-600 font-semibold group-hover:text-blue-700">
+                  <span>Read Tutorial</span>
+                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+                </div>
+              </Link>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* Contextual Category Cross-Links for Site Hierarchy */}
+      <section className="pt-10 border-t border-slate-200">
+        <h2 className="text-base sm:text-lg font-bold text-slate-900 mb-4">
+          Explore Other Toolora Categories
+        </h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {category.id !== 'image' && (
+            <Link
+              to="/category/image-tools"
+              className="p-4 rounded-xl bg-white border border-slate-200 hover:border-blue-500 hover:shadow-xs transition-all group"
+            >
+              <div className="flex items-center gap-2.5 text-slate-900 font-bold text-sm group-hover:text-blue-600">
+                <ImageIcon className="w-4 h-4 text-blue-600" />
+                <span>Image Tools</span>
+              </div>
+              <p className="text-xs text-slate-500 mt-1.5 line-clamp-2">
+                Compress, resize, convert, and edit photos directly in your browser.
+              </p>
+            </Link>
+          )}
+
+          {category.id !== 'pdf' && (
+            <Link
+              to="/category/pdf-tools"
+              className="p-4 rounded-xl bg-white border border-slate-200 hover:border-blue-500 hover:shadow-xs transition-all group"
+            >
+              <div className="flex items-center gap-2.5 text-slate-900 font-bold text-sm group-hover:text-blue-600">
+                <FileText className="w-4 h-4 text-blue-600" />
+                <span>PDF Tools</span>
+              </div>
+              <p className="text-xs text-slate-500 mt-1.5 line-clamp-2">
+                Merge, split, rotate, convert, and inspect PDF files without uploads.
+              </p>
+            </Link>
+          )}
+
+          {category.id !== 'student' && (
+            <Link
+              to="/category/student-tools"
+              className="p-4 rounded-xl bg-white border border-slate-200 hover:border-blue-500 hover:shadow-xs transition-all group"
+            >
+              <div className="flex items-center gap-2.5 text-slate-900 font-bold text-sm group-hover:text-blue-600">
+                <GraduationCap className="w-4 h-4 text-blue-600" />
+                <span>Student Tools</span>
+              </div>
+              <p className="text-xs text-slate-500 mt-1.5 line-clamp-2">
+                CGPA, weighted grades, fractions, ratios, and academic study timers.
+              </p>
+            </Link>
+          )}
+
+          {category.id !== 'utility' && (
+            <Link
+              to="/category/utility-tools"
+              className="p-4 rounded-xl bg-white border border-slate-200 hover:border-blue-500 hover:shadow-xs transition-all group"
+            >
+              <div className="flex items-center gap-2.5 text-slate-900 font-bold text-sm group-hover:text-blue-600">
+                <Wrench className="w-4 h-4 text-blue-600" />
+                <span>Daily Utilities</span>
+              </div>
+              <p className="text-xs text-slate-500 mt-1.5 line-clamp-2">
+                UUIDs, Unix timestamps, JSON formatters, text cleaners, and encoders.
+              </p>
+            </Link>
+          )}
+
+          {category.id !== 'student-utility' && (
+            <Link
+              to="/category/student-utility"
+              className="p-4 rounded-xl bg-white border border-slate-200 hover:border-blue-500 hover:shadow-xs transition-all group"
+            >
+              <div className="flex items-center gap-2.5 text-slate-900 font-bold text-sm group-hover:text-blue-600">
+                <Layers className="w-4 h-4 text-blue-600" />
+                <span>Student & Utility Hub</span>
+              </div>
+              <p className="text-xs text-slate-500 mt-1.5 line-clamp-2">
+                Unified workspace combining academic solvers and daily productivity tools.
+              </p>
+            </Link>
+          )}
+        </div>
+      </section>
     </div>
   );
 }

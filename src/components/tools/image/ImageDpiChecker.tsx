@@ -176,7 +176,7 @@ export function ImageDpiChecker() {
 
       <div className="flex items-center gap-2 pt-4 border-t border-slate-200 text-xs text-slate-500">
         <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
-        <span>100% Client-Side. Your photos never leave your device or travel over any network.</span>
+        <span>Client-Side Processing. Image files are analyzed in local browser memory without server uploads.</span>
       </div>
     </div>
   );

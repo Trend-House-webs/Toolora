@@ -239,7 +239,7 @@ export function MergePdfTool() {
       <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-slate-200">
         <div className="flex items-center gap-2 text-xs text-slate-500">
           <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
-          <span>No documents are uploaded to any server. 100% processed in your browser.</span>
+          <span>Documents are processed directly in your browser without server uploads.</span>
         </div>
 
         <button

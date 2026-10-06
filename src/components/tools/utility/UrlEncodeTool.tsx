@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { Copy, Check, ArrowRightLeft, ShieldCheck, AlertCircle } from 'lucide-react';
+import { SITE_URL } from '../../../config/site';
 
 export function UrlEncodeTool() {
   const [mode, setMode] = useState<'encode' | 'decode'>('encode');
   const [encodeType, setEncodeType] = useState<'component' | 'full'>('component');
-  const [inputVal, setInputVal] = useState<string>('https://toolora.com/search?q=free tools & privacy=100%');
+  const [inputVal, setInputVal] = useState<string>(`${SITE_URL}/search?q=free tools & privacy=100%`);
   const [outputVal, setOutputVal] = useState<string>('');
   const [error, setError] = useState<string | null>(null);
   const [copied, setCopied] = useState<boolean>(false);
@@ -151,7 +152,7 @@ export function UrlEncodeTool() {
 
       <div className="pt-4 border-t border-slate-100 flex items-center gap-2 text-xs text-slate-500">
         <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
-        <span>100% Client-Side. URL queries and strings are processed entirely in your web browser.</span>
+        <span>Client-Side Processing. URL queries and strings are processed locally in your web browser.</span>
       </div>
     </div>
   );

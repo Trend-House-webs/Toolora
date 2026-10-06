@@ -121,7 +121,7 @@ export function ImageCompressor() {
           onImageSelected={handleSelectFile}
           accept="image/jpeg,image/jpg,image/png,image/webp"
           title="Select JPG, PNG or WebP image to compress"
-          subtitle="Drag & drop your file here, or click to browse. Processing runs 100% locally."
+          subtitle="Drag & drop your file here, or click to browse. Processing runs locally in your browser."
         />
       </div>
     );

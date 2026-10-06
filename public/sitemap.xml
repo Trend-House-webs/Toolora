@@ -42,7 +42,6 @@
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
   </url>
-
   <url>
     <loc>https://toolorahub.vercel.app/category/image-tools</loc>
     <lastmod>2026-10-05</lastmod>
@@ -73,7 +72,36 @@
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
-
+  <url>
+    <loc>https://toolorahub.vercel.app/guides</loc>
+    <lastmod>2026-10-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://toolorahub.vercel.app/guides/how-to-compress-images-online</loc>
+    <lastmod>2026-10-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://toolorahub.vercel.app/guides/jpg-vs-png-vs-webp</loc>
+    <lastmod>2026-10-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://toolorahub.vercel.app/guides/how-to-resize-an-image-without-losing-quality</loc>
+    <lastmod>2026-10-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://toolorahub.vercel.app/guides/how-to-convert-images-to-pdf</loc>
+    <lastmod>2026-10-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
   <url>
     <loc>https://toolorahub.vercel.app/tools/image-compressor</loc>
     <lastmod>2026-10-05</lastmod>
@@ -152,7 +180,6 @@
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
-
   <url>
     <loc>https://toolorahub.vercel.app/tools/percentage-calculator</loc>
     <lastmod>2026-10-05</lastmod>
@@ -267,7 +294,6 @@
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
-
   <url>
     <loc>https://toolorahub.vercel.app/tools/percentage-increase-calculator</loc>
     <lastmod>2026-10-05</lastmod>

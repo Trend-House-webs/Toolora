@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://toolora.com/sitemap.xml
+Sitemap: https://toolorahub.vercel.app/sitemap.xml

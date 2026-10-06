@@ -100,7 +100,7 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
                 handleSelect(filteredTools[selectedIndex].slug);
               }
             }}
-            placeholder="Search all 21 tools (e.g. compress, pdf, gpa, percentage, qr)..."
+            placeholder={`Search all ${TOOLS.length} tools (e.g. compress, pdf, gpa, percentage, qr)...`}
             className="w-full py-4 px-3 text-base bg-transparent text-slate-900 placeholder:text-slate-400 focus:outline-hidden"
           />
           <button

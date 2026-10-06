@@ -9,26 +9,24 @@ export function Footer() {
   return (
     <footer className="mt-20 bg-white border-t border-slate-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 lg:gap-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10">
           {/* Brand & Value Proposition */}
-          <div className="md:col-span-2 space-y-4">
+          <div className="space-y-4">
             <Link to="/" className="inline-block" aria-label="Toolora Homepage">
               <TooloraLogo size="md" showTagline />
             </Link>
-            <p className="text-sm text-slate-600 max-w-sm leading-relaxed">
-              Everyday tools, made simple. Built with client-side browser technology to ensure your files and calculations remain private and never touch our servers.
+            <p className="text-sm text-slate-600 leading-relaxed">
+              Everyday tools, made simple. Built with client-side browser technology so your files and calculations are processed locally without server file uploads.
             </p>
-            <div className="flex flex-wrap items-center gap-4 text-xs text-slate-500 pt-1">
+            <div className="flex flex-col gap-2 text-xs text-slate-500 pt-1">
               <span className="flex items-center gap-1.5">
                 <ShieldCheck className="w-4 h-4 text-emerald-600" />
-                100% Client-Side Privacy
+                Client-Side Processing
               </span>
-              <span aria-hidden="true" className="text-slate-300">·</span>
               <span className="flex items-center gap-1.5">
                 <Zap className="w-4 h-4 text-amber-500" />
                 Instant Execution
               </span>
-              <span aria-hidden="true" className="text-slate-300">·</span>
               <span className="flex items-center gap-1.5">
                 <Lock className="w-4 h-4 text-blue-600" />
                 No Accounts Required
@@ -49,42 +47,61 @@ export function Footer() {
               </li>
               <li>
                 <Link to="/category/image-tools" className="hover:text-blue-600 transition-colors">
-                  Image Tools
+                  Image Tools (22)
                 </Link>
               </li>
               <li>
                 <Link to="/category/pdf-tools" className="hover:text-blue-600 transition-colors">
-                  PDF Tools
+                  PDF Tools (7)
+                </Link>
+              </li>
+              <li>
+                <Link to="/category/student-tools" className="hover:text-blue-600 transition-colors">
+                  Student Tools (18)
+                </Link>
+              </li>
+              <li>
+                <Link to="/category/utility-tools" className="hover:text-blue-600 transition-colors">
+                  Daily Utilities (16)
                 </Link>
               </li>
               <li>
                 <Link to="/category/student-utility" className="hover:text-blue-600 transition-colors">
-                  Student & Utility Tools
+                  Student & Utility Hub
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Practical Guides */}
+          <div>
+            <h3 className="text-xs font-semibold text-slate-900 uppercase tracking-wider mb-4">
+              Helpful Guides
+            </h3>
+            <ul className="space-y-2.5 text-sm text-slate-600">
+              <li>
+                <Link to="/guides/how-to-compress-images-online" className="hover:text-blue-600 transition-colors">
+                  Compress Images Cleanly
                 </Link>
               </li>
               <li>
-                <Link to="/tools/merge-pdf" className="hover:text-blue-600 transition-colors">
-                  Merge PDF
+                <Link to="/guides/jpg-vs-png-vs-webp" className="hover:text-blue-600 transition-colors">
+                  JPG vs PNG vs WebP
                 </Link>
               </li>
               <li>
-                <Link to="/tools/cgpa-calculator" className="hover:text-blue-600 transition-colors">
-                  CGPA Calculator
+                <Link to="/guides/how-to-resize-an-image-without-losing-quality" className="hover:text-blue-600 transition-colors">
+                  Resize Without Quality Loss
                 </Link>
               </li>
               <li>
-                <Link to="/tools/image-compressor" className="hover:text-blue-600 transition-colors">
-                  Image Compressor
+                <Link to="/guides/how-to-convert-images-to-pdf" className="hover:text-blue-600 transition-colors">
+                  Convert Images to PDF
                 </Link>
               </li>
-              <li>
-                <Link to="/tools/jpg-to-pdf" className="hover:text-blue-600 transition-colors">
-                  JPG to PDF
-                </Link>
-              </li>
-              <li>
-                <Link to="/tools/password-generator" className="hover:text-blue-600 transition-colors">
-                  Password Generator
+              <li className="pt-1">
+                <Link to="/guides" className="text-blue-600 hover:text-blue-700 font-semibold transition-colors flex items-center gap-1">
+                  All Guides & Tutorials →
                 </Link>
               </li>
             </ul>

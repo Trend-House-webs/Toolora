@@ -151,7 +151,7 @@ export function RemoveDuplicateLines() {
 
       <div className="flex justify-between items-center text-xs text-slate-500">
         <span>Current Lines: <strong className="font-mono text-slate-800">{totalLines}</strong></span>
-        <span>Processed 100% in your browser</span>
+        <span>Processed locally in your browser</span>
       </div>
     </div>
   );
