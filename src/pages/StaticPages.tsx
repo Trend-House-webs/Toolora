@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Breadcrumbs } from '../components/common/Breadcrumbs';
 import { SEO } from '../components/common/SEO';
-import { ShieldCheck, Mail, CheckCircle2, Lock, Zap, AlertCircle, Copy, Check, ExternalLink, ArrowLeft } from 'lucide-react';
+import { ShieldCheck, CheckCircle2, Lock, Zap, AlertCircle, Send, Loader2, MessageSquare, RotateCcw } from 'lucide-react';
 import { SITE_URL } from '../config/site';
 
 const getStaticBreadcrumbSchema = (name: string, path: string) => ({
@@ -150,9 +150,9 @@ export function PrivacyPage() {
         </div>
 
         <div>
-          <h2 className="text-base font-bold text-slate-900 mb-2">6. Communications & Contact Inquiries</h2>
+          <h2 className="text-base font-bold text-slate-900 mb-2">6. Communications & Feedback</h2>
           <p>
-            Toolora does not operate a server-side message collection backend. Contact submissions are prepared as email drafts addressed to support@toolora.com. Any correspondence you choose to send directly via email is used solely to respond to your technical questions, bug reports, or feature suggestions.
+            When you submit feedback or tool suggestions through our feedback form, your message, selected topic, and optional contact details are securely transmitted to our feedback system solely for reviewing suggestions, resolving technical bugs, and improving Toolora. No account is required and submissions are never sold or shared with advertisers.
           </p>
         </div>
 
@@ -267,46 +267,95 @@ export function DisclaimerPage() {
 export function ContactPage() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [subject, setSubject] = useState('Tool Suggestion');
+  const [topic, setTopic] = useState('Tool Suggestion');
   const [message, setMessage] = useState('');
+  const [website, setWebsite] = useState(''); // Honeypot
+  const [pageUrl, setPageUrl] = useState('https://toolorahub.vercel.app/contact');
 
-  // Drafted state - shown after user clicks to draft/open in email client
-  const [draftPrepared, setDraftPrepared] = useState(false);
-  const [mailtoUrl, setMailtoUrl] = useState('');
-  const [copiedDraft, setCopiedDraft] = useState(false);
-  const [copiedEmail, setCopiedEmail] = useState(false);
-
-  // Field-specific validation errors for accessibility
+  const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [fieldErrors, setFieldErrors] = useState<{
     name?: string;
     email?: string;
+    topic?: string;
     message?: string;
   }>({});
   const [generalError, setGeneralError] = useState<string | null>(null);
 
-  const validate = (): boolean => {
-    const errors: { name?: string; email?: string; message?: string } = {};
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-    if (!name.trim()) {
-      errors.name = 'Please enter your name.';
+  // Initialize page URL safely
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setPageUrl(window.location.href);
+    }
+  }, []);
+
+  // Listen for Apps Script postMessage notification from hidden iframe
+  useEffect(() => {
+    const handleMessage = (event: MessageEvent) => {
+      if (!event.data || typeof event.data !== 'object') return;
+
+      if (event.data.type === 'TOOLORA_FEEDBACK_RESULT') {
+        if (timeoutRef.current) {
+          clearTimeout(timeoutRef.current);
+          timeoutRef.current = null;
+        }
+
+        if (event.data.success === true) {
+          setStatus('success');
+          setName('');
+          setEmail('');
+          setMessage('');
+          setWebsite('');
+          setFieldErrors({});
+          setGeneralError(null);
+        } else {
+          setStatus('error');
+          setGeneralError("Sorry, we couldn't send your feedback right now. Please try again.");
+        }
+      }
+    };
+
+    window.addEventListener('message', handleMessage);
+    return () => {
+      window.removeEventListener('message', handleMessage);
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
+  }, []);
+
+  const validate = (): boolean => {
+    const errors: { name?: string; email?: string; topic?: string; message?: string } = {};
+
+    if (name.trim().length > 100) {
+      errors.name = 'Name must be 100 characters or fewer.';
     }
 
-    if (!email.trim()) {
-      errors.email = 'Please enter your email address.';
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
-      errors.email = 'Please enter a valid email address (e.g. name@example.com).';
+    if (email.trim().length > 254) {
+      errors.email = 'Email address must be 254 characters or fewer.';
+    } else if (email.trim().length > 0 && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email.trim())) {
+      errors.email = 'Please enter a valid email address (e.g. name@example.com) or leave it blank.';
+    }
+
+    if (!topic.trim()) {
+      errors.topic = 'Please select a feedback topic.';
+    } else if (topic.trim().length > 100) {
+      errors.topic = 'Topic must be 100 characters or fewer.';
     }
 
     if (!message.trim()) {
-      errors.message = 'Please enter your feedback or suggestion message.';
+      errors.message = 'Please enter your feedback message.';
     } else if (message.trim().length < 5) {
       errors.message = 'Please enter a slightly more detailed message (at least 5 characters).';
+    } else if (message.trim().length > 5000) {
+      errors.message = 'Message must be 5000 characters or fewer.';
     }
 
     setFieldErrors(errors);
 
     if (Object.keys(errors).length > 0) {
-      setGeneralError('Please correct the highlighted fields before proceeding.');
+      setGeneralError('Please correct the highlighted fields before submitting.');
       return false;
     }
 
@@ -314,57 +363,46 @@ export function ContactPage() {
     return true;
   };
 
-  const getFullDraftBody = () => {
-    return `Name: ${name.trim()}\nEmail: ${email.trim()}\nTopic: ${subject}\n\nMessage:\n${message.trim()}`;
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-
-    if (!validate()) {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    if (status === 'submitting') {
+      e.preventDefault();
       return;
     }
 
-    const emailSubject = `[Toolora] ${subject} from ${name.trim()}`;
-    const emailBody = getFullDraftBody();
-    const mailto = `mailto:support@toolora.com?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
-
-    setMailtoUrl(mailto);
-    setDraftPrepared(true);
-
-    // Attempt to open email client safely via standard browser protocol
-    try {
-      window.location.href = mailto;
-    } catch {
-      // If browser blocks location change, the UI provides direct button & copy options
+    if (!validate()) {
+      e.preventDefault();
+      return;
     }
+
+    setStatus('submitting');
+    setGeneralError(null);
+
+    // Safety timeout: if iframe never responds, release submitting state and show helpful error
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    timeoutRef.current = setTimeout(() => {
+      setStatus((current) => {
+        if (current === 'submitting') {
+          setGeneralError("Sorry, we couldn't send your feedback right now. Please try again.");
+          return 'error';
+        }
+        return current;
+      });
+    }, 20000);
+
+    // Form submission naturally proceeds via target="toolora-feedback-frame"
   };
 
-  const copyDraftToClipboard = async () => {
-    try {
-      await navigator.clipboard.writeText(getFullDraftBody());
-      setCopiedDraft(true);
-      setTimeout(() => setCopiedDraft(false), 2500);
-    } catch {
-      // Fallback
-    }
-  };
-
-  const copyEmailAddress = async () => {
-    try {
-      await navigator.clipboard.writeText('support@toolora.com');
-      setCopiedEmail(true);
-      setTimeout(() => setCopiedEmail(false), 2500);
-    } catch {
-      // Fallback
-    }
+  const resetForm = () => {
+    setStatus('idle');
+    setGeneralError(null);
+    setFieldErrors({});
   };
 
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 space-y-8">
       <SEO
         title="Contact & Feedback — Toolora"
-        description="Contact Toolora. Suggest new free tools, submit technical feedback, or reach our support team directly via email."
+        description="Contact Toolora. Suggest new free tools, submit technical feedback, or share ideas with our team."
         canonicalPath="/contact"
         schema={getStaticBreadcrumbSchema('Contact & Feedback', '/contact')}
       />
@@ -382,119 +420,125 @@ export function ContactPage() {
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         <div className="md:col-span-2 bg-white rounded-2xl border border-slate-200/90 p-6 sm:p-8 shadow-xs">
-          {draftPrepared ? (
-            /* Honest State: Explains that message was drafted for email client, NOT server-delivered */
-            <div className="space-y-6">
-              <div className="flex items-start gap-3 p-4 bg-blue-50 border border-blue-200 rounded-xl">
-                <CheckCircle2 className="w-5 h-5 text-blue-600 shrink-0 mt-0.5" />
-                <div className="text-xs sm:text-sm text-blue-950 space-y-1">
-                  <h2 className="font-bold text-sm text-blue-900">Email Draft Prepared</h2>
-                  <p className="text-slate-700 leading-relaxed">
-                    Toolora operates as a client-side application without a message-handling backend server. We have generated an email draft addressed to <strong>support@toolora.com</strong> in your default mail application.
+          {status === 'success' ? (
+            <div className="space-y-6" aria-live="polite">
+              <div className="flex items-start gap-3.5 p-5 bg-emerald-50 border border-emerald-200 rounded-2xl">
+                <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
+                <div className="space-y-1 text-emerald-950">
+                  <h2 className="font-bold text-base text-emerald-900">
+                    Feedback Received
+                  </h2>
+                  <p className="text-xs sm:text-sm text-emerald-800 leading-relaxed">
+                    Thanks! Your feedback has been received.
                   </p>
                 </div>
               </div>
 
-              <div className="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-3">
-                <div className="flex items-center justify-between text-xs text-slate-500 pb-2 border-b border-slate-200">
-                  <span className="font-semibold text-slate-700">Draft Summary</span>
-                  <span>To: support@toolora.com</span>
-                </div>
-                <div className="text-xs font-mono bg-white p-3 rounded-lg border border-slate-200 text-slate-800 whitespace-pre-wrap break-words max-h-48 overflow-y-auto">
-                  {getFullDraftBody()}
-                </div>
+              <div className="p-4 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-600 space-y-1">
+                <p className="font-semibold text-slate-800">What happens next?</p>
+                <p className="leading-relaxed">
+                  We review every suggestion to refine existing tools, add edge-case support, and prioritize new features. Thank you for helping make Toolora better!
+                </p>
               </div>
 
-              <div className="flex flex-wrap items-center gap-3 pt-2">
-                <a
-                  href={mailtoUrl}
-                  className="inline-flex items-center gap-2 px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs sm:text-sm font-semibold transition-colors shadow-xs"
-                >
-                  <ExternalLink className="w-4 h-4" />
-                  Launch Email Client Again
-                </a>
-
-                <button
-                  type="button"
-                  onClick={copyDraftToClipboard}
-                  className="inline-flex items-center gap-2 px-4 py-2.5 bg-white border border-slate-300 hover:bg-slate-50 text-slate-800 rounded-xl text-xs sm:text-sm font-semibold transition-colors cursor-pointer"
-                >
-                  {copiedDraft ? (
-                    <>
-                      <Check className="w-4 h-4 text-emerald-600" />
-                      Draft Copied to Clipboard
-                    </>
-                  ) : (
-                    <>
-                      <Copy className="w-4 h-4 text-slate-500" />
-                      Copy Draft Text
-                    </>
-                  )}
-                </button>
-
-                <button
-                  type="button"
-                  onClick={() => setDraftPrepared(false)}
-                  className="inline-flex items-center gap-1.5 px-3 py-2.5 text-xs text-slate-600 hover:text-slate-900 transition-colors cursor-pointer"
-                >
-                  <ArrowLeft className="w-3.5 h-3.5" />
-                  Edit Form Inputs
-                </button>
-              </div>
-
-              <p className="text-xs text-slate-500 leading-relaxed">
-                If your device does not have a desktop email client configured (e.g. if you use browser webmail), simply click <strong>Copy Draft Text</strong> and paste it into a new email sent to <strong>support@toolora.com</strong>.
-              </p>
+              <button
+                type="button"
+                onClick={resetForm}
+                className="inline-flex items-center gap-2 px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs sm:text-sm font-semibold transition-colors shadow-xs cursor-pointer"
+              >
+                <RotateCcw className="w-4 h-4" />
+                Send Another Note
+              </button>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="space-y-4" noValidate>
+            <form
+              method="POST"
+              action="https://script.google.com/macros/s/AKfycbwlwESCYz4Cit9xanpCOKY0czNoOWNXgc8DpEJWTYsgghorAdIixsGMhNENefalRPNm/exec"
+              target="toolora-feedback-frame"
+              onSubmit={handleSubmit}
+              className="space-y-4.5"
+              noValidate
+            >
+              {/* Hidden honeypot field for bot suppression */}
+              <div className="hidden" aria-hidden="true" style={{ display: 'none' }}>
+                <label htmlFor="contact-website">Website</label>
+                <input
+                  id="contact-website"
+                  name="website"
+                  type="text"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  value={website}
+                  onChange={(e) => setWebsite(e.target.value)}
+                />
+              </div>
+
+              {/* Hidden page URL context */}
+              <input type="hidden" name="page" value={pageUrl} />
+
+              {/* General submission error banner */}
               {generalError && (
                 <div
                   role="alert"
-                  className="p-3 bg-rose-50 border border-rose-200 text-rose-700 text-xs rounded-xl flex items-center gap-2"
+                  aria-live="assertive"
+                  className="p-3.5 bg-rose-50 border border-rose-200 text-rose-800 text-xs sm:text-sm rounded-xl flex items-start gap-2.5"
                 >
-                  <AlertCircle className="w-4 h-4 shrink-0" />
-                  <span>{generalError}</span>
+                  <AlertCircle className="w-4 h-4 text-rose-600 shrink-0 mt-0.5" />
+                  <div className="space-y-0.5">
+                    <p className="font-semibold">{generalError}</p>
+                    {status === 'error' && (
+                      <p className="text-xs text-rose-600">Your message is preserved below so you can try submitting again.</p>
+                    )}
+                  </div>
                 </div>
               )}
 
-              {/* Topic / Category */}
+              {/* Feedback Topic */}
               <div>
                 <label
-                  htmlFor="contact-subject"
+                  htmlFor="contact-topic"
                   className="block text-xs font-semibold text-slate-700 mb-1.5"
                 >
-                  Feedback Topic
+                  Feedback Topic <span className="text-rose-500" aria-hidden="true">*</span>
                 </label>
                 <select
-                  id="contact-subject"
-                  name="subject"
-                  value={subject}
-                  onChange={(e) => setSubject(e.target.value)}
+                  id="contact-topic"
+                  name="topic"
+                  value={topic}
+                  onChange={(e) => {
+                    setTopic(e.target.value);
+                    if (fieldErrors.topic) {
+                      setFieldErrors((prev) => ({ ...prev, topic: undefined }));
+                    }
+                  }}
                   className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:bg-white focus:outline-hidden focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
                 >
                   <option value="Tool Suggestion">Suggest a New Free Tool</option>
                   <option value="Bug Report">Bug Report / Technical Issue</option>
                   <option value="General Feedback">General Feedback</option>
-                  <option value="Privacy Question">Privacy or Data Question</option>
+                  <option value="Feature Improvement">Feature Improvement</option>
                   <option value="Other">Other Inquiry</option>
                 </select>
+                {fieldErrors.topic && (
+                  <p id="contact-topic-error" className="text-xs text-rose-600 mt-1" role="alert">
+                    {fieldErrors.topic}
+                  </p>
+                )}
               </div>
 
-              {/* Name field */}
+              {/* Name field (optional) */}
               <div>
                 <label
                   htmlFor="contact-name"
                   className="block text-xs font-semibold text-slate-700 mb-1.5"
                 >
-                  Your Name <span className="text-rose-500" aria-hidden="true">*</span>
+                  Your Name <span className="text-slate-400 font-normal">(optional)</span>
                 </label>
                 <input
                   id="contact-name"
                   name="name"
                   type="text"
-                  required
-                  aria-required="true"
+                  maxLength={100}
                   aria-invalid={Boolean(fieldErrors.name)}
                   aria-describedby={fieldErrors.name ? 'contact-name-error' : undefined}
                   value={name}
@@ -518,20 +562,19 @@ export function ContactPage() {
                 )}
               </div>
 
-              {/* Email field */}
+              {/* Email field (optional) */}
               <div>
                 <label
                   htmlFor="contact-email"
                   className="block text-xs font-semibold text-slate-700 mb-1.5"
                 >
-                  Your Email Address <span className="text-rose-500" aria-hidden="true">*</span>
+                  Your Email Address <span className="text-slate-400 font-normal">(optional — for follow-up only)</span>
                 </label>
                 <input
                   id="contact-email"
                   name="email"
                   type="email"
-                  required
-                  aria-required="true"
+                  maxLength={254}
                   aria-invalid={Boolean(fieldErrors.email)}
                   aria-describedby={fieldErrors.email ? 'contact-email-error' : undefined}
                   value={email}
@@ -555,7 +598,7 @@ export function ContactPage() {
                 )}
               </div>
 
-              {/* Message field */}
+              {/* Feedback Message (required) */}
               <div>
                 <label
                   htmlFor="contact-message"
@@ -568,6 +611,7 @@ export function ContactPage() {
                   name="message"
                   rows={5}
                   required
+                  maxLength={5000}
                   aria-required="true"
                   aria-invalid={Boolean(fieldErrors.message)}
                   aria-describedby={fieldErrors.message ? 'contact-message-error' : undefined}
@@ -592,62 +636,73 @@ export function ContactPage() {
                 )}
               </div>
 
-              {/* Honest delivery explanation */}
+              {/* Privacy and delivery notice */}
               <div className="p-3 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-600 leading-relaxed">
-                <span className="font-semibold text-slate-800">How Delivery Works: </span>
-                Toolora runs client-side with no centralized message database. Clicking below formats an email draft addressed to <strong>support@toolora.com</strong> in your default mail application.
+                Feedback is submitted securely to our feedback system. No account is required.
               </div>
 
+              {/* Action button */}
               <button
                 type="submit"
-                className="w-full sm:w-auto px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold rounded-xl transition-colors cursor-pointer shadow-xs inline-flex items-center justify-center gap-2"
+                disabled={status === 'submitting'}
+                className="w-full sm:w-auto px-6 py-3 bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 disabled:cursor-not-allowed text-white text-sm font-semibold rounded-xl transition-colors cursor-pointer shadow-xs inline-flex items-center justify-center gap-2"
               >
-                <Mail className="w-4 h-4" />
-                Compose in Email Client
+                {status === 'submitting' ? (
+                  <>
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                    <span>Sending Feedback...</span>
+                  </>
+                ) : (
+                  <>
+                    <Send className="w-4 h-4" />
+                    <span>Submit Feedback</span>
+                  </>
+                )}
               </button>
             </form>
           )}
+
+          {/* Hidden iframe target for silent Apps Script form POST */}
+          <iframe
+            name="toolora-feedback-frame"
+            id="toolora-feedback-frame"
+            title="Feedback submission"
+            aria-hidden="true"
+            tabIndex={-1}
+            className="hidden"
+            style={{ display: 'none', width: 0, height: 0, border: 0 }}
+          />
         </div>
 
-        {/* Sidebar / Direct Contact */}
+        {/* Sidebar / Helpful Guidance */}
         <div className="space-y-4">
-          <div className="p-6 bg-slate-50 rounded-2xl border border-slate-200 space-y-3">
-            <h2 className="font-bold text-slate-900 text-sm">Direct Email</h2>
-            <p className="text-xs text-slate-600 leading-relaxed">
-              Prefer writing directly from your email client or webmail? Reach our team anytime at:
+          <div className="p-6 bg-slate-50 rounded-2xl border border-slate-200 space-y-2">
+            <h2 className="font-bold text-slate-900 text-sm flex items-center gap-2">
+              <MessageSquare className="w-4 h-4 text-blue-600" />
+              How Feedback Helps
+            </h2>
+            <p className="text-xs text-slate-600 leading-relaxed font-normal">
+              We review every suggestion to improve existing utilities, fix edge cases, and prioritize new tool requests.
             </p>
-            <div className="pt-1">
-              <a
-                href="mailto:support@toolora.com"
-                className="text-xs font-semibold text-blue-600 hover:underline break-all flex items-center gap-1.5"
-              >
-                <Mail className="w-3.5 h-3.5 shrink-0" />
-                support@toolora.com
-              </a>
-            </div>
-            <button
-              type="button"
-              onClick={copyEmailAddress}
-              className="mt-2 w-full px-3 py-2 bg-white border border-slate-200 hover:bg-slate-100 text-slate-700 rounded-lg text-xs font-medium transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
-            >
-              {copiedEmail ? (
-                <>
-                  <Check className="w-3.5 h-3.5 text-emerald-600" />
-                  <span>Email Copied</span>
-                </>
-              ) : (
-                <>
-                  <Copy className="w-3.5 h-3.5 text-slate-500" />
-                  <span>Copy Address</span>
-                </>
-              )}
-            </button>
           </div>
 
-          <div className="p-6 bg-slate-50 rounded-2xl border border-slate-200">
-            <h2 className="font-bold text-slate-900 text-sm mb-2">Technical Questions & Bugs</h2>
+          <div className="p-6 bg-slate-50 rounded-2xl border border-slate-200 space-y-2">
+            <h2 className="font-bold text-slate-900 text-sm flex items-center gap-2">
+              <AlertCircle className="w-4 h-4 text-amber-600" />
+              Technical Issues & Bugs
+            </h2>
+            <p className="text-xs text-slate-600 leading-relaxed font-normal">
+              When reporting a bug, including your browser version, operating system, and the specific tool name or input file format helps us resolve it quickly.
+            </p>
+          </div>
+
+          <div className="p-5 bg-blue-50/60 rounded-2xl border border-blue-100 space-y-1.5">
+            <h3 className="font-semibold text-blue-900 text-xs flex items-center gap-1.5">
+              <ShieldCheck className="w-4 h-4 text-blue-600" />
+              Secure Submission
+            </h3>
             <p className="text-xs text-slate-600 leading-relaxed">
-              When reporting a bug, including your operating system, browser version, and the specific tool name helps us replicate and fix the issue quickly.
+              Feedback is submitted securely to our feedback system. No account is required.
             </p>
           </div>
         </div>

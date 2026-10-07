@@ -40,8 +40,8 @@ const staticPages: PageMetadata[] = [
   },
   {
     path: 'contact',
-    title: 'Contact Us — Toolora Support',
-    description: 'Get in touch with the Toolora team. We welcome your feedback, bug reports, and tool suggestions.',
+    title: 'Contact & Feedback — Toolora',
+    description: 'Contact Toolora. Suggest new free tools, submit technical feedback, or share ideas with our team.',
   },
   {
     path: 'privacy',
