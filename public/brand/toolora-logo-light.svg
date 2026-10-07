@@ -1,0 +1,38 @@
+<svg viewBox="0 0 400 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Master Toolora Brand Logo — Light Background Edition -->
+  <!-- Standalone Geometric Icon -->
+  <g transform="translate(16, 13) scale(1)">
+    <!-- Top Cantilever (Royal Cobalt) -->
+    <path
+      d="M21 14.5 L47.5 14.5 C49.4 14.5 50.5 15.6 50.5 17.5 L50.5 20 C50.5 21.9 49.4 23 47.5 23 L15.5 23 C14.3 23 13.8 21.7 14.5 20.8 L18.8 15.6 C19.4 14.9 20.2 14.5 21 14.5 Z"
+      fill="#2563EB"
+    />
+    <!-- Vertical Keystone Monolith (Deep Sapphire) -->
+    <path
+      d="M30.5 26.5 L37 26.5 C38.4 26.5 39.5 27.6 39.5 29 L39.5 46.5 C39.5 48.4 38 49.5 36 49.5 L29.5 49.5 C27.6 49.5 26.5 48.4 26.5 46.5 L26.5 30.5 C26.5 29.7 26.9 28.9 27.5 28.3 L29.3 26.9 C29.7 26.6 30.1 26.5 30.5 26.5 Z"
+      fill="#1D4ED8"
+    />
+  </g>
+
+  <!-- Typography: Wordmark "Toolora" -->
+  <text
+    x="92"
+    y="48"
+    font-family="'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
+    font-size="34"
+    font-weight="800"
+    letter-spacing="-0.035em"
+    fill="#0F172A"
+  >Toolora</text>
+
+  <!-- Typography: Tagline "Everyday tools, made simple." -->
+  <text
+    x="93"
+    y="68"
+    font-family="'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
+    font-size="13"
+    font-weight="500"
+    letter-spacing="-0.01em"
+    fill="#64748B"
+  >Everyday tools, made simple.</text>
+</svg>

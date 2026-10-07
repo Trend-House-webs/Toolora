@@ -10,6 +10,7 @@ import { ToolPageWrapper } from './pages/ToolPageWrapper';
 import { AboutPage, PrivacyPage, TermsPage, DisclaimerPage, ContactPage } from './pages/StaticPages';
 import { GuidesPage } from './pages/GuidesPage';
 import { GuideDetailPage } from './pages/GuideDetailPage';
+import { BrandShowcasePage } from './pages/BrandShowcasePage';
 import { getToolBySlug, getCategoryBySlug, TOOLS } from './data/tools';
 import { getGuideBySlug } from './data/guides';
 import { Link } from './context/RouterContext';
@@ -61,6 +62,7 @@ function AppContent() {
     if (path === '/terms') return <TermsPage />;
     if (path === '/disclaimer') return <DisclaimerPage />;
     if (path === '/contact') return <ContactPage />;
+    if (path === '/brand') return <BrandShowcasePage />;
 
     // Guides routes: /guides or /guides/:slug
     if (path === '/guides') {

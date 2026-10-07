@@ -1,14 +1,12 @@
 <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <!-- Solid Pure White Background: High contrast across light, dark, and browser tab themes -->
-  <rect width="64" height="64" fill="#FFFFFF" />
-
-  <!-- Toolora Precision Apex T — Top Cantilever (Royal Cobalt) -->
+  <!-- Toolora Precision Apex T — Standalone Vector Icon -->
+  <!-- Top Cantilever (Royal Cobalt) -->
   <path
     d="M21 14.5 L47.5 14.5 C49.4 14.5 50.5 15.6 50.5 17.5 L50.5 20 C50.5 21.9 49.4 23 47.5 23 L15.5 23 C14.3 23 13.8 21.7 14.5 20.8 L18.8 15.6 C19.4 14.9 20.2 14.5 21 14.5 Z"
     fill="#2563EB"
   />
 
-  <!-- Toolora Precision Apex T — Vertical Keystone Monolith (Deep Sapphire) -->
+  <!-- Vertical Keystone Monolith (Deep Sapphire) -->
   <path
     d="M30.5 26.5 L37 26.5 C38.4 26.5 39.5 27.6 39.5 29 L39.5 46.5 C39.5 48.4 38 49.5 36 49.5 L29.5 49.5 C27.6 49.5 26.5 48.4 26.5 46.5 L26.5 30.5 C26.5 29.7 26.9 28.9 27.5 28.3 L29.3 26.9 C29.7 26.6 30.1 26.5 30.5 26.5 Z"
     fill="#1D4ED8"

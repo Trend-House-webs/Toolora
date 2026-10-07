@@ -1,18 +1,33 @@
 import React from 'react';
 
-interface LogoProps {
+export interface LogoProps {
   className?: string;
-  size?: 'sm' | 'md' | 'lg';
+  size?: 'sm' | 'md' | 'lg' | 'xl';
   showTagline?: boolean;
-  variant?: 'light' | 'dark' | 'icon-only';
+  variant?: 'light' | 'dark' | 'monochrome';
+}
+
+export interface IconProps {
+  className?: string;
+  variant?: 'default' | 'light' | 'dark' | 'monochrome';
+  roundedWhiteBg?: boolean;
 }
 
 /**
- * Toolora Folded Ribbon "T" Icon
- * Recreated accurately from the official brand reference.
+ * Toolora Precision Apex "T" Icon
+ * A luxury minimalist architectural geometric monogram representing the letter "T"
+ * and modular precision tools.
+ *
+ * Designed with mathematically aligned 45° chamfers, balanced negative space,
+ * and zero unnecessary gradient clutter for instant recognition across 16px to 512px.
  */
-export function TooloraIcon({ className = 'w-8 h-8', roundedDarkBg = false }: { className?: string; roundedDarkBg?: boolean }) {
-  if (roundedDarkBg) {
+export function TooloraIcon({
+  className = 'w-8 h-8',
+  variant = 'default',
+  roundedWhiteBg = false,
+}: IconProps) {
+  // If app icon mode with clean solid white background requested
+  if (roundedWhiteBg) {
     return (
       <svg
         viewBox="0 0 64 64"
@@ -21,89 +36,65 @@ export function TooloraIcon({ className = 'w-8 h-8', roundedDarkBg = false }: { 
         className={className}
         aria-hidden="true"
       >
-        <defs>
-          <linearGradient id="t-top-grad-dark" x1="18" y1="18" x2="48" y2="18" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stopColor="#38BDF8" />
-            <stop offset="100%" stopColor="#2563EB" />
-          </linearGradient>
-          <linearGradient id="t-stem-front-dark" x1="28" y1="24" x2="38" y2="52" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stopColor="#2563EB" />
-            <stop offset="100%" stopColor="#3B82F6" />
-          </linearGradient>
-          <linearGradient id="t-stem-fold-dark" x1="28" y1="24" x2="40" y2="40" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stopColor="#1D4ED8" />
-            <stop offset="100%" stopColor="#1E3A8A" />
-          </linearGradient>
-        </defs>
+        {/* Crisp solid white container with subtle micro-border — strictly NO dark/navy background */}
+        <rect x="2" y="2" width="60" height="60" rx="15" fill="#FFFFFF" />
+        <rect x="2.5" y="2.5" width="59" height="59" rx="14.5" stroke="#E2E8F0" strokeWidth="1" />
 
-        {/* Squircle container matching the brand app icon */}
-        <rect width="64" height="64" rx="16" fill="#0B132B" />
-
-        {/* Top horizontal crossbar of 'T' with slanted left edge */}
+        {/* Top Cantilever (Royal Cobalt #2563EB) */}
         <path
-          d="M26 18 L48 18 C49.1 18 50 18.9 50 20 L50 22 C50 23.1 49.1 24 48 24 L22.5 24 C21.4 24 20.8 22.7 21.5 21.8 L24.5 18.6 C24.9 18.2 25.4 18 26 18 Z"
-          fill="url(#t-top-grad-dark)"
+          d="M21 14.5 L47.5 14.5 C49.4 14.5 50.5 15.6 50.5 17.5 L50.5 20 C50.5 21.9 49.4 23 47.5 23 L15.5 23 C14.3 23 13.8 21.7 14.5 20.8 L18.8 15.6 C19.4 14.9 20.2 14.5 21 14.5 Z"
+          fill="#2563EB"
         />
 
-        {/* Vertical Stem - Back fold layer (darker crease) */}
+        {/* Vertical Keystone Monolith (Deep Sapphire #1D4ED8) */}
         <path
-          d="M29 24 L40 32 L40 44 L29 36 Z"
-          fill="url(#t-stem-fold-dark)"
-        />
-
-        {/* Vertical Stem - Front folded ribbon */}
-        <path
-          d="M29 24 L40 32 L40 47 C40 48.1 39.1 49 38 49 L31 49 C29.9 49 29 48.1 29 47 Z"
-          fill="url(#t-stem-front-dark)"
+          d="M30.5 26.5 L37 26.5 C38.4 26.5 39.5 27.6 39.5 29 L39.5 46.5 C39.5 48.4 38 49.5 36 49.5 L29.5 49.5 C27.6 49.5 26.5 48.4 26.5 46.5 L26.5 30.5 C26.5 29.7 26.9 28.9 27.5 28.3 L29.3 26.9 C29.7 26.6 30.1 26.5 30.5 26.5 Z"
+          fill="#1D4ED8"
         />
       </svg>
     );
   }
 
+  // Color schemes based on variant
+  let topBarFill = '#2563EB'; // Royal Cobalt
+  let stemFill = '#1D4ED8';   // Deep Sapphire
+
+  if (variant === 'light') {
+    // For dark website backgrounds
+    topBarFill = '#38BDF8';   // Sky Cyan
+    stemFill = '#3B82F6';     // Vibrant Cobalt
+  } else if (variant === 'monochrome') {
+    topBarFill = 'currentColor';
+    stemFill = 'currentColor';
+  }
+
   return (
     <svg
-      viewBox="0 0 48 48"
+      viewBox="0 0 64 64"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className={className}
       aria-hidden="true"
     >
-      <defs>
-        <linearGradient id="toolora-top-grad" x1="14" y1="8" x2="44" y2="8" gradientUnits="userSpaceOnUse">
-          <stop offset="0%" stopColor="#38BDF8" />
-          <stop offset="100%" stopColor="#2563EB" />
-        </linearGradient>
-        <linearGradient id="toolora-stem-front" x1="22" y1="16" x2="36" y2="44" gradientUnits="userSpaceOnUse">
-          <stop offset="0%" stopColor="#2563EB" />
-          <stop offset="100%" stopColor="#3B82F6" />
-        </linearGradient>
-        <linearGradient id="toolora-stem-fold" x1="22" y1="16" x2="35" y2="34" gradientUnits="userSpaceOnUse">
-          <stop offset="0%" stopColor="#1D4ED8" />
-          <stop offset="100%" stopColor="#1E3A8A" />
-        </linearGradient>
-      </defs>
-
-      {/* Top horizontal crossbar of 'T' with clean geometric slant */}
+      {/* Top Cantilever */}
       <path
-        d="M20 8 L43 8 C44.1 8 45 8.9 45 10 L45 14 C45 15.1 44.1 16 43 16 L16.8 16 C15.6 16 14.9 14.6 15.7 13.6 L18.5 9.2 C19.1 8.5 19.5 8 20 8 Z"
-        fill="url(#toolora-top-grad)"
+        d="M21 14.5 L47.5 14.5 C49.4 14.5 50.5 15.6 50.5 17.5 L50.5 20 C50.5 21.9 49.4 23 47.5 23 L15.5 23 C14.3 23 13.8 21.7 14.5 20.8 L18.8 15.6 C19.4 14.9 20.2 14.5 21 14.5 Z"
+        fill={topBarFill}
       />
 
-      {/* Vertical Stem - Folded ribbon under-crease */}
+      {/* Vertical Keystone Monolith */}
       <path
-        d="M23 16 L35 25 L35 38 L23 29 Z"
-        fill="url(#toolora-stem-fold)"
-      />
-
-      {/* Vertical Stem - Front faceted ribbon */}
-      <path
-        d="M23 16 L35 25 L35 41 C35 42.1 34.1 43 33 43 L25 43 C23.9 43 23 42.1 23 41 Z"
-        fill="url(#toolora-stem-front)"
+        d="M30.5 26.5 L37 26.5 C38.4 26.5 39.5 27.6 39.5 29 L39.5 46.5 C39.5 48.4 38 49.5 36 49.5 L29.5 49.5 C27.6 49.5 26.5 48.4 26.5 46.5 L26.5 30.5 C26.5 29.7 26.9 28.9 27.5 28.3 L29.3 26.9 C29.7 26.6 30.1 26.5 30.5 26.5 Z"
+        fill={stemFill}
       />
     </svg>
   );
 }
 
+/**
+ * Toolora Master Brand Logo
+ * Combines the Precision Apex icon, custom geometric wordmark, and optional tagline.
+ */
 export function TooloraLogo({
   className = '',
   size = 'md',
@@ -114,28 +105,44 @@ export function TooloraLogo({
     sm: 'w-7 h-7',
     md: 'w-8 h-8',
     lg: 'w-10 h-10',
+    xl: 'w-14 h-14',
   };
 
   const textSizes = {
     sm: 'text-lg',
     md: 'text-xl',
     lg: 'text-2xl',
+    xl: 'text-4xl',
+  };
+
+  const taglineSizes = {
+    sm: 'text-[10px]',
+    md: 'text-[11px]',
+    lg: 'text-xs',
+    xl: 'text-sm',
   };
 
   return (
     <div className={`inline-flex items-center gap-2.5 ${className}`}>
-      <TooloraIcon className={`${iconSizes[size]} shrink-0`} />
-      <div className="flex flex-col">
+      <TooloraIcon
+        className={`${iconSizes[size]} shrink-0`}
+        variant={variant === 'light' ? 'light' : 'default'}
+      />
+      <div className="flex flex-col justify-center">
         <span
-          className={`font-extrabold tracking-tight leading-none ${textSizes[size]} ${
+          className={`font-extrabold tracking-[-0.035em] leading-none ${textSizes[size]} ${
             variant === 'light' ? 'text-white' : 'text-slate-900'
           }`}
-          style={{ fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif" }}
+          style={{ fontFamily: "'Plus Jakarta Sans', system-ui, -apple-system, sans-serif" }}
         >
           Toolora
         </span>
         {showTagline && (
-          <span className="text-[11px] text-slate-500 font-normal tracking-normal mt-0.5">
+          <span
+            className={`font-medium tracking-normal mt-0.5 leading-tight ${taglineSizes[size]} ${
+              variant === 'light' ? 'text-slate-400' : 'text-slate-500'
+            }`}
+          >
             Everyday tools, made simple.
           </span>
         )}
