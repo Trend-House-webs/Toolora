@@ -453,7 +453,7 @@ export function ContactPage() {
           ) : (
             <form
               method="POST"
-              action="https://script.google.com/macros/s/AKfycbwlwESCYz4Cit9xanpCOKY0czNoOWNXgc8DpEJWTYsgghorAdIixsGMhNENefalRPNm/exec"
+              action="https://script.google.com/macros/s/AKfycbzP0xWxpQlsbSdkZH5liBI1-4IvdiAKYWTfkGDDFC2F1IxRR9_Yae425oqFCQzi6_Av/exec"
               target="toolora-feedback-frame"
               onSubmit={handleSubmit}
               className="space-y-4.5"
