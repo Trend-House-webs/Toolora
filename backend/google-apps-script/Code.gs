@@ -5,14 +5,18 @@
  * Production backend script for processing Toolora feedback submissions
  * and appending records to a private Google Sheet.
  *
+ * Supported Request Handlers:
+ * - doGet(e): Returns a clean health/status check ("Status: Online")
+ * - doPost(e): Processes feedback form POSTs via hidden iframe
+ *
  * Architecture Highlights:
  * - Listens for standard HTML form POSTs via hidden iframe target.
  * - Requires no cross-origin fetch(), CORS headers, or custom headers.
  * - Dispatches a secure postMessage to https://toolorahub.vercel.app.
  * - Protects against CSV/Formula Injection (CWE-1236).
- * - Ignores spam via a silent honeypot field.
+ * - Ignores spam via a silent honeypot field ("website").
  * - Minimizes race conditions with LockService.
- * - Zero external dependencies, zero email sending, zero secrets in response.
+ * - Zero external dependencies, zero email sending, zero secrets in responses.
  */
 
 // Configuration constants
@@ -24,6 +28,92 @@ var CONFIG = {
   MESSAGE_TYPE: 'TOOLORA_FEEDBACK_RESULT',
   HEADERS: ['Timestamp', 'Name', 'Email', 'Topic', 'Message', 'Page']
 };
+
+/**
+ * Handles incoming HTTP GET requests.
+ * Returns a simple, secure HTML health/status page.
+ * Does NOT expose the Spreadsheet ID, sheet data, account info, or secrets.
+ *
+ * @param {Object} e Event object passed by Apps Script runtime.
+ * @return {HtmlOutput} Iframe-compatible HTML status page.
+ */
+function doGet(e) {
+  var html = '<!DOCTYPE html>\n' +
+    '<html>\n' +
+    '<head>\n' +
+    '  <meta charset="utf-8">\n' +
+    '  <meta name="viewport" content="width=device-width, initial-scale=1.0">\n' +
+    '  <title>Toolora Feedback Service</title>\n' +
+    '  <style>\n' +
+    '    body {\n' +
+    '      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;\n' +
+    '      background: #f8fafc;\n' +
+    '      color: #0f172a;\n' +
+    '      display: flex;\n' +
+    '      align-items: center;\n' +
+    '      justify-content: center;\n' +
+    '      min-height: 100vh;\n' +
+    '      margin: 0;\n' +
+    '      padding: 1.5rem;\n' +
+    '      box-sizing: border-box;\n' +
+    '    }\n' +
+    '    .card {\n' +
+    '      background: #ffffff;\n' +
+    '      border: 1px solid #e2e8f0;\n' +
+    '      border-radius: 1rem;\n' +
+    '      padding: 2rem;\n' +
+    '      max-width: 420px;\n' +
+    '      width: 100%;\n' +
+    '      box-shadow: 0 1px 3px rgba(0,0,0,0.05);\n' +
+    '      text-align: center;\n' +
+    '    }\n' +
+    '    h1 {\n' +
+    '      font-size: 1.25rem;\n' +
+    '      font-weight: 700;\n' +
+    '      margin: 0 0 0.75rem;\n' +
+    '      color: #0f172a;\n' +
+    '    }\n' +
+    '    .badge {\n' +
+    '      display: inline-flex;\n' +
+    '      align-items: center;\n' +
+    '      gap: 0.375rem;\n' +
+    '      background: #ecfdf5;\n' +
+    '      color: #047857;\n' +
+    '      padding: 0.25rem 0.75rem;\n' +
+    '      border-radius: 9999px;\n' +
+    '      font-size: 0.75rem;\n' +
+    '      font-weight: 600;\n' +
+    '      margin-bottom: 1rem;\n' +
+    '    }\n' +
+    '    .dot {\n' +
+    '      width: 0.5rem;\n' +
+    '      height: 0.5rem;\n' +
+    '      background: #10b981;\n' +
+    '      border-radius: 9999px;\n' +
+    '    }\n' +
+    '    p {\n' +
+    '      font-size: 0.875rem;\n' +
+    '      color: #64748b;\n' +
+    '      margin: 0;\n' +
+    '      line-height: 1.5;\n' +
+    '    }\n' +
+    '  </style>\n' +
+    '</head>\n' +
+    '<body>\n' +
+    '  <div class="card">\n' +
+    '    <h1>Toolora Feedback Service</h1>\n' +
+    '    <div class="badge"><span class="dot"></span>Status: Online</div>\n' +
+    '    <p>The feedback service is active and operational. Submissions are received via HTTP POST.</p>\n' +
+    '  </div>\n' +
+    '</body>\n' +
+    '</html>';
+
+  var output = HtmlService.createHtmlOutput(html);
+  output.setTitle('Toolora Feedback Service — Status: Online');
+  // Iframe-compatible mode so it renders properly when requested inside an iframe
+  output.setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL);
+  return output;
+}
 
 /**
  * Handles incoming HTTP POST requests from the HTML form inside the iframe.
@@ -84,27 +174,6 @@ function doPost(e) {
     // Never expose stack trace or technical details to client
     return createIframeResponse(false);
   }
-}
-
-/**
- * Handles incoming HTTP GET requests. Returns a benign status message only.
- * Never exposes sheet contents, account details, or configuration secrets.
- *
- * @param {Object} e Event object.
- * @return {HtmlOutput} Harmless status page.
- */
-function doGet(e) {
-  var html = '<!DOCTYPE html><html><head><meta charset="utf-8">' +
-    '<title>Toolora Feedback Service</title>' +
-    '<style>body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif;padding:3rem;color:#1e293b;line-height:1.5;max-width:600px;margin:auto;}h1{font-size:1.25rem;color:#0f172a;}p{color:#64748b;font-size:0.875rem;}</style>' +
-    '</head><body>' +
-    '<h1>Toolora Feedback Service</h1>' +
-    '<p>Service is active and operational. Submissions are accepted via HTTP POST.</p>' +
-    '</body></html>';
-
-  var output = HtmlService.createHtmlOutput(html);
-  output.setTitle('Toolora Feedback Service');
-  return output;
 }
 
 /**
