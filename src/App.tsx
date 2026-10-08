@@ -10,12 +10,20 @@ import { ToolPageWrapper } from './pages/ToolPageWrapper';
 import { AboutPage, PrivacyPage, TermsPage, DisclaimerPage, ContactPage } from './pages/StaticPages';
 import { GuidesPage } from './pages/GuidesPage';
 import { GuideDetailPage } from './pages/GuideDetailPage';
-import { BrandShowcasePage } from './pages/BrandShowcasePage';
 import { getToolBySlug, getCategoryBySlug, TOOLS } from './data/tools';
 import { getGuideBySlug } from './data/guides';
 import { Link } from './context/RouterContext';
 import { ArrowLeft, Search } from 'lucide-react';
 import { SEO } from './components/common/SEO';
+
+function RedirectToHome() {
+  const { navigate } = useRouter();
+  useEffect(() => {
+    navigate('/');
+  }, [navigate]);
+
+  return null;
+}
 
 function RedirectToTools({ slug }: { slug: string }) {
   const { navigate } = useRouter();
@@ -62,7 +70,7 @@ function AppContent() {
     if (path === '/terms') return <TermsPage />;
     if (path === '/disclaimer') return <DisclaimerPage />;
     if (path === '/contact') return <ContactPage />;
-    if (path === '/brand') return <BrandShowcasePage />;
+    if (path === '/brand') return <RedirectToHome />;
 
     // Guides routes: /guides or /guides/:slug
     if (path === '/guides') {

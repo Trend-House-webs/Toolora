@@ -8,14 +8,16 @@
  * Supported Request Handlers:
  * - doGet(e): Returns a clean health/status check ("Status: Online")
  * - doPost(e): Processes feedback form POSTs via hidden iframe
+ * - testSpreadsheetAccess(): Manual diagnostic function to verify OAuth & sheet access
  *
  * Architecture Highlights:
  * - Listens for standard HTML form POSTs via hidden iframe target.
  * - Requires no cross-origin fetch(), CORS headers, or custom headers.
  * - Dispatches a secure postMessage to https://toolorahub.vercel.app.
  * - Protects against CSV/Formula Injection (CWE-1236).
- * - Ignores spam via a silent honeypot field ("website").
- * - Minimizes race conditions with LockService.
+ * - Ignores bot spam via honeypot field ("website").
+ * - Concurrency protection with LockService.
+ * - Comprehensive server-side diagnostic logging (safe, zero PII logged).
  * - Zero external dependencies, zero email sending, zero secrets in responses.
  */
 
@@ -30,7 +32,7 @@ var CONFIG = {
 };
 
 /**
- * Handles incoming HTTP GET requests.
+ * Handles incoming HTTP GET requests (direct browser visits & health checks).
  * Returns a simple, secure HTML health/status page.
  * Does NOT expose the Spreadsheet ID, sheet data, account info, or secrets.
  *
@@ -39,7 +41,7 @@ var CONFIG = {
  */
 function doGet(e) {
   var html = '<!DOCTYPE html>\n' +
-    '<html>\n' +
+    '<html lang="en">\n' +
     '<head>\n' +
     '  <meta charset="utf-8">\n' +
     '  <meta name="viewport" content="width=device-width, initial-scale=1.0">\n' +
@@ -110,7 +112,6 @@ function doGet(e) {
 
   var output = HtmlService.createHtmlOutput(html);
   output.setTitle('Toolora Feedback Service — Status: Online');
-  // Iframe-compatible mode so it renders properly when requested inside an iframe
   output.setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL);
   return output;
 }
@@ -122,28 +123,34 @@ function doGet(e) {
  * @return {HtmlOutput} HTML document sending postMessage back to parent window.
  */
 function doPost(e) {
+  console.log('doPost invoked at ' + new Date().toISOString());
+
   try {
     if (!e || !e.parameter) {
-      console.warn('doPost invoked with empty or missing parameters');
+      console.warn('doPost failure: e or e.parameter is missing/undefined');
       return createIframeResponse(false);
     }
+
+    // Safe diagnostic logging: log received field names only (never values or PII)
+    var fieldNames = Object.keys(e.parameter);
+    console.log('doPost parameters present. Received field keys: ' + JSON.stringify(fieldNames));
 
     var params = e.parameter;
 
-    // 1. Honeypot evaluation (blocks simple spam bots silently)
+    // 1. Honeypot check (silently drop automated spam bots)
     var honeypot = params.website ? String(params.website).trim() : '';
     if (honeypot.length > 0) {
-      console.info('Honeypot triggered; discarding submission without saving.');
-      // Return benign success response so bots do not retry or adapt
+      console.info('Honeypot field triggered; discarding submission without writing.');
       return createIframeResponse(true);
     }
 
-    // 2. Validate input parameters
+    // 2. Validate parameters and sanitize against spreadsheet formula injection
     var validation = validateAndSanitize(params);
     if (!validation.isValid) {
-      console.warn('Submission validation failed:', validation.errorReason);
+      console.warn('Submission validation failed: ' + validation.errorReason);
       return createIframeResponse(false);
     }
+    console.log('Submission input validation passed.');
 
     // 3. Acquire script lock to prevent race conditions during concurrent writes
     var lock = LockService.getScriptLock();
@@ -155,23 +162,29 @@ function doPost(e) {
         console.error('Lock timeout: Could not acquire script lock within ' + CONFIG.LOCK_TIMEOUT_MS + 'ms');
         return createIframeResponse(false);
       }
+      console.log('Script lock acquired successfully.');
 
       // 4. Append row to Google Sheet
       var appendSuccess = appendRowToSheet(validation.row);
       if (!appendSuccess) {
+        console.error('appendRowToSheet reported failure.');
         return createIframeResponse(false);
       }
 
+      console.log('doPost completed successfully; returning positive iframe response.');
       return createIframeResponse(true);
     } finally {
       if (hasLock) {
         lock.releaseLock();
+        console.log('Script lock released.');
       }
     }
   } catch (error) {
-    // Log technical error securely in Google Cloud / Apps Script execution log
-    console.error('Unhandled error in doPost:', error && error.stack ? error.stack : error);
-    // Never expose stack trace or technical details to client
+    // Log the exact error message in Apps Script Executions
+    console.error('Unhandled exception in doPost: ' + (error && error.message ? error.message : error));
+    if (error && error.stack) {
+      console.error('Stack trace: ' + error.stack);
+    }
     return createIframeResponse(false);
   }
 }
@@ -184,13 +197,13 @@ function doPost(e) {
  * @return {Object} Validation result { isValid: boolean, row: Array, errorReason?: string }
  */
 function validateAndSanitize(params) {
-  // --- Name (optional, max 100 chars) ---
+  // Name (optional, max 100 chars)
   var rawName = params.name ? String(params.name).trim() : '';
   if (rawName.length > 100) {
     return { isValid: false, errorReason: 'Name exceeds 100 characters' };
   }
 
-  // --- Email (optional, max 254 chars, basic format check if supplied) ---
+  // Email (optional, max 254 chars, standard format check)
   var rawEmail = params.email ? String(params.email).trim() : '';
   if (rawEmail.length > 254) {
     return { isValid: false, errorReason: 'Email exceeds 254 characters' };
@@ -202,7 +215,7 @@ function validateAndSanitize(params) {
     }
   }
 
-  // --- Topic (required, max 100 chars) ---
+  // Topic (required, max 100 chars)
   var rawTopic = params.topic ? String(params.topic).trim() : '';
   if (rawTopic.length === 0) {
     return { isValid: false, errorReason: 'Topic is required' };
@@ -211,7 +224,7 @@ function validateAndSanitize(params) {
     return { isValid: false, errorReason: 'Topic exceeds 100 characters' };
   }
 
-  // --- Message (required, min 5 chars, max 5000 chars) ---
+  // Message (required, min 5 chars, max 5000 chars)
   var rawMessage = params.message ? String(params.message).trim() : '';
   if (rawMessage.length < 5) {
     return { isValid: false, errorReason: 'Message must be at least 5 characters' };
@@ -220,23 +233,22 @@ function validateAndSanitize(params) {
     return { isValid: false, errorReason: 'Message exceeds 5000 characters' };
   }
 
-  // --- Page (optional, max 500 chars, basic URL/path validation) ---
+  // Page (optional, max 500 chars)
   var rawPage = params.page ? String(params.page).trim() : '';
   if (rawPage.length > 500) {
     return { isValid: false, errorReason: 'Page URL exceeds 500 characters' };
   }
   if (rawPage.length > 0) {
-    // Only accept reasonable URL or relative path strings
     var pageRegex = /^(https?:\/\/[^\s<>"']+|\/[^\s<>"']*)$/i;
     if (!pageRegex.test(rawPage)) {
-      rawPage = ''; // Fallback to empty if unexpected format, but do not block legitimate feedback
+      rawPage = '';
     }
   }
 
-  // --- Server-side UTC Timestamp ---
+  // Server-side UTC Timestamp
   var timestamp = new Date().toISOString();
 
-  // --- Spreadsheet Formula Injection Defense (CWE-1236) ---
+  // Spreadsheet Formula Injection Defense (CWE-1236)
   var cleanName = sanitizeSpreadsheetValue(rawName);
   var cleanEmail = sanitizeSpreadsheetValue(rawEmail);
   var cleanTopic = sanitizeSpreadsheetValue(rawTopic);
@@ -261,7 +273,7 @@ function validateAndSanitize(params) {
 /**
  * Prevents CSV/Spreadsheet formula injection.
  * If a value starts with '=', '+', '-', or '@', prepends a single apostrophe (')
- * so Google Sheets stores and displays it as a plain text string literal.
+ * so Google Sheets displays and stores it safely as plain text literal.
  *
  * @param {string} value String to sanitize.
  * @return {string} Sanitized string safe for spreadsheet insertion.
@@ -274,7 +286,6 @@ function sanitizeSpreadsheetValue(value) {
   if (trimmed.length === 0) {
     return '';
   }
-  // Formula execution triggers in Google Sheets
   if (/^[=+\-@]/.test(trimmed)) {
     return "'" + trimmed;
   }
@@ -283,41 +294,59 @@ function sanitizeSpreadsheetValue(value) {
 
 /**
  * Opens the target spreadsheet by ID, verifies tab existence, and appends the row.
- * Creates the header row automatically if the sheet is completely empty.
+ * Automatically inserts header row if sheet is fresh.
  *
  * @param {Array} rowValues The sanitized row values to append.
  * @return {boolean} True if write succeeded, false otherwise.
  */
 function appendRowToSheet(rowValues) {
+  var spreadsheet;
   try {
-    var spreadsheet = SpreadsheetApp.openById(CONFIG.SPREADSHEET_ID);
-    if (!spreadsheet) {
-      console.error('Could not open spreadsheet with ID:', CONFIG.SPREADSHEET_ID);
-      return false;
-    }
+    spreadsheet = SpreadsheetApp.openById(CONFIG.SPREADSHEET_ID);
+  } catch (openErr) {
+    console.error('Failed to open spreadsheet with openById: ' + (openErr && openErr.message ? openErr.message : openErr));
+    return false;
+  }
 
-    var sheet = spreadsheet.getSheetByName(CONFIG.SHEET_NAME);
-    if (!sheet) {
-      console.error('Target sheet tab not found:', CONFIG.SHEET_NAME);
-      return false;
-    }
+  if (!spreadsheet) {
+    console.error('SpreadsheetApp.openById returned null or undefined.');
+    return false;
+  }
+  console.log('Spreadsheet opened successfully: OK');
 
-    // Auto-initialize header row if sheet is fresh/empty
+  var sheet;
+  try {
+    sheet = spreadsheet.getSheetByName(CONFIG.SHEET_NAME);
+  } catch (sheetErr) {
+    console.error('Error retrieving sheet tab: ' + (sheetErr && sheetErr.message ? sheetErr.message : sheetErr));
+    return false;
+  }
+
+  if (!sheet) {
+    console.error('Sheet tab "' + CONFIG.SHEET_NAME + '" was not found in the spreadsheet. Please verify tab name in Google Sheets.');
+    return false;
+  }
+  console.log('Sheet tab "' + CONFIG.SHEET_NAME + '" located successfully: OK');
+
+  try {
+    // Auto-initialize header row if sheet is completely fresh
     if (sheet.getLastRow() === 0) {
+      console.log('Sheet is empty. Adding header row...');
       sheet.appendRow(CONFIG.HEADERS);
     }
 
     sheet.appendRow(rowValues);
+    console.log('Feedback row appended successfully to sheet: OK');
     return true;
-  } catch (err) {
-    console.error('Error writing to spreadsheet:', err && err.stack ? err.stack : err);
+  } catch (appendErr) {
+    console.error('Error appending row to sheet: ' + (appendErr && appendErr.message ? appendErr.message : appendErr));
     return false;
   }
 }
 
 /**
  * Creates the minimal HTML document rendered inside the hidden iframe.
- * Dispatches a postMessage to parent window strictly scoped to CONFIG.ALLOWED_ORIGIN.
+ * Dispatches a postMessage strictly scoped to CONFIG.ALLOWED_ORIGIN.
  *
  * @param {boolean} success Whether the submission was processed successfully.
  * @return {HtmlOutput} Minimal HTML document with postMessage invocation.
@@ -355,7 +384,24 @@ function createIframeResponse(success) {
     '</html>';
 
   var output = HtmlService.createHtmlOutput(html);
-  // Required so the hidden iframe embedded in toolorahub.vercel.app can render this response
   output.setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL);
   return output;
+}
+
+/**
+ * Safe manual test function to trigger and verify Google OAuth permissions
+ * and confirm that the spreadsheet ID and tab name are accessible.
+ * Does NOT write any test feedback into the production sheet.
+ */
+function testSpreadsheetAccess() {
+  var spreadsheet = SpreadsheetApp.openById(CONFIG.SPREADSHEET_ID);
+  var sheet = spreadsheet.getSheetByName(CONFIG.SHEET_NAME);
+
+  if (!sheet) {
+    throw new Error('Sheet tab "' + CONFIG.SHEET_NAME + '" was not found.');
+  }
+
+  console.log('Spreadsheet access: OK');
+  console.log('Sheet access: OK');
+  console.log('Sheet name: ' + sheet.getName());
 }

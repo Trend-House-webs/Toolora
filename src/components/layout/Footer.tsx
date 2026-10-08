@@ -119,11 +119,6 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link to="/brand" className="hover:text-blue-600 transition-colors">
-                  Brand Identity & Assets
-                </Link>
-              </li>
-              <li>
                 <Link to="/contact" className="hover:text-blue-600 transition-colors">
                   Contact & Feedback
                 </Link>

@@ -293,15 +293,33 @@ export function ContactPage() {
   // Listen for Apps Script postMessage notification from hidden iframe
   useEffect(() => {
     const handleMessage = (event: MessageEvent) => {
-      if (!event.data || typeof event.data !== 'object') return;
+      // Validate origin: accept from https://script.google.com or script.googleusercontent.com
+      const origin = event.origin || '';
+      const isAppsScriptOrigin =
+        origin === 'https://script.google.com' ||
+        origin.startsWith('https://script.google.com') ||
+        origin.endsWith('.script.googleusercontent.com');
 
-      if (event.data.type === 'TOOLORA_FEEDBACK_RESULT') {
+      if (!isAppsScriptOrigin) return;
+
+      let data = event.data;
+      if (typeof data === 'string') {
+        try {
+          data = JSON.parse(data);
+        } catch {
+          // Not a JSON string
+        }
+      }
+
+      if (!data || typeof data !== 'object') return;
+
+      if (data.type === 'TOOLORA_FEEDBACK_RESULT') {
         if (timeoutRef.current) {
           clearTimeout(timeoutRef.current);
           timeoutRef.current = null;
         }
 
-        if (event.data.success === true) {
+        if (data.success === true || data.success === 'true') {
           setStatus('success');
           setName('');
           setEmail('');
@@ -429,7 +447,7 @@ export function ContactPage() {
                     Feedback Received
                   </h2>
                   <p className="text-xs sm:text-sm text-emerald-800 leading-relaxed">
-                    Thanks! Your feedback has been received.
+                    Thanks — your feedback has been received.
                   </p>
                 </div>
               </div>
