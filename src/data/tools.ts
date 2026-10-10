@@ -134,7 +134,7 @@ export const TOOLS: ToolItem[] = [
       'Completely Free: No daily quotas, no watermarks, and no registration required.',
     ],
     tips: [
-      'For web publishing, aim for 75% quality to reduce file size by 60%–80% without noticeable artifacts.',
+      'For web publishing, a quality setting around 70%–80% typically offers an effective balance of visual clarity and file size reduction. Results vary depending on image complexity and initial resolution.',
       'If compressing a PNG with solid colors or text, try converting to WebP first for even smaller files.',
       'Check the dimensions: if your original photo is 4000px wide, resizing it first can save even more space.',
     ],
@@ -145,7 +145,7 @@ export const TOOLS: ToolItem[] = [
       },
       {
         question: 'What is the optimal compression level?',
-        answer: 'For most web, email, and social uses, setting the quality slider between 70% and 80% achieves a 50% to 80% reduction in file size with virtually no visible degradation.',
+        answer: 'For most web, email, and social uses, setting the quality slider between 70% and 80% typically achieves noticeable file size reductions with virtually no visible degradation. Actual savings vary based on image content, dimensions, and original format.',
       },
       {
         question: 'Can I compress PNG and WebP files?',
@@ -242,10 +242,14 @@ export const TOOLS: ToolItem[] = [
       'Completely Private: Files stay locally in your browser memory throughout the entire conversion.',
     ],
     tips: [
-      'Converting from JPG to PNG does not automatically make the background transparent, but it prepares the file for alpha editing.',
+      'Converting from JPG to PNG does not automatically remove the background or create transparency (JPG files lack an alpha transparency channel), but it produces a lossless file ready for cutout and layer editing.',
       'If file size is a priority, consider WebP instead, which offers similar benefits with smaller payloads.',
     ],
     faq: [
+      {
+        question: 'Will converting JPG to PNG make the background transparent?',
+        answer: 'No. JPG files do not contain an alpha (transparency) channel. Converting to PNG packages the existing opaque pixels into a lossless PNG container. To make the background transparent, you need to isolate and remove the background using a cutout tool or photo editor after converting.',
+      },
       {
         question: 'Does converting JPG to PNG improve existing image quality?',
         answer: 'Converting will not restore compression artifacts already present in a low-quality JPG, but it prevents any further quality degradation during subsequent saves and edits.',
@@ -735,7 +739,7 @@ export const TOOLS: ToolItem[] = [
       'Fun Milestones: Discover fascinating milestones like when you reach 10,000 days or 1,000 weeks of life.',
     ],
     tips: [
-      'Leap years are automatically accounted for to guarantee 100% mathematical precision.',
+      'Leap years and exact day counts are automatically accounted for based on Gregorian calendar rules.',
     ],
     faq: [
       {

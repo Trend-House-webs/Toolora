@@ -1299,7 +1299,7 @@ export const ADDITIONAL_TOOLS: ToolItem[] = [
       },
       {
         question: 'Does this calculator save my grades on a server?',
-        answer: 'No. Everything stays in your browser memory. Your academic privacy is 100% protected.',
+        answer: 'No. Everything stays in your browser memory; your academic data is not transmitted to any server.',
       },
       {
         question: 'Can I add more than 8 semesters?',

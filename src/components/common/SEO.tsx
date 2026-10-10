@@ -117,11 +117,19 @@ export function SEO({
     }
 
     if (schemas.length > 0) {
-      scriptTag.textContent = JSON.stringify(
-        schemas.length === 1 ? schemas[0] : { '@context': 'https://schema.org', '@graph': schemas },
-        null,
-        2
-      );
+      if (schemas.length === 1) {
+        scriptTag.textContent = JSON.stringify(schemas[0], null, 2);
+      } else {
+        const cleanSchemas = schemas.map((s) => {
+          const { '@context': _, ...rest } = s;
+          return rest;
+        });
+        scriptTag.textContent = JSON.stringify(
+          { '@context': 'https://schema.org', '@graph': cleanSchemas },
+          null,
+          2
+        );
+      }
     } else {
       scriptTag.textContent = '';
     }
