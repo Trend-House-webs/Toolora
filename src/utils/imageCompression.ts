@@ -52,6 +52,13 @@ export async function compressImageClientSide(
     throw new Error('Image has zero dimensions.');
   }
 
+  // Prevent memory exhaustion / canvas pixel flood (decompression bombs)
+  const MAX_CANVAS_DIMENSION = 16384;
+  const MAX_TOTAL_PIXELS = 100_000_000;
+  if (width > MAX_CANVAS_DIMENSION || height > MAX_CANVAS_DIMENSION || (width * height) > MAX_TOTAL_PIXELS) {
+    throw new Error(`Image dimensions (${width}×${height}) exceed maximum safe browser canvas limits.`);
+  }
+
   // Determine actual target format
   let format: 'image/jpeg' | 'image/png' | 'image/webp';
   if (desiredOutputFormat) {

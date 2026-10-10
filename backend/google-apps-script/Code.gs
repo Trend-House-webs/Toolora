@@ -152,6 +152,26 @@ function doPost(e) {
     }
     console.log('Submission input validation passed.');
 
+    // 2b. Duplicate submission suppression (60-second hash cache)
+    try {
+      var digest = Utilities.computeDigest(
+        Utilities.DigestAlgorithm.SHA_256,
+        (params.email || '') + '::' + (params.topic || '') + '::' + (params.message || '')
+      );
+      var fingerprint = Utilities.base64Encode(digest);
+      var cache = CacheService.getScriptCache();
+      if (cache && cache.get(fingerprint)) {
+        console.info('Duplicate feedback submission detected within 60s window; suppressing duplicate write.');
+        return createIframeResponse(true);
+      }
+      if (cache) {
+        cache.put(fingerprint, '1', 60);
+      }
+    } catch (cacheErr) {
+      // Non-fatal if cache service is temporarily unavailable
+      console.warn('Cache check non-fatal warning: ' + cacheErr);
+    }
+
     // 3. Acquire script lock to prevent race conditions during concurrent writes
     var lock = LockService.getScriptLock();
     var hasLock = false;
@@ -286,7 +306,8 @@ function sanitizeSpreadsheetValue(value) {
   if (trimmed.length === 0) {
     return '';
   }
-  if (/^[=+\-@]/.test(trimmed)) {
+  // Formula injection defense (CWE-1236): Triggers include =, +, -, @, \t, \r, %, |
+  if (/^[=+\-@\t\r%|]/.test(value) || /^[=+\-@\t\r%|]/.test(trimmed)) {
     return "'" + trimmed;
   }
   return trimmed;
@@ -316,17 +337,29 @@ function appendRowToSheet(rowValues) {
 
   var sheet;
   try {
+    // 1. Try configured name ("Toolora Feedback")
     sheet = spreadsheet.getSheetByName(CONFIG.SHEET_NAME);
+    // 2. Try standard default ("Sheet1")
+    if (!sheet) {
+      sheet = spreadsheet.getSheetByName('Sheet1');
+    }
+    // 3. Fallback to first available sheet in workbook
+    if (!sheet) {
+      var allSheets = spreadsheet.getSheets();
+      if (allSheets && allSheets.length > 0) {
+        sheet = allSheets[0];
+      }
+    }
   } catch (sheetErr) {
     console.error('Error retrieving sheet tab: ' + (sheetErr && sheetErr.message ? sheetErr.message : sheetErr));
     return false;
   }
 
   if (!sheet) {
-    console.error('Sheet tab "' + CONFIG.SHEET_NAME + '" was not found in the spreadsheet. Please verify tab name in Google Sheets.');
+    console.error('Could not locate any valid sheet tab in the spreadsheet.');
     return false;
   }
-  console.log('Sheet tab "' + CONFIG.SHEET_NAME + '" located successfully: OK');
+  console.log('Sheet tab "' + sheet.getName() + '" located successfully: OK');
 
   try {
     // Auto-initialize header row if sheet is completely fresh

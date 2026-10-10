@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { PDFDocument } from 'pdf-lib';
 import { FileText, RefreshCw, ShieldCheck, AlertCircle, Copy, Check, Hash } from 'lucide-react';
-import { formatBytes } from '../../../utils/fileHelpers';
+import { formatBytes, validatePdfFile } from '../../../utils/fileHelpers';
 
 interface PageDimension {
   pageNumber: number;
@@ -36,8 +36,9 @@ export function PdfPageCounter() {
   const handleFile = async (files: FileList | null) => {
     if (!files || files.length === 0) return;
     const file = files[0];
-    if (file.type !== 'application/pdf' && !file.name.toLowerCase().endsWith('.pdf')) {
-      setErrorMessage('Please select a valid PDF file.');
+    const val = validatePdfFile(file, 100);
+    if (!val.valid) {
+      setErrorMessage(val.error || 'Please select a valid PDF file.');
       return;
     }
 

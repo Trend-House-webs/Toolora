@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FileText, RefreshCw, ShieldCheck, AlertCircle, Copy, Check } from 'lucide-react';
-import { formatBytes } from '../../../utils/fileHelpers';
+import { formatBytes, validatePdfFile } from '../../../utils/fileHelpers';
 
 interface PdfInfo {
   name: string;
@@ -26,8 +26,9 @@ export function PdfMetadataViewer() {
     const selectedFile = e.target.files?.[0];
     if (!selectedFile) return;
 
-    if (!selectedFile.name.toLowerCase().endsWith('.pdf') && selectedFile.type !== 'application/pdf') {
-      setError('Please select a valid PDF file.');
+    const val = validatePdfFile(selectedFile, 100);
+    if (!val.valid) {
+      setError(val.error || 'Please select a valid PDF file.');
       return;
     }
 

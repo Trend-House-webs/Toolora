@@ -293,12 +293,11 @@ export function ContactPage() {
   // Listen for Apps Script postMessage notification from hidden iframe
   useEffect(() => {
     const handleMessage = (event: MessageEvent) => {
-      // Validate origin: accept from https://script.google.com or script.googleusercontent.com
+      // Validate origin strictly: exactly https://script.google.com or https://*.script.googleusercontent.com
       const origin = event.origin || '';
       const isAppsScriptOrigin =
         origin === 'https://script.google.com' ||
-        origin.startsWith('https://script.google.com') ||
-        origin.endsWith('.script.googleusercontent.com');
+        /^https:\/\/[a-z0-9-]+\.script\.googleusercontent\.com$/i.test(origin);
 
       if (!isAppsScriptOrigin) return;
 
@@ -320,6 +319,11 @@ export function ContactPage() {
         }
 
         if (data.success === true || data.success === 'true') {
+          try {
+            sessionStorage.setItem('toolora_feedback_last_sent', String(Date.now()));
+          } catch {
+            // Ignored
+          }
           setStatus('success');
           setName('');
           setEmail('');
@@ -385,6 +389,18 @@ export function ContactPage() {
     if (status === 'submitting') {
       e.preventDefault();
       return;
+    }
+
+    try {
+      const lastSent = sessionStorage.getItem('toolora_feedback_last_sent');
+      const now = Date.now();
+      if (lastSent && now - parseInt(lastSent, 10) < 10000) {
+        e.preventDefault();
+        setGeneralError('Please wait a moment before sending another feedback message.');
+        return;
+      }
+    } catch {
+      // Ignored if sessionStorage is disabled
     }
 
     if (!validate()) {

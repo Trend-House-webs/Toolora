@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { PDFDocument } from 'pdf-lib';
 import { Download, Trash2, ArrowUp, ArrowDown, Plus, ShieldCheck, AlertCircle, FileText, CheckCircle2 } from 'lucide-react';
-import { formatBytes } from '../../../utils/fileHelpers';
+import { formatBytes, validatePdfFile } from '../../../utils/fileHelpers';
 
 interface PdfFileItem {
   id: string;
@@ -26,8 +26,9 @@ export function MergePdfTool() {
 
     for (let i = 0; i < files.length; i++) {
       const file = files[i];
-      if (file.type !== 'application/pdf' && !file.name.toLowerCase().endsWith('.pdf')) {
-        setErrorMessage(`"${file.name}" is not a valid PDF file. Only PDF files are supported.`);
+      const val = validatePdfFile(file, 100);
+      if (!val.valid) {
+        setErrorMessage(val.error || `"${file.name}" is not a valid PDF file.`);
         continue;
       }
 

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { PDFDocument, degrees } from 'pdf-lib';
 import { Download, RefreshCw, ShieldCheck, AlertCircle, FileText, CheckCircle2, RotateCw } from 'lucide-react';
-import { formatBytes } from '../../../utils/fileHelpers';
+import { formatBytes, validatePdfFile } from '../../../utils/fileHelpers';
 
 export function RotatePdfTool() {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -16,8 +16,9 @@ export function RotatePdfTool() {
   const handleFileChange = async (files: FileList | null) => {
     if (!files || files.length === 0) return;
     const file = files[0];
-    if (file.type !== 'application/pdf' && !file.name.toLowerCase().endsWith('.pdf')) {
-      setErrorMessage('Please select a valid PDF file.');
+    const val = validatePdfFile(file, 100);
+    if (!val.valid) {
+      setErrorMessage(val.error || 'Please select a valid PDF file.');
       return;
     }
 

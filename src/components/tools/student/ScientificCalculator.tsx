@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { RotateCcw, Delete, History, Check, Copy } from 'lucide-react';
+import { safeEvaluateMath } from '../../../utils/safeMathEvaluator';
 
 function factorial(n: number): number {
   if (n < 0) return NaN;
@@ -34,43 +35,7 @@ export function ScientificCalculator() {
 
   const calculate = () => {
     try {
-      // Evaluate safely with mathematical substitutions
-      let expr = display
-        .replace(/×/g, '*')
-        .replace(/÷/g, '/')
-        .replace(/π/g, 'Math.PI')
-        .replace(/\be\b/g, 'Math.E');
-
-      // Functions with angle conversion
-      if (angleUnit === 'deg') {
-        expr = expr
-          .replace(/sin\(([^)]+)\)/g, 'Math.sin(($1) * Math.PI / 180)')
-          .replace(/cos\(([^)]+)\)/g, 'Math.cos(($1) * Math.PI / 180)')
-          .replace(/tan\(([^)]+)\)/g, 'Math.tan(($1) * Math.PI / 180)');
-      } else {
-        expr = expr
-          .replace(/sin\(/g, 'Math.sin(')
-          .replace(/cos\(/g, 'Math.cos(')
-          .replace(/tan\(/g, 'Math.tan(');
-      }
-
-      expr = expr
-        .replace(/ln\(/g, 'Math.log(')
-        .replace(/log\(/g, 'Math.log10(')
-        .replace(/sqrt\(/g, 'Math.sqrt(')
-        .replace(/\^/g, '**');
-
-      // Sanitize expression: only allowed characters
-      if (!/^[\d+\-*/.()MathPIEsincoaglrt\s]+$/.test(expr)) {
-        throw new Error('Invalid expression');
-      }
-
-      // Safe evaluation using Function
-      const evaluated = Function(`"use strict"; return (${expr})`)();
-      if (typeof evaluated !== 'number' || isNaN(evaluated) || !isFinite(evaluated)) {
-        throw new Error('Math Error');
-      }
-
+      const evaluated = safeEvaluateMath(display, { angleUnit });
       const formatted = Number(evaluated.toFixed(8)).toString();
       setHistory((prev) => [`${display} = ${formatted}`, ...prev.slice(0, 9)]);
       setDisplay(formatted);
