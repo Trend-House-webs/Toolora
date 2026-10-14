@@ -92,7 +92,7 @@ export function PrivacyPage() {
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 space-y-8">
       <SEO
         title="Privacy Policy — Toolora"
-        description="Read the Toolora Privacy Policy. Learn about client-side tool processing, local storage, hosting logs, and advertising disclosures."
+        description="Read the Toolora Privacy Policy, including client-side tool processing, browser storage, hosting logs, web fonts, advertising, and feedback submissions."
         canonicalPath="/privacy"
         schema={getStaticBreadcrumbSchema('Privacy Policy', '/privacy')}
       />

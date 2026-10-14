@@ -4,7 +4,7 @@ import { TOOLS, FEATURED_TOOLS, POPULAR_TOOLS, IMAGE_TOOLS, PDF_TOOLS, STUDENT_T
 import { ToolCard } from '../components/common/ToolCard';
 import { SEO } from '../components/common/SEO';
 import { Link, useRouter } from '../context/RouterContext';
-import { SITE_URL } from '../config/site';
+import { SITE_DESCRIPTION, SITE_URL } from '../config/site';
 
 interface HomePageProps {
   onOpenSearchModal: () => void;
@@ -58,7 +58,7 @@ export function HomePage({ onOpenSearchModal }: HomePageProps) {
       {/* Dynamic SEO Tags & WebSite Structured Data */}
       <SEO
         title="Toolora — Everyday tools, made simple."
-        description="Fast, free tools for images, files, calculations and everyday tasks. 100% client-side with no sign-up."
+        description={SITE_DESCRIPTION}
         canonicalPath="/"
         schema={websiteSchema}
       />

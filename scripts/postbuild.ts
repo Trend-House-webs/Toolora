@@ -17,9 +17,7 @@ const baseHtml = fs.readFileSync(path.join(distDir, 'index.html'), 'utf8');
 // Import tools and categories
 import { TOOLS, CATEGORIES } from '../src/data/tools.ts';
 import { GUIDES } from '../src/data/guides.ts';
-
-const SITE_URL = 'https://toolorahub.vercel.app';
-const TODAY = new Date().toISOString().split('T')[0];
+import { SITE_URL } from '../src/config/site.ts';
 
 interface PageMetadata {
   path: string;
@@ -80,7 +78,7 @@ const staticPages: PageMetadata[] = [
   {
     path: 'privacy',
     title: 'Privacy Policy — Toolora',
-    description: 'Toolora privacy policy. Learn how all image, file, and utility operations run locally in your browser with zero data collection.',
+    description: 'Read the Toolora Privacy Policy, including client-side tool processing, browser storage, hosting logs, web fonts, advertising, and feedback submissions.',
     priority: '0.4',
     changefreq: 'monthly',
     schema: {
@@ -133,8 +131,8 @@ const categoryPages: PageMetadata[] = CATEGORIES.map((cat) => {
 
   return {
     path: `category/${cat.slug}`,
-    title: `${cat.title} — Free Online Utilities | Toolora`,
-    description: cat.description,
+    title: cat.metaTitle || `${cat.title} — Free Online Utilities | Toolora`,
+    description: cat.metaDescription || cat.description,
     priority: '0.85',
     changefreq: 'weekly',
     schema: [
@@ -167,22 +165,9 @@ const categoryPages: PageMetadata[] = CATEGORIES.map((cat) => {
 });
 
 const toolPages: PageMetadata[] = TOOLS.map((tool) => {
-  const categorySlug =
-    tool.category === 'image'
-      ? 'image-tools'
-      : tool.category === 'pdf'
-      ? 'pdf-tools'
-      : tool.category === 'student'
-      ? 'student-tools'
-      : 'utility-tools';
-  const categoryName =
-    tool.category === 'image'
-      ? 'Image Tools'
-      : tool.category === 'pdf'
-      ? 'PDF Tools'
-      : tool.category === 'student'
-      ? 'Student Tools'
-      : 'Utilities';
+  const category = CATEGORIES.find((item) => item.id === tool.category);
+  const categorySlug = category?.slug || 'utility-tools';
+  const categoryName = category?.title || 'Daily Utilities';
 
   const schemas: any[] = [
     {
@@ -416,11 +401,10 @@ const notFoundHtml = customizeHtml(baseHtml, notFoundPage);
 fs.writeFileSync(path.join(distDir, '404.html'), notFoundHtml);
 
 // Generate valid XML Sitemap directly from the registry
-const sitemapUrls: Array<{ loc: string; lastmod: string; changefreq: string; priority: string }> = [
-  { loc: `${SITE_URL}/`, lastmod: TODAY, changefreq: 'daily', priority: '1.0' },
+const sitemapUrls: Array<{ loc: string; changefreq: string; priority: string }> = [
+  { loc: `${SITE_URL}/`, changefreq: 'daily', priority: '1.0' },
   ...allPages.map((p) => ({
     loc: `${SITE_URL}/${p.path}`,
-    lastmod: TODAY,
     changefreq: p.changefreq || 'weekly',
     priority: p.priority || '0.7',
   })),
@@ -432,7 +416,6 @@ ${sitemapUrls
   .map(
     (u) => `  <url>
     <loc>${u.loc}</loc>
-    <lastmod>${u.lastmod}</lastmod>
     <changefreq>${u.changefreq}</changefreq>
     <priority>${u.priority}</priority>
   </url>`

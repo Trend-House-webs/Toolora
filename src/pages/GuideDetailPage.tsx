@@ -23,6 +23,23 @@ interface GuideDetailPageProps {
 }
 
 export function GuideDetailPage({ guide }: GuideDetailPageProps) {
+  const articleSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: guide.title,
+    description: guide.summary,
+    url: `${SITE_URL}/guides/${guide.slug}`,
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': `${SITE_URL}/guides/${guide.slug}`,
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'Toolora',
+      url: `${SITE_URL}/`,
+    },
+  };
+
   // Breadcrumb structured data
   const breadcrumbSchema = {
     '@context': 'https://schema.org',
@@ -59,7 +76,7 @@ export function GuideDetailPage({ guide }: GuideDetailPageProps) {
         description={guide.metaDescription}
         canonicalPath={`/guides/${guide.slug}`}
         ogType="article"
-        schema={breadcrumbSchema}
+        schema={[articleSchema, breadcrumbSchema]}
       />
 
       {/* Visible Breadcrumbs */}
