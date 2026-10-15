@@ -17,6 +17,32 @@ export const CATEGORIES: CategoryInfo[] = [
       'Zero compression loss during 90-degree rotations and horizontal/vertical flips',
       'Batch export support for JPG, PNG, WebP, and multi-page PDF documents',
     ],
+    toolTypes: [
+      {
+        title: 'Compression & File Size Optimization',
+        description: 'Shrink photo file sizes for website speed, email limits, and upload forms without noticeable quality loss.',
+        whenToChoose: 'Choose Image Compressor for fine-tuned visual quality or Photo Size Reducer to hit strict kilobyte caps (e.g. under 200 KB or 500 KB).',
+        toolSlugs: ['image-compressor', 'photo-size-reducer'],
+      },
+      {
+        title: 'Format Conversion',
+        description: 'Convert photos and graphics between JPG, PNG, WebP, and BMP directly in browser memory.',
+        whenToChoose: 'Choose format converters when an application requires a specific format, when you need transparent backgrounds (PNG/WebP), or when modernizing web galleries.',
+        toolSlugs: ['jpg-to-png', 'png-to-jpg', 'jpg-to-webp', 'png-to-webp', 'webp-to-jpg', 'webp-to-png', 'bmp-to-jpg'],
+      },
+      {
+        title: 'Dimensions, Aspect Ratios & Cropping',
+        description: 'Resize pixel dimensions, calculate proportional aspect ratios, crop frames, and fit passport or social media specs.',
+        whenToChoose: 'Choose these tools when images are too wide or tall for a layout, need standardized proportions (16:9, 4:3), or need official document photo standards.',
+        toolSlugs: ['image-resizer', 'crop-image', 'aspect-ratio-calculator', 'passport-photo-resizer', 'social-media-resizer'],
+      },
+      {
+        title: 'Quality, Inspection & Rotation',
+        description: 'Inspect EXIF metadata, check print DPI resolution, verify alpha transparency, and correct photo orientations.',
+        whenToChoose: 'Choose these tools when you need to inspect camera settings, verify 300 DPI print sharpness, check transparent background channels, or fix orientation.',
+        toolSlugs: ['image-metadata-viewer', 'image-dpi-checker', 'transparent-background-checker', 'rotate-image', 'flip-image', 'rotate-flip-image', 'add-watermark'],
+      },
+    ],
     get count() {
       return TOOLS.filter((t) => t.category === 'image').length;
     },
@@ -35,6 +61,32 @@ export const CATEGORIES: CategoryInfo[] = [
       'Extract custom page ranges and individual sheets into fresh files',
       'Permanently rotate upside-down scanned pages by 90°, 180°, or 270°',
       'Compile JPG and PNG photo albums into standard PDF portfolios',
+    ],
+    toolTypes: [
+      {
+        title: 'PDF Assembly & Splitting',
+        description: 'Merge multiple separate documents into one ordered packet, or extract specific page ranges and chapters.',
+        whenToChoose: 'Choose Merge PDF to assemble contracts and portfolios into one file. Choose Split PDF when you only need to submit specific pages from a larger document.',
+        toolSlugs: ['merge-pdf', 'split-pdf'],
+      },
+      {
+        title: 'Orientation & Layout Corrections',
+        description: 'Permanently rotate upside-down or sideways pages from smartphone camera scans and office copiers.',
+        whenToChoose: 'Choose Rotate PDF when scanned forms, invoices, or legal filings are rotated 90° or 180° out of alignment.',
+        toolSlugs: ['rotate-pdf'],
+      },
+      {
+        title: 'Image to PDF Document Assembly',
+        description: 'Package single or multi-page photos, receipts, and screenshots into standard, printable PDF files.',
+        whenToChoose: 'Choose these tools when an institution (school, tax portal, visa office) requires PDF submissions instead of raw image files.',
+        toolSlugs: ['image-to-pdf', 'jpg-to-pdf', 'png-to-pdf'],
+      },
+      {
+        title: 'Document Inspection & Verification',
+        description: 'Inspect page counts, page dimensions (A4, US Letter), document titles, and encryption status.',
+        whenToChoose: 'Choose these tools before submitting official papers to confirm exact page counts and check structural PDF properties.',
+        toolSlugs: ['pdf-page-counter', 'pdf-metadata-viewer'],
+      },
     ],
     get count() {
       return TOOLS.filter((t) => t.category === 'pdf').length;
@@ -55,6 +107,32 @@ export const CATEGORIES: CategoryInfo[] = [
       'Fraction arithmetic and ratio reduction with step-by-step GCD solutions',
       'Structured 25/5 Pomodoro study intervals with gentle audio chimes',
     ],
+    toolTypes: [
+      {
+        title: 'Academic Performance & GPA Solvers',
+        description: 'Calculate semester GPA, cumulative multi-term CGPA, weighted coursework grades, and target final exam scores.',
+        whenToChoose: 'Choose GPA or CGPA calculators at term end to verify academic standing. Choose Grade Calculator or Marks Percentage Calculator mid-term to find what score you need on finals.',
+        toolSlugs: ['gpa-calculator', 'cgpa-calculator', 'grade-calculator', 'marks-percentage-calculator'],
+      },
+      {
+        title: 'Math & Arithmetic Problem Solvers',
+        description: 'Step-by-step fraction arithmetic, mathematical ratio simplifications, scientific formulas, and averages.',
+        whenToChoose: 'Choose Fraction or Ratio calculators when solving homework step-by-step with lowest common denominators. Choose Scientific Calculator for trigonometry, exponents, and logs.',
+        toolSlugs: ['fraction-calculator', 'ratio-calculator', 'scientific-calculator', 'average-calculator'],
+      },
+      {
+        title: 'Percentage & Number Calculations',
+        description: 'Calculate percentage changes, increases, discounts, number-to-words currency formats, and random draws.',
+        whenToChoose: 'Choose Percentage Increase or Decrease calculators for comparison problems and discounts. Choose Number to Words when filling checks, legal receipts, and invoices.',
+        toolSlugs: ['percentage-calculator', 'percentage-increase-calculator', 'percentage-decrease-calculator', 'number-to-words', 'random-number-generator'],
+      },
+      {
+        title: 'Study Productivity & Text Analysis',
+        description: 'Estimate reading times for essays and articles, count sentences, and time structured study intervals.',
+        whenToChoose: 'Choose Reading Time or Sentence counters when planning speeches or checking essay length. Choose Pomodoro Study Timer to pace 25-minute focused study sessions.',
+        toolSlugs: ['reading-time-calculator', 'sentence-counter', 'pomodoro-timer', 'date-difference-calculator'],
+      },
+    ],
     get count() {
       return TOOLS.filter((t) => t.category === 'student').length;
     },
@@ -74,6 +152,32 @@ export const CATEGORIES: CategoryInfo[] = [
       'Formatted JSON beautification with syntax error diagnostics',
       'URL query parameter and UTF-8 Base64 encoding/decoding',
     ],
+    toolTypes: [
+      {
+        title: 'Secure Identifiers & Password Generators',
+        description: 'Generate cryptographically secure version 4 UUIDs, high-entropy passwords, and custom random strings.',
+        whenToChoose: 'Choose UUID Generator when building database records or testing APIs. Choose Password Generator when securing online accounts with custom character sets.',
+        toolSlugs: ['uuid-generator', 'password-generator', 'random-string-generator'],
+      },
+      {
+        title: 'Data Encoding & Developer Formatters',
+        description: 'Encode query strings, convert binary to Base64, format nested JSON trees, and convert color codes.',
+        whenToChoose: 'Choose JSON Formatter when debugging API responses. Choose Base64 or URL Encode tools when transferring data safely through web URLs and headers.',
+        toolSlugs: ['json-formatter', 'base64-tool', 'url-encoder-decoder', 'color-converter'],
+      },
+      {
+        title: 'Text Cleaning & Content Auditing',
+        description: 'Remove duplicate lines, clean redundant whitespace, convert letter cases, and audit word/character lengths.',
+        whenToChoose: 'Choose Text Cleaner or Remove Duplicate Lines when cleaning messy copied lists or data exports. Choose Word and Character counters for social posts and form limits.',
+        toolSlugs: ['text-cleaner', 'remove-duplicate-lines', 'text-case-converter', 'word-counter', 'character-counter'],
+      },
+      {
+        title: 'Everyday Time & Measurement Utilities',
+        description: 'Convert Unix epoch timestamps, generate QR codes, calculate exact age, and convert physical units.',
+        whenToChoose: 'Choose Timestamp Converter when inspecting server logs. Choose QR Code Generator to share links, Wi-Fi passwords, or contact cards.',
+        toolSlugs: ['timestamp-converter', 'qr-code-generator', 'age-calculator', 'unit-converter', 'study-timer'],
+      },
+    ],
     get count() {
       return TOOLS.filter((t) => t.category === 'utility').length;
     },
@@ -92,6 +196,32 @@ export const CATEGORIES: CategoryInfo[] = [
       'Step-by-step math solvers for percentages, fractions, GPA, and proportions',
       'Text statistics for word counts, character limits, formatting, and reading duration',
       'Direct navigation to dedicated Student Tools and Daily Utilities categories',
+    ],
+    toolTypes: [
+      {
+        title: 'Academic Coursework & GPA Solvers',
+        description: 'Fast mathematical formulas, weighted grade tracking, GPA systems, and target final exam solvers.',
+        whenToChoose: 'Choose academic performance tools when calculating semester or cumulative CGPA, determining grade weights, or calculating what score you need on final exams.',
+        toolSlugs: ['gpa-calculator', 'cgpa-calculator', 'grade-calculator', 'marks-percentage-calculator'],
+      },
+      {
+        title: 'Math, Arithmetic & Fractions',
+        description: 'Step-by-step arithmetic solvers for fractions, ratios, scientific calculations, and percentages.',
+        whenToChoose: 'Choose math problem solvers when simplifying fractions with lowest common denominators, calculating ratios, or solving percentage increases and discounts.',
+        toolSlugs: ['fraction-calculator', 'ratio-calculator', 'scientific-calculator', 'percentage-calculator'],
+      },
+      {
+        title: 'Developer Identifiers & Data Encoders',
+        description: 'Cryptographically secure UUID generators, Unix timestamp converters, JSON formatters, and Base64 encoders.',
+        whenToChoose: 'Choose developer utilities when generating mock data, inspecting and beautifying API payloads, or encoding URL query strings safely.',
+        toolSlugs: ['uuid-generator', 'timestamp-converter', 'json-formatter', 'base64-tool'],
+      },
+      {
+        title: 'Text Cleaning, Word Counts & Study Timers',
+        description: 'Text formatting tools, word and character counters, reading time estimators, and Pomodoro study timers.',
+        whenToChoose: 'Choose text and productivity utilities when writing essays, auditing character limits, cleaning copied lists, or pacing focused study blocks.',
+        toolSlugs: ['text-cleaner', 'word-counter', 'reading-time-calculator', 'pomodoro-timer'],
+      },
     ],
     get count() {
       return TOOLS.filter(
@@ -116,29 +246,59 @@ export const TOOLS: ToolItem[] = [
     isFeatured: true,
     isPopular: true,
     badge: 'Popular',
+    directAnswer: 'Toolora Image Compressor is a client-side utility built to compress image online by re-encoding graphics using HTML5 canvas processing. It allows you to reduce image size for JPG, PNG, and WebP files with an adjustable quality slider while keeping your photos securely on your device.',
     features: [
       'Client-side instant compression with HTML5 Canvas',
       'Configurable quality slider from 1% to 100%',
-      'Live before-and-after file size preview',
-      'Supports JPG, PNG, and WebP formats',
+      'Optional WebP conversion for smaller file footprints',
+      'Live before-and-after byte size and reduction preview',
+      'Zero server file uploads or account requirements',
     ],
     howToUse: [
-      { step: 1, title: 'Upload Your Image', description: 'Drag and drop any JPG, PNG, or WebP photo into the dropzone or click to browse files.' },
-      { step: 2, title: 'Adjust Quality', description: 'Use the slider to balance visual clarity against file size. A 75% to 80% setting is optimal for most web uses.' },
-      { step: 3, title: 'Compare & Download', description: 'Inspect the calculated size reduction percentage and click Download to save your compressed image instantly.' },
+      { step: 1, title: 'Upload Image', description: 'Select or drag and drop any JPG, PNG, WebP, GIF, or BMP image (up to 50 MB) into the upload area.' },
+      { step: 2, title: 'Adjust Quality Level', description: 'Use the quality slider (1% to 100%) to balance file reduction with visual clarity (75%–80% is recommended for web publishing).' },
+      { step: 3, title: 'Optional WebP Toggle', description: 'Check "Convert to WebP format" if you want next-generation compression that achieves even smaller file sizes.' },
+      { step: 4, title: 'Inspect & Download', description: 'Review the calculated byte savings and click "Download Compressed Image" to save your optimized file.' },
     ],
+    technicalDetails: {
+      supportedInputs: [
+        'JPG / JPEG (.jpg, .jpeg)',
+        'PNG (.png)',
+        'WebP (.webp)',
+        'GIF (.gif — static first frame)',
+        'BMP (.bmp)',
+      ],
+      outputFormat: 'Optimized JPEG or WebP file (when toggled) with quality quantization applied via HTML5 Canvas. Downloaded as [name]-compressed.[ext].',
+      limitations: [
+        'Maximum recommended single file size is 50 MB to prevent exceeding browser tab RAM limits.',
+        'Animated GIF files will be flattened to their initial static frame because canvas rasterization processes single frames.',
+        'Vector files like SVG are not supported because vector graphics scale via code rather than raster pixel compression.',
+        'To compress a photo to an exact kilobyte target (e.g. under 50 KB or 100 KB), use our dedicated [Photo Size Reducer](/tools/photo-size-reducer).',
+      ],
+    },
+    practicalExample: {
+      title: 'Optimizing a High-Resolution Camera Photo for Website Publishing',
+      scenario: 'A web designer has a 4.6 MB JPEG hero photograph straight from a digital camera that is slowing down page load speeds.',
+      action: 'Upload the file to the [Image Compressor](/tools/image-compressor), keep dimensions intact, set the quality slider to 78%, and enable WebP conversion.',
+      result: 'The file size drops from 4.6 MB down to 480 KB (an ~89% reduction) with no visible blur or pixelation on retina displays.',
+    },
     whyUse: [
       'In-Browser Processing: Photos are compressed in local browser memory without uploading to Toolora servers.',
-      'Lightning Fast: Instant processing powered by your device hardware, avoiding network lag.',
+      'Lightning Fast Turnaround: Instant processing powered by your device hardware, avoiding network latency and upload queues.',
       'Web-Ready Optimization: Drastically speed up website loading times and email attachments without visible quality loss.',
-      'Completely Free: No daily quotas, no watermarks, and no registration required.',
+      'Companion Resizing: If your picture is physically too large in pixel dimensions, pair with our [Image Resizer](/tools/image-resizer) first.',
     ],
     tips: [
       'For web publishing, a quality setting around 70%–80% typically offers an effective balance of visual clarity and file size reduction. Results vary depending on image complexity and initial resolution.',
       'If compressing a PNG with solid colors or text, try converting to WebP first for even smaller files.',
-      'Check the dimensions: if your original photo is 4000px wide, resizing it first can save even more space.',
+      'Check the dimensions: if your original photo is 4000px wide, resizing it first with [Image Resizer](/tools/image-resizer) can save even more space.',
+      'Read our step-by-step tutorial on [How to Compress Images Online](/guides/how-to-compress-images-online) for optimal compression workflows.',
     ],
     faq: [
+      {
+        question: 'What is the difference between compressing an image and resizing it?',
+        answer: 'Compressing reduces file size in kilobytes by optimizing pixel data encoding (bitrate) without altering width and height. Resizing changes the actual physical pixel dimensions (e.g., from 3000×2000px to 1200×800px). Using [Image Resizer](/tools/image-resizer) together with Image Compressor yields the smallest possible files.',
+      },
       {
         question: 'Are my photos uploaded to any server?',
         answer: 'No. All compression is executed entirely inside your web browser via the HTML5 Canvas API. Your files remain on your device.',
@@ -146,6 +306,10 @@ export const TOOLS: ToolItem[] = [
       {
         question: 'What is the optimal compression level?',
         answer: 'For most web, email, and social uses, setting the quality slider between 70% and 80% typically achieves noticeable file size reductions with virtually no visible degradation. Actual savings vary based on image content, dimensions, and original format.',
+      },
+      {
+        question: 'Can I compress photos to a strict maximum limit like 50 KB?',
+        answer: 'While you can lower the quality slider until the counter shows your target size, Toolora offers an automated [Photo Size Reducer](/tools/photo-size-reducer) that calculates the exact byte ceiling automatically.',
       },
       {
         question: 'Can I compress PNG and WebP files?',
@@ -156,7 +320,7 @@ export const TOOLS: ToolItem[] = [
         answer: 'There are no artificial usage limits. Because processing runs locally on your machine, you can compress as many images as you need.',
       },
     ],
-    relatedSlugs: ['image-resizer', 'jpg-to-webp', 'crop-image', 'image-to-pdf'],
+    relatedSlugs: ['photo-size-reducer', 'image-resizer', 'jpg-to-webp', 'crop-image', 'image-to-pdf'],
   },
 
   // 2. IMAGE RESIZER
@@ -173,17 +337,42 @@ export const TOOLS: ToolItem[] = [
     isFeatured: true,
     isPopular: true,
     badge: 'Essential',
+    directAnswer: 'Toolora Image Resizer is a client-side tool to resize image online by setting custom pixel width and height dimensions or scaling by percentage. It allows you to resize image dimensions with strict aspect ratio locking so graphics never look stretched or squished.',
     features: [
-      'Resize by custom pixel width and height',
-      'Convenient preset scale shortcuts (25%, 50%, 75%, 200%)',
+      'Resize by custom pixel width and height dimensions',
+      'Convenient preset scale shortcuts (25%, 50%, 75%, 100%)',
       'Aspect ratio constraint lock to prevent distortion',
-      'High-quality bi-cubic interpolation canvas rendering',
+      'Export to JPG, PNG, or WebP with bicubic canvas interpolation',
+      'Private client-side processing without server uploads',
     ],
     howToUse: [
-      { step: 1, title: 'Choose Photo', description: 'Upload the image you want to resize by dropping it onto the workspace.' },
-      { step: 2, title: 'Set Dimensions', description: 'Enter your desired width or height, or pick a percentage scaling preset like 50%.' },
-      { step: 3, title: 'Lock Ratio & Export', description: 'Keep the aspect ratio locked to prevent stretching, then click Download Resized Image.' },
+      { step: 1, title: 'Upload Image', description: 'Select or drag and drop any image into the workspace (JPG, PNG, WebP, GIF, or BMP).' },
+      { step: 2, title: 'Choose Sizing Method', description: 'Enter custom pixel width or height, or select a preset scaling button (25%, 50%, 75%, 100%).' },
+      { step: 3, title: 'Lock Proportions & Format', description: 'Keep "Lock Aspect Ratio" checked to preserve natural proportions, and choose export format (JPG, PNG, or WebP).' },
+      { step: 4, title: 'Download Resized Image', description: 'Click "Download Resized Image" to instantly save your resized file named with exact width and height dimensions.' },
     ],
+    technicalDetails: {
+      supportedInputs: [
+        'JPG / JPEG (.jpg, .jpeg)',
+        'PNG (.png)',
+        'WebP (.webp)',
+        'GIF (.gif — static frame)',
+        'BMP (.bmp)',
+      ],
+      outputFormat: 'Exported image in chosen format (JPG with white canvas background, PNG with transparency, or WebP) at 0.9 quality. Downloaded as [name]-[width]x[height].[ext].',
+      limitations: [
+        'Maximum recommended single image size is 50 MB for responsive browser canvas rendering.',
+        'Enlarging a low-resolution graphic (e.g. 200px to 2000px) cannot reconstruct non-existent optical detail and will appear soft due to pixel interpolation.',
+        'Animated GIFs are processed as single static frames on the HTML5 canvas.',
+        'To calculate exact width-to-height proportions before resizing, use our [Aspect Ratio Calculator](/tools/aspect-ratio-calculator).',
+      ],
+    },
+    practicalExample: {
+      title: 'Resizing a High-Resolution Product Photo for an E-Commerce Store',
+      scenario: 'An online shop owner has a 4000×3000px manufacturer photo that must meet a marketplace catalog requirement of exactly 1200px width.',
+      action: 'Upload the photo to [Image Resizer](/tools/image-resizer), ensure "Lock Aspect Ratio" is checked, enter 1200 in the width input (height automatically recalculates to 900px), and select JPG format.',
+      result: 'The photo is resized to exactly 1200×900 pixels in seconds, maintaining razor-sharp product details without distortion.',
+    },
     whyUse: [
       'Exact Fit: Meet strict dimension requirements for application portals, CMS uploads, and social platforms.',
       'Zero Distortion: Proportional auto-scaling ensures photos never appear squished or stretched.',
@@ -193,7 +382,8 @@ export const TOOLS: ToolItem[] = [
     tips: [
       'Keep "Lock Aspect Ratio" enabled unless you specifically need to stretch an image to non-proportional dimensions.',
       'When downscaling for email or chat, 1200px to 1600px width is usually sufficient for crystal-clear viewing.',
-      'If you need specific social media header dimensions, check out our Social Media Resizer for pre-configured templates.',
+      'If you need specific social media header dimensions, check out our [Social Media Resizer](/tools/social-media-resizer) for pre-configured templates.',
+      'Follow our guide on [How to Resize an Image Without Losing Quality](/guides/how-to-resize-an-image-without-losing-quality) for in-depth resolution tips.',
     ],
     faq: [
       {
@@ -201,15 +391,19 @@ export const TOOLS: ToolItem[] = [
         answer: 'Keep the "Lock Aspect Ratio" toggle checked. Changing the width will automatically update the height proportionally, and vice-versa.',
       },
       {
-        question: 'Does downscaling reduce the file size?',
-        answer: 'Yes, reducing the pixel resolution of an image substantially lowers the total number of pixels, resulting in much smaller file sizes.',
+        question: 'Does resizing an image reduce its file size?',
+        answer: 'Yes, reducing the pixel resolution of an image substantially lowers the total number of pixels, resulting in much smaller file sizes. To reduce size further without changing dimensions, use our [Image Compressor](/tools/image-compressor).',
       },
       {
         question: 'Can I enlarge a small photo?',
         answer: 'You can increase dimensions, but keep in mind that enlarging a low-resolution image cannot invent new pixel details and may look softer.',
       },
+      {
+        question: 'Are my personal photos stored or tracked?',
+        answer: 'No. Processing occurs purely in your browser window with zero file transmissions to Toolora or third-party servers.',
+      },
     ],
-    relatedSlugs: ['image-compressor', 'crop-image', 'social-media-resizer', 'rotate-flip-image'],
+    relatedSlugs: ['image-compressor', 'aspect-ratio-calculator', 'crop-image', 'social-media-resizer', 'photo-size-reducer'],
   },
 
   // 3. JPG TO PNG
@@ -480,37 +674,72 @@ export const TOOLS: ToolItem[] = [
     isFeatured: true,
     isPopular: true,
     badge: 'Popular',
+    directAnswer: 'Toolora Image to PDF is a private image to PDF converter designed to convert images to PDF into a clean, unified document. It allows you to transform photos to PDF pages with custom page ordering, orientation, paper sizing, and margin controls without uploading files to remote servers.',
     features: [
       'Combine multiple photos into a single PDF document',
       'Choose between A4 and US Letter page dimensions',
       'Select Portrait or Landscape orientation',
-      'Configurable margins with automatic aspect ratio scaling',
+      'Configurable margins (None, 10mm, 20mm) with automatic aspect ratio scaling',
+      'Reorder or remove pages with simple card controls',
+      'Instant client-side PDF compilation via jsPDF',
     ],
     howToUse: [
-      { step: 1, title: 'Add Images', description: 'Upload one or multiple photos, scans, or receipts.' },
-      { step: 2, title: 'Reorder & Configure', description: 'Use the up and down arrows to arrange pages. Select page size, orientation, and margins.' },
-      { step: 3, title: 'Generate PDF', description: 'Click Generate PDF to immediately compile and download your document.' },
+      { step: 1, title: 'Add Images', description: 'Click "Choose File(s)" or drag and drop JPG, PNG, WebP, GIF, or BMP photos into the upload zone.' },
+      { step: 2, title: 'Arrange Document Sequence', description: 'Use the "Move Up" and "Move Down" arrow buttons on each card to set your exact page order, or remove unwanted pages.' },
+      { step: 3, title: 'Configure Layout', description: 'Select page orientation (Portrait or Landscape), paper format (standard A4 or US Letter), and margins (None, 10mm, or 20mm).' },
+      { step: 4, title: 'Compile and Download', description: 'Click "Download PDF Document" to assemble and save your multi-page PDF document immediately.' },
     ],
+    technicalDetails: {
+      supportedInputs: [
+        'JPG / JPEG (.jpg, .jpeg)',
+        'PNG (.png)',
+        'WebP (.webp)',
+        'GIF (.gif — static frame)',
+        'BMP (.bmp)',
+      ],
+      outputFormat: 'Standard multi-page PDF document (.pdf) compiled directly in client memory via jsPDF with automatic aspect ratio scaling to fit page boundaries.',
+      limitations: [
+        'Accepts raster image formats; existing PDF files cannot be input here (use our [Merge PDF](/tools/merge-pdf) tool to combine PDF documents).',
+        'Browser memory handles up to ~50 high-resolution images smoothly; very large batches may experience brief compilation delays.',
+        'For format-specific single conversions, you can also use our dedicated [JPG to PDF](/tools/jpg-to-pdf) and [PNG to PDF](/tools/png-to-pdf) tools.',
+      ],
+    },
+    practicalExample: {
+      title: 'Packaging Multi-Page Handwritten Homework for Online Portal Submission',
+      scenario: 'A university student took three smartphone photos of handwritten chemistry problem sets that must be submitted as a single consolidated PDF file.',
+      action: 'Upload all three photo files to [Image to PDF](/tools/image-to-pdf), reorder them sequentially from page 1 to 3, choose A4 Portrait with 10mm margins, and click Download PDF Document.',
+      result: 'A single, cleanly formatted 3-page PDF is generated in 2 seconds, ready for university LMS upload without watermark or subscription fees.',
+    },
     whyUse: [
       'Document Submission Ready: Perfect for sending multi-page receipts, invoices, assignments, or IDs in one clean PDF.',
       'In-Browser Assembly: Sensitive IDs and scans are compiled directly in local browser memory without server file uploads.',
+      'Custom Margins & Fit: Choose between zero margins (full-bleed) or 10mm/20mm margins to ensure content is print-ready.',
       'Zero Watermarks: Clean, professional PDF documents without branding or limitations.',
     ],
     tips: [
       'For receipts and forms, use A4 Portrait with 10mm margins for a standard printed look.',
       'For landscape presentations or artwork, switch the layout to Landscape.',
+      'Check our detailed guide on [How to Convert Images to PDF](/guides/how-to-convert-images-to-pdf) for tips on optimizing page sequencing and quality.',
     ],
     faq: [
       {
-        question: 'Can I combine multiple images into a single PDF?',
-        answer: 'Yes! You can upload multiple images, reorder them as desired, and compile them into a unified multi-page PDF document.',
+        question: 'Can I combine multiple image formats into a single PDF?',
+        answer: 'Yes! You can upload a mixture of JPG, PNG, and WebP images together; each is converted into its own PDF page in your chosen sequence.',
       },
       {
         question: 'Are my confidential documents uploaded to a server?',
         answer: 'No. The PDF is constructed purely client-side using JavaScript in your browser memory. Your documents never touch external servers.',
       },
+      {
+        question: 'How do I combine already existing PDF files?',
+        answer: 'If you already have multiple PDF files instead of images, use our companion [Merge PDF](/tools/merge-pdf) tool to combine them.',
+      },
+      {
+        question: 'What paper size should I select?',
+        answer: 'Select A4 for international submissions (standard in Europe, Asia, and Latin America) and US Letter for North American institutions and offices.',
+      },
     ],
-    relatedSlugs: ['image-compressor', 'image-resizer', 'crop-image'],
+    relatedSlugs: ['merge-pdf', 'jpg-to-pdf', 'png-to-pdf', 'image-compressor', 'image-resizer'],
   },
 
   // 10. CROP IMAGE
@@ -764,35 +993,70 @@ export const TOOLS: ToolItem[] = [
     isFeatured: true,
     isPopular: true,
     badge: 'Academic',
+    directAnswer: 'Toolora GPA Calculator is an academic tool to calculate GPA and semester GPA using weighted course credit hours and customizable grading scales. It helps college, university, and high school students determine both current term grade points and overall cumulative CGPA.',
     features: [
-      'Standard 4.0 grade scale (A+, A, A-, B+, etc.)',
-      'Credit hour weighting for every course',
-      'Add unlimited courses and semesters',
-      'Optional local storage auto-save',
+      'Configurable grading scales: Standard 4.0, Honors 4.33, and Weighted 5.0 systems',
+      'Accurate credit-hour weighting for lecture classes and labs',
+      'Real-time semester GPA calculation updated with every grade change',
+      'Optional cumulative history input (prior credits and prior GPA) to compute CGPA',
+      'Add or remove unlimited courses with one-click row management',
     ],
     howToUse: [
-      { step: 1, title: 'Add Course', description: 'Enter course name, credit hours (e.g. 3.0), and expected letter grade.' },
-      { step: 2, title: 'Add Multiple Subjects', description: 'Click Add Course for each class in your semester schedule.' },
-      { step: 3, title: 'Check GPA', description: 'Your weighted Grade Point Average updates automatically in real time.' },
+      { step: 1, title: 'Select Grading Scale System', description: 'Choose the grading model used by your institution: Standard 4.0 Scale, Honors 4.33 Scale, or Weighted 5.0 Scale.' },
+      { step: 2, title: 'Input Course Names & Credits', description: 'Enter each course title and its assigned credit hours (e.g. 3.0 or 4.0 credits).' },
+      { step: 3, title: 'Select Letter Grades', description: 'Pick the letter grade received for each course from the dropdown menu to calculate earned grade points.' },
+      { step: 4, title: 'Review Semester GPA & CGPA', description: 'Check your weighted Semester GPA and Total Credits. Optionally fill in prior credits and prior cumulative GPA to compute overall CGPA.' },
     ],
+    technicalDetails: {
+      supportedInputs: [
+        'Course titles (optional descriptive label for each class)',
+        'Course credit weights (numeric from 0.5 to 12.0 credits, step 0.5)',
+        'Letter grade selections based on chosen grading scale system (A+, A, A-, B+, B, B-, C+, C, C-, D+, D, F)',
+        'Optional prior completed credits and prior cumulative GPA for CGPA projection',
+      ],
+      outputFormat: 'Real-time calculated Semester GPA (rounded to 2 decimal places), total earned quality points, semester credit hours, and overall cumulative CGPA.',
+      limitations: [
+        'Grading scales and letter-grade point conversions vary across universities, colleges, and national education systems. Toolora supports 3 common systems (Standard 4.0, Honors 4.33, and Weighted 5.0), but you should always verify your school official grading syllabus.',
+        'Courses with zero credit weighting (such as pass/fail or non-credit remedial courses) do not affect weighted GPA.',
+        'The calculation method assumes standard quality points: Grade Points = Course Credits × Grade Point Value.',
+      ],
+    },
+    practicalExample: {
+      title: 'Calculating Weighted Semester GPA for College Coursework',
+      scenario: 'A university sophomore is taking 4 classes: 4-credit Calculus I (grade A, 4.0), 3-credit Computer Science (grade A-, 3.7), 4-credit Physics (grade B+, 3.3), and 3-credit Writing (grade B, 3.0).',
+      action: 'Add each course to the [GPA Calculator](/tools/gpa-calculator) on the Standard 4.0 scale: Calculus earns 16.0 points (4×4.0), CS earns 11.1 points (3×3.7), Physics earns 13.2 points (4×3.3), and Writing earns 9.0 points (3×3.0). Total grade points = 49.3 across 14 total credit hours.',
+      result: 'Semester GPA = 49.3 ÷ 14 = 3.52. If the student previously had 30 credits at a 3.40 GPA, their new cumulative CGPA updates to (102.0 + 49.3) ÷ 44 = 3.44.',
+    },
     whyUse: [
-      'Academic Planning: Test hypothetical grades to see what scores you need to hit honors or dean\'s list requirements.',
-      'Local Browser Storage: Course grades are saved locally in your browser storage so you can return to them anytime.',
+      'Academic Planning: Test hypothetical grades before final exams to see what scores you need to hit honors or Dean’s List requirements.',
+      'Credit Hour Precision: Accurately weights difficult 4-credit and 5-credit lecture courses relative to 1-credit seminars.',
+      'Flexible Multi-Scale Support: Easily switch between Standard 4.0, Honors 4.33, and high school Weighted 5.0 systems.',
+      'Cumulative Projection: Seamlessly combines previous academic history with current semester projections.',
     ],
     tips: [
       'Courses with higher credit weights (e.g. 4-credit lab science) have a much larger impact on your cumulative GPA than 1-credit seminars.',
+      'If your institution uses percentage marks rather than letter grades, convert your grades first using our [Marks Percentage Calculator](/tools/marks-percentage-calculator).',
+      'To calculate overall degree completion across all completed terms, check out our companion [CGPA Calculator](/tools/cgpa-calculator).',
     ],
     faq: [
       {
-        question: 'How is weighted GPA calculated?',
-        answer: 'Each grade is assigned point values (e.g. A = 4.0, B = 3.0). Points are multiplied by course credits, summed, and divided by total credit hours.',
+        question: 'How is weighted semester GPA calculated?',
+        answer: 'Each letter grade has a numerical point value (e.g., A = 4.0, B = 3.0). The calculator multiplies each course credits by the grade points earned, sums all course points together, and divides by total semester credit hours: Semester GPA = ∑ (Credits × Grade Points) ÷ Total Credits.',
       },
       {
-        question: 'Does this work for high school and university?',
-        answer: 'Yes, it follows the standard North American 4.0 grading system used across universities, colleges, and high schools.',
+        question: 'Do all universities and colleges use the same GPA scale?',
+        answer: 'No. While the Standard 4.0 scale is the most common in North America, institutions vary widely: some award 4.33 for an A+, others do not award plus/minus grades, and many high schools use a weighted 5.0 scale for AP or IB courses. Always check your institution transcript legend.',
+      },
+      {
+        question: 'How is cumulative CGPA calculated with prior semesters?',
+        answer: 'Cumulative CGPA multiplies your prior credits by your prior cumulative GPA to determine prior grade points, adds your current semester grade points, and divides by the combined total credit hours: (Prior Points + Current Semester Points) ÷ Total Combined Credits.',
+      },
+      {
+        question: 'Are my courses or grades saved online?',
+        answer: 'No. All calculations are executed purely in your local browser session. Your academic data is never uploaded or shared with any server.',
       },
     ],
-    relatedSlugs: ['cgpa-calculator', 'grade-calculator', 'percentage-calculator'],
+    relatedSlugs: ['cgpa-calculator', 'grade-calculator', 'marks-percentage-calculator', 'percentage-calculator'],
   },
 
   // 17. WORD COUNTER

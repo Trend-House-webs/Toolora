@@ -195,25 +195,62 @@ export const ADDITIONAL_TOOLS: ToolItem[] = [
     icon: 'Sliders',
     isPopular: true,
     badge: 'Essential',
+    directAnswer: 'Toolora Photo Size Reducer is an automated browser utility to reduce photo size to a strict maximum kilobyte limit (such as under 20KB, 50KB, 100KB, 200KB, or 500KB). As a targeted photo size reducer, it executes an in-browser binary search algorithm to reduce image to a target KB size with the highest possible visual clarity for government portals, job applications, and student registrations.',
     features: [
       'Target ceiling presets: <20 KB, <50 KB, <100 KB, <200 KB, <500 KB',
-      'Custom numeric KB target input',
-      'Iterative binary search for optimal visual fidelity at minimum size',
-      'Instant client-side JPEG export',
+      'Custom numeric KB target input (10 KB to 5000 KB)',
+      'Adaptive iterative binary search for optimal visual fidelity at minimum size',
+      'Instant client-side JPEG export with zero server file uploads',
+      'Clear byte counter verifying that the file size ceiling is strictly met',
     ],
     howToUse: [
-      { step: 1, title: 'Upload Photo', description: 'Select your photo or document scan.' },
-      { step: 2, title: 'Pick Target KB', description: 'Choose a preset like Under 50 KB or type your portal exact maximum file size.' },
-      { step: 3, title: 'Download Compressed Photo', description: 'Save your optimized photo guaranteed to pass portal file size limits.' },
+      { step: 1, title: 'Upload Photo', description: 'Select or drag and drop any JPG, PNG, WebP, GIF, or BMP picture into the dropzone.' },
+      { step: 2, title: 'Pick or Enter Target KB', description: 'Choose a preset ceiling like Under 50 KB or Under 100 KB, or enter your portal exact maximum file size in the custom numeric box.' },
+      { step: 3, title: 'Automatic Optimization', description: 'The tool automatically executes a binary search in your browser, adjusting JPEG quantization and downscaling resolution if necessary to guarantee the target size.' },
+      { step: 4, title: 'Verify & Download', description: 'Review the output size metric to confirm the ceiling is met, and click "Download Photo" to save your optimized file.' },
     ],
+    technicalDetails: {
+      supportedInputs: [
+        'JPG / JPEG (.jpg, .jpeg)',
+        'PNG (.png)',
+        'WebP (.webp)',
+        'GIF (.gif — static first frame)',
+        'BMP (.bmp)',
+      ],
+      outputFormat: 'Optimized JPEG file (.jpg) generated via adaptive binary search quantization. Downloaded as [name]-under-[targetKb]kb.jpg.',
+      limitations: [
+        'Output format is always JPEG because progressive JPEG quantization allows the granular quality tuning needed to guarantee an exact byte ceiling.',
+        'For extremely tight limits on large photos (e.g. compressing a 4000px picture to <20 KB), the algorithm proportionally downscales pixel dimensions to prevent illegible compression noise.',
+        'Maximum recommended input file size is 50 MB for smooth in-browser canvas execution.',
+        'If you want to manually adjust quality sliders rather than targeting a strict byte ceiling, use our general [Image Compressor](/tools/image-compressor).',
+      ],
+    },
+    practicalExample: {
+      title: 'Meeting a Strict 50 KB Upload Limit for an Online Exam Registration Portal',
+      scenario: 'A student applying for a civil service exam has a 2.8 MB smartphone portrait photo, but the registration website strictly rejects any file larger than 50 KB.',
+      action: 'Upload the photo to the [Photo Size Reducer](/tools/photo-size-reducer) and click the "Under 50 KB" preset button.',
+      result: 'The browser algorithm runs 6 adaptive iterations and produces a crisp 47.8 KB JPEG that uploads to the exam portal on the first attempt with zero rejections.',
+    },
     whyUse: [
       'Pass Portal Validation: Government websites, civil service exams, and admissions portals strictly reject files over 50KB or 100KB.',
       'No Quality Guesswork: Automatically calculates the exact mathematical compression ratio needed to fit your ceiling.',
+      '100% Private: Photo processing runs locally in browser RAM without uploading sensitive ID photos to remote servers.',
+      'Custom Limit Precision: Type any custom number between 10 KB and 5000 KB to match your portal exact specifications.',
     ],
     tips: [
       'If an image is very large (e.g. 5000px wide), the algorithm automatically scales resolution slightly to achieve sub-50KB sizes with excellent clarity.',
+      'For official ID and passport photo submissions requiring exact physical head proportions, prepare your crop first with our [Passport Photo Resizer](/tools/passport-photo-resizer).',
+      'Read our comprehensive tutorial on [How to Compress Images Online](/guides/how-to-compress-images-online) for additional tips on balancing dimensions and bitrate.',
     ],
     faq: [
+      {
+        question: 'How does the tool guarantee my photo stays under the target KB limit?',
+        answer: 'The tool uses an iterative binary search algorithm on an HTML5 canvas. It tests multiple compression qualities and, if necessary, downscales image dimensions slightly until the resulting file size is strictly less than or equal to your specified target.',
+      },
+      {
+        question: 'Why is the output format always JPEG?',
+        answer: 'JPEG provides progressive compression quantization from 1% to 100%, allowing fine-tuned byte targeting. Formats like PNG use lossless deflate compression, which cannot be fine-tuned to hit an exact arbitrary kilobyte ceiling.',
+      },
       {
         question: 'Will my image look blurry after compression?',
         answer: 'Toolora optimizes the trade-off between image dimensions and compression quality to keep faces and text legible while staying below your target byte limit.',
@@ -222,8 +259,12 @@ export const ADDITIONAL_TOOLS: ToolItem[] = [
         question: 'Can I set a custom KB size like 40 KB?',
         answer: 'Yes! Simply type 40 in the custom target box and Toolora will compress your photo to 40 KB or less.',
       },
+      {
+        question: 'Are my personal ID photos safe?',
+        answer: 'Yes. All processing executes inside your browser on your device. Your photos are never sent over the Internet to Toolora or any third-party server.',
+      },
     ],
-    relatedSlugs: ['image-compressor', 'passport-photo-resizer', 'image-resizer'],
+    relatedSlugs: ['image-compressor', 'passport-photo-resizer', 'image-resizer', 'image-to-pdf'],
   },
 
   // 27. BMP TO JPG
@@ -908,31 +949,70 @@ export const ADDITIONAL_TOOLS: ToolItem[] = [
     isFeatured: true,
     isPopular: true,
     badge: 'Popular',
+    directAnswer: 'Toolora JSON Formatter is a developer utility to format, beautify, minify, and validate JSON data directly in your browser. As a dedicated JSON formatter and JSON beautifier, it parses raw strings to pretty print JSON with 2-space or 4-space indentation, strips whitespace for compact payloads, and checks RFC 8259 syntax with real-time error messaging.',
     features: [
-      'Beautify messy JSON with 2 or 4 space indentation',
-      'Minify JSON to compact single-line payloads',
-      'Precise syntax validation with line diagnostics',
-      'Download formatted .json files directly',
+      'Pretty print JSON with selectable 2-space or 4-space indentation',
+      'Minify JSON to compact single-line payloads with unnecessary whitespace removed',
+      'Real-time RFC 8259 syntax validation with parser error message diagnostics',
+      'One-click clipboard copy and direct download as formatted.json',
+      'Instant sample prefill and clear actions in a monospace editor',
     ],
     howToUse: [
-      { step: 1, title: 'Paste JSON', description: 'Paste unformatted JSON into the editor window.' },
-      { step: 2, title: 'Format or Minify', description: 'Click Format / Beautify to indent or Minify to compact.' },
-      { step: 3, title: 'Export', description: 'Click Copy to clipboard or Download to save as formatted.json.' },
+      { step: 1, title: 'Paste or Type JSON', description: 'Enter your unformatted, minified, or raw JSON text into the editor, or click "Sample" to load an example structure.' },
+      { step: 2, title: 'Inspect Validation Status', description: 'Check the real-time indicator banner: green indicates valid RFC 8259 syntax; red displays the specific parse error.' },
+      { step: 3, title: 'Format or Minify', description: 'Select 2 Spaces or 4 Spaces indent and click "Format / Beautify" to pretty print, or click "Minify / Compact" for single-line output.' },
+      { step: 4, title: 'Copy or Download', description: 'Click "Copy" to transfer the result to your clipboard or "Download" to save as formatted.json directly to your computer.' },
     ],
+    technicalDetails: {
+      supportedInputs: [
+        'Raw text strings formatted according to standard JSON (RFC 8259)',
+        'Nested JSON objects, arrays, strings, numbers, booleans, and null literals',
+        'Unformatted, escaped, or minified single-line API responses',
+      ],
+      outputFormat: 'Beautified JSON text with 2-space or 4-space indentation, minified single-line text, or downloadable formatted.json file.',
+      limitations: [
+        'Strictly enforces standard JSON (RFC 8259); loose JavaScript object notation (such as unquoted keys, single quotes, or trailing commas) is flagged as invalid syntax.',
+        'This tool is focused on text formatting, minification, and syntax parsing; it does not provide interactive tree-view node collapsing or JSON Schema draft evaluation.',
+        'Processing runs in local browser memory via native JavaScript JSON.parse; memory limits depend on your browser tab capability (typically handling files up to several tens of megabytes comfortably).',
+        'For base64 or URL encoded payloads, decode first using our [Base64 Encoder/Decoder](/tools/base64-encoder-decoder) or [URL Encoder/Decoder](/tools/url-encoder-decoder).',
+      ],
+    },
+    practicalExample: {
+      title: 'Formatting and Validating a Minified REST API Response',
+      scenario: 'A web developer receives an unformatted, minified single-line API error payload that is impossible to read or debug in browser developer tools.',
+      action: 'Paste the string into [JSON Formatter](/tools/json-formatter), select "2 Spaces Indent", and click "Format / Beautify".',
+      result: 'The payload expands into structured, readable indented JSON with validated hierarchy, immediately exposing a misplaced closing bracket.',
+    },
     whyUse: [
       'API Debugging: Turn illegible minified server responses into structured, readable data trees.',
-      'Catch Subtle Errors: Immediately identify missing commas, trailing commas, or unquoted keys.',
+      'Catch Subtle Errors: Immediately identify missing commas, trailing commas, or unquoted keys with real-time parser diagnostics.',
+      'Zero Server Transmissions: Confidential API tokens, user data, and system configurations never leave your machine.',
+      'Production Minification: Compact formatted JSON down to single-line text before transferring over HTTP or embedding in config files.',
     ],
     tips: [
       'Unlike JavaScript objects, strict standard JSON requires double quotes around both property keys and string values.',
+      'Trailing commas after final array items or object attributes are forbidden by RFC 8259 and will trigger a parse error.',
+      'If you have stray whitespace or line breaks copied from external documents, sanitize text first with our [Text Cleaner](/tools/text-cleaner).',
     ],
     faq: [
       {
         question: 'Are trailing commas allowed in standard JSON?',
-        answer: 'No. The JSON standard (RFC 8259) forbids trailing commas after the final element in arrays and objects.',
+        answer: 'No. The JSON standard (RFC 8259) forbids trailing commas after the final element in arrays and objects. Removing the last comma will resolve the validation error.',
+      },
+      {
+        question: 'Why does my JSON show a syntax error with single quotes?',
+        answer: 'Standard JSON requires double quotation marks ("key": "value"). Single quotes, unquoted keys, and template literals are valid in JavaScript syntax, but are invalid in JSON.',
+      },
+      {
+        question: 'Is my confidential data sent to Toolora servers?',
+        answer: 'No. All parsing, indentation, and minification runs locally in your browser using the native JavaScript JSON parser. No data is logged, transmitted, or stored.',
+      },
+      {
+        question: 'Can this tool minify JSON for production?',
+        answer: 'Yes! Clicking "Minify / Compact" removes all indentation, newlines, and unnecessary whitespace to produce a single-line string ideal for production API payloads.',
       },
     ],
-    relatedSlugs: ['base64-encoder-decoder', 'url-encoder-decoder', 'text-case-converter'],
+    relatedSlugs: ['base64-encoder-decoder', 'url-encoder-decoder', 'text-cleaner', 'text-case-converter'],
   },
 
   // 45. COLOR CONVERTER
@@ -1065,43 +1145,69 @@ export const ADDITIONAL_TOOLS: ToolItem[] = [
     isPopular: true,
     isFeatured: true,
     badge: 'Popular',
+    directAnswer: 'Toolora Merge PDF is an in-browser utility built to merge PDF online by combining multiple documents into a single organized file. It lets you combine PDF files and join PDFs in any custom page sequence without sending your confidential paperwork to remote servers.',
     features: [
       'Pure client-side merging without server file uploads',
-      'Reorder documents before combining',
-      'Preview total page count and file sizes',
-      'Preserves original vector sharpness and embedded fonts',
+      'Flexible reordering with Up and Down page controls',
+      'Preview total page count and file sizes across all queued documents',
+      'Bit-for-bit page stream copy preserving vector typography, hyperlinks, and embedded images',
+      'Immediate client-side PDF document generation and download',
     ],
     howToUse: [
-      { step: 1, title: 'Upload PDF Files', description: 'Click or drag and drop 2 or more PDF documents into the upload box.' },
-      { step: 2, title: 'Arrange Order', description: 'Use the up and down arrow buttons to set the exact sequence of pages.' },
-      { step: 3, title: 'Merge & Download', description: 'Click Merge & Download PDF to assemble and save your combined file.' },
+      { step: 1, title: 'Upload PDF Files', description: 'Click or drag and drop 2 or more PDF documents (up to 100 MB each) into the upload area.' },
+      { step: 2, title: 'Inspect File Queue', description: 'Review the file cards showing individual page counts, file sizes, and cumulative total pages.' },
+      { step: 3, title: 'Arrange Document Order', description: 'Use the "Move Up" and "Move Down" arrow buttons to set the exact sequence of documents, or remove unnecessary files.' },
+      { step: 4, title: 'Merge & Download', description: 'Click "Merge & Download PDF" to assemble all pages into a new unified PDF document and download it instantly.' },
     ],
+    technicalDetails: {
+      supportedInputs: [
+        'Standard unencrypted PDF documents (.pdf, application/pdf)',
+        'Single-page and multi-page PDF documents up to 100 MB per file',
+      ],
+      outputFormat: 'Single unified PDF document (.pdf) containing all pages from each input document in selected order. Downloaded as merged-document-[timestamp].pdf.',
+      limitations: [
+        'Requires at least 2 PDF files to perform a merge operation.',
+        'Encrypted or password-protected PDF files cannot be merged until encryption or owner permissions passwords are removed.',
+        'Corrupted or malformed PDF streams that fail PDFDocument load will display a descriptive error notification.',
+        'If you need to extract individual pages from a large file before combining, use our [Split PDF](/tools/split-pdf) tool.',
+      ],
+    },
+    practicalExample: {
+      title: 'Assembling a Job Application Packet from Separate PDF Documents',
+      scenario: 'A job applicant has a 2-page resume PDF, a 1-page cover letter PDF, and a 2-page credentials PDF that must be sent as one unified attachment.',
+      action: 'Upload all 3 documents to [Merge PDF](/tools/merge-pdf), use the Up arrow to put the cover letter first, resume second, and credentials third, then click "Merge & Download PDF".',
+      result: 'A single 5-page PDF document is produced in under 2 seconds with all vector text and layout sharpness 100% preserved.',
+    },
     whyUse: [
-      'Complete Document Confidentiality: Legal contracts, invoices, and financial records are processed locally in RAM.',
-      'No Artificial Limits: Merge as many documents as your device memory supports without daily caps.',
+      'Complete Document Confidentiality: Legal contracts, invoices, and financial records are processed locally in RAM without touching external servers.',
+      'Lossless Assembly: Pages are copied bit-for-bit so vector typography, embedded forms, and high-resolution images never lose quality.',
+      'No File Caps or Subscriptions: Combine as many documents as your device memory can accommodate without paying per file or hitting daily limits.',
+      'Visual Page Statistics: View total combined page count before compiling to verify document completeness.',
     ],
     tips: [
       'Check page counts on each file before merging to ensure no blank trailing pages are included.',
+      'If you have image files (like JPG or PNG scans) instead of PDFs, convert them first with our [Image to PDF](/tools/image-to-pdf) tool before merging.',
+      'Read our comprehensive guide on [How to Convert Images to PDF](/guides/how-to-convert-images-to-pdf) for complete document organization workflows.',
     ],
     faq: [
       {
-        question: 'Is it safe to merge sensitive financial or legal PDFs here?',
-        answer: 'Yes, absolutely. All PDF merging takes place entirely inside your web browser using WebAssembly and client-side JavaScript. Your files are never sent over the Internet.',
-      },
-      {
-        question: 'Does merging compress or degrade the quality of PDF pages?',
-        answer: 'No. The pages, vector typography, and embedded images are copied bit-for-bit into the destination document.',
-      },
-      {
-        question: 'Can I reorder files before merging?',
-        answer: 'Yes! Use the Up and Down arrow buttons next to each file to arrange them in your exact desired order.',
+        question: 'Does merging PDF files reduce their visual quality or sharpness?',
+        answer: 'No. Merging copies the underlying PDF page streams, embedded vector fonts, vector paths, and raster photos directly into the new PDF container without re-compressing or degrading quality.',
       },
       {
         question: 'Can I merge password-protected PDFs?',
         answer: 'Encrypted PDFs must have passwords removed first so the browser can access and copy page streams.',
       },
+      {
+        question: 'Are my private documents uploaded to any remote server?',
+        answer: 'No. Toolora processes all PDF document streams purely on your local machine using client-side JavaScript. Your files never leave your device.',
+      },
+      {
+        question: 'Can I change the page order before merging?',
+        answer: 'Yes! Use the Up and Down arrow buttons next to each file to arrange them in your exact desired sequence before compiling.',
+      },
     ],
-    relatedSlugs: ['split-pdf', 'rotate-pdf', 'pdf-page-counter', 'jpg-to-pdf'],
+    relatedSlugs: ['split-pdf', 'image-to-pdf', 'rotate-pdf', 'pdf-page-counter'],
   },
 
   // 49. SPLIT PDF

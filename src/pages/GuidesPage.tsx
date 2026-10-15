@@ -51,10 +51,10 @@ export function GuidesPage() {
           <span>Practical Knowledge Base</span>
         </div>
         <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
-          How-To Guides & Tool Tutorials
+          Online Tools Guides & Tutorials
         </h1>
         <p className="mt-3 text-sm sm:text-base text-slate-600 leading-relaxed">
-          Concise, practical walk-throughs designed to help you optimize image assets, navigate file format differences, and handle documents efficiently using Toolora’s private, client-side tools.
+          Concise, actionable online tools guides designed to help you optimize image assets, navigate file format differences, and handle documents efficiently using Toolora’s private, client-side tools.
         </p>
 
         <div className="flex flex-wrap items-center gap-4 text-xs text-slate-500 mt-4">
@@ -108,11 +108,21 @@ export function GuidesPage() {
                 {guide.summary}
               </p>
 
-              {/* Primary tool featured badge */}
-              <div className="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between text-xs">
-                <span className="text-slate-500">
-                  Featured Tool: <strong className="text-slate-800">{guide.primaryTool.name}</strong>
-                </span>
+              {/* Primary / Featured tools badge */}
+              <div className="mt-4 pt-4 border-t border-slate-100 flex flex-wrap items-center gap-1.5 text-xs">
+                <span className="text-slate-500 font-medium">Tools:</span>
+                {guide.featuredTools && guide.featuredTools.length > 0 ? (
+                  guide.featuredTools.map((ft) => (
+                    <span
+                      key={ft.slug}
+                      className="px-2 py-0.5 rounded bg-slate-100 text-slate-700 text-2xs font-semibold"
+                    >
+                      {ft.name}
+                    </span>
+                  ))
+                ) : (
+                  <strong className="text-slate-800">{guide.primaryTool.name}</strong>
+                )}
               </div>
             </div>
 

@@ -236,6 +236,67 @@ export function CategoryPage({ categorySlug }: CategoryPageProps) {
         </div>
       )}
 
+      {/* Types of Tools & Selection Guide */}
+      {category.toolTypes && category.toolTypes.length > 0 && (
+        <div className="bg-white rounded-2xl border border-slate-200/90 p-6 sm:p-8 space-y-6">
+          <div>
+            <div className="text-xs font-semibold text-blue-600 uppercase tracking-wider mb-1">
+              Category Guide
+            </div>
+            <h2 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">
+              Tool Types & Selection Guide
+            </h2>
+            <p className="text-xs sm:text-sm text-slate-600 mt-1 leading-relaxed">
+              Understand which utilities belong in this collection and when to choose each tool for your task.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+            {category.toolTypes.map((type, idx) => (
+              <div
+                key={idx}
+                className="p-5 rounded-xl bg-slate-50/70 border border-slate-200/80 hover:border-slate-300 transition-colors flex flex-col justify-between space-y-4"
+              >
+                <div className="space-y-2">
+                  <h3 className="text-base font-bold text-slate-900 flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-blue-600 shrink-0" />
+                    <span>{type.title}</span>
+                  </h3>
+                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
+                    {type.description}
+                  </p>
+                  <div className="p-3 bg-white rounded-lg border border-slate-200/60 text-xs text-slate-700 leading-relaxed">
+                    <strong className="text-slate-900 font-semibold block mb-0.5">When to choose:</strong>
+                    <span>{type.whenToChoose}</span>
+                  </div>
+                </div>
+
+                <div className="pt-2 border-t border-slate-200/60">
+                  <span className="text-2xs uppercase tracking-wider font-semibold text-slate-400 block mb-1.5">
+                    Included tools:
+                  </span>
+                  <div className="flex flex-wrap gap-1.5">
+                    {type.toolSlugs.map((slug) => {
+                      const t = TOOLS.find((item) => item.slug === slug);
+                      if (!t) return null;
+                      return (
+                        <Link
+                          key={slug}
+                          to={`/tools/${slug}`}
+                          className="px-2.5 py-1 text-2xs sm:text-xs font-medium text-slate-700 bg-white hover:bg-blue-50 hover:text-blue-600 border border-slate-200 rounded-md transition-colors"
+                        >
+                          {t.name}
+                        </Link>
+                      );
+                    })}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
       {/* Tools Grid */}
       {filteredTools.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

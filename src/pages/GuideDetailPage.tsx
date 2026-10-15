@@ -18,6 +18,51 @@ import { SEO } from '../components/common/SEO';
 import { SITE_URL } from '../config/site';
 import { Link } from '../context/RouterContext';
 
+function renderFormattedText(text: string) {
+  const regex = /\[([^\]]+)\]\(([^)]+)\)/g;
+  const parts: (string | React.ReactNode)[] = [];
+  let lastIndex = 0;
+  let match: RegExpExecArray | null;
+
+  while ((match = regex.exec(text)) !== null) {
+    if (match.index > lastIndex) {
+      parts.push(text.substring(lastIndex, match.index));
+    }
+    const label = match[1];
+    const url = match[2];
+    if (url.startsWith('/')) {
+      parts.push(
+        <Link
+          key={`${match.index}-${url}`}
+          to={url}
+          className="text-blue-600 hover:text-blue-700 underline font-semibold decoration-blue-300 hover:decoration-blue-600 transition-colors"
+        >
+          {label}
+        </Link>
+      );
+    } else {
+      parts.push(
+        <a
+          key={`${match.index}-${url}`}
+          href={url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-blue-600 hover:text-blue-700 underline font-semibold decoration-blue-300 hover:decoration-blue-600 transition-colors"
+        >
+          {label}
+        </a>
+      );
+    }
+    lastIndex = regex.lastIndex;
+  }
+
+  if (lastIndex < text.length) {
+    parts.push(text.substring(lastIndex));
+  }
+
+  return parts.length > 0 ? parts : text;
+}
+
 interface GuideDetailPageProps {
   guide: GuideItem;
 }
@@ -117,28 +162,72 @@ export function GuideDetailPage({ guide }: GuideDetailPageProps) {
           {guide.summary}
         </p>
 
-        {/* Primary Tool Callout Box */}
-        <div className="mt-6 p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-blue-50/80 to-indigo-50/50 border border-blue-200/80 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-          <div className="space-y-1">
-            <div className="text-xs font-bold uppercase tracking-wider text-blue-700 flex items-center gap-1.5">
-              <Sparkles className="w-3.5 h-3.5" />
-              Featured Free Tool
+        {/* Featured Tools Callout Box (Linked Near the Beginning) */}
+        {guide.featuredTools && guide.featuredTools.length > 0 ? (
+          <div className="mt-6 p-5 sm:p-6 rounded-2xl bg-gradient-to-br from-blue-50/90 via-indigo-50/50 to-slate-50 border border-blue-200/90 space-y-4">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-blue-100">
+              <div>
+                <div className="text-xs font-bold uppercase tracking-wider text-blue-700 flex items-center gap-1.5">
+                  <Sparkles className="w-3.5 h-3.5" />
+                  <span>Featured Client-Side Tools</span>
+                </div>
+                <div className="text-base font-bold text-slate-900 mt-0.5">
+                  Tools Used in This Tutorial
+                </div>
+              </div>
+              <span className="text-2xs font-medium text-slate-500">
+                100% In-Browser Execution · Zero Server Uploads
+              </span>
             </div>
-            <div className="text-base font-bold text-slate-900">
-              {guide.primaryTool.name}
+
+            <div className={`grid grid-cols-1 ${guide.featuredTools.length > 2 ? 'sm:grid-cols-2 lg:grid-cols-3' : 'sm:grid-cols-2'} gap-3`}>
+              {guide.featuredTools.map((tool) => (
+                <div
+                  key={tool.slug}
+                  className="p-3.5 bg-white rounded-xl border border-blue-100/80 shadow-2xs flex flex-col justify-between space-y-2.5"
+                >
+                  <div className="space-y-1">
+                    <div className="font-bold text-slate-900 text-sm">
+                      {tool.name}
+                    </div>
+                    <p className="text-xs text-slate-600 leading-relaxed font-normal">
+                      {tool.context}
+                    </p>
+                  </div>
+                  <Link
+                    to={tool.path}
+                    className="inline-flex items-center justify-between px-3 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs transition-colors"
+                  >
+                    <span>{tool.actionLabel}</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </Link>
+                </div>
+              ))}
             </div>
-            <p className="text-xs text-slate-600">
-              Run this tool directly in your browser with zero server uploads and no account required.
-            </p>
           </div>
-          <Link
-            to={guide.primaryTool.path}
-            className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs sm:text-sm shadow-xs transition-colors shrink-0"
-          >
-            {guide.primaryTool.actionLabel}
-            <ArrowRight className="w-4 h-4" />
-          </Link>
-        </div>
+        ) : (
+          <div className="mt-6 p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-blue-50/80 to-indigo-50/50 border border-blue-200/80 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div className="space-y-1">
+              <div className="text-xs font-bold uppercase tracking-wider text-blue-700 flex items-center gap-1.5">
+                <Sparkles className="w-3.5 h-3.5" />
+                Featured Free Tool
+              </div>
+              <div className="text-base font-bold text-slate-900">
+                {guide.primaryTool.name}
+              </div>
+              <p className="text-xs text-slate-600">
+                Run this tool directly in your browser with zero server uploads and no account required.
+              </p>
+            </div>
+            <Link
+              to={guide.primaryTool.path}
+              className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs sm:text-sm shadow-xs transition-colors shrink-0"
+            >
+              {guide.primaryTool.actionLabel}
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+        )}
       </header>
 
       {/* Guide Content Sections */}
@@ -152,7 +241,7 @@ export function GuideDetailPage({ guide }: GuideDetailPageProps) {
             {/* Paragraphs */}
             <div className="space-y-3.5 text-sm sm:text-base text-slate-700 leading-relaxed font-normal">
               {section.paragraphs.map((para, pIdx) => (
-                <p key={pIdx}>{para}</p>
+                <p key={pIdx}>{renderFormattedText(para)}</p>
               ))}
             </div>
 
@@ -162,7 +251,7 @@ export function GuideDetailPage({ guide }: GuideDetailPageProps) {
                 {section.keyPoints.map((pt, ptIdx) => (
                   <li key={ptIdx} className="flex items-start gap-2.5">
                     <span className="w-1.5 h-1.5 rounded-full bg-blue-600 mt-2 shrink-0" />
-                    <span>{pt}</span>
+                    <span>{renderFormattedText(pt)}</span>
                   </li>
                 ))}
               </ul>
@@ -184,7 +273,7 @@ export function GuideDetailPage({ guide }: GuideDetailPageProps) {
                 )}
                 <div className="space-y-1">
                   <div className="font-bold">{section.callout.title}</div>
-                  <div className="leading-relaxed">{section.callout.message}</div>
+                  <div className="leading-relaxed">{renderFormattedText(section.callout.message)}</div>
                 </div>
               </div>
             )}
@@ -202,7 +291,7 @@ export function GuideDetailPage({ guide }: GuideDetailPageProps) {
                     </div>
                     <h3 className="text-sm font-bold text-slate-900">{step.title}</h3>
                     <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                      {step.description}
+                      {renderFormattedText(step.description)}
                     </p>
                   </div>
                 ))}
@@ -223,7 +312,7 @@ export function GuideDetailPage({ guide }: GuideDetailPageProps) {
                   </p>
                   <p>
                     <strong className="text-white">Solution: </strong>
-                    {section.practicalScenario.solution}
+                    {renderFormattedText(section.practicalScenario.solution)}
                   </p>
                   <p className="p-3 rounded-lg bg-slate-800 text-emerald-300 border border-slate-700/80">
                     <strong className="text-emerald-200">Outcome: </strong>

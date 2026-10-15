@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Search, Shield, Zap, Sparkles, UserX, ArrowRight, Image as ImageIcon, GraduationCap, FileText, Wrench } from 'lucide-react';
+import { Search, Shield, Zap, Sparkles, UserX, ArrowRight, Image as ImageIcon, GraduationCap, FileText, Wrench, Layers } from 'lucide-react';
 import { TOOLS, FEATURED_TOOLS, POPULAR_TOOLS, IMAGE_TOOLS, PDF_TOOLS, STUDENT_TOOLS, UTILITY_TOOLS, STUDENT_UTILITY_TOOLS } from '../data/tools';
 import { ToolCard } from '../components/common/ToolCard';
 import { SEO } from '../components/common/SEO';
@@ -64,14 +64,14 @@ export function HomePage({ onOpenSearchModal }: HomePageProps) {
       />
 
       {/* 1. Compact, Immediate Hero Section */}
-      <section className="relative pt-8 pb-4 sm:pt-14 sm:pb-8 text-center">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
+      <section className="relative pt-8 pb-4 sm:pt-12 sm:pb-8 text-center">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
           <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-tight">
             Everyday tools, made simple.
           </h1>
 
-          <p className="text-base sm:text-lg text-slate-600 max-w-xl mx-auto leading-relaxed">
-            Fast, free tools for images, files, calculations and everyday tasks.
+          <p className="text-base sm:text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed">
+            Free online tools for images, PDF documents, academic calculations, and daily digital tasks. Process files directly in your web browser with zero sign-up and complete confidentiality.
           </p>
 
           {/* Primary Tool Search Bar */}
@@ -105,6 +105,121 @@ export function HomePage({ onOpenSearchModal }: HomePageProps) {
             <span>No sign-up</span>
             <span aria-hidden="true" className="text-slate-300">·</span>
             <span>Client-side processing</span>
+            <span aria-hidden="true" className="text-slate-300">·</span>
+            <span>Zero server file uploads</span>
+          </div>
+
+          {/* Choose a Tool Category (Immediate First Visible Action) */}
+          <div className="pt-5 max-w-4xl mx-auto text-left">
+            <div className="text-2xs sm:text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2.5 text-center">
+              Choose a Tool Category
+            </div>
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2.5">
+              <Link
+                to="/category/image-tools"
+                className="group p-3 rounded-xl bg-white border border-slate-200/90 hover:border-blue-500/80 hover:shadow-xs transition-all flex flex-col justify-between"
+              >
+                <div>
+                  <div className="w-7 h-7 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center mb-1.5 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                    <ImageIcon className="w-4 h-4" />
+                  </div>
+                  <div className="font-bold text-xs text-slate-900 group-hover:text-blue-600 transition-colors">
+                    Image Tools
+                  </div>
+                  <div className="text-2xs text-slate-500 mt-0.5 line-clamp-1">
+                    Compress, resize & convert
+                  </div>
+                </div>
+                <div className="text-2xs font-semibold text-blue-600 mt-2 flex items-center gap-0.5">
+                  <span>Browse</span>
+                  <ArrowRight className="w-2.5 h-2.5 group-hover:translate-x-0.5 transition-transform" />
+                </div>
+              </Link>
+
+              <Link
+                to="/category/pdf-tools"
+                className="group p-3 rounded-xl bg-white border border-slate-200/90 hover:border-blue-500/80 hover:shadow-xs transition-all flex flex-col justify-between"
+              >
+                <div>
+                  <div className="w-7 h-7 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center mb-1.5 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                    <FileText className="w-4 h-4" />
+                  </div>
+                  <div className="font-bold text-xs text-slate-900 group-hover:text-blue-600 transition-colors">
+                    PDF Tools
+                  </div>
+                  <div className="text-2xs text-slate-500 mt-0.5 line-clamp-1">
+                    Merge, split & convert to PDF
+                  </div>
+                </div>
+                <div className="text-2xs font-semibold text-blue-600 mt-2 flex items-center gap-0.5">
+                  <span>Browse</span>
+                  <ArrowRight className="w-2.5 h-2.5 group-hover:translate-x-0.5 transition-transform" />
+                </div>
+              </Link>
+
+              <Link
+                to="/category/student-tools"
+                className="group p-3 rounded-xl bg-white border border-slate-200/90 hover:border-blue-500/80 hover:shadow-xs transition-all flex flex-col justify-between"
+              >
+                <div>
+                  <div className="w-7 h-7 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center mb-1.5 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                    <GraduationCap className="w-4 h-4" />
+                  </div>
+                  <div className="font-bold text-xs text-slate-900 group-hover:text-blue-600 transition-colors">
+                    Student Tools
+                  </div>
+                  <div className="text-2xs text-slate-500 mt-0.5 line-clamp-1">
+                    CGPA, grades & math solvers
+                  </div>
+                </div>
+                <div className="text-2xs font-semibold text-blue-600 mt-2 flex items-center gap-0.5">
+                  <span>Browse</span>
+                  <ArrowRight className="w-2.5 h-2.5 group-hover:translate-x-0.5 transition-transform" />
+                </div>
+              </Link>
+
+              <Link
+                to="/category/utility-tools"
+                className="group p-3 rounded-xl bg-white border border-slate-200/90 hover:border-blue-500/80 hover:shadow-xs transition-all flex flex-col justify-between"
+              >
+                <div>
+                  <div className="w-7 h-7 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center mb-1.5 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                    <Wrench className="w-4 h-4" />
+                  </div>
+                  <div className="font-bold text-xs text-slate-900 group-hover:text-blue-600 transition-colors">
+                    Daily Utilities
+                  </div>
+                  <div className="text-2xs text-slate-500 mt-0.5 line-clamp-1">
+                    UUIDs, timestamps & JSON
+                  </div>
+                </div>
+                <div className="text-2xs font-semibold text-blue-600 mt-2 flex items-center gap-0.5">
+                  <span>Browse</span>
+                  <ArrowRight className="w-2.5 h-2.5 group-hover:translate-x-0.5 transition-transform" />
+                </div>
+              </Link>
+
+              <Link
+                to="/category/student-utility"
+                className="group p-3 rounded-xl bg-white border border-slate-200/90 hover:border-blue-500/80 hover:shadow-xs transition-all flex flex-col justify-between col-span-2 sm:col-span-1"
+              >
+                <div>
+                  <div className="w-7 h-7 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center mb-1.5 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                    <Layers className="w-4 h-4" />
+                  </div>
+                  <div className="font-bold text-xs text-slate-900 group-hover:text-blue-600 transition-colors">
+                    Productivity Hub
+                  </div>
+                  <div className="text-2xs text-slate-500 mt-0.5 line-clamp-1">
+                    Unified productivity index
+                  </div>
+                </div>
+                <div className="text-2xs font-semibold text-blue-600 mt-2 flex items-center gap-0.5">
+                  <span>Browse</span>
+                  <ArrowRight className="w-2.5 h-2.5 group-hover:translate-x-0.5 transition-transform" />
+                </div>
+              </Link>
+            </div>
           </div>
         </div>
       </section>

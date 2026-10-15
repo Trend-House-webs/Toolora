@@ -87,6 +87,35 @@ function WorkspaceSkeleton({ toolName }: { toolName: string }) {
   );
 }
 
+function renderFormattedText(text: string) {
+  const regex = /\[([^\]]+)\]\(([^)]+)\)/g;
+  const parts: (string | React.ReactNode)[] = [];
+  let lastIndex = 0;
+  let match: RegExpExecArray | null;
+
+  while ((match = regex.exec(text)) !== null) {
+    if (match.index > lastIndex) {
+      parts.push(text.substring(lastIndex, match.index));
+    }
+    const linkText = match[1];
+    const linkHref = match[2];
+    parts.push(
+      <Link
+        key={`${linkHref}-${match.index}`}
+        to={linkHref}
+        className="font-semibold text-blue-600 hover:text-blue-800 underline decoration-blue-300 underline-offset-2 transition-colors"
+      >
+        {linkText}
+      </Link>
+    );
+    lastIndex = regex.lastIndex;
+  }
+  if (lastIndex < text.length) {
+    parts.push(text.substring(lastIndex));
+  }
+  return parts.length > 0 ? parts : text;
+}
+
 interface ToolPageWrapperProps {
   tool: ToolItem;
 }
@@ -385,7 +414,7 @@ export function ToolPageWrapper({ tool }: ToolPageWrapperProps) {
         </h1>
 
         <p className="text-sm sm:text-base text-slate-600 mt-3 leading-relaxed">
-          {tool.detailedDescription || tool.description}
+          {renderFormattedText(tool.detailedDescription || tool.description)}
         </p>
 
         {/* Real browser trust markers */}
@@ -405,6 +434,14 @@ export function ToolPageWrapper({ tool }: ToolPageWrapperProps) {
             Free & Unlimited
           </span>
         </div>
+
+        {/* Direct Answer / Core Purpose Callout */}
+        {tool.directAnswer && (
+          <div className="mt-5 p-4 rounded-xl bg-blue-50/80 border border-blue-200/80 text-xs sm:text-sm text-slate-800 leading-relaxed flex items-start gap-3">
+            <div className="font-bold text-blue-700 shrink-0">Purpose:</div>
+            <div>{renderFormattedText(tool.directAnswer)}</div>
+          </div>
+        )}
       </div>
 
       {/* Primary Tool Workspace */}
@@ -418,7 +455,7 @@ export function ToolPageWrapper({ tool }: ToolPageWrapperProps) {
           <h2 className="text-lg sm:text-xl font-bold text-slate-900 mb-6 flex items-center gap-2">
             <span>How to Use {tool.name}</span>
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className={`grid grid-cols-1 ${tool.howToUse.length >= 4 ? 'sm:grid-cols-2 lg:grid-cols-4' : 'md:grid-cols-3'} gap-6`}>
             {tool.howToUse.map((step) => (
               <div key={step.step} className="relative flex flex-col space-y-2">
                 <div className="w-8 h-8 rounded-xl bg-blue-50 text-blue-600 font-bold text-sm flex items-center justify-center shrink-0">
@@ -428,10 +465,87 @@ export function ToolPageWrapper({ tool }: ToolPageWrapperProps) {
                   {step.title}
                 </h3>
                 <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
-                  {step.description}
+                  {renderFormattedText(step.description)}
                 </p>
               </div>
             ))}
+          </div>
+        </section>
+      )}
+
+      {/* Supported Formats & Technical Limitations */}
+      {tool.technicalDetails && (
+        <section className="mb-14 bg-white rounded-2xl border border-slate-200/90 p-6 sm:p-8 shadow-xs space-y-5">
+          <div>
+            <h2 className="text-lg sm:text-xl font-bold text-slate-900 tracking-tight">
+              Supported Formats & Technical Limitations
+            </h2>
+            <p className="text-xs sm:text-sm text-slate-600 mt-1">
+              Verified browser specifications, format handling, and processing boundaries for {tool.name}.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-1">
+            <div className="p-4 rounded-xl bg-slate-50 border border-slate-200/80 space-y-2">
+              <span className="text-2xs font-bold text-slate-500 uppercase tracking-wider block">
+                Accepted Inputs
+              </span>
+              <ul className="space-y-1.5 text-xs text-slate-700">
+                {tool.technicalDetails.supportedInputs.map((input, idx) => (
+                  <li key={idx} className="flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-blue-600 shrink-0" />
+                    <span>{renderFormattedText(input)}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="p-4 rounded-xl bg-slate-50 border border-slate-200/80 space-y-2">
+              <span className="text-2xs font-bold text-slate-500 uppercase tracking-wider block">
+                Output Handling
+              </span>
+              <p className="text-xs text-slate-700 leading-relaxed">
+                {renderFormattedText(tool.technicalDetails.outputFormat)}
+              </p>
+            </div>
+
+            <div className="p-4 rounded-xl bg-slate-50 border border-slate-200/80 space-y-2">
+              <span className="text-2xs font-bold text-slate-500 uppercase tracking-wider block">
+                Processing Limitations
+              </span>
+              <ul className="space-y-1.5 text-xs text-slate-700">
+                {tool.technicalDetails.limitations.map((lim, idx) => (
+                  <li key={idx} className="flex items-start gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-amber-500 mt-1.5 shrink-0" />
+                    <span>{renderFormattedText(lim)}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Practical Example */}
+      {tool.practicalExample && (
+        <section className="mb-14 p-6 sm:p-7 rounded-2xl bg-slate-900 text-white shadow-xs space-y-3.5">
+          <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-blue-400">
+            <BookOpen className="w-4 h-4" />
+            <span>Practical Example: {tool.practicalExample.title}</span>
+          </div>
+          <div className="space-y-2.5 text-xs sm:text-sm text-slate-300 leading-relaxed">
+            <p>
+              <strong className="text-white">Scenario: </strong>
+              {renderFormattedText(tool.practicalExample.scenario)}
+            </p>
+            <p>
+              <strong className="text-white">Action: </strong>
+              {renderFormattedText(tool.practicalExample.action)}
+            </p>
+            <p className="p-3 rounded-lg bg-slate-800 text-emerald-300 border border-slate-700/80">
+              <strong className="text-emerald-200">Outcome: </strong>
+              {renderFormattedText(tool.practicalExample.result)}
+            </p>
           </div>
         </section>
       )}
@@ -447,7 +561,7 @@ export function ToolPageWrapper({ tool }: ToolPageWrapperProps) {
               <div key={idx} className="flex items-start gap-3 p-3.5 rounded-xl bg-slate-50/80 border border-slate-100">
                 <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                 <p className="text-sm text-slate-700 leading-relaxed font-normal">
-                  {reason}
+                  {renderFormattedText(reason)}
                 </p>
               </div>
             ))}
@@ -468,7 +582,7 @@ export function ToolPageWrapper({ tool }: ToolPageWrapperProps) {
             {tool.tips.map((tip, idx) => (
               <li key={idx} className="flex items-start gap-2.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-amber-500 mt-2 shrink-0" />
-                <span>{tip}</span>
+                <span>{renderFormattedText(tip)}</span>
               </li>
             ))}
           </ul>

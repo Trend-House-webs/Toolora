@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { Search } from 'lucide-react';
-import { TOOLS } from '../data/tools';
+import { Search, ArrowRight } from 'lucide-react';
+import { TOOLS, CATEGORIES } from '../data/tools';
 import { Breadcrumbs } from '../components/common/Breadcrumbs';
 import { ToolCard } from '../components/common/ToolCard';
 import { SEO } from '../components/common/SEO';
 import { SITE_URL } from '../config/site';
+import { Link } from '../context/RouterContext';
 
 export function AllToolsPage() {
   const [filter, setFilter] = useState<'all' | 'image' | 'pdf' | 'student' | 'utility'>('all');
@@ -56,6 +57,50 @@ export function AllToolsPage() {
       />
 
       <Breadcrumbs items={[{ label: 'All Tools Directory' }]} />
+
+      {/* Category Jump Links & Short Descriptions */}
+      <section className="bg-slate-50/90 rounded-2xl border border-slate-200/90 p-5 sm:p-6 space-y-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+          <div>
+            <h2 className="text-base sm:text-lg font-bold text-slate-900">
+              Browse Tools by Category
+            </h2>
+            <p className="text-xs sm:text-sm text-slate-600">
+              Jump directly to specialized category hubs or browse the unified index below.
+            </p>
+          </div>
+          <span className="text-xs font-semibold text-slate-500">
+            5 Dedicated Hubs
+          </span>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3.5">
+          {CATEGORIES.map((cat) => (
+            <Link
+              key={cat.id}
+              to={`/category/${cat.slug}`}
+              className="group p-4 bg-white rounded-xl border border-slate-200/90 hover:border-blue-500/80 hover:shadow-xs transition-all flex flex-col justify-between"
+            >
+              <div>
+                <div className="flex items-center justify-between gap-1 mb-2">
+                  <div className="font-bold text-xs sm:text-sm text-slate-900 group-hover:text-blue-600 transition-colors">
+                    {cat.title}
+                  </div>
+                  <span className="text-2xs font-semibold text-blue-600 bg-blue-50 px-1.5 py-0.5 rounded">
+                    {cat.count}
+                  </span>
+                </div>
+                <p className="text-xs text-slate-500 line-clamp-2 leading-relaxed font-normal">
+                  {cat.description}
+                </p>
+              </div>
+              <span className="text-xs font-semibold text-blue-600 flex items-center gap-1 mt-3 group-hover:translate-x-0.5 transition-transform">
+                Explore Hub <ArrowRight className="w-3 h-3" />
+              </span>
+            </Link>
+          ))}
+        </div>
+      </section>
 
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-slate-200">
         <div>

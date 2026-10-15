@@ -30,6 +30,14 @@ export interface RelatedToolLink {
   context: string;
 }
 
+export interface FeaturedToolItem {
+  slug: string;
+  name: string;
+  path: string;
+  actionLabel: string;
+  context: string;
+}
+
 export interface GuideItem {
   slug: string;
   title: string;
@@ -46,6 +54,7 @@ export interface GuideItem {
     path: string;
     actionLabel: string;
   };
+  featuredTools: FeaturedToolItem[];
   relatedTools: RelatedToolLink[];
   sections: GuideSection[];
   keyTakeaways: string[];
@@ -68,6 +77,22 @@ export const GUIDES: GuideItem[] = [
       path: '/tools/image-compressor',
       actionLabel: 'Open Image Compressor',
     },
+    featuredTools: [
+      {
+        slug: 'image-compressor',
+        name: 'Image Compressor',
+        path: '/tools/image-compressor',
+        actionLabel: 'Open Image Compressor',
+        context: 'Adjust visual quality with a real-time slider to optimize JPG, PNG, and WebP files.',
+      },
+      {
+        slug: 'photo-size-reducer',
+        name: 'Photo Size Reducer (KB Limit)',
+        path: '/tools/photo-size-reducer',
+        actionLabel: 'Open Photo Size Reducer',
+        context: 'Compress images to hit strict maximum file size caps like 100 KB, 200 KB, or 500 KB.',
+      },
+    ],
     relatedTools: [
       {
         slug: 'image-resizer',
@@ -97,7 +122,7 @@ export const GUIDES: GuideItem[] = [
     keyTakeaways: [
       'Image file size depends on pixel dimensions, color data precision, and embedded metadata.',
       'A quality setting between 75% and 85% delivers 60% to 80% file size reduction with virtually no visible degradation.',
-      'Downscaling resolution before compressing yields significantly smaller output than compression alone.',
+      'Use the Image Compressor for fine-tuned visual fidelity, or the Photo Size Reducer when hitting an exact upload kilobyte quota.',
       'Toolora performs compression client-side in your browser canvas, keeping your personal photos private.',
     ],
     sections: [
@@ -106,12 +131,14 @@ export const GUIDES: GuideItem[] = [
         heading: 'Why Image Files Become Unnecessarily Large',
         paragraphs: [
           'Modern smartphone cameras and digital photography sensors routinely capture images at 12 to 48 megapixels. While this high resolution is fantastic for large-format physical printing, it results in raw photo files between 4 MB and 15 MB in size.',
-          'When you attempt to upload these images to a job application portal, attach them to an email, or publish them on a blog, oversized files cause upload failures, exceed mailbox limits, and dramatically slow down web page loading. Most display screens only require between 1080 and 2160 pixels of width to render an image with pin-sharp clarity.',
+          'When you attempt to upload these images to a job portal, government application, or attach them to an email, oversized files cause upload failures, exceed mailbox limits, and dramatically slow down web pages. Learning how to compress images online solves this instantly.',
+          'Toolora provides two dedicated utilities to solve this problem right in your browser: the [Image Compressor](/tools/image-compressor), which lets you visually tune quality with live before-and-after feedback, and the [Photo Size Reducer](/tools/photo-size-reducer), designed specifically when an upload portal enforces a strict kilobyte quota such as 200 KB or 500 KB.',
         ],
         keyPoints: [
           'Camera sensors embed extensive uncompressed color data and EXIF metadata (camera model, GPS coordinates, capture date).',
-          'Web and mobile viewports rarely need raw 4000x3000 resolution for clear on-screen rendering.',
-          'Compressing removes redundant pixel variance without degrading the perceived sharpness on ordinary displays.',
+          'Web and mobile screens rarely need raw 4000x3000 resolution for crystal-clear on-screen rendering.',
+          'Using the [Image Compressor](/tools/image-compressor) removes redundant pixel variance without degrading perceived sharpness on ordinary displays.',
+          'When an application portal strictly rejects files over a specific size, use the [Photo Size Reducer](/tools/photo-size-reducer) to guarantee the final output falls under that threshold.',
         ],
       },
       {
@@ -119,13 +146,14 @@ export const GUIDES: GuideItem[] = [
         heading: 'Lossy vs. Lossless Compression: Where the Bytes Go',
         paragraphs: [
           'Image compression operates through two distinct technical approaches: lossy compression and lossless compression. Choosing the right method depends on your intended use case.',
-          'Lossless compression works by optimizing how image data is encoded and stripping non-visual metadata tags. The pixels themselves remain 100% identical to the source. This typically reduces file size by 10% to 30% and is ideal for diagrams, archival photos, and pixel-art graphics.',
-          'Lossy compression selectively removes subtle color variations and high-frequency details that the human eye cannot easily discern in complex photographic scenes. By adjusting the quality parameter, you can achieve 60% to 85% reductions in file size while the image remains visually crisp.',
+          'Lossless compression works by optimizing how image data is encoded and stripping non-visual metadata tags. The pixels themselves remain identical to the source. This typically reduces file size by 10% to 30% and is ideal for diagrams, archival photos, and pixel-art graphics.',
+          'Lossy compression selectively removes subtle color variations and high-frequency details that the human eye cannot easily discern in complex photographic scenes. In our [Image Compressor](/tools/image-compressor), adjusting the quality parameter between 75% and 85% typically achieves 60% to 85% reductions in file size while keeping images visually crisp.',
+          'If your primary constraint is a hard numerical file size limit rather than an arbitrary percentage, the [Photo Size Reducer](/tools/photo-size-reducer) algorithmically tests compression levels until the generated file meets your exact target weight.',
         ],
         callout: {
           type: 'info',
           title: 'The 75% to 85% Sweet Spot',
-          message: 'Setting lossy compression to 80% generally cuts file weight by more than half while maintaining crisp edges and faithful color reproduction.',
+          message: 'Setting lossy compression to 80% in the Image Compressor generally cuts file weight by more than half while maintaining crisp edges and faithful color reproduction.',
         },
       },
       {
@@ -137,23 +165,23 @@ export const GUIDES: GuideItem[] = [
         steps: [
           {
             step: 1,
-            title: 'Load Your Image',
-            description: 'Open the client-side Image Compressor and drop your JPG, PNG, or WebP file into the upload zone.',
+            title: 'Choose the Right Tool',
+            description: 'Open the [Image Compressor](/tools/image-compressor) for visual quality adjustment, or open the [Photo Size Reducer](/tools/photo-size-reducer) if you have an exact kilobyte cap to satisfy.',
           },
           {
             step: 2,
-            title: 'Adjust the Quality Slider',
-            description: 'Select your target compression ratio. For everyday web sharing or portal submissions, 75% to 80% is recommended.',
+            title: 'Load Your Image File',
+            description: 'Drop your JPG, PNG, or WebP photo into the upload dropzone. Processing starts immediately in browser memory.',
           },
           {
             step: 3,
-            title: 'Compare the File Size in Real Time',
-            description: 'Inspect the live calculation showing the original file size, the estimated new size, and total percentage saved.',
+            title: 'Set Quality or Target Size',
+            description: 'In the Image Compressor, slide the quality control to 75%–80%. In the Photo Size Reducer, enter your target limit (e.g., 200 KB or 500 KB).',
           },
           {
             step: 4,
-            title: 'Download the Optimized Image',
-            description: 'Click Download to save the compressed file directly to your local device with no watermarks or accounts required.',
+            title: 'Inspect and Download',
+            description: 'Check the real-time file size comparison and click Download to save the compressed image directly to your device with no watermarks.',
           },
         ],
       },
@@ -166,7 +194,7 @@ export const GUIDES: GuideItem[] = [
         practicalScenario: {
           title: 'Resume Profile Headshot',
           scenario: 'A smartphone camera photo is 4.8 MB with dimensions of 4032x3024 pixels. The application portal rejects files larger than 500 KB.',
-          solution: 'First, use the Image Resizer to scale the dimensions down to 1200x900 pixels (a generous size for web displays). Then, pass the image through the Image Compressor at 82% quality.',
+          solution: 'First, use the [Image Resizer](/tools/image-resizer) to scale the dimensions down to 1200x900 pixels. Then, pass the image through the [Image Compressor](/tools/image-compressor) at 82% quality, or set a 450 KB cap in the [Photo Size Reducer](/tools/photo-size-reducer).',
           result: 'The final file drops from 4.8 MB down to 285 KB (over 94% reduction) with zero visible artifacts or fuzziness on desktop and mobile screens.',
         },
       },
@@ -179,7 +207,7 @@ export const GUIDES: GuideItem[] = [
         keyPoints: [
           'Avoid re-compressing an already heavily compressed JPEG: Each generation of lossy encoding compounds compression artifacts.',
           'Keep an uncompressed master copy: Always preserve your original high-resolution camera photograph in case you need it for print later.',
-          'Resize before compressing: If an image is 5000 pixels wide but will only be displayed in a 800-pixel card, downsizing dimensions first will reduce file size far more effectively than cranking up compression.',
+          'Resize before compressing: If an image is 5000 pixels wide but will only be displayed in a 800-pixel card, downsizing dimensions with [Image Resizer](/tools/image-resizer) first will reduce file size far more effectively than cranking up compression alone.',
         ],
       },
     ],
@@ -200,6 +228,43 @@ export const GUIDES: GuideItem[] = [
       path: '/tools/jpg-to-webp',
       actionLabel: 'Convert JPG to WebP',
     },
+    featuredTools: [
+      {
+        slug: 'jpg-to-webp',
+        name: 'JPG to WebP',
+        path: '/tools/jpg-to-webp',
+        actionLabel: 'Convert JPG to WebP',
+        context: 'Convert photos to modern WebP for 25%–35% smaller file sizes without losing detail.',
+      },
+      {
+        slug: 'png-to-jpg',
+        name: 'PNG to JPG',
+        path: '/tools/png-to-jpg',
+        actionLabel: 'Convert PNG to JPG',
+        context: 'Flatten opaque graphics into compact JPEG files when transparency is not required.',
+      },
+      {
+        slug: 'webp-to-png',
+        name: 'WebP to PNG',
+        path: '/tools/webp-to-png',
+        actionLabel: 'Convert WebP to PNG',
+        context: 'Export WebP graphics to lossless PNG for older graphic design editors.',
+      },
+      {
+        slug: 'jpg-to-png',
+        name: 'JPG to PNG',
+        path: '/tools/jpg-to-png',
+        actionLabel: 'Convert JPG to PNG',
+        context: 'Convert JPEG photos to PNG format to prevent repeated lossy compression during editing.',
+      },
+      {
+        slug: 'png-to-webp',
+        name: 'PNG to WebP',
+        path: '/tools/png-to-webp',
+        actionLabel: 'Convert PNG to WebP',
+        context: 'Preserve full transparent backgrounds while drastically reducing PNG file weight.',
+      },
+    ],
     relatedTools: [
       {
         slug: 'png-to-jpg',
@@ -239,6 +304,7 @@ export const GUIDES: GuideItem[] = [
         paragraphs: [
           'Selecting the right image format is one of the most effective ways to balance visual presentation against web speed and storage capacity. Every digital format was engineered with specific technical trade-offs.',
           'Using the wrong format can result in bloated file sizes, muddy text, or black boxes where transparent backgrounds ought to be. Understanding their distinct strengths allows you to choose with confidence.',
+          'If you have existing files that need format changes, Toolora provides dedicated browser converters including [JPG to WebP](/tools/jpg-to-webp), [PNG to JPG](/tools/png-to-jpg), [WebP to PNG](/tools/webp-to-png), [JPG to PNG](/tools/jpg-to-png), and [PNG to WebP](/tools/png-to-webp). All conversions execute client-side with zero server uploads.',
         ],
         keyPoints: [
           'JPG (JPEG): Lossy compression, 24-bit color (16.7 million colors), no transparency support, universal hardware and software compatibility.',
@@ -248,10 +314,11 @@ export const GUIDES: GuideItem[] = [
       },
       {
         id: 'when-to-use-jpg',
-        heading: 'When to Use JPG (JPEG)',
+        heading: 'When to Use JPG (JPEG) for Photos and Web Content',
         paragraphs: [
           'JPG uses discrete cosine transform (DCT) mathematical compression designed specifically for continuous-tone photographic imagery. It excels at smoothing subtle color gradations found in nature, portraits, and real-world scenes.',
           'Because JPEG discards high-frequency pixel contrast that the human visual cortex rarely notices, it yields lightweight files ideal for social sharing, photo albums, and email attachments.',
+          'If you have large PNG screenshot files that do not need transparency, converting them with our [PNG to JPG](/tools/png-to-jpg) converter can slash file size by 50% to 80%. Similarly, if you need universal compatibility for WebP graphics, use our [WebP to JPG](/tools/webp-to-jpg) tool.',
         ],
         callout: {
           type: 'tip',
@@ -261,29 +328,30 @@ export const GUIDES: GuideItem[] = [
       },
       {
         id: 'when-to-use-png',
-        heading: 'When to Use PNG',
+        heading: 'When to Use PNG for Logos, Screenshots, and Transparency',
         paragraphs: [
           'PNG uses DEFLATE lossless compression, guaranteeing that every single pixel rendered matches the original file without any approximation. This makes PNG the industry benchmark for digital design, brand assets, and user interface captures.',
           'Crucially, PNG features true alpha transparency. This allows logos, product cutouts, and icons to blend cleanly on top of any background color or textured layout without awkward white borders.',
+          'When converting from JPEG to PNG using [JPG to PNG](/tools/jpg-to-png), you preserve existing visual quality for further graphic editing. If you have WebP images that need to be edited in desktop software without WebP support, convert them using [WebP to PNG](/tools/webp-to-png).',
         ],
         keyPoints: [
-          'Website logos, brand watermarks, and app icons.',
+          'Website logos, brand watermarks, and app icons requiring alpha transparency.',
           'Screenshots of software dashboards, code snippets, or text documents where blurriness hurts readability.',
           'Graphics that will be repeatedly edited and re-saved in graphic design software.',
         ],
       },
       {
         id: 'when-to-use-webp',
-        heading: 'When to Use WebP',
+        heading: 'When to Use WebP for Modern High-Efficiency Performance',
         paragraphs: [
-          'WebP was engineered by Google to modernize web asset delivery. It incorporates advanced prediction algorithms from the VP8 video codec, allowing it to compress image data far more efficiently than legacy JPEG and PNG formats.',
-          'Unlike JPEG, WebP supports full alpha transparency while still utilizing lossy compression. This means you can have a transparent product photograph that weighs 80 KB in WebP instead of 600 KB in PNG.',
-          'Today, WebP is supported across all modern web browsers including Google Chrome, Apple Safari, Mozilla Firefox, and Microsoft Edge.',
+          'WebP was engineered to modernize web asset delivery. It incorporates advanced prediction algorithms from the VP8 video codec, allowing it to compress image data far more efficiently than legacy JPEG and PNG formats.',
+          'Unlike JPEG, WebP supports full alpha transparency while still utilizing lossy compression. This means you can have a transparent product photograph that weighs 80 KB in WebP instead of 600 KB in PNG. Use [PNG to WebP](/tools/png-to-webp) to achieve this saving instantly.',
+          'For standard camera photographs, converting with [JPG to WebP](/tools/jpg-to-webp) reduces transfer size by 25% to 35% at identical visual quality, accelerating website load times on all modern browsers.',
         ],
         practicalScenario: {
           title: 'E-Commerce Product Catalog Optimization',
           scenario: 'An online store features 200 product showcase photos saved as 2 MB PNG files, causing slow page loads on mobile devices.',
-          solution: 'Convert product photos from PNG to WebP while retaining clean transparent backgrounds and high detail.',
+          solution: 'Convert product photos from PNG to WebP using [PNG to WebP](/tools/png-to-webp) while retaining clean transparent backgrounds and high detail.',
           result: 'Total page weight drops by over 70%, boosting mobile load speeds and keeping visuals crisp.',
         },
       },
@@ -292,14 +360,15 @@ export const GUIDES: GuideItem[] = [
         heading: 'How to Choose and Convert in Practice',
         paragraphs: [
           'Follow this simple decision rule for your projects:',
-          '1. Need a transparent background? Choose WebP for the web, or PNG for desktop software compatibility.',
-          '2. High-detail real-world photo? Choose WebP for websites, or JPG for maximum universal device compatibility.',
-          '3. Software screenshot with fine text? Choose PNG to keep every letter sharp, or lossless WebP.',
+          '1. Need a transparent background? Choose WebP for the web using [PNG to WebP](/tools/png-to-webp), or PNG for desktop software compatibility using [WebP to PNG](/tools/webp-to-png).',
+          '2. High-detail real-world photo? Choose WebP for websites using [JPG to WebP](/tools/jpg-to-webp), or JPG for universal compatibility.',
+          '3. Software screenshot with fine text? Choose PNG to keep every letter sharp using [JPG to PNG](/tools/jpg-to-png), or lossless WebP.',
         ],
         keyPoints: [
-          'Use the JPG to WebP converter when modernizing photo galleries for websites.',
-          'Use the PNG to JPG converter when preparing receipts or photos that do not need transparency to save storage space.',
-          'Use the WebP to PNG converter if an older desktop application does not recognize WebP files.',
+          'Use [JPG to WebP](/tools/jpg-to-webp) when modernizing photo galleries for websites.',
+          'Use [PNG to JPG](/tools/png-to-jpg) when preparing receipts or photos that do not need transparency to save storage space.',
+          'Use [WebP to PNG](/tools/webp-to-png) if an older desktop application does not recognize WebP files.',
+          'Use [PNG to WebP](/tools/png-to-webp) to preserve transparent backgrounds while drastically cutting file weight.',
         ],
       },
     ],
@@ -320,6 +389,22 @@ export const GUIDES: GuideItem[] = [
       path: '/tools/image-resizer',
       actionLabel: 'Open Image Resizer',
     },
+    featuredTools: [
+      {
+        slug: 'image-resizer',
+        name: 'Image Resizer',
+        path: '/tools/image-resizer',
+        actionLabel: 'Open Image Resizer',
+        context: 'Scale width and height in pixels or percentages with aspect ratio locking and bicubic resampling.',
+      },
+      {
+        slug: 'aspect-ratio-calculator',
+        name: 'Aspect Ratio Calculator',
+        path: '/tools/aspect-ratio-calculator',
+        actionLabel: 'Open Aspect Ratio Calculator',
+        context: 'Compute proportional dimensions (16:9, 4:3, 1:1, or custom) to avoid distorted or stretched photos.',
+      },
+    ],
     relatedTools: [
       {
         slug: 'aspect-ratio-calculator',
@@ -349,7 +434,7 @@ export const GUIDES: GuideItem[] = [
     keyTakeaways: [
       'Downscaling (reducing dimensions) preserves sharpness by consolidating pixel data with interpolation filtering.',
       'Upscaling (enlarging smaller images) inherently loses crispness because the computer must estimate missing pixels.',
-      'Always lock your aspect ratio to avoid squishing or stretching subjects.',
+      'Always lock your aspect ratio using the Image Resizer or compute proportions with the Aspect Ratio Calculator.',
       'Start with your original, highest-resolution file rather than re-scaling an already downsized version.',
     ],
     sections: [
@@ -358,8 +443,9 @@ export const GUIDES: GuideItem[] = [
         heading: 'Downscaling vs. Upscaling: The Physics of Pixels',
         paragraphs: [
           'Digital photos are raster graphics composed of a finite grid of tiny colored squares called pixels. When you resize an image, you are altering that total pixel grid.',
-          'Downsampling (reducing pixel dimensions) combines adjacent pixels using interpolation algorithms (such as bicubic or bilinear resampling). Because you are condensing rich visual information into a tighter grid, downscaled images typically look remarkably sharp and detailed.',
-          'Upscaling (enlarging pixel dimensions) does the exact opposite: it attempts to create new pixels where none existed before. Because the browser must mathematically guess intermediate color values, upscaled images look soft, fuzzy, or visibly pixelated.',
+          'Downsampling (reducing pixel dimensions) combines adjacent pixels using interpolation algorithms like bicubic resampling. Because you are condensing rich visual information into a tighter grid, downscaled images typically look remarkably sharp and detailed.',
+          'Upscaling (enlarging pixel dimensions) does the exact opposite: it attempts to create new pixels where none existed before. Because the computer must mathematically guess intermediate color values, upscaled images look soft, fuzzy, or visibly pixelated.',
+          'To ensure perfect resizing results, calculate your target proportions beforehand using the [Aspect Ratio Calculator](/tools/aspect-ratio-calculator), and perform the scaling cleanly in your browser using the [Image Resizer](/tools/image-resizer).',
         ],
         callout: {
           type: 'info',
@@ -372,12 +458,13 @@ export const GUIDES: GuideItem[] = [
         heading: 'Preserving Proportions: The Aspect Ratio Rule',
         paragraphs: [
           'The most common resizing blunder is modifying width and height independently, resulting in warped circles, squished faces, or unnaturally stretched text.',
-          'Aspect ratio is the proportional relationship between width and height (such as 16:9 widescreen or 1:1 square). When you change one dimension, the other must adjust automatically to maintain the original geometric proportions.',
+          'Aspect ratio is the proportional relationship between width and height (such as 16:9 widescreen, 4:3 photography, or 1:1 square). When you change one dimension, the other must adjust automatically to maintain the original geometric proportions.',
+          'Before resizing, use the [Aspect Ratio Calculator](/tools/aspect-ratio-calculator) to check the math for standard monitor or social media formats. Then open the [Image Resizer](/tools/image-resizer) with the aspect ratio lock toggled on to ensure your photo never stretches or skews.',
         ],
         keyPoints: [
-          'Keep the Aspect Ratio Lock enabled in the Image Resizer.',
+          'Keep the Aspect Ratio Lock enabled in the [Image Resizer](/tools/image-resizer).',
           'If your target layout requires a different shape (e.g., turning a 4:3 landscape into a 1:1 square), crop the image first before resizing.',
-          'Use the Aspect Ratio Calculator to preview dimensions across standard screen ratios.',
+          'Use the [Aspect Ratio Calculator](/tools/aspect-ratio-calculator) to preview dimensions across standard screen ratios.',
         ],
       },
       {
@@ -389,21 +476,26 @@ export const GUIDES: GuideItem[] = [
         steps: [
           {
             step: 1,
-            title: 'Drop Your File into Image Resizer',
-            description: 'Select your photo or drag it directly onto the upload card.',
+            title: 'Calculate Target Dimensions',
+            description: 'If targeting a specific aspect ratio, use the [Aspect Ratio Calculator](/tools/aspect-ratio-calculator) to find the correct proportional pixel height for your desired width.',
           },
           {
             step: 2,
+            title: 'Drop Your File into Image Resizer',
+            description: 'Open the [Image Resizer](/tools/image-resizer) and select your photo or drag it directly onto the upload card.',
+          },
+          {
+            step: 3,
             title: 'Verify the Aspect Ratio Lock',
             description: 'Ensure the link/lock icon between width and height is active to prevent visual distortion.',
           },
           {
-            step: 3,
+            step: 4,
             title: 'Specify Dimensions or Percentage',
             description: 'Type your desired width in pixels (e.g., 1200 px) or adjust the percentage slider down to 50%.',
           },
           {
-            step: 4,
+            step: 5,
             title: 'Export the Crisp Resized Asset',
             description: 'Click Download to instantly save your resized graphic with preserved sharpness.',
           },
@@ -418,7 +510,7 @@ export const GUIDES: GuideItem[] = [
         practicalScenario: {
           title: 'Blog Article Featured Image',
           scenario: 'A photographer delivers a 6000x4000 RAW-export JPEG weighing 8.4 MB. The blog template container is 1200 pixels wide.',
-          solution: 'Load the image into Toolora Image Resizer. Keep aspect ratio locked and enter 1200 in the Width input. The height automatically scales to 800.',
+          solution: 'Verify the 3:2 ratio in the [Aspect Ratio Calculator](/tools/aspect-ratio-calculator). Load the image into the [Image Resizer](/tools/image-resizer), keep aspect ratio locked, and enter 1200 in the Width input. The height automatically scales to 800.',
           result: 'The image renders with crystal clarity on all desktop and mobile displays, while file weight is reduced by over 85% even before applying compression.',
         },
       },
@@ -448,6 +540,29 @@ export const GUIDES: GuideItem[] = [
       path: '/tools/image-to-pdf',
       actionLabel: 'Open Image to PDF',
     },
+    featuredTools: [
+      {
+        slug: 'image-to-pdf',
+        name: 'Image to PDF',
+        path: '/tools/image-to-pdf',
+        actionLabel: 'Open Image to PDF',
+        context: 'Convert multi-page or single photos with customizable page sizes, orientation, and margin spacing.',
+      },
+      {
+        slug: 'jpg-to-pdf',
+        name: 'JPG to PDF',
+        path: '/tools/jpg-to-pdf',
+        actionLabel: 'Open JPG to PDF',
+        context: 'Rapidly package JPEG photos into standardized PDF documents without extra configuration.',
+      },
+      {
+        slug: 'png-to-pdf',
+        name: 'PNG to PDF',
+        path: '/tools/png-to-pdf',
+        actionLabel: 'Open PNG to PDF',
+        context: 'Convert PNG graphics, receipts, and screenshots to PDF with crisp lines and text.',
+      },
+    ],
     relatedTools: [
       {
         slug: 'merge-pdf',
@@ -483,8 +598,8 @@ export const GUIDES: GuideItem[] = [
     keyTakeaways: [
       'PDF is the global standard for multi-page document submissions because layout geometry is locked across all devices and printers.',
       'Converting photos of receipts, school assignments, or forms into PDF ensures the recipient sees exactly what you intended.',
+      'Use Image to PDF for multi-image portfolios, JPG to PDF for camera photos, or PNG to PDF for screenshots.',
       'Toolora compiles PDF files client-side, making it completely secure for sensitive personal IDs and financial documents.',
-      'You can pair conversion with Merge PDF and Rotate PDF for full document organization.',
     ],
     sections: [
       {
@@ -493,11 +608,13 @@ export const GUIDES: GuideItem[] = [
         paragraphs: [
           'While image formats like JPG and PNG are designed for visual display, PDF (Portable Document Format) is designed for document preservation and universal interchange.',
           'When you send someone an image, their photo viewer might scale it unpredictably, rotate it according to differing orientation metadata, or split it onto multiple paper pages when printed. PDF locks down page boundaries, margins, and resolution so the document looks identical on every phone, tablet, computer, and printer.',
+          'Toolora offers three dedicated utilities for this conversion: the versatile [Image to PDF](/tools/image-to-pdf) tool for compiling multiple photos with page and margin controls, the focused [JPG to PDF](/tools/jpg-to-pdf) converter for quick photo packaging, and the [PNG to PDF](/tools/png-to-pdf) tool for crisp digital screenshots.',
         ],
         keyPoints: [
-          'Combine multiple separate photos into a single paginated document.',
+          'Combine multiple separate photos into a single paginated document using [Image to PDF](/tools/image-to-pdf).',
+          'Convert standard camera photos quickly with [JPG to PDF](/tools/jpg-to-pdf).',
+          'Preserve clean lines and readable text on screenshots and diagrams using [PNG to PDF](/tools/png-to-pdf).',
           'Comply with institutional submission requirements (schools, tax authorities, visa portals).',
-          'Ensure clean, standardized margins when printed on standard paper sizes.',
         ],
       },
       {
@@ -505,7 +622,7 @@ export const GUIDES: GuideItem[] = [
         heading: 'Document Privacy: Why Client-Side Processing Matters',
         paragraphs: [
           'Images frequently converted to PDF include sensitive personal materials: scanned passports, driver licenses, university transcripts, medical bills, and tax forms.',
-          'Many online PDF utilities upload your files to third-party cloud servers where they may sit in temporary directories or be indexed by logging services. Toolora operates completely client-side in your browser. The PDF file is assembled directly in your device’s local memory using JavaScript and Web APIs. Your confidential files never touch an external server.',
+          'Many online PDF utilities upload your files to third-party cloud servers where they may sit in temporary directories or be indexed by logging services. Toolora operates completely client-side in your browser. With our [Image to PDF](/tools/image-to-pdf) tool, the PDF file is assembled directly in your device’s local memory using JavaScript and Web APIs. Your confidential files never touch an external server.',
         ],
         callout: {
           type: 'tip',
@@ -522,18 +639,18 @@ export const GUIDES: GuideItem[] = [
         steps: [
           {
             step: 1,
-            title: 'Select or Drag Your Images',
-            description: 'Open the client-side Image to PDF tool and drop in your JPG, PNG, or WebP files.',
+            title: 'Choose Your Conversion Tool',
+            description: 'Open [Image to PDF](/tools/image-to-pdf) for full layout configuration, [JPG to PDF](/tools/jpg-to-pdf) for standard camera photos, or [PNG to PDF](/tools/png-to-pdf) for diagrams.',
           },
           {
             step: 2,
-            title: 'Configure Page Layout',
-            description: 'Select your preferred paper size (e.g. A4 or US Letter) and choose orientation (Portrait or Landscape) to fit your photo neatly.',
+            title: 'Select or Drag Your Images',
+            description: 'Drop your JPG, PNG, or WebP files into the tool dropzone.',
           },
           {
             step: 3,
-            title: 'Set Margins and Fit',
-            description: 'Choose whether to fit the image to page borders with clean margins or let it fill the entire page.',
+            title: 'Configure Page Layout',
+            description: 'Select your preferred paper size (e.g. A4 or US Letter) and choose orientation (Portrait or Landscape) to fit your photos neatly.',
           },
           {
             step: 4,
@@ -551,7 +668,7 @@ export const GUIDES: GuideItem[] = [
         practicalScenario: {
           title: 'Academic Assignment Submission',
           scenario: 'A student has 4 smartphone photos of handwritten math problem sets. The submission portal accepts only one PDF file under 10 MB.',
-          solution: 'Convert each image to PDF using the Image to PDF tool with A4 portrait sizing. Then, combine the resulting files using Toolora Merge PDF.',
+          solution: 'Convert each image to PDF using the [Image to PDF](/tools/image-to-pdf) or [JPG to PDF](/tools/jpg-to-pdf) tool with A4 portrait sizing. Then, combine the resulting files using Toolora [Merge PDF](/tools/merge-pdf).',
           result: 'A single, cleanly organized 4-page PDF document that professors can read and annotate without managing multiple image files.',
         },
       },
@@ -562,10 +679,10 @@ export const GUIDES: GuideItem[] = [
           'Once your images are packaged into PDF format, you can refine your document further using Toolora’s companion PDF utilities:',
         ],
         keyPoints: [
-          'Merge PDF: Combine multiple separate documents or generated PDFs into one cohesive file.',
-          'Rotate PDF: Fix upside-down or sideways pages that were scanned at an awkward angle.',
-          'Split PDF: Extract specific pages if you only need to submit a portion of a larger packet.',
-          'PDF Metadata Viewer: Inspect total page count and verify file properties before submission.',
+          '[Merge PDF](/tools/merge-pdf): Combine multiple separate documents or generated PDFs into one cohesive file.',
+          '[Rotate PDF](/tools/rotate-pdf): Fix upside-down or sideways pages that were scanned at an awkward angle.',
+          '[Split PDF](/tools/split-pdf): Extract specific pages if you only need to submit a portion of a larger packet.',
+          '[PDF Metadata Viewer](/tools/pdf-metadata-viewer): Inspect total page count and verify file properties before submission.',
         ],
       },
     ],
@@ -582,6 +699,9 @@ export function getGuidesByCategory(categorySlug: string): GuideItem[] {
 
 export function getGuidesForTool(toolSlug: string): GuideItem[] {
   return GUIDES.filter(
-    (g) => g.primaryTool.slug === toolSlug || g.relatedTools.some((r) => r.slug === toolSlug)
+    (g) =>
+      g.primaryTool.slug === toolSlug ||
+      g.relatedTools.some((r) => r.slug === toolSlug) ||
+      (g.featuredTools && g.featuredTools.some((ft) => ft.slug === toolSlug))
   );
 }

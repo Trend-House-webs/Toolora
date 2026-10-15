@@ -11,6 +11,19 @@ export interface HowToStep {
   description: string;
 }
 
+export interface PracticalExample {
+  title: string;
+  scenario: string;
+  action: string;
+  result: string;
+}
+
+export interface TechnicalDetails {
+  supportedInputs: string[];
+  outputFormat: string;
+  limitations: string[];
+}
+
 export interface ToolItem {
   id: string;
   name: string;
@@ -22,14 +35,24 @@ export interface ToolItem {
   isPopular?: boolean;
   isFeatured?: boolean;
   badge?: string;
+  directAnswer?: string;
   features?: string[];
   howToUse?: HowToStep[];
   whyUse?: string[];
   tips?: string[];
+  technicalDetails?: TechnicalDetails;
+  practicalExample?: PracticalExample;
   metaTitle?: string;
   metaDescription?: string;
   faq: FAQItem[];
   relatedSlugs: string[];
+}
+
+export interface CategoryToolType {
+  title: string;
+  description: string;
+  whenToChoose: string;
+  toolSlugs: string[];
 }
 
 export interface CategoryInfo {
@@ -43,4 +66,5 @@ export interface CategoryInfo {
   metaDescription?: string;
   introParagraph?: string;
   highlights?: string[];
+  toolTypes?: CategoryToolType[];
 }
