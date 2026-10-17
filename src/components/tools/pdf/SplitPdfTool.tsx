@@ -130,7 +130,7 @@ export function SplitPdfTool() {
       <div className="mb-6">
         <h2 className="text-xl font-bold text-slate-900">Split & Extract PDF Pages</h2>
         <p className="text-sm text-slate-500 mt-1">
-          Extract specific pages or page ranges from a PDF file. Fast, client-side, and completely private.
+          Extract specific pages or page ranges from a PDF file. Fast, client-side, with in-browser processing.
         </p>
       </div>
 

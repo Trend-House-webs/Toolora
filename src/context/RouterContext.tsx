@@ -16,14 +16,15 @@ export function useRouter() {
 
 interface RouterProviderProps {
   children: ReactNode;
+  initialPath?: string;
 }
 
-export function RouterProvider({ children }: RouterProviderProps) {
+export function RouterProvider({ children, initialPath = '/' }: RouterProviderProps) {
   const [currentPath, setCurrentPath] = useState<string>(() => {
     if (typeof window !== 'undefined') {
       return window.location.pathname || '/';
     }
-    return '/';
+    return initialPath;
   });
 
   useEffect(() => {

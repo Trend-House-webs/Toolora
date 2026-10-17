@@ -270,7 +270,7 @@ export function RotatePdfTool() {
       <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-slate-200">
         <div className="flex items-center gap-2 text-xs text-slate-500">
           <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
-          <span>Pure client-side rotation. Your private document is never sent over any network.</span>
+          <span>Client-side processing: your document is rotated directly in browser memory without server uploads.</span>
         </div>
 
         <button

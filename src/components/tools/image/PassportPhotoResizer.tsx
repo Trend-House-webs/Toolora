@@ -235,7 +235,7 @@ export function PassportPhotoResizer() {
 
       <div className="pt-4 border-t border-slate-100 flex items-center gap-2 text-xs text-slate-500">
         <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
-        <span>Your photo is formatted completely in your browser. Nothing is ever uploaded to a server.</span>
+        <span>Client-side processing: your photo is formatted locally in your browser memory without server uploads.</span>
       </div>
     </div>
   );

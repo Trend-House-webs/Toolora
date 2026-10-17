@@ -5,7 +5,7 @@ import { SITE_URL } from '../../../config/site';
 export function UrlEncodeTool() {
   const [mode, setMode] = useState<'encode' | 'decode'>('encode');
   const [encodeType, setEncodeType] = useState<'component' | 'full'>('component');
-  const [inputVal, setInputVal] = useState<string>(`${SITE_URL}/search?q=free tools & privacy=100%`);
+  const [inputVal, setInputVal] = useState<string>(`${SITE_URL}/search?q=free tools & mode=client-side`);
   const [outputVal, setOutputVal] = useState<string>('');
   const [error, setError] = useState<string | null>(null);
   const [copied, setCopied] = useState<boolean>(false);

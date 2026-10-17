@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Search, Shield, Zap, Sparkles, UserX, ArrowRight, Image as ImageIcon, GraduationCap, FileText, Wrench, Layers } from 'lucide-react';
+import { Search, Shield, Zap, Sparkles, UserX, ArrowRight, Image as ImageIcon, GraduationCap, FileText, Wrench, Layers, BookOpen, Clock } from 'lucide-react';
 import { TOOLS, FEATURED_TOOLS, POPULAR_TOOLS, IMAGE_TOOLS, PDF_TOOLS, STUDENT_TOOLS, UTILITY_TOOLS, STUDENT_UTILITY_TOOLS } from '../data/tools';
+import { GUIDES } from '../data/guides';
 import { ToolCard } from '../components/common/ToolCard';
 import { SEO } from '../components/common/SEO';
 import { Link, useRouter } from '../context/RouterContext';
@@ -349,22 +350,22 @@ export function HomePage({ onOpenSearchModal }: HomePageProps) {
         </div>
 
         {/* Category Cards Overview */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3.5 mb-6">
           <Link
             to="/category/image-tools"
-            className="group p-5 rounded-2xl bg-white border border-slate-200/90 hover:border-blue-500/60 hover:shadow-sm transition-all flex flex-col justify-between"
+            className="group p-4 sm:p-5 rounded-2xl bg-white border border-slate-200/90 hover:border-blue-500/60 hover:shadow-xs transition-all flex flex-col justify-between"
           >
             <div>
-              <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0 group-hover:bg-blue-600 group-hover:text-white transition-colors mb-3">
-                <ImageIcon className="w-5 h-5" />
+              <div className="w-9 h-9 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0 group-hover:bg-blue-600 group-hover:text-white transition-colors mb-3">
+                <ImageIcon className="w-4 h-4" />
               </div>
               <div className="flex items-center justify-between gap-1">
                 <h3 className="text-sm font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
                   Image Tools
                 </h3>
-                <span className="text-2xs text-slate-400 font-medium">{IMAGE_TOOLS.length} Tools</span>
+                <span className="text-2xs text-slate-400 font-medium">{IMAGE_TOOLS.length}</span>
               </div>
-              <p className="text-xs text-slate-600 mt-1 leading-relaxed">
+              <p className="text-xs text-slate-600 mt-1 leading-relaxed line-clamp-2">
                 Compress, convert, resize, crop, rotate, and format photos in-browser.
               </p>
             </div>
@@ -375,19 +376,19 @@ export function HomePage({ onOpenSearchModal }: HomePageProps) {
 
           <Link
             to="/category/pdf-tools"
-            className="group p-5 rounded-2xl bg-white border border-slate-200/90 hover:border-blue-500/60 hover:shadow-sm transition-all flex flex-col justify-between"
+            className="group p-4 sm:p-5 rounded-2xl bg-white border border-slate-200/90 hover:border-blue-500/60 hover:shadow-xs transition-all flex flex-col justify-between"
           >
             <div>
-              <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0 group-hover:bg-blue-600 group-hover:text-white transition-colors mb-3">
-                <FileText className="w-5 h-5" />
+              <div className="w-9 h-9 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0 group-hover:bg-blue-600 group-hover:text-white transition-colors mb-3">
+                <FileText className="w-4 h-4" />
               </div>
               <div className="flex items-center justify-between gap-1">
                 <h3 className="text-sm font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
                   PDF Tools
                 </h3>
-                <span className="text-2xs text-slate-400 font-medium">{PDF_TOOLS.length} Tools</span>
+                <span className="text-2xs text-slate-400 font-medium">{PDF_TOOLS.length}</span>
               </div>
-              <p className="text-xs text-slate-600 mt-1 leading-relaxed">
+              <p className="text-xs text-slate-600 mt-1 leading-relaxed line-clamp-2">
                 Merge, split, rotate, convert JPG/PNG to PDF, and inspect metadata.
               </p>
             </div>
@@ -398,19 +399,19 @@ export function HomePage({ onOpenSearchModal }: HomePageProps) {
 
           <Link
             to="/category/student-tools"
-            className="group p-5 rounded-2xl bg-white border border-slate-200/90 hover:border-blue-500/60 hover:shadow-sm transition-all flex flex-col justify-between"
+            className="group p-4 sm:p-5 rounded-2xl bg-white border border-slate-200/90 hover:border-blue-500/60 hover:shadow-xs transition-all flex flex-col justify-between"
           >
             <div>
-              <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0 group-hover:bg-blue-600 group-hover:text-white transition-colors mb-3">
-                <GraduationCap className="w-5 h-5" />
+              <div className="w-9 h-9 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0 group-hover:bg-blue-600 group-hover:text-white transition-colors mb-3">
+                <GraduationCap className="w-4 h-4" />
               </div>
               <div className="flex items-center justify-between gap-1">
                 <h3 className="text-sm font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
                   Student Tools
                 </h3>
-                <span className="text-2xs text-slate-400 font-medium">{STUDENT_TOOLS.length} Tools</span>
+                <span className="text-2xs text-slate-400 font-medium">{STUDENT_TOOLS.length}</span>
               </div>
-              <p className="text-xs text-slate-600 mt-1 leading-relaxed">
+              <p className="text-xs text-slate-600 mt-1 leading-relaxed line-clamp-2">
                 CGPA, weighted grades, fractions, ratios, scientific math, and timers.
               </p>
             </div>
@@ -421,24 +422,47 @@ export function HomePage({ onOpenSearchModal }: HomePageProps) {
 
           <Link
             to="/category/utility-tools"
-            className="group p-5 rounded-2xl bg-white border border-slate-200/90 hover:border-blue-500/60 hover:shadow-sm transition-all flex flex-col justify-between"
+            className="group p-4 sm:p-5 rounded-2xl bg-white border border-slate-200/90 hover:border-blue-500/60 hover:shadow-xs transition-all flex flex-col justify-between"
           >
             <div>
-              <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0 group-hover:bg-blue-600 group-hover:text-white transition-colors mb-3">
-                <Wrench className="w-5 h-5" />
+              <div className="w-9 h-9 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0 group-hover:bg-blue-600 group-hover:text-white transition-colors mb-3">
+                <Wrench className="w-4 h-4" />
               </div>
               <div className="flex items-center justify-between gap-1">
                 <h3 className="text-sm font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
                   Daily Utilities
                 </h3>
-                <span className="text-2xs text-slate-400 font-medium">{UTILITY_TOOLS.length} Tools</span>
+                <span className="text-2xs text-slate-400 font-medium">{UTILITY_TOOLS.length}</span>
               </div>
-              <p className="text-xs text-slate-600 mt-1 leading-relaxed">
+              <p className="text-xs text-slate-600 mt-1 leading-relaxed line-clamp-2">
                 UUIDs, timestamps, text cleaner, password generator, Base64 & QR codes.
               </p>
             </div>
             <span className="inline-flex items-center gap-1 text-xs font-semibold text-blue-600 mt-3 group-hover:translate-x-0.5 transition-transform">
               Browse Utility Tools <ArrowRight className="w-3 h-3" />
+            </span>
+          </Link>
+
+          <Link
+            to="/category/student-utility"
+            className="group p-4 sm:p-5 rounded-2xl bg-white border border-slate-200/90 hover:border-blue-500/60 hover:shadow-xs transition-all flex flex-col justify-between col-span-1 sm:col-span-2 lg:col-span-1"
+          >
+            <div>
+              <div className="w-9 h-9 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0 group-hover:bg-blue-600 group-hover:text-white transition-colors mb-3">
+                <Layers className="w-4 h-4" />
+              </div>
+              <div className="flex items-center justify-between gap-1">
+                <h3 className="text-sm font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
+                  Productivity Hub
+                </h3>
+                <span className="text-2xs text-slate-400 font-medium">{STUDENT_UTILITY_TOOLS.length}</span>
+              </div>
+              <p className="text-xs text-slate-600 mt-1 leading-relaxed line-clamp-2">
+                Unified workspace combining academic solvers and daily productivity utilities.
+              </p>
+            </div>
+            <span className="inline-flex items-center gap-1 text-xs font-semibold text-blue-600 mt-3 group-hover:translate-x-0.5 transition-transform">
+              Browse Productivity Hub <ArrowRight className="w-3 h-3" />
             </span>
           </Link>
         </div>
@@ -448,6 +472,63 @@ export function HomePage({ onOpenSearchModal }: HomePageProps) {
           {displayedCategoryTools.map((tool) => (
             <ToolCard key={tool.id} tool={tool} />
           ))}
+        </div>
+      </section>
+
+      {/* 5. Practical Guides & Workflow Tutorials */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="bg-slate-50/80 rounded-2xl border border-slate-200/90 p-6 sm:p-8 lg:p-10 space-y-6">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+            <div>
+              <div className="inline-flex items-center gap-1.5 text-xs font-bold text-blue-700 uppercase tracking-wider mb-1">
+                <BookOpen className="w-3.5 h-3.5" />
+                <span>Knowledge Base</span>
+              </div>
+              <h2 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">
+                Practical Guides & Workflow Tutorials
+              </h2>
+              <p className="text-xs sm:text-sm text-slate-600 mt-1 max-w-2xl leading-relaxed">
+                Step-by-step walk-throughs and format comparisons to help you optimize images, choose formats, resize cleanly, and assemble documents.
+              </p>
+            </div>
+            <Link
+              to="/guides"
+              className="inline-flex items-center gap-1 text-xs sm:text-sm font-semibold text-blue-600 hover:text-blue-700 hover:underline shrink-0"
+            >
+              <span>View All Guides & Tutorials</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {GUIDES.map((g) => (
+              <Link
+                key={g.slug}
+                to={`/guides/${g.slug}`}
+                className="group p-4 bg-white rounded-xl border border-slate-200/90 hover:border-blue-400 hover:shadow-xs transition-all flex flex-col justify-between"
+              >
+                <div>
+                  <div className="flex items-center justify-between text-2xs text-slate-500 mb-2">
+                    <span className="font-semibold text-blue-600">{g.categoryName}</span>
+                    <span className="flex items-center gap-1">
+                      <Clock className="w-3 h-3" />
+                      {g.readTime}
+                    </span>
+                  </div>
+                  <h3 className="text-sm font-bold text-slate-900 group-hover:text-blue-600 transition-colors leading-snug">
+                    {g.title}
+                  </h3>
+                  <p className="text-xs text-slate-600 mt-1.5 line-clamp-2 leading-relaxed">
+                    {g.summary}
+                  </p>
+                </div>
+                <div className="mt-4 pt-2.5 border-t border-slate-100 flex items-center justify-between text-xs text-blue-600 font-semibold group-hover:text-blue-700">
+                  <span>Read Guide</span>
+                  <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
+                </div>
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
 

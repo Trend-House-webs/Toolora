@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Search, ArrowRight } from 'lucide-react';
+import { Search, ArrowRight, BookOpen, Clock } from 'lucide-react';
 import { TOOLS, CATEGORIES } from '../data/tools';
+import { GUIDES } from '../data/guides';
 import { Breadcrumbs } from '../components/common/Breadcrumbs';
 import { ToolCard } from '../components/common/ToolCard';
 import { SEO } from '../components/common/SEO';
@@ -197,6 +198,61 @@ export function AllToolsPage() {
           <p className="text-xs text-slate-400 mt-1">Try resetting the search or category filter.</p>
         </div>
       )}
+
+      {/* Practical Guides & Workflow Tutorials */}
+      <section className="pt-10 border-t border-slate-200">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6">
+          <div>
+            <div className="inline-flex items-center gap-1.5 text-xs font-bold text-blue-700 uppercase tracking-wider mb-1">
+              <BookOpen className="w-3.5 h-3.5" />
+              <span>Step-by-Step Tutorials</span>
+            </div>
+            <h2 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">
+              Practical Guides for Toolora Workflows
+            </h2>
+            <p className="text-xs sm:text-sm text-slate-600 mt-1">
+              Learn how to get the cleanest compression, correct photo dimensions, and assemble documents.
+            </p>
+          </div>
+          <Link
+            to="/guides"
+            className="inline-flex items-center gap-1 text-xs sm:text-sm font-semibold text-blue-600 hover:text-blue-700 hover:underline shrink-0"
+          >
+            <span>All Guides & Tutorials</span>
+            <ArrowRight className="w-3.5 h-3.5" />
+          </Link>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {GUIDES.map((g) => (
+            <Link
+              key={g.slug}
+              to={`/guides/${g.slug}`}
+              className="group p-4 bg-white rounded-xl border border-slate-200 hover:border-blue-300 hover:shadow-xs transition-all flex flex-col justify-between"
+            >
+              <div>
+                <div className="flex items-center justify-between text-2xs text-slate-500 mb-2">
+                  <span className="font-semibold text-blue-600">{g.categoryName}</span>
+                  <span className="flex items-center gap-1">
+                    <Clock className="w-3 h-3" />
+                    {g.readTime}
+                  </span>
+                </div>
+                <h3 className="text-sm font-bold text-slate-900 group-hover:text-blue-600 transition-colors leading-snug">
+                  {g.title}
+                </h3>
+                <p className="text-xs text-slate-600 mt-1.5 line-clamp-2 leading-relaxed font-normal">
+                  {g.summary}
+                </p>
+              </div>
+              <div className="mt-4 pt-2.5 border-t border-slate-100 flex items-center justify-between text-xs text-blue-600 font-semibold group-hover:text-blue-700">
+                <span>Read Tutorial</span>
+                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
     </div>
   );
 }

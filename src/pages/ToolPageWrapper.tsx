@@ -1,6 +1,6 @@
 import React, { Suspense, lazy } from 'react';
 import { ToolItem } from '../types';
-import { getToolBySlug } from '../data/tools';
+import { getToolBySlug, TOOLS } from '../data/tools';
 import { Breadcrumbs } from '../components/common/Breadcrumbs';
 import { ToolCard } from '../components/common/ToolCard';
 import { FaqAccordion } from '../components/common/FaqAccordion';
@@ -332,10 +332,16 @@ export function ToolPageWrapper({ tool }: ToolPageWrapperProps) {
     </Suspense>
   );
 
-  const relatedTools = (tool.relatedSlugs || [])
+  const explicitRelated = (tool.relatedSlugs || [])
     .map((s) => getToolBySlug(s))
-    .filter((t): t is ToolItem => Boolean(t))
-    .slice(0, 4);
+    .filter((t): t is ToolItem => Boolean(t));
+
+  // Guarantee 4 sibling tools by filling with other tools from the same category
+  const fallbackRelated = TOOLS.filter(
+    (t) => t.category === tool.category && t.slug !== tool.slug && !explicitRelated.some((er) => er.slug === t.slug)
+  );
+
+  const relatedTools = [...explicitRelated, ...fallbackRelated].slice(0, 4);
 
   const relevantGuides = getGuidesForTool(tool.slug);
 
@@ -364,12 +370,18 @@ export function ToolPageWrapper({ tool }: ToolPageWrapperProps) {
       {
         '@type': 'ListItem',
         position: 2,
+        name: 'All Tools Directory',
+        item: `${SITE_URL}/tools`,
+      },
+      {
+        '@type': 'ListItem',
+        position: 3,
         name: categoryName,
         item: `${SITE_URL}${categoryHref}`,
       },
       {
         '@type': 'ListItem',
-        position: 3,
+        position: 4,
         name: tool.name,
         item: `${SITE_URL}/tools/${tool.slug}`,
       },
@@ -387,10 +399,11 @@ export function ToolPageWrapper({ tool }: ToolPageWrapperProps) {
         faqItems={tool.faq}
       />
 
-      {/* Breadcrumb Navigation */}
+      {/* Breadcrumb Navigation: Home -> All Tools -> Category -> Tool */}
       <div className="mb-6">
         <Breadcrumbs
           items={[
+            { label: 'All Tools', href: '/tools' },
             { label: categoryName, href: categoryHref },
             { label: tool.name },
           ]}

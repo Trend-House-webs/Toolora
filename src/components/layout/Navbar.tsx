@@ -109,12 +109,28 @@ export function Navbar({ onOpenSearch }: NavbarProps) {
               PDF Tools
             </Link>
             <Link
-              to="/category/student-utility"
+              to="/category/student-tools"
               onClick={() => setMobileMenuOpen(false)}
               className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50 hover:text-blue-600"
             >
               <GraduationCap className="w-4 h-4 text-slate-400" />
-              Student & Utility Tools
+              Student Tools
+            </Link>
+            <Link
+              to="/category/utility-tools"
+              onClick={() => setMobileMenuOpen(false)}
+              className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50 hover:text-blue-600"
+            >
+              <Wrench className="w-4 h-4 text-slate-400" />
+              Daily Utilities
+            </Link>
+            <Link
+              to="/category/student-utility"
+              onClick={() => setMobileMenuOpen(false)}
+              className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50 hover:text-blue-600"
+            >
+              <Layers className="w-4 h-4 text-slate-400" />
+              Productivity Hub
             </Link>
             <Link
               to="/guides"

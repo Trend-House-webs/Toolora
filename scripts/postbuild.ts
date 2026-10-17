@@ -14,7 +14,9 @@ if (!fs.existsSync(distDir)) {
 
 const baseHtml = fs.readFileSync(path.join(distDir, 'index.html'), 'utf8');
 
-// Import tools and categories
+import React from 'react';
+import { renderToString } from 'react-dom/server';
+import App from '../src/App.tsx';
 import { TOOLS, CATEGORIES } from '../src/data/tools.ts';
 import { GUIDES } from '../src/data/guides.ts';
 import { SITE_URL } from '../src/config/site.ts';
@@ -298,7 +300,7 @@ function serializeSchema(schema: Record<string, any> | Array<Record<string, any>
   return JSON.stringify(schema, null, 2);
 }
 
-function customizeHtml(html: string, page: PageMetadata): string {
+function customizeHtml(html: string, page: PageMetadata, bodyContent?: string): string {
   let updated = html;
   const canonicalUrl = `${SITE_URL}/${page.path}`;
 
@@ -360,6 +362,11 @@ function customizeHtml(html: string, page: PageMetadata): string {
     }
   }
 
+  // Inject prerendered semantic body content into <div id="root">
+  if (bodyContent) {
+    updated = updated.replace('<div id="root"></div>', `<div id="root">${bodyContent}</div>`);
+  }
+
   return updated;
 }
 
@@ -372,12 +379,20 @@ let generatedCount = 0;
 for (const page of allPages) {
   const targetDir = path.join(distDir, page.path);
   fs.mkdirSync(targetDir, { recursive: true });
-  const htmlContent = customizeHtml(baseHtml, page);
+
+  let prerenderedBody = '';
+  try {
+    prerenderedBody = renderToString(React.createElement(App as React.ComponentType<{ initialPath?: string }>, { initialPath: `/${page.path}` }));
+  } catch (err: any) {
+    console.warn(`[Prerender Notice] Route /${page.path} fallback to client-side shell:`, err?.message);
+  }
+
+  const htmlContent = customizeHtml(baseHtml, page, prerenderedBody);
   fs.writeFileSync(path.join(targetDir, 'index.html'), htmlContent);
   generatedCount++;
 }
 
-// Update dist/index.html (Homepage root) with WebSite Schema
+// Update dist/index.html (Homepage root) with WebSite Schema and prerendered DOM
 const homepageSchema = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
@@ -388,6 +403,14 @@ const homepageSchema = {
 let homepageHtml = baseHtml;
 const hpJsonLd = serializeSchema(homepageSchema);
 homepageHtml = homepageHtml.replace('</head>', `  <script id="seo-structured-data" type="application/ld+json">\n${hpJsonLd}\n  </script>\n</head>`);
+try {
+  const hpBody = renderToString(React.createElement(App as React.ComponentType<{ initialPath?: string }>, { initialPath: '/' }));
+  if (hpBody) {
+    homepageHtml = homepageHtml.replace('<div id="root"></div>', `<div id="root">${hpBody}</div>`);
+  }
+} catch (err: any) {
+  console.warn('[Prerender Notice] Homepage fallback to client-side shell:', err?.message);
+}
 fs.writeFileSync(path.join(distDir, 'index.html'), homepageHtml);
 
 // Generate 404.html
@@ -397,7 +420,13 @@ const notFoundPage: PageMetadata = {
   description: 'The requested tool or page could not be found on Toolora.',
   noindex: true,
 };
-const notFoundHtml = customizeHtml(baseHtml, notFoundPage);
+let notFoundBody = '';
+try {
+  notFoundBody = renderToString(React.createElement(App as React.ComponentType<{ initialPath?: string }>, { initialPath: '/404' }));
+} catch (err: any) {
+  console.warn('[Prerender Notice] 404 fallback:', err?.message);
+}
+const notFoundHtml = customizeHtml(baseHtml, notFoundPage, notFoundBody);
 fs.writeFileSync(path.join(distDir, '404.html'), notFoundHtml);
 
 // Generate valid XML Sitemap directly from the registry

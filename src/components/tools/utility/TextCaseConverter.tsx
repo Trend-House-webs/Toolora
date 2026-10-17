@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Copy, Check, Type, Sparkles } from 'lucide-react';
 
 export function TextCaseConverter() {
-  const [text, setText] = useState<string>('Toolora provides fast, free, private-by-default everyday utilities.');
+  const [text, setText] = useState<string>('Toolora provides fast, free, client-side everyday utilities.');
   const [copied, setCopied] = useState<boolean>(false);
 
   const toUppercase = () => setText(text.toUpperCase());

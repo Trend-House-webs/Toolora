@@ -48,7 +48,7 @@ export const ADDITIONAL_TOOLS: ToolItem[] = [
     },
     whyUse: [
       'Fix Smartphone Orientation: Fix photos that were accidentally shot sideways or upside down.',
-      '100% Private: Image rendering runs on your device graphics hardware without touching a server.',
+      'Client-side processing: image rendering runs in browser memory on local hardware without server file uploads',
       'Instant Processing: Avoid slow upload and download roundtrips on large camera files.',
     ],
     tips: [
@@ -241,7 +241,7 @@ export const ADDITIONAL_TOOLS: ToolItem[] = [
       'Presets for India (51×51 mm), Canada (50×70 mm), China (33×48 mm), and Australia',
       'Solid background fill options (Pure White, Off-White, Light Blue)',
       'High-quality 95% JPEG output matching strict portal upload requirements',
-      'Complete biometric privacy: portraits never leave your computer',
+      'Client-side photo formatting: portraits are cropped in local browser memory without server uploads',
     ],
     howToUse: [
       { step: 1, title: 'Upload Portrait', description: 'Upload a clear, front-facing portrait photo with neutral lighting and even background.' },
@@ -351,7 +351,7 @@ export const ADDITIONAL_TOOLS: ToolItem[] = [
     whyUse: [
       'Pass Portal Validation: Government websites, civil service exams, and admissions portals strictly reject files over 50KB or 100KB.',
       'No Quality Guesswork: Automatically calculates the exact mathematical compression ratio needed to fit your ceiling.',
-      '100% Private: Photo processing runs locally in browser RAM without uploading sensitive ID photos to remote servers.',
+      'Client-side processing: photo sizing runs locally in browser memory without uploading files to remote servers',
       'Custom Limit Precision: Type any custom number between 10 KB and 5000 KB to match your portal exact specifications.',
     ],
     tips: [
@@ -407,7 +407,7 @@ export const ADDITIONAL_TOOLS: ToolItem[] = [
       'Adjustable JPEG quality slider (10% to 100%, default 90%)',
       'Solid white canvas backing preventing dark pixel errors',
       'Instant one-click browser download with byte savings comparison',
-      '100% private: raw bitmap files are processed in local RAM without server uploads',
+      'Client-side processing: raw bitmap files are processed in local memory without server uploads',
     ],
     howToUse: [
       { step: 1, title: 'Upload BMP Bitmap', description: 'Drag and drop any .bmp file (standard Windows Bitmap or OS/2 DIB) into the dropzone.' },
@@ -481,7 +481,7 @@ export const ADDITIONAL_TOOLS: ToolItem[] = [
       '4 backdrop testing modes: Checkerboard, Pure White, Solid Black, and Custom Color',
       'Precise transparent vs. opaque pixel count and coverage percentage readout',
       'Detects white fringes, rough cutout halos, and compression artifacts',
-      '100% private: graphic files are analyzed purely in local browser memory',
+      'Client-side processing: graphic files are analyzed in local browser memory without server uploads',
     ],
     howToUse: [
       { step: 1, title: 'Upload Cutout or Graphic', description: 'Select or drag and drop any PNG, WebP, SVG, or GIF file into the dropzone.' },
@@ -635,7 +635,7 @@ export const ADDITIONAL_TOOLS: ToolItem[] = [
       'Reorder queued pages with up/down controls before building the PDF',
       'Choose standard A4 (210×297 mm) or US Letter (8.5×11 in) paper formats',
       'Configurable margins from borderless (0 mm) to wide (20 mm)',
-      '100% private in-browser PDF 1.4 compilation with zero file uploads',
+      'Client-side PDF compilation: generates PDF 1.4 documents directly in browser memory without server file uploads',
     ],
     howToUse: [
       { step: 1, title: 'Upload JPG Photos', description: 'Drag and drop one or multiple JPG / JPEG pictures into the dropzone.' },
@@ -978,7 +978,7 @@ export const ADDITIONAL_TOOLS: ToolItem[] = [
       'Automated letter grade assignment (A+ through F) and honors classification',
       'Passing status check and 10-point GPA equivalent scale indication',
       'Real-time percentage progress bar and one-click summary copying',
-      '100% private: academic records and exam scores stay in local browser memory',
+      'Client-side processing: academic records stay in local browser memory without server storage',
     ],
     howToUse: [
       { step: 1, title: 'Choose Mode', description: 'Select Single Total Score for overall test results, or Multi-Subject Marksheet for individual course scores.' },
@@ -1047,7 +1047,7 @@ export const ADDITIONAL_TOOLS: ToolItem[] = [
       'Working business days (Monday–Friday) vs weekend days calculation',
       'Optional toggle to include the end date (+1 day) for inclusive billing periods',
       'Works across leap years and handles reversed date ranges automatically',
-      '100% private: date calculations run entirely in your local browser',
+      'Client-side processing: date calculations run entirely in your local browser',
     ],
     howToUse: [
       { step: 1, title: 'Pick Start Date', description: 'Select the beginning date on the calendar picker.' },
@@ -1321,7 +1321,7 @@ export const ADDITIONAL_TOOLS: ToolItem[] = [
       'Completed session counter with streak tracking',
       'Pleasant dual-tone Web Audio chime notifications',
       'Visual circular time progress ring showing elapsed interval percentage',
-      '100% private client-side timer running reliably in background browser tabs',
+      'Client-side timer: runs in background browser tabs without network requests',
     ],
     howToUse: [
       { step: 1, title: 'Start Focus Interval', description: 'Click "Start Focus" to launch your standard 25-minute uninterrupted work block.' },
@@ -1394,7 +1394,7 @@ export const ADDITIONAL_TOOLS: ToolItem[] = [
       'Guarantees at least one character from every active character pool, shuffled with Fisher-Yates',
       'Real-time entropy score calculation and crack-time strength estimate meter',
       'One-click clipboard copy with immediate temporary feedback',
-      '100% private: passwords never leave your device CPU and are wiped on browser refresh',
+      'Client-side generation: passwords are generated in local browser memory via Web Crypto API without server transmission',
     ],
     howToUse: [
       { step: 1, title: 'Set Desired Length', description: 'Adjust the slider between 8 and 64 characters (16+ is recommended for banking and email accounts).' },
@@ -1471,7 +1471,7 @@ export const ADDITIONAL_TOOLS: ToolItem[] = [
       'Real-time syntax validation with actionable error messages for malformed input strings',
       'One-click input/output swap button and instant clipboard copy',
       'Option to export and download decoded output as a plaintext file',
-      '100% private in-browser execution with zero transmission to servers or databases',
+      'Client-side execution: decodes text in local browser memory without server transmission',
     ],
     howToUse: [
       { step: 1, title: 'Select Operation', description: 'Click "Encode to Base64" to convert plain text, or "Decode from Base64" to unmask an encoded string.' },
@@ -1543,7 +1543,7 @@ export const ADDITIONAL_TOOLS: ToolItem[] = [
       'Full UTF-8 character encoding support (properly percent-encodes emojis, symbols, and non-ASCII scripts)',
       'Immediate malformed URI sequence detection with error alerts',
       'One-click input/output swap and quick clipboard copy',
-      '100% private: all URL transformations execute client-side in browser memory',
+      'Client-side processing: URL transformations execute in local browser memory without server requests',
     ],
     howToUse: [
       { step: 1, title: 'Select Action', description: 'Choose "URL Encode" to escape reserved characters or "URL Decode" to translate %XX sequences into plain text.' },
@@ -1573,7 +1573,7 @@ export const ADDITIONAL_TOOLS: ToolItem[] = [
       'Prevent Broken Web Requests: Ensure query parameters containing ampersands, plus signs, spaces, or slashes parse accurately on backend servers.',
       'Debug Complex Redirects: Decode nested redirect URLs and OAuth callback parameters to read tracking and state tokens.',
       'Standard RFC 3986 Compliance: Guarantee links are fully compliant with universal web standards across browsers and HTTP clients.',
-      'Complete Privacy: Sensitive API endpoints and parameters never leave your local browser session.',
+      'Local In-Browser Processing: API endpoints and query parameters are transformed in local memory without server requests.',
     ],
     tips: [
       'Always use `encodeURIComponent` when encoding values assigned to query parameters (e.g. `?name=VALUE`).',
@@ -1647,7 +1647,7 @@ export const ADDITIONAL_TOOLS: ToolItem[] = [
     whyUse: [
       'API Debugging: Turn illegible minified server responses into structured, readable data trees.',
       'Catch Subtle Errors: Immediately identify missing commas, trailing commas, or unquoted keys with real-time parser diagnostics.',
-      'Zero Server Transmissions: Confidential API tokens, user data, and system configurations never leave your machine.',
+      'Local Parser Execution: API tokens, payload data, and configurations are parsed in browser memory without server uploads.',
       'Production Minification: Compact formatted JSON down to single-line text before transferring over HTTP or embedding in config files.',
     ],
     tips: [
@@ -1695,7 +1695,7 @@ export const ADDITIONAL_TOOLS: ToolItem[] = [
       'Contrast-adaptive text display calculating relative luminance to ensure readability',
       'CSS custom property export snippets (--primary-color: #2563EB;)',
       'One-click clipboard copy for individual color definitions',
-      '100% private: color values are processed client-side without network requests',
+      'Client-side processing: color values are converted locally without network requests',
     ],
     howToUse: [
       { step: 1, title: 'Input or Pick Color', description: 'Type or paste a HEX code into the text input, or click the color swatch box to open the visual palette.' },
@@ -1768,7 +1768,7 @@ export const ADDITIONAL_TOOLS: ToolItem[] = [
       'Live character and word counts tracking string length throughout transformations',
       'One-click clipboard copy with instant visual confirmation',
       'Monospace and clean serif typography preview',
-      '100% private: text remains in browser memory with zero tracking or storage',
+      'Client-side processing: text remains in browser memory without server transmission',
     ],
     howToUse: [
       { step: 1, title: 'Paste or Type Text', description: 'Enter your headlines, body copy, list, or variable names into the text box.' },
@@ -1959,7 +1959,7 @@ export const ADDITIONAL_TOOLS: ToolItem[] = [
       },
       {
         question: 'Are my private documents uploaded to any remote server?',
-        answer: 'No. Toolora processes all PDF document streams purely on your local machine using client-side JavaScript. Your files never leave your device.',
+        answer: 'No. Toolora processes PDF document streams directly in your browser using client-side JavaScript (pdf-lib) without uploading your files to remote servers.',
       },
       {
         question: 'Can I change the page order before merging?',
@@ -1988,7 +1988,7 @@ export const ADDITIONAL_TOOLS: ToolItem[] = [
       'One-click Even or Odd page filtering for double-sided scans and duplex printing',
       'Lossless page extraction preserving original vector curves, fonts, and images',
       'Real-time page count detection and range boundary validation',
-      '100% private in-browser extraction with zero server file uploads',
+      'Client-side PDF extraction: extracts pages in local browser memory without server file uploads',
     ],
     howToUse: [
       { step: 1, title: 'Choose PDF File', description: 'Select or drag and drop your PDF document into the workspace.' },
@@ -2138,7 +2138,7 @@ export const ADDITIONAL_TOOLS: ToolItem[] = [
       'Orientation detection per page (Portrait, Landscape, or Square)',
       'Displays document metadata (Title, Author, Creator, Producer, Creation and Modification Dates)',
       'Formatted file size and page breakdown',
-      '100% private: analysis runs strictly in browser memory without file uploads',
+      'Client-side processing: document analysis runs in browser memory without file uploads',
     ],
     howToUse: [
       { step: 1, title: 'Select PDF', description: 'Drop any PDF into the inspector dropzone.' },
@@ -2213,7 +2213,7 @@ export const ADDITIONAL_TOOLS: ToolItem[] = [
       'Automatic percentage conversion (including CBSE 10.0 scale standard × 9.5)',
       'Academic honors classification (Summa Cum Laude, Magna Cum Laude, First Class)',
       'Add unlimited semester rows with instant dynamic recalculation',
-      '100% private: all transcript numbers remain on your local device',
+      'Client-side processing: transcript numbers remain in local browser memory',
     ],
     howToUse: [
       { step: 1, title: 'Choose Grading Scale', description: 'Select the 4.0, 5.0, or 10.0 scale matching your university or college grading policy.' },
@@ -2368,7 +2368,7 @@ export const ADDITIONAL_TOOLS: ToolItem[] = [
       'Decimal equivalency calculated to 4 decimal places',
       'Zero-denominator prevention guarding against undefined mathematical division',
       'One-click clipboard copy of the full equation, reduction, and decimal result',
-      '100% private in-browser computation with zero server uploads',
+      'Client-side computation: fraction calculations evaluate in local browser memory without server requests',
     ],
     howToUse: [
       { step: 1, title: 'Enter Numerators & Denominators', description: 'Type the top numerator and bottom denominator for both Fraction 1 and Fraction 2.' },
@@ -2445,7 +2445,7 @@ export const ADDITIONAL_TOOLS: ToolItem[] = [
       'Normalized unit ratio output (X : 1) with 3 decimal precision',
       'Supports positive and negative integers as well as decimal floating-point values',
       'One-click clipboard copy of computed solutions and proportion formulas',
-      '100% private: all calculations run locally in browser memory without server tracking',
+      'Client-side calculation: proportion formulas evaluate locally in browser memory without server requests',
     ],
     howToUse: [
       { step: 1, title: 'Choose Calculator Mode', description: 'Select "Solve Proportion (A:B = C:D)" to find an unknown variable, or "Simplify Ratio" to reduce two quantities.' },
@@ -2556,7 +2556,7 @@ export const ADDITIONAL_TOOLS: ToolItem[] = [
       'Comprehensive Academic Coverage: Solves trigonometry, logarithms, exponential growth, and combinatorics in one place.',
       'Calculation History: Never lose your previous calculation when working through multi-step engineering assignments.',
       'Degree and Radian Precision: Seamlessly toggle angle modes without recalculating intermediate values.',
-      'Completely Private & Offline: Operates 100% inside your local browser tab with zero internet requests after load.',
+      'Client-Side Execution: Evaluates calculations locally inside your browser tab without server-side calculation requests.',
     ],
     tips: [
       'Always check the DEG/RAD banner before evaluating trigonometric functions: physics projectile problems typically use degrees, while calculus uses radians.',
@@ -2602,7 +2602,7 @@ export const ADDITIONAL_TOOLS: ToolItem[] = [
       'Calculates automated Flesch Reading Ease score (0 to 100) and reading difficulty level',
       'Live paragraph, word, character, and syllable counters',
       'One-click summary statistics copy for editorial review',
-      '100% private: your writing is never sent to any server or AI model',
+      'Client-side analysis: text is analyzed in local browser memory without transmission to servers',
     ],
     howToUse: [
       { step: 1, title: 'Paste Your Draft', description: 'Paste or type your essay, article, or manuscript into the text area.' },
@@ -2681,7 +2681,7 @@ export const ADDITIONAL_TOOLS: ToolItem[] = [
       'Negative number support ("negative two hundred...")',
       'Instant case selection: Title Case, UPPERCASE, and lowercase output',
       'One-click clipboard copy for each formatted numbering representation',
-      '100% private: all translation algorithms run client-side in your browser',
+      'Client-side processing: numeral translations run locally in browser memory',
     ],
     howToUse: [
       { step: 1, title: 'Enter Number', description: 'Type or paste any positive or negative integer or decimal number into the input box.' },
@@ -2760,7 +2760,7 @@ export const ADDITIONAL_TOOLS: ToolItem[] = [
       'Format options: toggle standard hyphens (8-4-4-4-12) or compact 32-character hex format',
       'Letter casing switch: toggle between standard lowercase and uppercase hexadecimal output',
       'One-click copy for individual UUIDs or "Copy All" to export the entire newline-separated list',
-      '100% private: all identifiers are created in local browser memory with zero network calls',
+      'Client-side generation: UUIDs are generated in local browser memory via Web Crypto API without network requests',
     ],
     howToUse: [
       { step: 1, title: 'Choose Batch Size', description: 'Select how many UUIDs you want to generate (between 1 and 50).' },
@@ -2842,7 +2842,7 @@ export const ADDITIONAL_TOOLS: ToolItem[] = [
       'Interactive date and time picker to convert custom future or historical calendar events into epoch seconds and ms',
       'Live ticking Unix epoch clock with one-click copy of current real-time second',
       'Year 2038 (Y2038) overflow safety via 64-bit JavaScript numeric representation',
-      '100% private: date conversions execute locally in browser memory without server latency',
+      'Client-side processing: timestamp conversions execute locally in browser memory without server requests',
     ],
     howToUse: [
       { step: 1, title: 'Convert Timestamp to Date', description: 'Paste a 10-digit or 13-digit timestamp into the left field; the tool immediately displays UTC, local time, and relative duration.' },
@@ -3066,7 +3066,7 @@ export const ADDITIONAL_TOOLS: ToolItem[] = [
       'Calculates print dimensions at 150 DPI (flyers & posters) and 72 DPI (screen graphics)',
       'Instant pixel width, height, and total sensor megapixel breakdown',
       'Simplified aspect ratio calculation (e.g. 3:2, 4:3, 16:9)',
-      '100% private in-browser analysis without uploading large photo files',
+      'Client-side image analysis: inspects dimensions in browser memory without server file uploads',
     ],
     howToUse: [
       { step: 1, title: 'Upload Image', description: 'Drag and drop any JPG, PNG, or WebP photo into the dropzone.' },

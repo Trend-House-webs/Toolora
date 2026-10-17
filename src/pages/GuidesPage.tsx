@@ -60,10 +60,10 @@ export function GuidesPage() {
         <div className="flex flex-wrap items-center gap-4 text-xs text-slate-500 mt-4">
           <span className="flex items-center gap-1.5 font-medium text-slate-700">
             <ShieldCheck className="w-4 h-4 text-emerald-600" />
-            100% Client-Side Workflows
+            In-Browser Client-Side Workflows
           </span>
           <span aria-hidden="true" className="text-slate-300">·</span>
-          <span>Zero Server Uploads</span>
+          <span>No Server File Uploads</span>
           <span aria-hidden="true" className="text-slate-300">·</span>
           <span>Actionable Step-by-Step Solutions</span>
         </div>

@@ -221,7 +221,7 @@ export function PasswordGen() {
 
         <div className="pt-4 border-t border-slate-100 flex items-center gap-2 text-xs text-slate-500">
           <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
-          <span>Generated with cryptographically secure Web Crypto API (`window.crypto`). Passwords are never sent across any network.</span>
+          <span>Generated locally with the browser Web Crypto API (`window.crypto`) without transmitting inputs or passwords to a server.</span>
         </div>
       </div>
     </div>

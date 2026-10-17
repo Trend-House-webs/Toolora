@@ -163,7 +163,7 @@ export const CATEGORIES: CategoryInfo[] = [
         title: 'Data Encoding & Developer Formatters',
         description: 'Encode query strings, convert binary to Base64, format nested JSON trees, and convert color codes.',
         whenToChoose: 'Choose JSON Formatter when debugging API responses. Choose Base64 or URL Encode tools when transferring data safely through web URLs and headers.',
-        toolSlugs: ['json-formatter', 'base64-tool', 'url-encoder-decoder', 'color-converter'],
+        toolSlugs: ['json-formatter', 'base64-encoder-decoder', 'url-encoder-decoder', 'color-converter'],
       },
       {
         title: 'Text Cleaning & Content Auditing',
@@ -214,7 +214,7 @@ export const CATEGORIES: CategoryInfo[] = [
         title: 'Developer Identifiers & Data Encoders',
         description: 'Cryptographically secure UUID generators, Unix timestamp converters, JSON formatters, and Base64 encoders.',
         whenToChoose: 'Choose developer utilities when generating mock data, inspecting and beautifying API payloads, or encoding URL query strings safely.',
-        toolSlugs: ['uuid-generator', 'timestamp-converter', 'json-formatter', 'base64-tool'],
+        toolSlugs: ['uuid-generator', 'timestamp-converter', 'json-formatter', 'base64-encoder-decoder'],
       },
       {
         title: 'Text Cleaning, Word Counts & Study Timers',
@@ -430,7 +430,7 @@ export const TOOLS: ToolItem[] = [
       'Preserves original color fidelity without secondary compression artifacts',
       'Ideal for text, line art, diagrams, and digital graphics editing',
       'Compatible with Photoshop, Figma, Canva, and all design suites',
-      '100% private: images are processed in local memory without server uploads',
+      'Client-side processing: images are processed in local browser memory without server uploads',
     ],
     howToUse: [
       { step: 1, title: 'Select JPG File', description: 'Upload your JPEG image using the file selector or drag and drop.' },
@@ -458,7 +458,7 @@ export const TOOLS: ToolItem[] = [
       'Lossless Archiving: PNG prevents generation loss during repeated saves in photo editors.',
       'Crisp Text & Icons: Ideal format for screenshots, diagrams, and digital graphics with sharp boundaries.',
       'Universal Editing Support: Compatible with Figma, Photoshop, Canva, and all design workflows.',
-      'Completely Private: Files stay locally in your browser memory throughout the entire conversion.',
+      'In-Browser Execution: Files stay locally in your browser memory throughout the conversion.',
     ],
     tips: [
       'Converting from JPG to PNG does not automatically remove the background or create transparency (JPG files lack an alpha transparency channel), but it produces a lossless file ready for cutout and layer editing.',
@@ -559,7 +559,7 @@ export const TOOLS: ToolItem[] = [
     description: 'Modernize JPG images into high-performance WebP format for fast web delivery.',
     detailedDescription: 'Convert your JPEG photos to next-generation Google WebP format. WebP produces images that are 25–35% smaller than comparable JPEGs at equivalent visual quality.',
     metaTitle: 'Free JPG to WebP Converter — Next-Gen Image Optimization',
-    metaDescription: 'Convert JPG to WebP online for 25%–35% smaller files and faster website speeds. Client-side, free, and completely private.',
+    metaDescription: 'Convert JPG to WebP online for 25%–35% smaller files and faster website speeds. Free and processed client-side in your browser.',
     icon: 'Zap',
     isFeatured: true,
     badge: 'Next-Gen',
@@ -754,7 +754,7 @@ export const TOOLS: ToolItem[] = [
       'Lossless pixel extraction from WebP into standard PNG container',
       'Full preservation of transparent alpha layers and anti-aliasing',
       'Compatible with all creative desktop suites (Photoshop, Figma, Illustrator, InDesign)',
-      '100% private: images are decoded and saved locally in browser memory',
+      'Client-side processing: images are decoded and saved locally in browser memory without server uploads',
     ],
     howToUse: [
       { step: 1, title: 'Upload WebP', description: 'Select the WebP file you want to convert.' },
@@ -903,7 +903,7 @@ export const TOOLS: ToolItem[] = [
       'Interactive draggable crop window with real-time pixel dimension readout',
       'Full-resolution HTML5 canvas slicing without downsampling',
       'Lossless PNG export with instant browser download',
-      '100% private: photos remain strictly on your local computer or phone',
+      'Client-side processing: photos are cropped locally in browser memory without server uploads',
     ],
     howToUse: [
       { step: 1, title: 'Upload Image', description: 'Select or drag and drop any JPG, PNG, WebP, GIF, or BMP image into the upload dropzone.' },
@@ -1054,7 +1054,7 @@ export const TOOLS: ToolItem[] = [
       'Granular opacity slider (10% to 100%) and font size controls (12px to 96px)',
       'Hex color picker and automatic contrast drop-shadow rendering',
       'High-resolution PNG export with embedded pixel data',
-      '100% private: your creative photography is never uploaded to external servers',
+      'Client-side processing: your creative photography is watermarked in browser memory without server file uploads',
     ],
     howToUse: [
       { step: 1, title: 'Upload Photo', description: 'Select or drag and drop any JPG, PNG, WebP, GIF, or BMP image into the workspace.' },
@@ -1086,7 +1086,7 @@ export const TOOLS: ToolItem[] = [
     whyUse: [
       'Prevent Image Theft: Clearly identify your creative work before publishing to social media, portfolios, or stock sites.',
       'Confidentiality Tagging: Stamp sample proofs or sensitive documents with "DRAFT", "PROOF", or "CONFIDENTIAL".',
-      'Zero Server Risk: High-resolution client assets and client proofs never leave your computer.',
+      'Local Canvas Rendering: High-resolution client assets and client proofs are watermarked in browser memory without server file uploads.',
     ],
     tips: [
       'A 30% to 50% opacity in white or subtle grey provides clear attribution without distracting from the artwork.',
@@ -1108,7 +1108,7 @@ export const TOOLS: ToolItem[] = [
       },
       {
         question: 'Are my high-resolution photos uploaded to a server?',
-        answer: 'No. All canvas rendering and text embedding take place 100% client-side inside your browser memory.',
+        answer: 'No. All canvas rendering and text embedding take place client-side inside your browser memory without server uploads.',
       },
     ],
     relatedSlugs: ['crop-image', 'image-resizer', 'image-compressor', 'social-media-resizer'],
@@ -1133,7 +1133,7 @@ export const TOOLS: ToolItem[] = [
       'Custom color picker for letterbox/pillarbox padding in Contain mode',
       'Custom dimension mode for typing arbitrary target width and height',
       'Lossless PNG export with one-click download',
-      '100% client-side: social assets remain completely private on your device',
+      'Client-side processing: social assets are formatted locally in browser memory without server uploads',
     ],
     howToUse: [
       { step: 1, title: 'Upload Graphic', description: 'Drag and drop your photo or promotional banner into the workspace.' },
@@ -1289,7 +1289,7 @@ export const TOOLS: ToolItem[] = [
       'Countdown timer showing exact days remaining until your next birthday',
       'Western Zodiac sign determination (Aries, Taurus, etc.)',
       'Configurable target date to calculate historical age or future milestones',
-      '100% private: birth dates are processed locally without transmission or storage',
+      'Client-side processing: birth dates are processed locally in browser memory without server transmission or storage',
     ],
     howToUse: [
       { step: 1, title: 'Select Date of Birth', description: 'Enter your birth day, month, and year using the calendar selector.' },
@@ -1444,7 +1444,7 @@ export const TOOLS: ToolItem[] = [
       'Estimated silent reading time (225 wpm) and speaking duration (130 wpm)',
       'Automatic keyword density analysis highlighting top non-stopword frequencies',
       'One-click text copy and reset controls',
-      '100% client-side: your private writing is never sent to any server or AI model',
+      'Client-side processing: your writing is analyzed locally in browser memory without server transmission',
     ],
     howToUse: [
       { step: 1, title: 'Paste or Type', description: 'Paste your draft or type directly into the text editor workspace.' },
@@ -1519,7 +1519,7 @@ export const TOOLS: ToolItem[] = [
       'Configurable custom limit tracker with color-coded progress meter',
       'Quick presets for X/Twitter (280), SMS (160), SEO Title (60), Meta Description (160), Instagram Bio (150)',
       'Quick casing tools: UPPERCASE, lowercase, Title Case, and Trim Extra Spaces',
-      '100% private: no text is saved, uploaded, or exposed to third parties',
+      'Client-side processing: text is formatted locally in browser memory without server storage or transmission',
     ],
     howToUse: [
       { step: 1, title: 'Input Text', description: 'Paste or type your draft into the editor workspace.' },
@@ -1733,7 +1733,7 @@ export const TOOLS: ToolItem[] = [
     description: 'Create customizable QR codes for websites, Wi-Fi networks, text, emails, and phone numbers.',
     detailedDescription: 'Generate high-resolution QR codes instantly. Customize foreground and background colors, choose data type (URL, Wi-Fi, Plain Text, Email, Phone), and download as crisp PNG graphics.',
     metaTitle: 'Free QR Code Generator — Create Custom QR Codes Online',
-    metaDescription: 'Generate high-resolution QR codes for websites, Wi-Fi, text, email, and phone numbers. Custom colors, free download, and zero tracking.',
+    metaDescription: 'Generate high-resolution QR codes for websites, Wi-Fi, text, email, and phone numbers. Custom colors, free download, and direct static links.',
     icon: 'QrCode',
     isFeatured: true,
     isPopular: true,
@@ -1746,7 +1746,7 @@ export const TOOLS: ToolItem[] = [
       'High error correction level (Level H) providing up to 30% data recovery for outdoor or physical print use',
       'Crisp 400 × 400 pixel PNG output with standard quiet zone borders',
       'One-click download as PNG and direct clipboard image copy via modern Clipboard API',
-      '100% private and static: no tracking redirects, no analytics cookies, and codes never expire',
+      'Direct static QR codes: encodes target data directly into the QR matrix without redirect URLs or intermediate servers',
     ],
     howToUse: [
       { step: 1, title: 'Select Data Type', description: 'Choose Website URL, Wi-Fi Network, Plain Text, Email, or Phone Number from the selector bar.' },
@@ -1777,7 +1777,7 @@ export const TOOLS: ToolItem[] = [
     },
     whyUse: [
       'No Expiration Dates: Generated static QR codes encode data directly into the pixel pattern and never stop working.',
-      'Zero Tracking Links: Unlike commercial QR services that route through third-party redirect domains to harvest user data, our QR codes connect directly to your destination.',
+      'Direct Static Links: Unlike commercial QR services that route through third-party redirect domains to harvest user data, our QR codes connect directly to your destination.',
       'Instant Wi-Fi Sharing: Allow guests and colleagues to connect to secure home or office Wi-Fi networks in seconds.',
       'Professional Print Quality: Level H error correction and 400px resolution guarantee crisp physical printouts on posters, flyers, and merchandise.',
     ],

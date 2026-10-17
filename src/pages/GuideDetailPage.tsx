@@ -176,7 +176,7 @@ export function GuideDetailPage({ guide }: GuideDetailPageProps) {
                 </div>
               </div>
               <span className="text-2xs font-medium text-slate-500">
-                100% In-Browser Execution · Zero Server Uploads
+                Client-Side In-Browser Execution · No Server File Uploads
               </span>
             </div>
 

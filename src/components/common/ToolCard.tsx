@@ -10,12 +10,22 @@ interface ToolCardProps {
 }
 
 export function ToolCard({ tool, variant = 'default' }: ToolCardProps) {
-  const categoryLabel = tool.category === 'image' ? 'Image Tool' : 'Student & Utility';
+  const categoryLabel =
+    tool.category === 'image'
+      ? 'Image Tool'
+      : tool.category === 'pdf'
+      ? 'PDF Tool'
+      : tool.category === 'student'
+      ? 'Student Tool'
+      : tool.category === 'utility'
+      ? 'Daily Utility'
+      : 'Productivity Tool';
 
   if (variant === 'compact') {
     return (
       <Link
         to={`/tools/${tool.slug}`}
+        aria-label={`Open ${tool.name}`}
         className="group flex items-start gap-4 p-4 rounded-xl bg-white border border-slate-200/80 hover:border-blue-500/60 hover:shadow-md transition-all duration-200"
       >
         <div className="w-10 h-10 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center shrink-0 group-hover:bg-blue-600 group-hover:text-white transition-colors duration-200">
@@ -39,6 +49,7 @@ export function ToolCard({ tool, variant = 'default' }: ToolCardProps) {
   return (
     <Link
       to={`/tools/${tool.slug}`}
+      aria-label={`Open ${tool.name}`}
       className="group relative flex flex-col justify-between p-6 rounded-2xl bg-white border border-slate-200/80 hover:border-blue-500/60 hover:shadow-lg transition-all duration-200"
     >
       <div>
@@ -69,7 +80,7 @@ export function ToolCard({ tool, variant = 'default' }: ToolCardProps) {
 
       <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-sm font-semibold text-blue-600 group-hover:text-blue-700">
         <span className="inline-flex items-center gap-1.5">
-          Open Tool
+          <span>Open {tool.name}</span>
           <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
         </span>
         <span className="text-xs font-normal text-slate-400">Browser-only</span>
