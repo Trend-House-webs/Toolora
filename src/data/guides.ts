@@ -65,7 +65,7 @@ export const GUIDES: GuideItem[] = [
     slug: 'how-to-compress-images-online',
     title: 'How to Compress Images Online Without Losing Noticeable Quality',
     metaTitle: 'How to Compress Images Online Without Losing Quality | Toolora Guide',
-    metaDescription: 'Learn how image compression works, the difference between lossy and lossless algorithms, and how to reduce image file sizes in your browser without quality loss.',
+    metaDescription: 'Learn how image compression works, the trade-offs between file size and visual fidelity, and how to compress images online in your browser while preserving clarity.',
     categorySlug: 'image-tools',
     categoryName: 'Image Tools',
     categoryPath: '/category/image-tools',
@@ -121,8 +121,9 @@ export const GUIDES: GuideItem[] = [
     ],
     keyTakeaways: [
       'Image file size depends on pixel dimensions, color data precision, and embedded metadata.',
-      'A quality setting between 75% and 85% delivers 60% to 80% file size reduction with virtually no visible degradation.',
-      'Use the Image Compressor for fine-tuned visual fidelity, or the Photo Size Reducer when hitting an exact upload kilobyte quota.',
+      'A quality setting between 75% and 85% delivers 60% to 80% file size reduction with virtually no noticeable visual degradation on standard screens.',
+      'Distinguish general compression (quality slider in Image Compressor) from target-size workflows (strict kilobyte caps in Photo Size Reducer).',
+      'Format matters: use JPG for photos, PNG for graphics with transparency, and WebP for lightweight web publishing.',
       'Toolora performs compression client-side in your browser canvas, keeping your personal photos private.',
     ],
     sections: [
@@ -132,7 +133,7 @@ export const GUIDES: GuideItem[] = [
         paragraphs: [
           'Modern smartphone cameras and digital photography sensors routinely capture images at 12 to 48 megapixels. While this high resolution is fantastic for large-format physical printing, it results in raw photo files between 4 MB and 15 MB in size.',
           'When you attempt to upload these images to a job portal, government application, or attach them to an email, oversized files cause upload failures, exceed mailbox limits, and dramatically slow down web pages. Learning how to compress images online solves this instantly.',
-          'Toolora provides two dedicated utilities to solve this problem right in your browser: the [Image Compressor](/tools/image-compressor), which lets you visually tune quality with live before-and-after feedback, and the [Photo Size Reducer](/tools/photo-size-reducer), designed specifically when an upload portal enforces a strict kilobyte quota such as 200 KB or 500 KB.',
+          'If you need to optimize files immediately, use our browser-based [Image Compressor](/tools/image-compressor) to adjust visual quality with a live slider, or use [Photo Size Reducer](/tools/photo-size-reducer) to compress directly to a target kilobyte ceiling (such as under 200 KB or 500 KB). Both tools operate locally in browser memory without server file uploads.',
         ],
         keyPoints: [
           'Camera sensors embed extensive uncompressed color data and EXIF metadata (camera model, GPS coordinates, capture date).',
@@ -143,45 +144,55 @@ export const GUIDES: GuideItem[] = [
       },
       {
         id: 'lossy-vs-lossless',
-        heading: 'Lossy vs. Lossless Compression: Where the Bytes Go',
+        heading: 'Lossy vs. Lossless Compression: Balancing File Size and Quality',
         paragraphs: [
           'Image compression operates through two distinct technical approaches: lossy compression and lossless compression. Choosing the right method depends on your intended use case.',
-          'Lossless compression works by optimizing how image data is encoded and stripping non-visual metadata tags. The pixels themselves remain identical to the source. This typically reduces file size by 10% to 30% and is ideal for diagrams, archival photos, and pixel-art graphics.',
+          'Lossless compression optimizes how pixel data is encoded and strips non-visual metadata tags without modifying the original pixel values. This typically reduces file size by 10% to 30% and is ideal for diagrams, technical screenshots, and pixel-art graphics.',
           'Lossy compression selectively removes subtle color variations and high-frequency details that the human eye cannot easily discern in complex photographic scenes. In our [Image Compressor](/tools/image-compressor), adjusting the quality parameter between 75% and 85% typically achieves 60% to 85% reductions in file size while keeping images visually crisp.',
-          'If your primary constraint is a hard numerical file size limit rather than an arbitrary percentage, the [Photo Size Reducer](/tools/photo-size-reducer) algorithmically tests compression levels until the generated file meets your exact target weight.',
+          'There is always an inherent trade-off: higher compression drastically cuts file size, but pushing compression too aggressively (below 50%) introduces noticeable blocky pixelation and color banding. Staying in the 75% to 85% range delivers the optimal balance for website publishing and digital sharing.',
         ],
         callout: {
           type: 'info',
           title: 'The 75% to 85% Sweet Spot',
-          message: 'Setting lossy compression to 80% in the Image Compressor generally cuts file weight by more than half while maintaining crisp edges and faithful color reproduction.',
+          message: 'Setting lossy compression to 80% in the Image Compressor generally cuts file weight by more than half while maintaining crisp edges and faithful color reproduction without noticeable quality loss.',
         },
+      },
+      {
+        id: 'format-considerations',
+        heading: 'Format Considerations: JPG, PNG, and WebP',
+        paragraphs: [
+          'Choosing the right format before compressing can significantly reduce file weight even before adjusting quality settings:',
+          '• JPG (JPEG): Best for continuous-tone photography, portraits, and scenery. Its discrete cosine transform algorithms compress complex color gradations efficiently.',
+          '• PNG: Essential for logos, user interface screenshots, and graphics requiring alpha transparency. PNG uses lossless compression, which produces larger files for real-world photos but maintains perfect edge sharpness.',
+          '• WebP: Modern web format that supports both lossy and lossless modes as well as alpha transparency. Converting photos with [JPG to WebP](/tools/jpg-to-webp) often saves an additional 25% to 35% compared to standard JPEG compression.',
+        ],
       },
       {
         id: 'step-by-step-guide',
         heading: 'Step-by-Step: How to Compress an Image with Toolora',
         paragraphs: [
-          'Toolora provides client-side compression that runs directly inside your web browser using HTML5 Canvas APIs. Your files are never uploaded to a remote server, ensuring complete confidentiality for personal documents and photos.',
+          'Toolora provides two distinct compression workflows depending on your objective: visual tuning or meeting a hard file-size cap.',
         ],
         steps: [
           {
             step: 1,
-            title: 'Choose the Right Tool',
-            description: 'Open the [Image Compressor](/tools/image-compressor) for visual quality adjustment, or open the [Photo Size Reducer](/tools/photo-size-reducer) if you have an exact kilobyte cap to satisfy.',
+            title: 'Distinguish Your Workflow',
+            description: 'For general web publishing or portfolio sharing where you want to visually balance sharpness and file weight, choose [Image Compressor](/tools/image-compressor). If an upload portal imposes a strict kilobyte ceiling (e.g. under 200 KB), choose [Photo Size Reducer](/tools/photo-size-reducer).',
           },
           {
             step: 2,
-            title: 'Load Your Image File',
-            description: 'Drop your JPG, PNG, or WebP photo into the upload dropzone. Processing starts immediately in browser memory.',
+            title: 'Drop Your Photo into the Workspace',
+            description: 'Select or drag your JPG, PNG, or WebP photo into the upload card. The image is rendered immediately onto a local HTML5 canvas in browser memory without server uploads.',
           },
           {
             step: 3,
-            title: 'Set Quality or Target Size',
-            description: 'In the Image Compressor, slide the quality control to 75%–80%. In the Photo Size Reducer, enter your target limit (e.g., 200 KB or 500 KB).',
+            title: 'Set Quality or Target Kilobyte Cap',
+            description: 'In the Image Compressor, slide the quality control to 75%–80%. In the Photo Size Reducer, type your maximum file size limit (e.g. 200 KB or 500 KB).',
           },
           {
             step: 4,
-            title: 'Inspect and Download',
-            description: 'Check the real-time file size comparison and click Download to save the compressed image directly to your device with no watermarks.',
+            title: 'Review Savings and Download',
+            description: 'Compare the before-and-after file weights and visual preview. Click Download to save your compressed image directly to your device with no watermarks.',
           },
         ],
       },
@@ -195,7 +206,7 @@ export const GUIDES: GuideItem[] = [
           title: 'Resume Profile Headshot',
           scenario: 'A smartphone camera photo is 4.8 MB with dimensions of 4032x3024 pixels. The application portal rejects files larger than 500 KB.',
           solution: 'First, use the [Image Resizer](/tools/image-resizer) to scale the dimensions down to 1200x900 pixels. Then, pass the image through the [Image Compressor](/tools/image-compressor) at 82% quality, or set a 450 KB cap in the [Photo Size Reducer](/tools/photo-size-reducer).',
-          result: 'The final file drops from 4.8 MB down to 285 KB (over 94% reduction) with zero visible artifacts or fuzziness on desktop and mobile screens.',
+          result: 'The final file drops from 4.8 MB down to 285 KB (over 94% reduction) with no noticeable loss in visual clarity on desktop and mobile screens.',
         },
       },
       {
@@ -377,7 +388,7 @@ export const GUIDES: GuideItem[] = [
     slug: 'how-to-resize-an-image-without-losing-quality',
     title: 'How to Resize an Image Without Losing Quality',
     metaTitle: 'How to Resize an Image Without Losing Quality | Toolora Guide',
-    metaDescription: 'Learn how to resize images cleanly. Understand raster scaling, aspect ratios, downsampling vs upsampling, and how to avoid blurriness or distortion.',
+    metaDescription: 'Learn how image dimensions, aspect ratio and downsampling affect quality, with practical steps for resizing without blur or distortion.',
     categorySlug: 'image-tools',
     categoryName: 'Image Tools',
     categoryPath: '/category/image-tools',
@@ -432,25 +443,26 @@ export const GUIDES: GuideItem[] = [
       },
     ],
     keyTakeaways: [
-      'Downscaling (reducing dimensions) preserves sharpness by consolidating pixel data with interpolation filtering.',
-      'Upscaling (enlarging smaller images) inherently loses crispness because the computer must estimate missing pixels.',
+      'Downscaling (reducing dimensions) preserves perceived sharpness by consolidating pixel data via interpolation filtering.',
+      'Upscaling (enlarging small images) inherently loses crispness because the computer must mathematically estimate missing pixels.',
       'Always lock your aspect ratio using the Image Resizer or compute proportions with the Aspect Ratio Calculator.',
-      'Start with your original, highest-resolution file rather than re-scaling an already downsized version.',
+      'Start with your original, highest-resolution master photo rather than re-scaling an already downsized version.',
+      'Resizing modifies the raster pixel grid; while downsampling retains crisp visual clarity, raster scaling is not mathematically lossless.',
     ],
     sections: [
       {
         id: 'downscaling-vs-upscaling',
         heading: 'Downscaling vs. Upscaling: The Physics of Pixels',
         paragraphs: [
+          'If you need to resize a photo immediately, use our free [Image Resizer](/tools/image-resizer) with aspect ratio locking, or calculate proportional width and height with our [Aspect Ratio Calculator](/tools/aspect-ratio-calculator). Both tools run entirely in your web browser with zero server file uploads.',
           'Digital photos are raster graphics composed of a finite grid of tiny colored squares called pixels. When you resize an image, you are altering that total pixel grid.',
           'Downsampling (reducing pixel dimensions) combines adjacent pixels using interpolation algorithms like bicubic resampling. Because you are condensing rich visual information into a tighter grid, downscaled images typically look remarkably sharp and detailed.',
-          'Upscaling (enlarging pixel dimensions) does the exact opposite: it attempts to create new pixels where none existed before. Because the computer must mathematically guess intermediate color values, upscaled images look soft, fuzzy, or visibly pixelated.',
-          'To ensure perfect resizing results, calculate your target proportions beforehand using the [Aspect Ratio Calculator](/tools/aspect-ratio-calculator), and perform the scaling cleanly in your browser using the [Image Resizer](/tools/image-resizer).',
+          'Upscaling (enlarging pixel dimensions) does the exact opposite: it attempts to create new pixels where none existed before. Because the computer must mathematically guess intermediate color values, upscaled images look soft, fuzzy, or visibly pixelated. Resizing is an interpolation process that alters the raster grid; while downsampling preserves visual sharpness, raster resizing is not mathematically lossless.',
         ],
         callout: {
           type: 'info',
           title: 'Rule of Thumb',
-          message: 'Always capture or export your original images at high resolution. Downsizing is clean and lossless in appearance; enlarging a tiny thumbnail will never recover lost fine details.',
+          message: 'Always capture or export your original images at high resolution. Downsizing maintains high visual sharpness; enlarging a tiny thumbnail will never recover optical detail that was not captured by the camera sensor.',
         },
       },
       {
@@ -503,15 +515,15 @@ export const GUIDES: GuideItem[] = [
       },
       {
         id: 'practical-scenario',
-        heading: 'Practical Example: Preparing a Hero Header for a Website',
+        heading: 'Practical Example: Downscaling vs. Upscaling Before and After',
         paragraphs: [
-          'Web designers often receive 24-megapixel camera photographs (6000x4000 pixels) that must fit into a 1200x800 pixel content container.',
+          'Consider two common real-world scenarios that demonstrate how pixel dimensions dictate visual quality:',
         ],
         practicalScenario: {
-          title: 'Blog Article Featured Image',
-          scenario: 'A photographer delivers a 6000x4000 RAW-export JPEG weighing 8.4 MB. The blog template container is 1200 pixels wide.',
-          solution: 'Verify the 3:2 ratio in the [Aspect Ratio Calculator](/tools/aspect-ratio-calculator). Load the image into the [Image Resizer](/tools/image-resizer), keep aspect ratio locked, and enter 1200 in the Width input. The height automatically scales to 800.',
-          result: 'The image renders with crystal clarity on all desktop and mobile displays, while file weight is reduced by over 85% even before applying compression.',
+          title: 'Comparing Downscaling vs. Upscaling',
+          scenario: 'Case A (Downscaling): A 24-megapixel camera photograph (4000x3000 pixels, 8.4 MB) straight from a DSLR needs to fit into a 1200x900 website hero container. Case B (Upscaling): A small 400x300 pixel thumbnail must be stretched to fill the same 1200x900 container.',
+          solution: 'Load both files into the [Image Resizer](/tools/image-resizer) with aspect ratio locked, and enter 1200 in the Width input (height automatically scales to 900 px).',
+          result: 'In Case A (downscaling), the image retains razor-sharp edges and high contrast because bicubic filtering condenses 12 million pixels into 1.08 million pixels. In Case B (upscaling), each original pixel is stretched across 9 times its area, causing visible blur and pixelated softness because the computer cannot reconstruct missing optical camera data.',
         },
       },
       {

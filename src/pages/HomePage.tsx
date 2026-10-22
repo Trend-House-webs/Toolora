@@ -68,11 +68,11 @@ export function HomePage({ onOpenSearchModal }: HomePageProps) {
       <section className="relative pt-8 pb-4 sm:pt-12 sm:pb-8 text-center">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
           <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-tight">
-            Everyday tools, made simple.
+            Free Online Tools for Everyday Tasks
           </h1>
 
           <p className="text-base sm:text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed">
-            Free online tools for images, PDF documents, academic calculations, and daily digital tasks. Process files directly in your web browser with zero sign-up and complete confidentiality.
+            Toolora offers a comprehensive collection of free browser tools—including image tools online, free online calculators, and online utility tools. Process photos, assemble PDF documents, calculate academic marks, and format text directly in your web browser with zero sign-up or server file uploads.
           </p>
 
           {/* Primary Tool Search Bar */}
@@ -103,9 +103,9 @@ export function HomePage({ onOpenSearchModal }: HomePageProps) {
           <div className="pt-1 text-xs text-slate-500 font-medium flex items-center justify-center flex-wrap gap-2">
             <span>Free to use</span>
             <span aria-hidden="true" className="text-slate-300">·</span>
-            <span>No sign-up</span>
+            <span>No sign-up required</span>
             <span aria-hidden="true" className="text-slate-300">·</span>
-            <span>Client-side processing</span>
+            <span>In-browser processing</span>
             <span aria-hidden="true" className="text-slate-300">·</span>
             <span>Zero server file uploads</span>
           </div>

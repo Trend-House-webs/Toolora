@@ -109,8 +109,8 @@ const staticPages: PageMetadata[] = [
   },
   {
     path: 'disclaimer',
-    title: 'Disclaimer — Toolora',
-    description: 'Disclaimer and terms of accuracy for calculations and file transformations performed on Toolora.',
+    title: 'Toolora Website Disclaimer & Tool Limitations',
+    description: 'Read the official Toolora website disclaimer covering tool limitations, calculation accuracy, in-browser processing, and terms of use for our browser utilities.',
     priority: '0.4',
     changefreq: 'monthly',
     schema: {

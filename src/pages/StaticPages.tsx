@@ -3,6 +3,7 @@ import { Breadcrumbs } from '../components/common/Breadcrumbs';
 import { SEO } from '../components/common/SEO';
 import { ShieldCheck, CheckCircle2, Lock, Zap, AlertCircle, Send, Loader2, MessageSquare, RotateCcw } from 'lucide-react';
 import { SITE_URL } from '../config/site';
+import { Link } from '../context/RouterContext';
 
 const getStaticBreadcrumbSchema = (name: string, path: string) => ({
   '@context': 'https://schema.org',
@@ -223,8 +224,8 @@ export function DisclaimerPage() {
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 space-y-8">
       <SEO
-        title="Disclaimer — Toolora"
-        description="Legal and operational disclaimer for Toolora calculations, conversions, and client-side utilities."
+        title="Toolora Website Disclaimer & Tool Limitations"
+        description="Read the official Toolora website disclaimer covering tool limitations, calculation accuracy, in-browser processing, and terms of use for our browser utilities."
         canonicalPath="/disclaimer"
         schema={getStaticBreadcrumbSchema('Disclaimer', '/disclaimer')}
       />
@@ -233,7 +234,7 @@ export function DisclaimerPage() {
 
       <div className="space-y-4">
         <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
-          Legal & Operational Disclaimer
+          Toolora Website Disclaimer & Tool Limitations
         </h1>
         <p className="text-xs text-slate-400">Effective Date: October 2026</p>
       </div>
@@ -242,22 +243,50 @@ export function DisclaimerPage() {
         <div>
           <h2 className="text-base font-bold text-slate-900 mb-2">1. Educational & General Utility Only</h2>
           <p>
-            All calculations and conversions provided by Toolora (including Percentage Calculator, GPA Calculator, and Unit Converter) are offered for general informational and educational convenience. While formulas are mathematically validated, users should confirm critical grades or technical figures with their respective academic institutions or certified regulatory bodies.
+            All tools, calculators, format converters, and text utilities provided on Toolora are offered strictly for general informational, educational, and convenience purposes. While our formulas and conversion routines are tested against standard mathematical and algorithmic conventions, Toolora does not provide formal legal, financial, architectural, or certified academic advice.
           </p>
         </div>
 
         <div>
-          <h2 className="text-base font-bold text-slate-900 mb-2">2. Hardware & Device Performance</h2>
+          <h2 className="text-base font-bold text-slate-900 mb-2">2. Tool Limitations & In-Browser Processing Boundaries</h2>
           <p>
-            Because all processing executes client-side on your local machine, performance, processing speed, and file handling capabilities depend entirely upon your device hardware, available RAM, and browser software version.
+            Toolora operates without server-side processing queues; operations run directly within your web browser using HTML5 Canvas, WebAssembly, and JavaScript APIs. Consequently, processing capacity, execution speed, and file handling depend directly upon your individual device hardware, available RAM, operating system, and browser version. Extremely large files or complex documents may exceed browser memory allocations.
           </p>
         </div>
 
         <div>
-          <h2 className="text-base font-bold text-slate-900 mb-2">3. Limitation of Liability</h2>
+          <h2 className="text-base font-bold text-slate-900 mb-2">3. Verification of Calculations & File Conversions</h2>
           <p>
-            Under no circumstances shall Toolora or its operators be liable for any direct, indirect, incidental, or consequential damages resulting from the use or inability to use our free utilities.
+            Users are advised to independently verify critical numbers—such as university GPA calculations, scientific unit conversions, financial figures, or official print resolution specifications—against institutional guidelines and authoritative source documentation before taking formal action.
           </p>
+        </div>
+
+        <div>
+          <h2 className="text-base font-bold text-slate-900 mb-2">4. Limitation of Liability & "As Is" Provision</h2>
+          <p>
+            Toolora and its operators provide all utilities on an "as is" and "as available" basis without express or implied warranties of any kind. Under no circumstances shall Toolora be liable for direct, indirect, incidental, special, or consequential damages resulting from the use or inability to use our tools, including data loss or unintended file transformations.
+          </p>
+        </div>
+
+        <div className="pt-4 border-t border-slate-200">
+          <h2 className="text-base font-bold text-slate-900 mb-2">5. Related Legal Information & Terms of Use</h2>
+          <p className="mb-3">
+            Your use of Toolora is also subject to our general platform rules and privacy disclosures:
+          </p>
+          <ul className="space-y-1.5 text-xs sm:text-sm">
+            <li>
+              • To understand how tool data and technical connection logs are handled, read our{' '}
+              <Link to="/privacy" className="font-semibold text-blue-600 hover:text-blue-800 underline">
+                Privacy Policy
+              </Link>.
+            </li>
+            <li>
+              • To review user responsibilities and acceptable use rules, please see our{' '}
+              <Link to="/terms" className="font-semibold text-blue-600 hover:text-blue-800 underline">
+                Terms of Service
+              </Link>.
+            </li>
+          </ul>
         </div>
       </div>
     </div>

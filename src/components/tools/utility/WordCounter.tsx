@@ -93,6 +93,7 @@ export function WordCounter() {
           value={text}
           onChange={(e) => setText(e.target.value)}
           placeholder="Paste or write your text here to analyze..."
+          aria-label="Text to count and analyze"
           className="w-full p-4 text-base text-slate-800 bg-slate-50/60 border border-slate-300 rounded-2xl focus:bg-white focus:outline-hidden focus:border-blue-500 leading-relaxed font-sans"
         />
       </div>
