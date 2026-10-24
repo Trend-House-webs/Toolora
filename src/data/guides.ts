@@ -531,7 +531,7 @@ export const GUIDES: GuideItem[] = [
         heading: 'Understanding Resolution for Screen vs. Print',
         paragraphs: [
           'Digital displays measure image size in absolute pixel counts (such as 1920x1080), regardless of physical screen size. Physical printers, by contrast, rely on DPI (dots per inch) to determine how many physical ink dots are deposited per inch of paper.',
-          'For web and digital displays, only pixel dimensions matter. For physical printing on photo paper or posters, you generally need 300 DPI for gallery-grade sharpness. You can verify your physical print dimensions using the Image DPI & Print Checker.',
+          'For web and digital displays, only pixel dimensions matter. For physical printing on photo paper or posters, you generally need 300 DPI for gallery-grade sharpness. You can verify your physical print dimensions using the [Image DPI & Print Checker](/tools/image-dpi-checker).',
         ],
       },
     ],
