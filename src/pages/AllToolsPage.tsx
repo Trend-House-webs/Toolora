@@ -112,7 +112,7 @@ export function AllToolsPage() {
             All Free Online Tools ({TOOLS.length})
           </h1>
           <p className="text-sm sm:text-base text-slate-600 mt-2 leading-relaxed max-w-2xl">
-            Browse our full catalog of free online browser utilities. Fast, client-side, with zero sign-ups or payments.
+            Welcome to the complete Toolora tools directory. Browse online tools across image editing, PDF document assembly, student GPA calculators, and everyday utilities. This comprehensive browser utilities index and free web tools list runs client-side in your device memory with zero accounts, subscriptions, or server file uploads.
           </p>
         </div>
 

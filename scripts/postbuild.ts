@@ -95,7 +95,7 @@ const staticPages: PageMetadata[] = [
   {
     path: 'terms',
     title: 'Terms of Service — Toolora',
-    description: 'Terms of service for using Toolora and our suite of free online browser utilities.',
+    description: 'Toolora Terms of Service. Understand the terms, permissions, and conditions governing the free use of our client-side web tools.',
     priority: '0.4',
     changefreq: 'monthly',
     schema: {
@@ -220,16 +220,16 @@ const toolPages: PageMetadata[] = TOOLS.map((tool) => {
 
 const guidesHubPage: PageMetadata = {
   path: 'guides',
-  title: 'Practical Guides & Browser Tool Tutorials — Toolora',
-  description: 'Clear, practical tutorials on image compression, format selection, resizing without quality loss, and converting images to PDF directly in your browser.',
+  title: 'Online Tool Guides — Free Browser Utility Tutorials | Toolora',
+  description: 'Practical online tool guides and tutorials. Learn how to compress photos, choose between JPG, PNG, and WebP, resize images cleanly, and convert files to PDF in your browser.',
   priority: '0.85',
   changefreq: 'weekly',
   schema: [
     {
       '@context': 'https://schema.org',
       '@type': 'CollectionPage',
-      name: 'Practical Guides & Browser Tool Tutorials — Toolora',
-      description: 'Clear tutorials and guides for everyday digital tools.',
+      name: 'Online Tool Guides — Free Browser Utility Tutorials | Toolora',
+      description: 'Practical online tool guides and tutorials. Learn how to compress photos, choose between JPG, PNG, and WebP, resize images cleanly, and convert files to PDF in your browser.',
       url: `${SITE_URL}/guides`,
     },
     {

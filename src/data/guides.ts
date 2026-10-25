@@ -318,10 +318,28 @@ export const GUIDES: GuideItem[] = [
           'If you have existing files that need format changes, Toolora provides dedicated browser converters including [JPG to WebP](/tools/jpg-to-webp), [PNG to JPG](/tools/png-to-jpg), [WebP to PNG](/tools/webp-to-png), [JPG to PNG](/tools/jpg-to-png), and [PNG to WebP](/tools/png-to-webp). All conversions execute client-side with zero server uploads.',
         ],
         keyPoints: [
-          'JPG (JPEG): Lossy compression, 24-bit color (16.7 million colors), no transparency support, universal hardware and software compatibility.',
-          'PNG: Lossless compression, full 8-bit alpha channel transparency, crisp sharp edges on text and geometric shapes, larger file sizes for complex photos.',
-          'WebP: Modern format supporting both lossy and lossless modes, alpha transparency, and roughly 25% to 35% smaller file sizes than comparable JPG and PNG files.',
+          'JPG (JPEG): Lossy discrete cosine transform compression, 24-bit RGB color (16.7 million colors), no alpha transparency support, universal hardware and software compatibility.',
+          'PNG: Lossless DEFLATE compression, full 8-bit alpha channel transparency, crisp pixel boundaries for text and UI screenshots, larger file size for photographic scenes.',
+          'WebP: Modern predictive compression supporting both lossy and lossless modes, full alpha transparency, and roughly 25% to 35% smaller file sizes than comparable JPG files.',
+          'Transparent verification: inspect whether an existing asset contains genuine alpha channels using the [Transparent Background Checker](/tools/transparent-background-checker).',
+          'Fine-tuned optimization: adjust visual compression parameters directly with our [Image Compressor](/tools/image-compressor).',
         ],
+      },
+      {
+        id: 'format-comparison-matrix',
+        heading: 'Side-by-Side Comparison: JPG vs. PNG vs. WebP',
+        paragraphs: [
+          'When evaluating formats for websites, email attachments, and design assets, consider these core technical dimensions:',
+          '1. Compression Algorithm: JPG uses lossy mathematical approximations that discard fine variance in photographic gradients. PNG uses lossless DEFLATE compression preserving exact pixel values. WebP supports both lossy VP8 prediction and lossless modes.',
+          '2. Alpha Transparency Support: JPG does not support transparency; transparent areas flatten to solid white or black. PNG and WebP both support full 8-bit alpha channels with smooth anti-aliased edges.',
+          '3. Browser & Software Compatibility: JPG and PNG are universally supported across every operating system, web browser, and legacy desktop software program created in the last 30 years. WebP is supported across all modern web browsers (Chrome, Edge, Safari, Firefox), but legacy desktop editors (like older Photoshop releases) may require [WebP to PNG](/tools/webp-to-png) conversion.',
+          '4. Storage Efficiency: For real-world photographs, WebP typically delivers files 25% to 35% lighter than JPG at equal visual quality. For transparent graphics, WebP can achieve 60% to 80% size reductions compared to heavyweight PNG files via [PNG to WebP](/tools/png-to-webp).',
+        ],
+        callout: {
+          type: 'info',
+          title: 'Quick Format Selection Rule',
+          message: 'Use WebP for modern web publishing. Use PNG when you need transparent backgrounds or pixel-crisp text. Use JPG for natural camera photos when maximum legacy compatibility is required.',
+        },
       },
       {
         id: 'when-to-use-jpg',
@@ -329,7 +347,7 @@ export const GUIDES: GuideItem[] = [
         paragraphs: [
           'JPG uses discrete cosine transform (DCT) mathematical compression designed specifically for continuous-tone photographic imagery. It excels at smoothing subtle color gradations found in nature, portraits, and real-world scenes.',
           'Because JPEG discards high-frequency pixel contrast that the human visual cortex rarely notices, it yields lightweight files ideal for social sharing, photo albums, and email attachments.',
-          'If you have large PNG screenshot files that do not need transparency, converting them with our [PNG to JPG](/tools/png-to-jpg) converter can slash file size by 50% to 80%. Similarly, if you need universal compatibility for WebP graphics, use our [WebP to JPG](/tools/webp-to-jpg) tool.',
+          'If you have large PNG screenshot files that do not need transparency, converting them with our [PNG to JPG](/tools/png-to-jpg) converter can slash file size by 50% to 80%. Similarly, if you need universal compatibility for WebP graphics, use our [WebP to JPG](/tools/webp-to-jpg) tool. To fine-tune compression levels on existing JPEG photos, open the [Image Compressor](/tools/image-compressor).',
         ],
         callout: {
           type: 'tip',
@@ -342,7 +360,7 @@ export const GUIDES: GuideItem[] = [
         heading: 'When to Use PNG for Logos, Screenshots, and Transparency',
         paragraphs: [
           'PNG uses DEFLATE lossless compression, guaranteeing that every single pixel rendered matches the original file without any approximation. This makes PNG the industry benchmark for digital design, brand assets, and user interface captures.',
-          'Crucially, PNG features true alpha transparency. This allows logos, product cutouts, and icons to blend cleanly on top of any background color or textured layout without awkward white borders.',
+          'Crucially, PNG features true alpha transparency. This allows logos, product cutouts, and icons to blend cleanly on top of any background color or textured layout without awkward white borders. You can verify if an asset has an active alpha channel with the [Transparent Background Checker](/tools/transparent-background-checker).',
           'When converting from JPEG to PNG using [JPG to PNG](/tools/jpg-to-png), you preserve existing visual quality for further graphic editing. If you have WebP images that need to be edited in desktop software without WebP support, convert them using [WebP to PNG](/tools/webp-to-png).',
         ],
         keyPoints: [
@@ -371,15 +389,17 @@ export const GUIDES: GuideItem[] = [
         heading: 'How to Choose and Convert in Practice',
         paragraphs: [
           'Follow this simple decision rule for your projects:',
-          '1. Need a transparent background? Choose WebP for the web using [PNG to WebP](/tools/png-to-webp), or PNG for desktop software compatibility using [WebP to PNG](/tools/webp-to-png).',
+          '1. Need a transparent background? Choose WebP for the web using [PNG to WebP](/tools/png-to-webp), or PNG for desktop software compatibility using [WebP to PNG](/tools/webp-to-png). Test transparency anytime with the [Transparent Background Checker](/tools/transparent-background-checker).',
           '2. High-detail real-world photo? Choose WebP for websites using [JPG to WebP](/tools/jpg-to-webp), or JPG for universal compatibility.',
           '3. Software screenshot with fine text? Choose PNG to keep every letter sharp using [JPG to PNG](/tools/jpg-to-png), or lossless WebP.',
+          '4. Need to compress an existing JPG or PNG? Tune file weight directly with our in-browser [Image Compressor](/tools/image-compressor).',
         ],
         keyPoints: [
           'Use [JPG to WebP](/tools/jpg-to-webp) when modernizing photo galleries for websites.',
           'Use [PNG to JPG](/tools/png-to-jpg) when preparing receipts or photos that do not need transparency to save storage space.',
           'Use [WebP to PNG](/tools/webp-to-png) if an older desktop application does not recognize WebP files.',
           'Use [PNG to WebP](/tools/png-to-webp) to preserve transparent backgrounds while drastically cutting file weight.',
+          'Use [Transparent Background Checker](/tools/transparent-background-checker) to verify alpha channels before deploying assets.',
         ],
       },
     ],
@@ -611,7 +631,7 @@ export const GUIDES: GuideItem[] = [
       'PDF is the global standard for multi-page document submissions because layout geometry is locked across all devices and printers.',
       'Converting photos of receipts, school assignments, or forms into PDF ensures the recipient sees exactly what you intended.',
       'Use Image to PDF for multi-image portfolios, JPG to PDF for camera photos, or PNG to PDF for screenshots.',
-      'Toolora compiles PDF files client-side, making it completely secure for sensitive personal IDs and financial documents.',
+      'Toolora compiles PDF files client-side in browser memory without server file uploads.',
     ],
     sections: [
       {
@@ -634,40 +654,45 @@ export const GUIDES: GuideItem[] = [
         heading: 'Document Privacy: Why Client-Side Processing Matters',
         paragraphs: [
           'Images frequently converted to PDF include sensitive personal materials: scanned passports, driver licenses, university transcripts, medical bills, and tax forms.',
-          'Many online PDF utilities upload your files to third-party cloud servers where they may sit in temporary directories or be indexed by logging services. Toolora operates completely client-side in your browser. With our [Image to PDF](/tools/image-to-pdf) tool, the PDF file is assembled directly in your device’s local memory using JavaScript and Web APIs. Your confidential files never touch an external server.',
+          'Many online PDF utilities upload your files to third-party cloud servers where they may sit in temporary directories or be indexed by logging services. Toolora operates completely client-side in your browser. With our [Image to PDF](/tools/image-to-pdf) tool, the PDF file is assembled directly in your device’s local memory using JavaScript and Web APIs. Your confidential files are not uploaded to Toolora servers.',
         ],
         callout: {
           type: 'tip',
-          title: 'Complete Local Privacy',
-          message: 'Because processing happens entirely within your web browser, Toolora works offline once loaded and never transmits your documents over the network.',
+          title: 'Local In-Browser Assembly',
+          message: 'Because document assembly runs client-side in your web browser memory, files are processed locally and are not uploaded to remote servers.',
         },
       },
       {
         id: 'step-by-step-guide',
         heading: 'Step-by-Step: Converting Images to PDF in Toolora',
         paragraphs: [
-          'Converting an image to a clean PDF takes just a few clicks in Toolora:',
+          'Converting single or multiple images to a clean, standardized PDF takes just a few steps in Toolora:',
         ],
         steps: [
           {
             step: 1,
-            title: 'Choose Your Conversion Tool',
-            description: 'Open [Image to PDF](/tools/image-to-pdf) for full layout configuration, [JPG to PDF](/tools/jpg-to-pdf) for standard camera photos, or [PNG to PDF](/tools/png-to-pdf) for diagrams.',
+            title: 'Select the Best Conversion Tool',
+            description: 'Open [Image to PDF](/tools/image-to-pdf) for full layout configuration, [JPG to PDF](/tools/jpg-to-pdf) for standard camera photos, or [PNG to PDF](/tools/png-to-pdf) for digital screenshots.',
           },
           {
             step: 2,
-            title: 'Select or Drag Your Images',
-            description: 'Drop your JPG, PNG, or WebP files into the tool dropzone.',
+            title: 'Drop Your JPG, PNG, or WebP Files',
+            description: 'Upload your image files into the tool dropzone. Toolora supports JPG, PNG, and WebP graphics simultaneously.',
           },
           {
             step: 3,
-            title: 'Configure Page Layout',
-            description: 'Select your preferred paper size (e.g. A4 or US Letter) and choose orientation (Portrait or Landscape) to fit your photos neatly.',
+            title: 'Arrange Page Ordering',
+            description: 'Verify the sequence of your photos. Drag thumbnails or use page reorder arrows so documents read in the proper order.',
           },
           {
             step: 4,
+            title: 'Configure Page Sizing & Margins',
+            description: 'Select your preferred paper size (A4, US Letter, or Fit to Image), set orientation (Portrait or Landscape), and choose margin spacing.',
+          },
+          {
+            step: 5,
             title: 'Generate and Download Your PDF',
-            description: 'Click Generate PDF. The document is built instantaneously in your browser and ready to save.',
+            description: 'Click Generate PDF. The document is built instantaneously in local browser memory and ready to save to your device.',
           },
         ],
       },
@@ -695,6 +720,7 @@ export const GUIDES: GuideItem[] = [
           '[Rotate PDF](/tools/rotate-pdf): Fix upside-down or sideways pages that were scanned at an awkward angle.',
           '[Split PDF](/tools/split-pdf): Extract specific pages if you only need to submit a portion of a larger packet.',
           '[PDF Metadata Viewer](/tools/pdf-metadata-viewer): Inspect total page count and verify file properties before submission.',
+          '[PDF Page Counter](/tools/pdf-page-counter): Check exact page counts across submitted files.',
         ],
       },
     ],

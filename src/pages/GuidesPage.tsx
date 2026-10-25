@@ -29,8 +29,8 @@ export function GuidesPage() {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
       <SEO
-        title="Practical Guides & Browser Tool Tutorials — Toolora"
-        description="Clear, practical tutorials on image compression, format selection, resizing without quality loss, and converting images to PDF directly in your browser."
+        title="Online Tool Guides — Free Browser Utility Tutorials | Toolora"
+        description="Practical online tool guides and tutorials. Learn how to compress photos, choose between JPG, PNG, and WebP, resize images cleanly, and convert files to PDF in your browser."
         canonicalPath="/guides"
         schema={breadcrumbSchema}
       />
@@ -51,10 +51,10 @@ export function GuidesPage() {
           <span>Practical Knowledge Base</span>
         </div>
         <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
-          Online Tools Guides & Tutorials
+          Online Tool Guides & Tutorials
         </h1>
         <p className="mt-3 text-sm sm:text-base text-slate-600 leading-relaxed">
-          Concise, actionable online tools guides designed to help you optimize image assets, navigate file format differences, and handle documents efficiently using Toolora’s private, client-side tools.
+          Explore practical online tool guides and how-to tutorials for everyday digital tasks. Learn how to compress photos without blurriness, compare JPG, PNG, and WebP image formats, rescale dimensions with locked proportions, and convert images into standardized PDF documents directly in your browser without server uploads.
         </p>
 
         <div className="flex flex-wrap items-center gap-4 text-xs text-slate-500 mt-4">

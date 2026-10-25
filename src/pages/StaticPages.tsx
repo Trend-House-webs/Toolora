@@ -26,7 +26,7 @@ const getStaticBreadcrumbSchema = (name: string, path: string) => ({
 
 export function AboutPage() {
   return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 space-y-8">
+    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 space-y-10">
       <SEO
         title="About Toolora — Our Mission and Privacy-First Approach"
         description="Learn about Toolora: a suite of fast, free, client-side utility tools for images, math, and everyday tasks with in-browser processing."
@@ -41,31 +41,40 @@ export function AboutPage() {
           About Toolora
         </h1>
         <p className="text-base sm:text-lg text-slate-600 leading-relaxed">
-          Simple, fast, free tools for everyday tasks. Built to prioritize client-side execution and eliminate unnecessary barriers.
+          Simple, fast, free online tools for everyday tasks. Built to prioritize in-browser client-side execution, eliminate paywalls, and keep your files in your browser.
         </p>
       </div>
 
-      <div className="prose prose-slate max-w-none space-y-6 text-sm sm:text-base text-slate-700 leading-relaxed">
-        <div className="p-6 sm:p-8 bg-white rounded-2xl border border-slate-200/90 shadow-xs space-y-4">
-          <h2 className="text-xl font-bold text-slate-900">Our Mission</h2>
+      <div className="prose prose-slate max-w-none space-y-8 text-sm sm:text-base text-slate-700 leading-relaxed">
+        {/* Mission and Purpose */}
+        <section className="p-6 sm:p-8 bg-white rounded-2xl border border-slate-200/90 shadow-xs space-y-4">
+          <h2 className="text-xl font-bold text-slate-900">Our Mission & Purpose</h2>
           <p>
-            The internet was intended to empower people with accessible utilities. Yet today, basic everyday tasks like resizing an image, calculating a GPA, or converting a file format are frequently blocked behind account registrations, monthly subscription paywalls, and invasive trackers.
+            The web was conceived to empower people with accessible, friction-free utilities. Yet today, basic everyday digital tasks—such as resizing a photo, calculating a weighted semester grade, converting an image format, or merging PDF documents—are all too often locked behind mandatory account registrations, monthly paywalls, intrusive advertisements, or remote upload queues.
           </p>
           <p>
-            <strong>Toolora</strong> provides an honest, open alternative: a clean, fast suite of utility tools that anyone can use directly in their browser without registering, entering a credit card, or waiting on remote queues.
+            <strong>Toolora</strong> was created to offer an open, respectful alternative: a suite of <strong>Toolora free tools</strong> and fast <strong>Toolora browser utilities</strong> that anyone can use instantly. You do not need to create an account, enter a password, provide a credit card, or wait in server queues to get everyday tasks done.
           </p>
-        </div>
+        </section>
 
-        <div className="p-6 sm:p-8 bg-white rounded-2xl border border-slate-200/90 shadow-xs space-y-4">
+        {/* In-Browser Processing Boundaries */}
+        <section className="p-6 sm:p-8 bg-white rounded-2xl border border-slate-200/90 shadow-xs space-y-4">
           <h2 className="text-xl font-bold text-slate-900">How It Works: In-Browser Client-Side Processing</h2>
           <p>
-            Rather than sending your images, documents, and calculation inputs to remote servers for processing, Toolora leverages standard web APIs including the <strong>HTML5 Canvas API</strong>, <strong>Web Audio API</strong>, and modern JavaScript engines.
+            Unlike conventional online utility platforms that transmit your files and personal documents to external cloud servers for processing, Toolora executes tool logic directly on your local device. We leverage modern web standards including the <strong>HTML5 Canvas API</strong>, <strong>WebAssembly</strong>, and the browser's native JavaScript engine.
           </p>
           <p>
-            When you compress an image, convert a graphic format, or compile a PDF, your device CPU and browser process the file directly in local memory. Files processed through our tools are not uploaded to Toolora servers.
+            When you compress an image, convert graphics between formats, or assemble a PDF document, your computer or phone CPU handles the computation locally in active browser memory. Your files are not uploaded to Toolora servers.
           </p>
-        </div>
+          <div className="p-4 bg-slate-50 rounded-xl border border-slate-200/80 text-xs sm:text-sm text-slate-600 space-y-2">
+            <p className="font-semibold text-slate-900">Accurate Technical Boundaries:</p>
+            <p>
+              While tool operations (such as photo compression, PDF merging, and mathematical calculations) run client-side in browser memory without server file uploads, visiting any web page inherently involves standard internet protocol communication. Our hosting infrastructure receives technical connection requests (such as your IP address and browser type to deliver web assets), and web typography is served via Google Fonts. For complete transparency, read our <Link to="/privacy" className="text-blue-600 hover:underline font-semibold">Privacy Policy</Link>.
+            </p>
+          </div>
+        </section>
 
+        {/* Feature Highlights Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
           <div className="p-5 bg-white rounded-xl border border-slate-200/90 text-center shadow-2xs">
             <ShieldCheck className="w-6 h-6 text-emerald-600 mx-auto mb-2" />
@@ -75,14 +84,123 @@ export function AboutPage() {
           <div className="p-5 bg-white rounded-xl border border-slate-200/90 text-center shadow-2xs">
             <Zap className="w-6 h-6 text-amber-500 mx-auto mb-2" />
             <h3 className="font-semibold text-slate-900 text-sm">Instant Execution</h3>
-            <p className="text-xs text-slate-500 mt-1">No queues or network upload lag. Immediate local results.</p>
+            <p className="text-xs text-slate-500 mt-1">No upload queues or network latency. Immediate local computations.</p>
           </div>
           <div className="p-5 bg-white rounded-xl border border-slate-200/90 text-center shadow-2xs">
             <Lock className="w-6 h-6 text-blue-600 mx-auto mb-2" />
             <h3 className="font-semibold text-slate-900 text-sm">No Accounts Required</h3>
-            <p className="text-xs text-slate-500 mt-1">No registration, passwords, or logins required to use the tools.</p>
+            <p className="text-xs text-slate-500 mt-1">No registration, login, or personal profile needed to access any tool.</p>
           </div>
         </div>
+
+        {/* Toolora Online Tools Category Navigation Hub */}
+        <section className="p-6 sm:p-8 bg-white rounded-2xl border border-slate-200/90 shadow-xs space-y-6">
+          <div>
+            <h2 className="text-xl font-bold text-slate-900">Explore Toolora Online Tools</h2>
+            <p className="text-xs sm:text-sm text-slate-600 mt-1">
+              Browse our complete catalog of browser-based utilities or jump directly to specialized category suites:
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <Link
+              to="/category/image-tools"
+              className="p-4 rounded-xl bg-slate-50 hover:bg-blue-50/50 border border-slate-200 hover:border-blue-300 transition-all group flex flex-col justify-between"
+            >
+              <div>
+                <h3 className="text-sm font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
+                  Image Tools Suite
+                </h3>
+                <p className="text-xs text-slate-600 mt-1.5 leading-relaxed">
+                  Compress, resize, convert between JPG, PNG, and WebP, crop, and inspect image DPI without server uploads.
+                </p>
+              </div>
+              <span className="text-xs font-semibold text-blue-600 mt-3 inline-flex items-center gap-1">
+                Browse Image Tools →
+              </span>
+            </Link>
+
+            <Link
+              to="/category/pdf-tools"
+              className="p-4 rounded-xl bg-slate-50 hover:bg-blue-50/50 border border-slate-200 hover:border-blue-300 transition-all group flex flex-col justify-between"
+            >
+              <div>
+                <h3 className="text-sm font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
+                  PDF Tools Suite
+                </h3>
+                <p className="text-xs text-slate-600 mt-1.5 leading-relaxed">
+                  Merge multiple documents, extract page ranges, rotate orientations, inspect metadata, and convert photos to PDF.
+                </p>
+              </div>
+              <span className="text-xs font-semibold text-blue-600 mt-3 inline-flex items-center gap-1">
+                Browse PDF Tools →
+              </span>
+            </Link>
+
+            <Link
+              to="/category/student-tools"
+              className="p-4 rounded-xl bg-slate-50 hover:bg-blue-50/50 border border-slate-200 hover:border-blue-300 transition-all group flex flex-col justify-between"
+            >
+              <div>
+                <h3 className="text-sm font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
+                  Student & Math Tools
+                </h3>
+                <p className="text-xs text-slate-600 mt-1.5 leading-relaxed">
+                  Toolora image and math tools including GPA and CGPA calculators, weighted grade targets, fractions, and ratios.
+                </p>
+              </div>
+              <span className="text-xs font-semibold text-blue-600 mt-3 inline-flex items-center gap-1">
+                Browse Student Tools →
+              </span>
+            </Link>
+
+            <Link
+              to="/category/utility-tools"
+              className="p-4 rounded-xl bg-slate-50 hover:bg-blue-50/50 border border-slate-200 hover:border-blue-300 transition-all group flex flex-col justify-between"
+            >
+              <div>
+                <h3 className="text-sm font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
+                  Daily & Text Utilities
+                </h3>
+                <p className="text-xs text-slate-600 mt-1.5 leading-relaxed">
+                  Fast developer utilities including RFC 4122 UUID generators, Unix timestamp converters, JSON formatters, and text cleaners.
+                </p>
+              </div>
+              <span className="text-xs font-semibold text-blue-600 mt-3 inline-flex items-center gap-1">
+                Browse Daily Utilities →
+              </span>
+            </Link>
+          </div>
+
+          <div className="pt-4 border-t border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <span className="text-xs text-slate-500">
+              Looking for our comprehensive searchable index?
+            </span>
+            <Link
+              to="/tools"
+              className="inline-flex items-center gap-1 text-xs sm:text-sm font-semibold text-blue-600 hover:text-blue-700 hover:underline"
+            >
+              Explore All Free Online Tools ({SITE_URL ? 'Full Directory' : 'Directory'}) →
+            </Link>
+          </div>
+        </section>
+
+        {/* Suggest a Tool & Contact */}
+        <section className="p-6 sm:p-8 bg-slate-50 rounded-2xl border border-slate-200/90 space-y-3">
+          <h2 className="text-base sm:text-lg font-bold text-slate-900">Have Feedback or Tool Suggestions?</h2>
+          <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+            Toolora is continuously expanded based on real everyday workflows. If there is a calculation, document manipulation, or file formatting task you would like to see automated, we welcome your feedback.
+          </p>
+          <div className="pt-2">
+            <Link
+              to="/contact"
+              className="inline-flex items-center gap-2 px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs sm:text-sm font-semibold transition-colors shadow-xs"
+            >
+              <span>Contact Toolora & Submit Feedback</span>
+              <span aria-hidden="true">→</span>
+            </Link>
+          </div>
+        </section>
       </div>
     </div>
   );
@@ -116,23 +234,23 @@ export function PrivacyPage() {
         </div>
 
         <div>
-          <h2 className="text-base font-bold text-slate-900 mb-2">1. Tool File & Data Handling</h2>
+          <h2 className="text-base font-bold text-slate-900 mb-2">1. Tool File & Data Handling (Browser-Based Processing)</h2>
           <p>
-            When you use our utilities (such as Image Compressor, PDF Merge, GPA Calculator, or Text Formatter), your files and text inputs are loaded into local browser memory. Toolora operates no server-side file processing infrastructure; your files and calculation inputs are not uploaded to our servers.
+            When you use our utilities (such as Image Compressor, PDF Merge, GPA Calculator, or Text Formatter), your files and text inputs are loaded directly into your local browser memory. Toolora operates no server-side file processing infrastructure; your files, photos, academic entries, and calculation inputs are not uploaded to our servers. All computational operations take place via native browser technologies including HTML5 Canvas, WebAssembly, and local JavaScript engines.
           </p>
         </div>
 
         <div>
           <h2 className="text-base font-bold text-slate-900 mb-2">2. Local Storage Usage</h2>
           <p>
-            Certain convenience tools (such as the GPA Calculator) store data within your browser's local storage (LocalStorage) on your device so your coursework entries remain available across visits. This data is stored strictly on your local device and is not synchronized to any server. You can remove it at any time by clearing your browser cache and local storage.
+            Certain convenience tools (such as the GPA Calculator and CGPA Calculator) allow you to save coursework data within your browser's local storage (LocalStorage) on your device so your semester entries remain available across visits. This data is stored strictly on your local device and is not synchronized to any server. You can remove it at any time by clearing your browser cache and local storage.
           </p>
         </div>
 
         <div>
           <h2 className="text-base font-bold text-slate-900 mb-2">3. Hosting & Web Server Logs</h2>
           <p>
-            Like virtually all websites, when you visit Toolora, our web hosting provider (such as Vercel) receives and records standard technical connection data. This may include your IP address, browser type, operating system, referring URL, and the date and time of page requests. This data is processed by the hosting provider to deliver web assets and protect against cyberattacks and abuse.
+            Like virtually all websites, when you visit Toolora, our web hosting provider (such as Vercel) receives and records standard technical connection data. This may include your IP address, browser type, operating system, referring URL, and the date and time of page requests. This data is processed by the hosting provider to deliver web assets and protect against cyberattacks, automated abuse, and denial-of-service threats.
           </p>
         </div>
 
@@ -153,14 +271,14 @@ export function PrivacyPage() {
         <div>
           <h2 className="text-base font-bold text-slate-900 mb-2">6. Communications & Feedback</h2>
           <p>
-            When you submit feedback or tool suggestions through our feedback form, your message, selected topic, and optional contact details are securely transmitted to our feedback system solely for reviewing suggestions, resolving technical bugs, and improving Toolora. No account is required and submissions are never sold or shared with advertisers.
+            When you submit feedback or tool suggestions through our feedback form on our <Link to="/contact" className="text-blue-600 hover:underline font-semibold">Contact Page</Link>, your message, selected topic, and optional contact details are securely transmitted to our feedback system solely for reviewing suggestions, resolving technical bugs, and improving Toolora. No account is required and submissions are never sold or shared with advertisers.
           </p>
         </div>
 
         <div>
           <h2 className="text-base font-bold text-slate-900 mb-2">7. Updates to This Policy</h2>
           <p>
-            We may update this Privacy Policy from time to time to accurately reflect technical changes or legal standards. The effective date at the top indicates the most recent revision.
+            We may update this Privacy Policy from time to time to accurately reflect technical changes or legal standards. The effective date at the top indicates the most recent revision. For questions or terms governing website usage, please refer to our <Link to="/terms" className="text-blue-600 hover:underline font-semibold">Terms of Service</Link> and <Link to="/disclaimer" className="text-blue-600 hover:underline font-semibold">Tool Disclaimer</Link>.
           </p>
         </div>
       </div>
@@ -191,28 +309,42 @@ export function TermsPage() {
         <div>
           <h2 className="text-base font-bold text-slate-900 mb-2">1. Acceptance of Terms</h2>
           <p>
-            By accessing or using Toolora, you agree to comply with and be bound by these Terms of Service. If you do not agree to these terms, you should discontinue using the website and its utilities.
+            By accessing or using Toolora, you agree to comply with and be bound by these Terms of Service and general website terms of use. If you do not agree to these terms, you should discontinue using the website and its utilities.
           </p>
         </div>
 
         <div>
-          <h2 className="text-base font-bold text-slate-900 mb-2">2. Free Use License</h2>
+          <h2 className="text-base font-bold text-slate-900 mb-2">2. Free Use License & Permitted Usages</h2>
           <p>
-            Toolora grants you a free, non-exclusive, revocable license to utilize our browser-based tools for personal, educational, creative, and commercial projects without subscription fees.
+            Toolora grants you a free, non-exclusive, revocable license to utilize our browser-based tools for personal, educational, creative, and commercial projects without subscription fees. Under these Toolora usage terms, you are welcome to use our calculators, file converters, image editors, and text utilities for daily academic, professional, and personal productivity.
           </p>
         </div>
 
         <div>
           <h2 className="text-base font-bold text-slate-900 mb-2">3. User Responsibility & Content Rights</h2>
           <p>
-            You retain full ownership of all images, documents, and text processed through our tools. You are solely responsible for ensuring you possess the necessary legal rights or copyright permissions for any materials you process.
+            You retain full ownership of all images, documents, and text processed through our tools. Because files are handled client-side in your local browser memory, you are solely responsible for ensuring you possess the necessary legal rights, licenses, or permissions for any materials you process.
           </p>
         </div>
 
         <div>
-          <h2 className="text-base font-bold text-slate-900 mb-2">4. Availability & Modifications</h2>
+          <h2 className="text-base font-bold text-slate-900 mb-2">4. In-Browser Execution & Device Performance</h2>
           <p>
-            While we strive for continuous availability, our utilities are provided on an "as is" and "as available" basis without warranty of any kind. We reserve the right to update or enhance tools at any time.
+            Toolora operates using client-side execution in your browser rather than remote server queues. Consequently, performance and memory handling depend directly on your device's available RAM, processor speed, operating system, and web browser capabilities. Extremely large photo files or multi-hundred-page PDFs may exceed local browser memory limits.
+          </p>
+        </div>
+
+        <div>
+          <h2 className="text-base font-bold text-slate-900 mb-2">5. Availability, Disclaimer & "As Is" Provision</h2>
+          <p>
+            While we strive for high reliability and continuous availability, all free online tools are provided on an "as is" and "as available" basis without warranties of any kind. Toolora does not provide formal academic certification, legal advice, or financial guarantees. For complete details on tool limitations and calculation verification, please review our official <Link to="/disclaimer" className="text-blue-600 hover:underline font-semibold">Tool Disclaimer</Link>.
+          </p>
+        </div>
+
+        <div className="pt-4 border-t border-slate-200 space-y-2">
+          <h2 className="text-base font-bold text-slate-900 mb-2">6. Related Information & Inquiries</h2>
+          <p>
+            To understand how technical connection logs and local storage are handled, consult our <Link to="/privacy" className="text-blue-600 hover:underline font-semibold">Privacy Policy</Link>. If you have questions regarding these terms or wish to suggest an enhancement, visit our <Link to="/contact" className="text-blue-600 hover:underline font-semibold">Contact Page</Link>.
           </p>
         </div>
       </div>
@@ -767,6 +899,28 @@ export function ContactPage() {
             <p className="text-xs text-slate-600 leading-relaxed">
               Feedback is submitted securely to our feedback system. No account is required.
             </p>
+          </div>
+
+          <div className="p-5 bg-slate-50 rounded-2xl border border-slate-200 space-y-2.5">
+            <h3 className="font-semibold text-slate-900 text-xs uppercase tracking-wider text-slate-500">
+              Quick Navigation
+            </h3>
+            <div className="flex flex-col gap-1.5 text-xs">
+              <Link
+                to="/about"
+                className="text-blue-600 hover:underline font-semibold flex items-center justify-between"
+              >
+                <span>About Toolora & Mission</span>
+                <span aria-hidden="true">→</span>
+              </Link>
+              <Link
+                to="/tools"
+                className="text-blue-600 hover:underline font-semibold flex items-center justify-between"
+              >
+                <span>Browse All Free Online Tools</span>
+                <span aria-hidden="true">→</span>
+              </Link>
+            </div>
           </div>
         </div>
       </div>
