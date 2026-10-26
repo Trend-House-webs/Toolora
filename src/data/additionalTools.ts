@@ -649,13 +649,13 @@ export const ADDITIONAL_TOOLS: ToolItem[] = [
     category: 'pdf',
     description: 'Convert JPG photos and documents into a clean multi-page PDF with custom margins and page sizes.',
     detailedDescription: 'Combine single or multiple JPG images into a professional PDF document. Choose between A4 and US Letter page sizes, portrait or landscape orientations, and adjustable margins.',
-    metaTitle: 'Free JPG to PDF Converter — Convert Images to PDF Online',
-    metaDescription: 'Convert JPG to PDF online for free. Merge multiple pictures into one PDF with custom page size and margins. Fast client-side processing without file uploads.',
+    metaTitle: 'JPG to PDF Converter — Convert JPEG Photos to PDF Online | Toolora',
+    metaDescription: 'Convert JPG to PDF online for free. Combine multiple JPEG photos into a multi-page PDF with custom page size and margins. Fast client-side download.',
     icon: 'FileText',
     isFeatured: true,
     isPopular: true,
     badge: 'Popular',
-    directAnswer: 'Toolora JPG to PDF is a dedicated photo-to-PDF converter strictly tailored for JPEG (.jpg, .jpeg) images. Purpose-built for digital camera shots, smartphone photos, and scanned paper documents saved as JPGs, it compiles one or multiple JPEG files into standard A4 or US Letter PDF pages with configurable orientation and margins. If your files include PNGs, WebP, or mixed image formats, use our universal [Image to PDF](/tools/image-to-pdf) converter; if you have transparent graphics or screenshots, use [PNG to PDF](/tools/png-to-pdf).',
+    directAnswer: 'Toolora JPG to PDF is a dedicated photo-to-PDF converter strictly tailored for JPEG (.jpg, .jpeg) images. Purpose-built for digital camera shots, smartphone photos, and scanned paper documents saved as JPGs, it compiles one or multiple JPEG files into standard A4 or US Letter PDF pages with configurable orientation and margins. If your files include PNGs, WebP, or mixed image formats, use our universal [Image to PDF](/tools/image-to-pdf) converter; if you have transparent graphics or screenshots, use [PNG to PDF](/tools/png-to-pdf). If you need to combine already compiled PDF files, use [Merge PDF](/tools/merge-pdf).',
     features: [
       'Dedicated JPEG workflow optimized for digital camera and smartphone photos',
       'Merge multiple JPG photos into a single sequenced PDF document',
@@ -678,6 +678,7 @@ export const ADDITIONAL_TOOLS: ToolItem[] = [
       limitations: [
         'Accepts strictly JPG/JPEG files; if you need to convert PNG, WebP, GIF, or mixed image formats, use our universal [Image to PDF](/tools/image-to-pdf) tool.',
         'Total queued image volume is bounded by your device browser tab memory; for hundreds of high-res photos, compiling in batches of 20 to 50 photos is recommended.',
+        'To merge existing PDF files rather than photos, use our [Merge PDF](/tools/merge-pdf) tool.',
       ],
     },
     practicalExample: {
@@ -688,12 +689,13 @@ export const ADDITIONAL_TOOLS: ToolItem[] = [
     },
     whyUse: [
       'Document Submissions: Convert photo scans of IDs, homework assignments, or receipts into acceptable PDF format.',
-      'Zero Server Upload: Sensitive personal documents stay safely on your computer without privacy risks.',
+      'In-Browser Security: Sensitive personal documents stay safely on your computer without privacy risks.',
       'Consistent Page Sizing: Automatically scales varying camera photo dimensions to uniform A4 or Letter sheets.',
     ],
     tips: [
       'Use Portrait orientation for letter scans and Landscape for certificates and panoramic photos.',
       'If your resulting PDF file size is too large for an email attachment, compress your pictures first using [Photo Size Reducer](/tools/photo-size-reducer).',
+      'For transparent illustrations or computer UI diagrams, use [PNG to PDF](/tools/png-to-pdf) instead.',
     ],
     faq: [
       {
@@ -708,6 +710,10 @@ export const ADDITIONAL_TOOLS: ToolItem[] = [
         question: 'Are my document photos uploaded to a server?',
         answer: 'No. Toolora compiles PDF documents directly in local browser memory without uploading your files.',
       },
+      {
+        question: 'Can I combine existing PDF files with this tool?',
+        answer: 'No. This tool converts JPG images into PDF pages. To join pre-existing PDF files together, use our [Merge PDF](/tools/merge-pdf) tool.',
+      },
     ],
     relatedSlugs: ['image-to-pdf', 'png-to-pdf', 'merge-pdf', 'image-compressor'],
   },
@@ -720,18 +726,18 @@ export const ADDITIONAL_TOOLS: ToolItem[] = [
     category: 'pdf',
     description: 'Convert PNG graphics and screenshots to high-resolution PDF documents with white background backing.',
     detailedDescription: 'Turn PNG images into professional PDF files. Automatically backs transparent graphics with clean white paper background to prevent dark transparency rendering glitches in PDF viewers.',
-    metaTitle: 'Free PNG to PDF Converter — Convert PNG Images to PDF Online',
-    metaDescription: 'Convert PNG images to PDF online for free. Clean white background backing, custom page sizes, and 100% client-side compilation.',
+    metaTitle: 'PNG to PDF Converter — Convert Transparent PNGs to PDF | Toolora',
+    metaDescription: 'Convert PNG to PDF online for free. Combine multiple PNG images into a clean PDF with automatic white background backing and custom page dimensions.',
     icon: 'FileText',
     badge: 'Essential',
-    directAnswer: 'Toolora PNG to PDF is a specialized conversion tool purpose-built for PNG (.png) graphics, digital illustrations, diagrams, and computer screenshots. It compiles sequenced PNG files into standard A4 or US Letter PDF documents while automatically backing transparent graphic boundaries against clean white paper to prevent dark transparency rendering glitches in PDF viewers. For camera photos and JPEGs, use [JPG to PDF](/tools/jpg-to-pdf); for mixed graphic uploads, use [Image to PDF](/tools/image-to-pdf).',
+    directAnswer: 'Toolora PNG to PDF is a specialized conversion tool purpose-built for PNG (.png) graphics, digital illustrations, diagrams, and computer screenshots. It compiles sequenced PNG files into standard A4 or US Letter PDF documents while automatically backing transparent graphic boundaries against clean white paper to prevent dark transparency rendering glitches in PDF viewers. For camera photos and JPEGs, use [JPG to PDF](/tools/jpg-to-pdf); for mixed graphic uploads, use [Image to PDF](/tools/image-to-pdf); to join multiple compiled documents together, use [Merge PDF](/tools/merge-pdf).',
     features: [
       'Dedicated PNG workflow preserving vector-rasterized clarity and text sharpness',
       'Automatic white paper backing for transparent PNG logos, icons, and diagrams',
       'Combine multiple screenshots or flowcharts into a sequenced multi-page document',
       'Page layout controls: standard A4 and US Letter sizes with portrait/landscape options',
       'Reorder pages with intuitive up/down arrow controls before building',
-      'Zero server dependencies: private client-side PDF generation on your device',
+      'Client-side processing: private in-browser PDF generation without server uploads',
     ],
     howToUse: [
       { step: 1, title: 'Select PNG Files', description: 'Upload one or multiple PNG graphics, diagrams, or desktop screenshots.' },
@@ -743,10 +749,11 @@ export const ADDITIONAL_TOOLS: ToolItem[] = [
       supportedInputs: [
         'PNG (.png — MIME image/png)',
       ],
-      outputFormat: 'Standard PDF document (.pdf, PDF specification 1.4) compiled client-side via jsPDF. Downloaded as converted-document.pdf.',
+      outputFormat: 'Standard PDF document (.pdf, PDF specification 1.4) compiled client-side via jsPDF. Downloaded as converted-pngs.pdf.',
       limitations: [
         'Accepts strictly PNG format files; if you have JPG photos, use [JPG to PDF](/tools/jpg-to-pdf); for mixed formats, use [Image to PDF](/tools/image-to-pdf).',
         'Transparent alpha channels are rendered cleanly over standard white PDF paper; custom colored PDF background paper is not currently supported.',
+        'To merge existing PDF files into one, use our [Merge PDF](/tools/merge-pdf) tool.',
       ],
     },
     practicalExample: {
@@ -763,6 +770,7 @@ export const ADDITIONAL_TOOLS: ToolItem[] = [
     tips: [
       'Choose Landscape orientation for wide software screenshots and slide deck graphics.',
       'For academic papers or reports, standard A4 portrait orientation provides the most standard format.',
+      'If your document queue contains both PNG and JPEG images, use our universal [Image to PDF](/tools/image-to-pdf) tool.',
     ],
     faq: [
       {
@@ -789,11 +797,11 @@ export const ADDITIONAL_TOOLS: ToolItem[] = [
     category: 'pdf',
     description: 'Inspect PDF page counts, software producer metadata, PDF specification version, and encryption status.',
     detailedDescription: 'Analyze internal PDF structure client-side. Instantly check exact page count, standard specification version (e.g. PDF 1.4, 1.7), document title, author, and security encryption.',
-    metaTitle: 'Free PDF Metadata Viewer — Count Pages & Check PDF Info Online',
-    metaDescription: 'Inspect PDF page counts, version, title, author, producer, and encryption status directly in your browser. Client-side PDF analyzer without file uploads.',
+    metaTitle: 'PDF Metadata Viewer — View PDF Properties & Version Online | Toolora',
+    metaDescription: 'Inspect PDF properties online with our free PDF metadata viewer. Check PDF version, title, author, producer, page count, and encryption in your browser.',
     icon: 'FileCheck',
     badge: 'Utility',
-    directAnswer: 'Toolora PDF Metadata Viewer is a client-side PDF metadata viewer that inspects the internal structural dictionary of any PDF document directly in your browser. It reveals document metadata attributes—including Document Title, Author, Application/Creator, and PDF Producer engine—along with technical specifications: exact total page count, PDF specification version (e.g. PDF 1.4 through 1.7), byte size, encryption and password status, and Linearization (Fast Web View) status. If you need physical sheet dimensions (inches, mm, points) or page-by-page orientation breakdown, use our companion [PDF Page Counter](/tools/pdf-page-counter); for extracting specific page ranges, use [Split PDF](/tools/split-pdf).',
+    directAnswer: 'Toolora PDF Metadata Viewer is a client-side PDF metadata viewer that inspects the internal structural dictionary of any PDF document directly in your browser. It reveals document metadata attributes—including Document Title, Author, Application/Creator, and PDF Producer engine—along with technical specifications: exact total page count, PDF specification version (e.g. PDF 1.4 through 1.7), byte size, encryption and password status, and Linearization (Fast Web View) status. If you need physical sheet dimensions (inches, mm, points) or page-by-page orientation breakdown, use our companion [PDF Page Counter](/tools/pdf-page-counter); for extracting specific page ranges, use [Split PDF](/tools/split-pdf); to join separate documents together, use [Merge PDF](/tools/merge-pdf).',
     features: [
       'Inspect document title, author, creator software, and PDF producer engine',
       'Verify PDF specification version (e.g., %PDF-1.4 to %PDF-1.7)',
@@ -801,7 +809,7 @@ export const ADDITIONAL_TOOLS: ToolItem[] = [
       'Fast Web View / Linearization optimization status',
       'Total page count and formatted byte size readout',
       'One-click copy of all document metadata attributes to clipboard',
-      '100% client-side: sensitive business and legal documents are never uploaded to servers',
+      'Client-side processing: sensitive business and legal documents are inspected locally in browser memory without server file uploads',
     ],
     howToUse: [
       { step: 1, title: 'Upload PDF Document', description: 'Select or drag and drop any PDF file from your computer or phone (up to 100 MB).' },
@@ -815,6 +823,7 @@ export const ADDITIONAL_TOOLS: ToolItem[] = [
       outputFormat: 'On-screen structured metadata card with copy-to-clipboard summary.',
       limitations: [
         'Extracts standard PDF Info dictionary keys (/Title, /Author, /Creator, /Producer, /Encrypt, /Linearized); does not decrypt heavily password-locked documents without credentials.',
+        'This tool is an inspector only; it does not scrub, edit, or strip metadata from PDF files.',
         'To inspect physical print dimensions (mm, inches, points) per page, use our dedicated [PDF Page Counter](/tools/pdf-page-counter).',
         'To modify, extract, or re-order PDF pages, see [Split PDF](/tools/split-pdf) or [Rotate PDF](/tools/rotate-pdf).',
       ],
@@ -842,6 +851,10 @@ export const ADDITIONAL_TOOLS: ToolItem[] = [
       {
         question: 'What is the difference between PDF Metadata Viewer and PDF Page Counter?',
         answer: 'PDF Metadata Viewer focuses on internal document provenance: author, title, creation engine, specification version, and encryption status. [PDF Page Counter](/tools/pdf-page-counter) focuses on physical sheet geometry: page dimensions in millimeters, inches, and points, and portrait vs. landscape orientation across pages.',
+      },
+      {
+        question: 'Does this tool remove or strip metadata from PDF files?',
+        answer: 'No. This is a read-only metadata inspector designed to audit properties without altering or saving over the document.',
       },
       {
         question: 'Are my confidential PDF documents uploaded to an external server?',
@@ -2003,17 +2016,17 @@ export const ADDITIONAL_TOOLS: ToolItem[] = [
     category: 'pdf',
     description: 'Combine multiple PDF files into a single document in any order. Fast client-side processing in your browser.',
     detailedDescription: 'Merge two or more PDF files into one clean document. Drag to reorder, view page counts, and download the combined PDF instantly without server uploads.',
-    metaTitle: 'Free Merge PDF Online — Combine Multiple PDF Files Privately',
-    metaDescription: 'Merge multiple PDF documents into a single file directly in your browser. 100% free, client-side, with no file size limits or sign-up needed.',
+    metaTitle: 'Merge PDF Online — Combine Multiple PDF Files Free | Toolora',
+    metaDescription: 'Merge PDF online to combine multiple PDF files into a single document. Reorder files, preview total page counts, and download directly in your browser.',
     icon: 'Layers',
     isPopular: true,
     isFeatured: true,
     badge: 'Popular',
-    directAnswer: 'Toolora Merge PDF is an in-browser utility built to merge PDF online by combining multiple documents into a single organized file. It lets you combine PDF files and join PDFs in any custom page sequence without sending your confidential paperwork to remote servers.',
+    directAnswer: 'Toolora Merge PDF is an in-browser utility built to merge PDF online by combining multiple documents into a single organized file. It lets you combine PDF files and join PDFs in any custom page sequence without sending your confidential paperwork to remote servers. The tool reads individual page counts with pdf-lib, allows you to reorder documents with Up and Down controls, and concatenates all pages into a unified document. If you need to separate pages before merging, use [Split PDF](/tools/split-pdf); to correct sideways orientation, use [Rotate PDF](/tools/rotate-pdf); to convert pictures into PDF pages first, use [Image to PDF](/tools/image-to-pdf); and to verify page counts, use [PDF Page Counter](/tools/pdf-page-counter).',
     features: [
       'Pure client-side merging without server file uploads',
       'Flexible reordering with Up and Down page controls',
-      'Preview total page count and file sizes across all queued documents',
+      'Preview individual page counts and total cumulative pages across all queued documents',
       'Bit-for-bit page stream copy preserving vector typography, hyperlinks, and embedded images',
       'Immediate client-side PDF document generation and download',
     ],
@@ -2032,7 +2045,7 @@ export const ADDITIONAL_TOOLS: ToolItem[] = [
       limitations: [
         'Requires at least 2 PDF files to perform a merge operation.',
         'Encrypted or password-protected PDF files cannot be merged until encryption or owner permissions passwords are removed.',
-        'Corrupted or malformed PDF streams that fail PDFDocument load will display a descriptive error notification.',
+        'Total queued volume is bounded by your device browser memory; merging dozens of files up to 100 MB is supported in modern browsers.',
         'If you need to extract individual pages from a large file before combining, use our [Split PDF](/tools/split-pdf) tool.',
       ],
     },
@@ -2052,6 +2065,7 @@ export const ADDITIONAL_TOOLS: ToolItem[] = [
       'Check page counts on each file before merging to ensure no blank trailing pages are included.',
       'If you have image files (like JPG or PNG scans) instead of PDFs, convert them first with our [Image to PDF](/tools/image-to-pdf) tool before merging.',
       'Read our comprehensive guide on [How to Convert Images to PDF](/guides/how-to-convert-images-to-pdf) for complete document organization workflows.',
+      'To verify sheet dimensions and orientations across merged pages, inspect the output in [PDF Page Counter](/tools/pdf-page-counter).',
     ],
     faq: [
       {
@@ -2071,7 +2085,7 @@ export const ADDITIONAL_TOOLS: ToolItem[] = [
         answer: 'Yes! Use the Up and Down arrow buttons next to each file to arrange them in your exact desired sequence before compiling.',
       },
     ],
-    relatedSlugs: ['split-pdf', 'image-to-pdf', 'rotate-pdf', 'pdf-page-counter'],
+    relatedSlugs: ['split-pdf', 'rotate-pdf', 'image-to-pdf', 'pdf-page-counter'],
   },
 
   // 49. SPLIT PDF
@@ -2082,12 +2096,12 @@ export const ADDITIONAL_TOOLS: ToolItem[] = [
     category: 'pdf',
     description: 'Extract specific pages or page ranges from any PDF document into a new file.',
     detailedDescription: 'Split large PDF documents into smaller files. Select custom page ranges (e.g. 1-3, 5) or separate odd and even pages client-side with zero data uploads.',
-    metaTitle: 'Free Split PDF Online — Extract Pages from PDF Privately',
-    metaDescription: 'Extract specific pages or ranges from PDF files online for free. Browser-based extraction with instant download and no server file uploads.',
+    metaTitle: 'Split PDF Online — Extract Pages & Page Ranges Free | Toolora',
+    metaDescription: 'Split PDF online to extract specific pages or page ranges into a new document. Supports custom ranges and even or odd page extraction in your browser.',
     icon: 'Crop',
     isPopular: true,
     badge: 'Essential',
-    directAnswer: 'Toolora Split PDF is a fast client-side tool built to split PDF online by extracting specific pages or page ranges into a new, clean PDF document. It offers two extraction workflows: "Custom Selection" for entering individual page numbers and ranges (e.g. 1-3, 5, 8-10), and "Even / Odd Pages" for separating double-sided scans or duplex print jobs. All selected pages are extracted directly in browser memory and assembled into a single downloadable PDF without quality loss or server uploads. To combine separate documents together, use [Merge PDF](/tools/merge-pdf); to inspect page counts and sheet dimensions beforehand, use [PDF Page Counter](/tools/pdf-page-counter).',
+    directAnswer: 'Toolora Split PDF is a fast client-side tool built to split PDF online by extracting specific pages or page ranges into a new, clean PDF document. It offers two extraction workflows: "Custom Selection" for entering individual page numbers and ranges (e.g. 1-3, 5, 8-10), and "Even / Odd Pages" for separating double-sided scans or duplex print jobs. All selected pages are extracted directly in browser memory and assembled into a single downloadable PDF without quality loss or server uploads. To combine separate documents together, use [Merge PDF](/tools/merge-pdf); to turn sideways pages upright, use [Rotate PDF](/tools/rotate-pdf); to inspect page counts and sheet dimensions beforehand, use [PDF Page Counter](/tools/pdf-page-counter); and to audit file provenance, use [PDF Metadata Viewer](/tools/pdf-metadata-viewer).',
     features: [
       'Extract custom page ranges like 1-5, 8, 12-15 into a single sequenced document',
       'One-click Even or Odd page filtering for double-sided scans and duplex printing',
@@ -2109,6 +2123,7 @@ export const ADDITIONAL_TOOLS: ToolItem[] = [
         'Extracts chosen pages into a single combined PDF document; it does not currently generate a ZIP file of individual single-page files.',
         'Password-encrypted documents must have encryption removed before internal page extraction can proceed.',
         'To turn sideways pages upright after splitting, use [Rotate PDF](/tools/rotate-pdf).',
+        'To combine extracted pages with other files, use [Merge PDF](/tools/merge-pdf).',
       ],
     },
     practicalExample: {
@@ -2125,6 +2140,7 @@ export const ADDITIONAL_TOOLS: ToolItem[] = [
     tips: [
       'You can combine commas and hyphens in the page input, such as "1-3, 5, 8-10".',
       'Check page count and sheet sizes first with our [PDF Page Counter](/tools/pdf-page-counter) to plan your extraction ranges.',
+      'Inspect creator information and file properties using [PDF Metadata Viewer](/tools/pdf-metadata-viewer).',
     ],
     faq: [
       {
@@ -2159,11 +2175,11 @@ export const ADDITIONAL_TOOLS: ToolItem[] = [
     category: 'pdf',
     description: 'Permanently rotate PDF pages 90°, 180°, or 270° clockwise. Fix sideways scanned documents.',
     detailedDescription: 'Fix upside-down or sideways PDF scans. Rotate all pages or specific pages 90 degrees right, left, or 180 degrees upside-down directly in your browser.',
-    metaTitle: 'Free Rotate PDF Online — Permanently Rotate PDF Pages 90° or 180°',
-    metaDescription: 'Rotate PDF pages permanently in your browser. Fix orientation on scans and receipts. 100% free, private, and client-side.',
+    metaTitle: 'Rotate PDF Pages Online — Rotate PDF 90 Degrees & Save | Toolora',
+    metaDescription: 'Rotate PDF pages online and save permanently. Turn all pages or specific page ranges by 90°, 180°, or 270° clockwise directly in your web browser.',
     icon: 'RotateCw',
     badge: 'Tool',
-    directAnswer: 'Toolora Rotate PDF is a private browser utility designed to rotate PDF online by permanently adjusting page orientation angles in 90-degree orthogonal increments (90° clockwise, 180° upside-down, or 270° counter-clockwise). It supports rotating all pages at once or targeting specific page numbers and ranges (such as rotating only page 1 of a scanned receipt). Because the rotation tag is applied directly to the internal PDF page dictionary using client-side JavaScript, vector text sharpness and image resolution are preserved losslessly. If you need to extract pages before rotating, use [Split PDF](/tools/split-pdf); to combine multiple files, see [Merge PDF](/tools/merge-pdf).',
+    directAnswer: 'Toolora Rotate PDF is a private browser utility designed to rotate PDF pages online by permanently adjusting page orientation angles in 90-degree orthogonal increments (90° clockwise, 180° upside-down, or 270° counter-clockwise). It supports rotating all pages at once or targeting specific page numbers and ranges (such as rotating only page 1 or pages 3-5 of a scanned document). Because the rotation tag is applied directly to the internal PDF page dictionary using client-side JavaScript, vector text sharpness and image resolution are preserved losslessly. If you need to verify sheet dimensions and orientation first, use [PDF Page Counter](/tools/pdf-page-counter); to extract pages before rotating, use [Split PDF](/tools/split-pdf); and to combine multiple files, see [Merge PDF](/tools/merge-pdf).',
     features: [
       'Rotate 90° clockwise, 180° upside down, or 270° counter-clockwise (rotate left)',
       'Apply orientation changes to all pages simultaneously or specific page numbers and ranges',
@@ -2181,7 +2197,7 @@ export const ADDITIONAL_TOOLS: ToolItem[] = [
       supportedInputs: [
         'PDF (.pdf — MIME application/pdf up to 100 MB)',
       ],
-      outputFormat: 'Permanently rotated PDF document (.pdf) preserving original vector glyphs, embedded images, and bookmarks. Downloaded as [name]-rotated.pdf.',
+      outputFormat: 'Permanently rotated PDF document (.pdf) preserving original vector glyphs, embedded images, and bookmarks. Downloaded as [name]-rotated-[angle]deg.pdf.',
       limitations: [
         'Applies standard orthogonal rotations (90°, 180°, 270°); does not support arbitrary fractional skew correction (e.g. straightening a document skewed by 2 degrees on a scanner bed).',
         'Does not rotate individual image elements embedded inside a page; it rotates the entire page sheet container.',
@@ -2232,11 +2248,11 @@ export const ADDITIONAL_TOOLS: ToolItem[] = [
     category: 'pdf',
     description: 'Count total pages, inspect physical page dimensions (inches, mm), and check PDF metadata.',
     detailedDescription: 'Fast client-side inspector for PDF documents. Instantly view total page count, average size per page, physical print dimensions, and author metadata without installing heavy software.',
-    metaTitle: 'Free PDF Page Counter — Count Pages & Check PDF Size Online',
-    metaDescription: 'Count pages in any PDF file instantly online. Inspect dimensions in mm and inches, file sizes, and metadata without server file uploads.',
+    metaTitle: 'PDF Page Counter — Count Pages & Check Dimensions Online | Toolora',
+    metaDescription: 'Count pages in PDF files online. Check exact page counts, file size breakdown, and physical sheet dimensions in mm, inches, and points in your browser.',
     icon: 'FileText',
     badge: 'Utility',
-    directAnswer: 'Toolora PDF Page Counter is an instant in-browser PDF page counter and dimensional inspector designed for publishers, print shops, students, and legal professionals. It calculates the exact total page count of any PDF document in milliseconds and displays detailed physical sheet measurements for up to the first 10 pages—including width and height in millimeters (mm), inches (in), and PostScript points (pt), along with orientation (portrait, landscape, square). It also extracts available document metadata (Title, Author, Producer, and creation dates) without uploading files to remote servers. If you need to extract specific counted pages, use [Split PDF](/tools/split-pdf); to audit internal PDF specification versions and encryption, use [PDF Metadata Viewer](/tools/pdf-metadata-viewer).',
+    directAnswer: 'Toolora PDF Page Counter is an instant in-browser PDF page counter and dimensional inspector designed for publishers, print shops, students, and legal professionals. It calculates the exact total page count of any PDF document in milliseconds and displays detailed physical sheet measurements for up to the first 10 pages—including width and height in millimeters (mm), inches (in), and PostScript points (pt), along with orientation (portrait, landscape, square). It also extracts available document metadata (Title, Author, Producer, and creation dates) without uploading files to remote servers. If you need to audit internal PDF specification versions and encryption flags, use [PDF Metadata Viewer](/tools/pdf-metadata-viewer); to extract specific counted pages, use [Split PDF](/tools/split-pdf); and to combine multiple documents, use [Merge PDF](/tools/merge-pdf).',
     features: [
       'Instant total page count calculation with one-click clipboard copying',
       'Physical sheet dimensions in millimeters (mm), inches (in), and PostScript points (pt)',
@@ -2275,6 +2291,7 @@ export const ADDITIONAL_TOOLS: ToolItem[] = [
     tips: [
       'Standard A4 is 210 × 297 mm (8.27 × 11.69 in / 595 × 842 pt). Standard US Letter is 216 × 279 mm (8.5 × 11.0 in / 612 × 792 pt).',
       'To verify PDF security and encoder engine details, use [PDF Metadata Viewer](/tools/pdf-metadata-viewer).',
+      'To combine multiple PDF documents into a single document, use [Merge PDF](/tools/merge-pdf).',
     ],
     faq: [
       {
