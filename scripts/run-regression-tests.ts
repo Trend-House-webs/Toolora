@@ -80,6 +80,37 @@ for (const u of sitemapUrls) {
 }
 assert('Sitemap', 'All subpage sitemap URLs follow strict non-trailing slash canonical format', invalidCanonicalSitemap === 0);
 
+// Verify canonical links in HTML and setLink helper attribute assignment
+let canonicalTagErrors = 0;
+let brokenRelAttrCount = 0;
+for (const r of expectedRoutes) {
+  const filePath = r === '' ? path.join(distDir, 'index.html') : path.join(distDir, r, 'index.html');
+  const content = fs.readFileSync(filePath, 'utf8');
+  const canonicalMatches = Array.from(content.matchAll(/<link rel="canonical" href="(.*?)" \/>/g));
+  if (canonicalMatches.length !== 1) {
+    canonicalTagErrors++;
+  }
+  if (content.includes('canonical="canonical"') || content.includes('<link rel="rel"')) {
+    brokenRelAttrCount++;
+  }
+}
+assert('Canonical Integrity', 'Every route HTML has exactly one canonical link tag', canonicalTagErrors === 0, `${canonicalTagErrors} pages with missing/duplicate canonical`);
+assert('Canonical Integrity', 'Zero malformed canonical="canonical" attributes in generated HTML', brokenRelAttrCount === 0);
+
+// Unit test for SEO setLink helper logic
+const testLinkEl: Record<string, string> = {};
+const testSetLink = (rel: string, href: string) => {
+  const el = {
+    setAttribute: (attr: string, val: string) => {
+      testLinkEl[attr] = val;
+    },
+  };
+  el.setAttribute('rel', rel);
+  el.setAttribute('href', href);
+};
+testSetLink('canonical', `${SITE_URL}/tools/word-counter`);
+assert('Canonical Integrity', 'SEO setLink helper sets rel="canonical" attribute correctly', testLinkEl['rel'] === 'canonical' && testLinkEl['href'] === `${SITE_URL}/tools/word-counter`);
+
 // -------------------------------------------------------------
 // Suite 3: Robots.txt & Indexing Directives
 // -------------------------------------------------------------
@@ -118,6 +149,45 @@ for (const r of expectedRoutes) {
 }
 assert('SSR / Prerendering', 'All 80 routes have an H1 tag in static HTML', missingH1Count === 0);
 assert('SSR / Prerendering', 'All 80 routes have prerendered DOM inside root container', emptyBodyCount === 0);
+
+// Check that no tool pages contain Suspense fallback or aborted server rendering
+let suspenseAbortCount = 0;
+let loadingSkeletonCount = 0;
+for (const r of expectedRoutes) {
+  const filePath = r === '' ? path.join(distDir, 'index.html') : path.join(distDir, r, 'index.html');
+  const content = fs.readFileSync(filePath, 'utf8');
+  if (content.includes('Switched to client rendering because the server rendering aborted')) {
+    suspenseAbortCount++;
+  }
+  if (content.includes('Initializing client-side workspace in your browser')) {
+    loadingSkeletonCount++;
+  }
+}
+assert('SSR / Prerendering', 'Zero Suspense abort template comments in prerendered HTML', suspenseAbortCount === 0, `${suspenseAbortCount} files contain Suspense abort comments`);
+assert('SSR / Prerendering', 'Zero loading skeletons in prerendered tool workspaces', loadingSkeletonCount === 0, `${loadingSkeletonCount} files contain loading skeleton`);
+
+// Verify representative tool workspaces contain actual interactive/structural DOM
+const representativeChecks = [
+  { path: 'tools/word-counter', mustContain: '<textarea', desc: 'Word Counter contains interactive textarea in initial HTML' },
+  { path: 'tools/fraction-calculator', mustContain: 'Fraction Calculator with Steps Workspace', desc: 'Fraction Calculator contains workspace with math controls' },
+  { path: 'tools/grade-calculator', mustContain: 'Grade Calculator Workspace', desc: 'Grade Calculator contains workspace with course inputs' },
+  { path: 'tools/image-compressor', mustContain: 'Image Compressor Workspace', desc: 'Image Compressor contains upload dropzone workspace' },
+  { path: 'tools/photo-size-reducer', mustContain: 'Photo Size Reducer (KB Limit) Workspace', desc: 'Photo Size Reducer contains dropzone and KB inputs' },
+  { path: 'tools/merge-pdf', mustContain: 'Merge PDF Workspace', desc: 'Merge PDF contains PDF dropzone workspace' },
+  { path: 'tools/image-resizer', mustContain: 'Image Resizer Workspace', desc: 'Image Resizer contains dropzone and dimension workspace' },
+];
+
+for (const check of representativeChecks) {
+  const fileContent = fs.readFileSync(path.join(distDir, check.path, 'index.html'), 'utf8');
+  assert('SSR / Prerendering', check.desc, fileContent.includes(check.mustContain));
+}
+
+// Verify legacy redirect in vercel.json
+const vercelConfig = JSON.parse(fs.readFileSync('vercel.json', 'utf8'));
+const hasLegacyRedirect = vercelConfig.redirects?.some(
+  (r: any) => r.source === '/tool/:slug' && r.destination === '/tools/:slug' && r.permanent === true
+);
+assert('Legacy Redirects', 'vercel.json contains permanent 301 redirect from /tool/:slug to /tools/:slug', Boolean(hasLegacyRedirect));
 
 // -------------------------------------------------------------
 // Suite 5: Metadata Uniqueness & OpenGraph

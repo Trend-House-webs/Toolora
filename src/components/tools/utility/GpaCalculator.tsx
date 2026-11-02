@@ -78,8 +78,10 @@ export function GpaCalculator() {
   const [scaleKey, setScaleKey] = useState<GradingScaleType>('standard4');
   const [courses, setCourses] = useState<Course[]>(() => {
     try {
-      const saved = localStorage.getItem('toolora_gpa_courses');
-      if (saved) return JSON.parse(saved);
+      if (typeof window !== 'undefined' && window.localStorage) {
+        const saved = window.localStorage.getItem('toolora_gpa_courses');
+        if (saved) return JSON.parse(saved);
+      }
     } catch (e) {
       // ignore
     }
