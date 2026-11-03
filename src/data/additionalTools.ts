@@ -76,7 +76,7 @@ export const ADDITIONAL_TOOLS: ToolItem[] = [
         answer: 'No. All canvas rotation and export logic runs locally on your device. Nothing is uploaded to any server.',
       },
     ],
-    relatedSlugs: ['flip-image', 'rotate-flip-image', 'jpg-to-png', 'png-to-jpg', 'image-resizer'],
+    relatedSlugs: ['flip-image', 'rotate-flip-image', 'crop-image', 'image-resizer', 'image-compressor'],
   },
 
   // 23. FLIP IMAGE
@@ -85,25 +85,26 @@ export const ADDITIONAL_TOOLS: ToolItem[] = [
     name: 'Flip Image',
     slug: 'flip-image',
     category: 'image',
-    description: 'Flip image online horizontally or vertically. Mirror image online in your browser with our free image mirror tool.',
-    detailedDescription: 'Free image mirror tool to flip photos horizontally or vertically in seconds. Perfect for fixing mirrored front-facing selfies, reversing text, and creating symmetrical reflections.',
-    metaTitle: 'Flip Image Online — Free Image Mirror Tool | Toolora',
-    metaDescription: 'Flip image online horizontally or vertically. Mirror image online in your browser with our free image mirror tool. Fast, private, and instant download.',
+    description: 'Flip image online horizontally or vertically. Mirror single photos or batch process multiple images with free ZIP download.',
+    detailedDescription: 'Free image mirror tool to flip photos horizontally or vertically in seconds. Perfect for fixing mirrored front-facing selfies, reversing text, and batch processing multiple images with instant ZIP export.',
+    metaTitle: 'Flip Image Online — Mirror Photo Horizontally & Vertically | Toolora',
+    metaDescription: 'Flip image online horizontally or vertically. Mirror photos, fix backwards selfies, and batch process multiple pictures with free ZIP download.',
     icon: 'FlipHorizontal',
     badge: 'Popular',
-    directAnswer: 'Toolora Flip Image is a dedicated, fast image mirror tool designed to flip image online and mirror image online with a single click. It allows you to flip photo horizontally (left-to-right reflection across the vertical axis, using scale(-1, 1)) or flip image vertically (upside-down reflection across the horizontal axis, using scale(1, -1)), or apply both axes simultaneously. Unlike rotation—which turns an image radially around its center and swaps width and height on 90° turns—flipping creates an exact mirror reflection while maintaining the identical pixel width and height dimensions of your original photo. This makes it ideal for correcting backwards front-facing camera selfies, un-reversing clothing logos, and creating balanced graphic designs. If your picture was shot sideways and needs to be turned upright 90 or 180 degrees, use our [Rotate Image](/tools/rotate-image) tool; to brand or protect your mirrored graphics, use [Add Watermark](/tools/add-watermark); to convert formats, use [JPG to PNG](/tools/jpg-to-png); and for proportional scaling, check our [Image Resize Guide](/guides/how-to-resize-an-image-without-losing-quality).',
+    directAnswer: 'Toolora Flip Image is a dedicated, fast image mirror tool designed to flip image online and mirror image online with a single click. It allows you to flip photo horizontally (left-to-right reflection across the vertical axis, using scale(-1, 1)) or flip image vertically (upside-down reflection across the horizontal axis, using scale(1, -1)), or apply both axes simultaneously. Unlike rotation—which turns an image radially around its center and swaps width and height on 90° turns—flipping creates an exact mirror reflection while maintaining the identical pixel width and height dimensions of your original photo. The tool supports both single-photo mirror workflows and multi-image batch processing with one-click "Download All as ZIP". This makes it ideal for correcting backwards front-facing camera selfies, un-reversing clothing logos, and creating balanced graphic designs. If your picture was shot sideways and needs to be turned upright 90 or 180 degrees, use our [Rotate Image](/tools/rotate-image) tool; for combined angular rotation and flipping, use [Rotate & Flip Image](/tools/rotate-flip-image); to trim photo margins, use [Crop Image](/tools/crop-image); to optimize file size, use [Image Compressor](/tools/image-compressor); and to scale dimensions, use [Image Resizer](/tools/image-resizer).',
     features: [
       'Flip image online horizontally: mirror photo horizontally to fix backwards selfie text and clothing logos',
       'Flip image vertically: invert pictures upside-down along the horizontal axis',
       'Dual-axis mirroring: toggle horizontal and vertical flip simultaneously',
+      'Multi-image batch workflow: select multiple JPG, PNG, and WebP pictures and transform them in one click',
+      'One-click ZIP download: bundle all flipped images into a single clean ZIP archive with collision-safe filenames',
       'Preserves exact native pixel resolution, aspect ratio, and dimensions without cropping',
-      'Maintains format fidelity: exports PNGs as clean PNG files and JPEG/WebP/BMP as 92% quality JPEGs',
       'Client-side processing: your personal photos are mirrored in local browser RAM without server file uploads',
     ],
     howToUse: [
-      { step: 1, title: 'Upload Picture', description: 'Select or drag and drop any JPG, PNG, WebP, or BMP photo into the image mirror tool.' },
-      { step: 2, title: 'Select Flip Axis', description: 'Click "Flip Horizontal (Mirror)" to fix backwards selfies, or "Flip Vertical" for upside-down reflection.' },
-      { step: 3, title: 'Inspect & Download', description: 'Review the instant canvas preview, then click "Download Flipped Image" to save your mirrored photo.' },
+      { step: 1, title: 'Upload Pictures', description: 'Select or drag and drop one or multiple JPG, PNG, WebP, or BMP photos into the image mirror tool.' },
+      { step: 2, title: 'Select Flip Axis', description: 'Click "Flip All Horizontally" to fix backwards selfies, or "Flip All Vertically" for upside-down inversion.' },
+      { step: 3, title: 'Inspect & Download', description: 'Review the instant canvas preview, then download images individually or click "Download All as ZIP".' },
     ],
     technicalDetails: {
       supportedInputs: [
@@ -112,22 +113,23 @@ export const ADDITIONAL_TOOLS: ToolItem[] = [
         'WebP (.webp)',
         'BMP (.bmp)',
       ],
-      outputFormat: 'Exported image matching source format (PNG for PNG inputs; 92% quality JPEG for others). Downloaded as [name]-flipped.[ext].',
+      outputFormat: 'Exported image matching source format (PNG for PNG inputs; 92% quality JPEG for others). Downloaded individually as [name]-flipped.[ext] or combined as a ZIP archive.',
       limitations: [
         'Mirrors coordinates across horizontal (scale(-1, 1)) or vertical (scale(1, -1)) axes; does not rotate pixel grids by 90 degrees or swap aspect ratios.',
         'If your image is oriented sideways (e.g. shot in landscape mode), turn it upright first using [Rotate Image](/tools/rotate-image) or use our combined [Rotate & Flip Image](/tools/rotate-flip-image) tool.',
-        'To resize mirrored photos without distortion, see our [Image Resize Guide](/guides/how-to-resize-an-image-without-losing-quality) or use [Image Resizer](/tools/image-resizer).',
+        'To crop excess margins before or after mirroring, use [Crop Image](/tools/crop-image).',
       ],
     },
     practicalExample: {
-      title: 'Fixing Mirrored Text on a Smartphone Front-Facing Camera Selfie',
-      scenario: 'A user takes a selfie wearing a sports jersey, but the smartphone front camera automatically saved the photo mirrored, causing the team name and numbers to read backwards.',
-      action: 'Upload the selfie to [Flip Image](/tools/flip-image) and click the "Flip Horizontal (Mirror)" button once.',
-      result: 'The photo reflects across its vertical axis, instantly restoring the jersey typography and logos to natural left-to-right reading order without changing image resolution.',
+      title: 'Fixing Mirrored Text on Smartphone Front-Facing Camera Selfies in Bulk',
+      scenario: 'A creator takes a series of 5 selfie photos wearing a branded sports jersey, but the smartphone front camera saved all photos mirrored, causing the team typography to read backwards.',
+      action: 'Drop all 5 photos into [Flip Image](/tools/flip-image), click "Flip All Horizontally", and click "Download All as ZIP".',
+      result: 'All 5 photos are mirrored across their vertical axis simultaneously, restoring typography to natural left-to-right reading order, and downloaded together in a single ZIP file.',
     },
     whyUse: [
       'Mirror Image Online: Un-reverse inverted front-camera photos and video stills in seconds.',
-      'Symmetrical Design: Create mirrored artistic effects, reflective water patterns, and banner assets.',
+      'Batch Bulk Processing: Transform dozens of pictures at once with zero repeated manual effort.',
+      'ZIP Archive Export: Download entire image sets in a single organized ZIP package.',
       'Instant Local Canvas: No software installation, account creation, or server file uploads required.',
     ],
     tips: [
@@ -138,7 +140,11 @@ export const ADDITIONAL_TOOLS: ToolItem[] = [
     faq: [
       {
         question: 'What is the difference between flipping and rotating an image?',
-        answer: 'Flipping (mirroring) reflects an image across its horizontal or vertical axis without changing width or height dimensions, making backwards text readable. Rotating turns an image radially around its center (90°, 180°, 270°), transposing width and height when turned sideways. If you need angular turning, use [Rotate Image](/tools/rotate-image).',
+        answer: 'Flipping (mirroring) reflects an image across its horizontal or vertical axis without changing width or height dimensions, making backwards text readable. Rotating turns an image radially around its center (90°, 90° clockwise, 180°, 270°), transposing width and height when turned sideways. If you need angular turning, use [Rotate Image](/tools/rotate-image).',
+      },
+      {
+        question: 'Can I flip multiple photos at the same time?',
+        answer: 'Yes! Toolora Flip Image supports multi-file batch uploads. You can apply horizontal or vertical mirroring to all selected photos simultaneously and download them individually or as a single ZIP archive.',
       },
       {
         question: 'Can I flip photo horizontally and vertically at the same time?',
@@ -150,10 +156,10 @@ export const ADDITIONAL_TOOLS: ToolItem[] = [
       },
       {
         question: 'Are my personal selfies uploaded to any server?',
-        answer: 'No. All canvas transformations execute locally inside your web browser on your device, ensuring total privacy.',
+        answer: 'No. All canvas transformations execute locally inside your web browser on your device.',
       },
     ],
-    relatedSlugs: ['rotate-image', 'rotate-flip-image', 'add-watermark', 'jpg-to-png', 'image-resizer'],
+    relatedSlugs: ['rotate-image', 'rotate-flip-image', 'crop-image', 'image-compressor', 'image-resizer'],
   },
 
   // 24. IMAGE METADATA VIEWER
@@ -315,7 +321,7 @@ export const ADDITIONAL_TOOLS: ToolItem[] = [
         answer: 'Format your photo using the appropriate country preset here first, then open our companion [Photo Size Reducer](/tools/photo-size-reducer) to compress the file under 100 KB or 50 KB without altering its pixel dimensions.',
       },
     ],
-    relatedSlugs: ['social-media-resizer', 'rotate-image', 'photo-size-reducer', 'image-resizer'],
+    relatedSlugs: ['photo-size-reducer', 'image-compressor', 'crop-image', 'image-resizer', 'rotate-image'],
   },
 
   // 26. PHOTO SIZE REDUCER
@@ -326,19 +332,20 @@ export const ADDITIONAL_TOOLS: ToolItem[] = [
     category: 'image',
     description: 'Compress photos to strictly under 20KB, 50KB, 100KB, 200KB, or 500KB for application portals.',
     detailedDescription: 'Reduce photo file size to meet strict university admissions, job application, and government upload limits. Uses an adaptive binary search algorithm to ensure your image falls below your specified KB limit while maintaining maximum clarity.',
-    metaTitle: 'Free Photo Size Reducer — Compress Under 20KB, 50KB, 100KB Online',
-    metaDescription: 'Reduce photo file size to exact KB limits (under 20KB, 50KB, 100KB, 200KB). Ideal for government portals, job applications, and admissions without server file uploads.',
+    metaTitle: 'Photo Size Reducer — Compress Image to 100KB, 50KB & 20KB Online',
+    metaDescription: 'Reduce photo file size online to strict KB limits (20KB, 50KB, 100KB, 200KB). Compress JPG to 100KB for government portals and job applications without uploads.',
     icon: 'Sliders',
     isPopular: true,
     badge: 'Essential',
-    directAnswer: 'Toolora Photo Size Reducer is an automated browser utility engineered to reduce photo size to a strict maximum kilobyte limit—such as under 20KB, 50KB, 100KB, 200KB, or 500KB. Functioning as a specialized target-KB photo size reducer and photo compressor to target size, it executes an in-browser binary search algorithm across JPEG quantization levels. If an extreme target (like 20KB) cannot be met through quality compression alone, the tool proportionally downscales canvas resolution to guarantee the file size ceiling is strictly satisfied without visual noise. This automated target-KB workflow is distinct from our standard [Image Compressor](/tools/image-compressor), where you manually adjust a quality slider. If you need official biometric visa or passport dimensions before shrinking file weight, use [Passport Photo Resizer](/tools/passport-photo-resizer); to resize pixel dimensions directly, use [Image Resizer](/tools/image-resizer).',
+    directAnswer: 'Toolora Photo Size Reducer is an automated browser utility engineered to reduce photo size to a strict maximum kilobyte limit—such as under 20KB, 50KB, 100KB, 200KB, or 500KB. Functioning as a specialized target-KB photo size reducer, compress JPG to 100KB tool, and photo compressor to target size, it executes an in-browser binary search algorithm across JPEG quantization levels. If an extreme target (like 20KB) cannot be met through quality compression alone, the tool proportionally downscales canvas resolution while verifying that the final output blob genuinely meets the requested byte ceiling. If a target cannot be reached without rendering text or faces illegible, the tool provides an honest warning and a best-effort result rather than falsely claiming success. This automated target-KB workflow is distinct from our standard [Image Compressor](/tools/image-compressor), where you manually adjust a quality slider. If you need official biometric visa or passport dimensions before shrinking file weight, use [Passport Photo Resizer](/tools/passport-photo-resizer); to resize pixel dimensions directly, use [Image Resizer](/tools/image-resizer); or to trim excess background margins, use [Crop Image](/tools/crop-image).',
     features: [
       'Verified target ceiling presets: Under 20 KB, Under 50 KB, Under 100 KB, Under 200 KB, and Under 500 KB',
       'Custom numeric KB target input for exact portal specifications (e.g. 35 KB, 80 KB)',
       'Automated multi-step binary search balancing JPEG quantization and slight dimensional downscaling',
+      'Strict post-compression Blob size verification: never claims a target is met when output exceeds the ceiling',
+      'Honest warning state and best-effort download if an extreme target cannot be achieved with legible quality',
       'Solid white canvas backing ensures transparent PNG or WebP images convert cleanly to JPEG without dark borders',
       'Instant client-side JPEG export with zero server file uploads',
-      'Clear byte counter verifying that the file size ceiling is strictly met before download',
     ],
     howToUse: [
       { step: 1, title: 'Upload Photo', description: 'Select or drag and drop any JPG, PNG, WebP, GIF, or BMP picture into the dropzone.' },
@@ -356,26 +363,26 @@ export const ADDITIONAL_TOOLS: ToolItem[] = [
       ],
       outputFormat: 'Optimized JPEG file (.jpg) generated via adaptive binary search quantization. Downloaded as [name]-under-[targetKb]kb.jpg.',
       limitations: [
-        'Output format is always JPEG because progressive JPEG quantization allows the granular bit-rate tuning required to guarantee an exact byte ceiling.',
-        'For extremely tight limits on large photos (e.g. compressing a 4000px picture to <20 KB), the algorithm downscales pixel dimensions proportionally to prevent illegible compression artifacts.',
+        'Output format is always JPEG because progressive JPEG quantization allows the granular bit-rate tuning required to target an exact byte ceiling.',
+        'Not every image can be compressed below every target: an ultra-high resolution image with dense detail may not reach an extreme 20 KB ceiling without illegible blur, in which case the tool provides an honest warning and best-effort download.',
         'Maximum recommended input file size is 50 MB for smooth in-browser canvas execution.',
         'If you prefer manual slider control over visual quality rather than a strict byte ceiling, use our general [Image Compressor](/tools/image-compressor).',
       ],
     },
     practicalExample: {
-      title: 'Meeting a Strict 50 KB Upload Limit for an Online Exam Registration Portal',
-      scenario: 'A student applying for a civil service exam has a 2.8 MB smartphone portrait photo, but the registration portal strictly rejects any file exceeding 50 KB.',
-      action: 'Upload the photo to the [Photo Size Reducer](/tools/photo-size-reducer) and select the "Under 50 KB" preset button.',
-      result: 'The tool runs an automated binary search in browser memory, producing a crisp 47.8 KB JPEG that uploads to the registration portal on the first attempt without rejection.',
+      title: 'Compressing a Photo to Under 100 KB for an Employment Application',
+      scenario: 'A job applicant has a 3.4 MB portrait photo from a modern smartphone, but the company HR portal enforces a hard 100 KB upload limit.',
+      action: 'Upload the photo to the [Photo Size Reducer](/tools/photo-size-reducer) and select the "Under 100 KB" preset button.',
+      result: 'The tool executes a client-side binary search, producing a clear 92.4 KB JPEG that uploads to the job portal without rejection.',
     },
     whyUse: [
       'Pass Portal Validation: Government websites, civil service exams, visa portals, and job boards strictly enforce 20KB, 50KB, or 100KB file ceilings.',
+      'Honest Verification: Never misleads you—every output blob is strictly measured against your requested ceiling before showing a success badge.',
       'Eliminate Guesswork: The algorithm mathematically calculates the optimal compression ratio rather than forcing you to guess slider percentages.',
-      'Browser Memory Execution: Personal ID photos and resume portraits are compressed locally without uploading to Toolora servers.',
-      'Custom File Ceilings: Enter any specific number from 10 KB to 5000 KB to match niche submission guidelines.',
+      'Browser Memory Execution: Personal ID photos and resume portraits are compressed locally in browser RAM without server file uploads.',
     ],
     tips: [
-      'When compressing down to 20 KB or 50 KB, the algorithm automatically scales resolution slightly so faces and text remain sharp and recognizable.',
+      'When compressing down to 20 KB or 50 KB, the algorithm automatically scales resolution slightly so faces and text remain recognizable.',
       'For official ID or passport photo submissions requiring exact physical head proportions, crop first with [Passport Photo Resizer](/tools/passport-photo-resizer).',
       'If you need to resize pixel dimensions manually before compressing, use [Image Resizer](/tools/image-resizer).',
     ],
@@ -385,16 +392,16 @@ export const ADDITIONAL_TOOLS: ToolItem[] = [
         answer: 'Photo Size Reducer is an automated target-ceiling tool: you specify a maximum kilobyte threshold (e.g. 20KB, 50KB, 100KB) and the algorithm runs a binary search to produce a file strictly under that cap. In contrast, [Image Compressor](/tools/image-compressor) gives you manual slider control over quality percentage (e.g. 75%) without guaranteeing a specific byte limit.',
       },
       {
+        question: 'What happens if a photo cannot be compressed below my chosen target?',
+        answer: 'The tool displays an honest warning explaining that the target could not be achieved without severe quality loss, shows the actual output size versus requested target, and offers a best-effort download alongside suggestions like cropping excess margins.',
+      },
+      {
         question: 'Which target KB limits are available?',
-        answer: 'The tool includes 5 quick presets: Under 20 KB, Under 50 KB, Under 100 KB, Under 200 KB, and Under 500 KB, plus an input box to type any custom target size between 10 KB and 5000 KB.',
+        answer: 'The tool includes 5 quick presets: Under 20 KB, Under 50 KB, Under 100 KB, Under 200 KB, and Under 500 KB, plus an input box to type any custom target size between 5 KB and 10000 KB.',
       },
       {
         question: 'Why is the output format always JPEG?',
         answer: 'JPEG provides continuous quantization tuning from 1% to 100%, allowing the binary search algorithm to target precise byte counts. Formats like PNG use lossless DEFLATE compression, which cannot be dialed in to hit an exact arbitrary kilobyte ceiling.',
-      },
-      {
-        question: 'Will my photo become blurry when reducing file size?',
-        answer: 'The algorithm prioritizes visual fidelity by adjusting quantization first. It only reduces canvas dimensions if the target ceiling (such as under 20 KB) cannot be achieved with compression alone, ensuring facial features and documents remain clear.',
       },
       {
         question: 'Are my private ID photos uploaded to a server?',

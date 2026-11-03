@@ -9,6 +9,7 @@ import { ShieldCheck, Zap, Lock, CheckCircle2, Lightbulb, HelpCircle, ArrowRight
 import { Link } from '../context/RouterContext';
 import { SITE_URL } from '../config/site';
 import { getGuidesForTool } from '../data/guides';
+import { AdSenseBanner } from '../components/common/AdSenseBanner';
 
 // Tool workspace components
 import { ImageCompressor } from '../components/tools/image/ImageCompressor';
@@ -462,6 +463,9 @@ export function ToolPageWrapper({ tool }: ToolPageWrapperProps) {
         {renderWorkspace()}
       </section>
 
+      {/* Non-intrusive Ad Placement (Separated from tool interactive workspace) */}
+      <AdSenseBanner className="mb-14" />
+
       {/* How to Use Step-by-Step Guide */}
       {tool.howToUse && tool.howToUse.length > 0 && (
         <section className="mb-14 bg-white rounded-2xl border border-slate-200/90 p-6 sm:p-8 shadow-xs">
@@ -678,6 +682,9 @@ export function ToolPageWrapper({ tool }: ToolPageWrapperProps) {
           </div>
         </section>
       )}
+
+      {/* Secondary Ad Placement (Above related tools) */}
+      <AdSenseBanner className="mt-14 mb-8" />
 
       {/* Related Tools (Internal Linking) */}
       {relatedTools.length > 0 && (

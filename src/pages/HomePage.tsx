@@ -4,6 +4,7 @@ import { TOOLS, FEATURED_TOOLS, POPULAR_TOOLS, IMAGE_TOOLS, PDF_TOOLS, STUDENT_T
 import { GUIDES } from '../data/guides';
 import { ToolCard } from '../components/common/ToolCard';
 import { SEO } from '../components/common/SEO';
+import { AdSenseBanner } from '../components/common/AdSenseBanner';
 import { Link, useRouter } from '../context/RouterContext';
 import { SITE_DESCRIPTION, SITE_URL } from '../config/site';
 
@@ -252,6 +253,11 @@ export function HomePage({ onOpenSearchModal }: HomePageProps) {
         </div>
       </section>
 
+      {/* AdSense Unit (Between Popular and Featured Tools) */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <AdSenseBanner className="my-0" />
+      </div>
+
       {/* 3. Featured Tools Section */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-6 gap-3">
@@ -474,6 +480,11 @@ export function HomePage({ onOpenSearchModal }: HomePageProps) {
           ))}
         </div>
       </section>
+
+      {/* AdSense Unit (Between Catalog and Guides) */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <AdSenseBanner className="my-0" />
+      </div>
 
       {/* 5. Practical Guides & Workflow Tutorials */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

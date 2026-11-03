@@ -15,6 +15,7 @@ import {
 import { GuideItem, GUIDES } from '../data/guides';
 import { Breadcrumbs } from '../components/common/Breadcrumbs';
 import { SEO } from '../components/common/SEO';
+import { AdSenseBanner } from '../components/common/AdSenseBanner';
 import { SITE_URL } from '../config/site';
 import { Link } from '../context/RouterContext';
 
@@ -373,6 +374,9 @@ export function GuideDetailPage({ guide }: GuideDetailPageProps) {
             ))}
           </div>
         </section>
+
+        {/* AdSense Placement (Below article content, before discovery links) */}
+        <AdSenseBanner className="my-10" />
 
         {/* Category Connection Banner */}
         <section className="p-6 rounded-2xl bg-slate-100 border border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4">

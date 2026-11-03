@@ -282,6 +282,31 @@ const mockImage = new File(['mock'], 'test.jpg', { type: 'image/jpeg' });
 const valRes = validateImageFile(mockImage);
 assert('Tool Logic', 'validateImageFile accepts valid JPEG file', valRes.valid === true);
 
+// Image Tool Tests (PhotoSizeReducer, FlipTool, ImageCompressor)
+const psrContent = fs.readFileSync('src/components/tools/image/PhotoSizeReducer.tsx', 'utf8');
+const psrPresetsMatch = psrContent.includes('presets = [20, 50, 100, 200, 500]');
+assert('Tool Logic', 'PhotoSizeReducer includes 20, 50, 100, 200, 500 KB presets', psrPresetsMatch);
+
+const psrVerifiesFinalBlob = psrContent.includes('finalSize <= maxBytes') && psrContent.includes('targetAchieved');
+assert('Tool Logic', 'PhotoSizeReducer verifies final output Blob size against maxBytes', psrVerifiesFinalBlob);
+
+const psrHasWarningState = psrContent.includes('Target Size Not Fully Achieved') && psrContent.includes('Download Best-Effort Result');
+assert('Tool Logic', 'PhotoSizeReducer displays honest warning and best-effort download when target is not met', psrHasWarningState);
+
+const flipContent = fs.readFileSync('src/components/tools/image/FlipTool.tsx', 'utf8');
+const flipHasBatchSupport = flipContent.includes('multiple={true}') && flipContent.includes('JSZip') && flipContent.includes('downloadAllAsZip');
+assert('Tool Logic', 'FlipTool supports multi-image batch selection and ZIP archive export', flipHasBatchSupport);
+
+const flipHasTransformModes = (flipContent.includes('item.flipH ? -1 : 1') && flipContent.includes('item.flipV ? -1 : 1'));
+assert('Tool Logic', 'FlipTool supports horizontal, vertical, and combined flip transformations', flipHasTransformModes);
+
+const flipHasCollisionSafety = flipContent.includes('candidateName = `${baseName}-flipped-${counter}.${ext}`');
+assert('Tool Logic', 'FlipTool prevents duplicate filename collisions in ZIP packaging', flipHasCollisionSafety);
+
+const imgCompContent = fs.readFileSync('src/components/tools/image/ImageCompressor.tsx', 'utf8');
+const imgCompFormats = imgCompContent.includes('image/jpeg') && imgCompContent.includes('image/png') && imgCompContent.includes('image/webp');
+assert('Tool Logic', 'ImageCompressor supports JPG, PNG, and WebP compression', imgCompFormats);
+
 // -------------------------------------------------------------
 // Suite 9: Privacy Claims & Network Requests
 // -------------------------------------------------------------
@@ -313,6 +338,22 @@ for (const f of ['src/data/tools.ts', 'src/data/additionalTools.ts', 'src/pages/
   }
 }
 assert('Privacy Compliance', 'No unsupported absolute privacy claims exist in data or static pages', broadHits === 0);
+
+// -------------------------------------------------------------
+// Suite 10: Google AdSense Integration Integrity
+// -------------------------------------------------------------
+const distIndex = fs.readFileSync(path.join(distDir, 'index.html'), 'utf8');
+const hasAdSenseScript = distIndex.includes('https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6848191601714172');
+assert('AdSense Integration', 'Google AdSense script is present in dist/index.html head with publisher ID', hasAdSenseScript);
+
+const toolPageHtml = fs.readFileSync(path.join(distDir, 'tools', 'word-counter', 'index.html'), 'utf8');
+const hasAdUnitInTool = toolPageHtml.includes('class="adsbygoogle"') && toolPageHtml.includes('data-ad-slot="8603656892"');
+assert('AdSense Integration', 'AdSense ad units are present on tool pages outside interactive workspace', hasAdUnitInTool);
+
+const cspMatches = vercelConfig.headers?.some(
+  (h: any) => h.headers?.some((item: any) => item.key === 'Content-Security-Policy' && item.value.includes('pagead2.googlesyndication.com'))
+);
+assert('AdSense Integration', 'Vercel Content-Security-Policy allows pagead2.googlesyndication.com', Boolean(cspMatches));
 
 // -------------------------------------------------------------
 // Output Report

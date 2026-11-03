@@ -244,24 +244,24 @@ export const TOOLS: ToolItem[] = [
     category: 'image',
     description: 'Compress JPG, PNG, and WebP images with adjustable quality controls and live preview.',
     detailedDescription: 'Compress JPG, PNG, and WebP images directly in your browser. Real-time before-and-after comparison with adjustable quality controls without server file uploads.',
-    metaTitle: 'Free Image Compressor — Compress JPG, PNG & WebP Online',
-    metaDescription: 'Reduce image file sizes instantly in your browser with adjustable quality. Fast and free client-side tool with no file uploads or sign-up.',
+    metaTitle: 'Image Compressor — Compress Image Online (JPG, PNG & WebP)',
+    metaDescription: 'Free online image compressor and photo compressor. Compress JPG, PNG, and WebP images with adjustable quality settings and zero server file uploads.',
     icon: 'Minimize2',
     isFeatured: true,
     isPopular: true,
     badge: 'Popular',
-    directAnswer: 'Toolora Image Compressor is a client-side image compressor and photo compressor online built to compress image online directly in your browser. It functions as a versatile JPG compressor, PNG compressor, and WebP compressor, applying quality quantization to reduce image file size without altering pixel width or height. JPEG and WebP photos are optimized using HTML5 canvas quantization, while PNG graphics are processed via client-side palette quantization and DEFLATE compression to preserve transparent backgrounds. An adjustable quality slider (1% to 100%) and an optional "Convert to WebP" toggle let you preview and balance byte savings against visual sharpness. Note that file compression optimizes encoding bitrate and does not alter pixel dimensions; if you need to scale pixel width and height, use [Image Resizer](/tools/image-resizer). If you need to hit a strict upload ceiling (such as under 20KB, 50KB, or 100KB for an official portal), use our automated [Photo Size Reducer](/tools/photo-size-reducer).',
+    directAnswer: 'Toolora Image Compressor is a client-side image compressor and photo compressor online built to compress image online directly in your browser. It functions as a versatile JPG compressor, PNG compressor, and WebP compressor, applying quality quantization to reduce image file size without altering pixel width or height. JPEG and WebP photos are optimized using HTML5 canvas quantization, while PNG graphics are processed via client-side palette quantization and DEFLATE compression to preserve transparent backgrounds. An adjustable quality slider (10% to 100%) and an optional "Convert to WebP" toggle let you preview and balance byte savings against visual sharpness. Note that file compression optimizes encoding bitrate and does not alter pixel dimensions; if you need to scale pixel width and height, use [Image Resizer](/tools/image-resizer). If you need to hit a strict upload ceiling (such as under 20KB, 50KB, or 100KB for an official portal), use our automated [Photo Size Reducer](/tools/photo-size-reducer).',
     features: [
       'Multi-format compression: acts as a dedicated JPG compressor, PNG compressor, and WebP compressor',
-      'Configurable quality slider from 1% to 100% (75%–80% recommended for web publishing)',
+      'Configurable quality slider from 10% to 100% (75% recommended for balanced web publishing)',
       'PNG compression preserves alpha transparency channels via palette quantization and DEFLATE encoding',
-      'Optional "Convert to WebP format" toggle for next-generation web image optimization',
+      'Optional "Convert to WebP format" toggle for modern high-efficiency web image optimization',
       'Side-by-side original vs compressed visual preview tabs and live byte savings readout',
       'Zero server file uploads: all re-encoding runs locally in browser RAM',
     ],
     howToUse: [
       { step: 1, title: 'Upload Image', description: 'Select or drag and drop any JPG, PNG, WebP, GIF, or BMP image (up to 50 MB) into the compressor dropzone.' },
-      { step: 2, title: 'Adjust Quality Slider', description: 'Move the quality slider (1% to 100%) to fine-tune the balance between file size and visual fidelity.' },
+      { step: 2, title: 'Adjust Quality Slider', description: 'Move the quality slider (10% to 100%) to fine-tune the balance between file size and visual fidelity.' },
       { step: 3, title: 'Optional WebP Export', description: 'Check "Convert to WebP format" if you want to modernize JPEG or PNG assets for faster website delivery.' },
       { step: 4, title: 'Compare & Download', description: 'Toggle between the Original and Compressed preview tabs, review the byte reduction, and click "Download Compressed Image".' },
     ],
@@ -285,7 +285,7 @@ export const TOOLS: ToolItem[] = [
     practicalExample: {
       title: 'Compressing a High-Resolution Camera Photograph for Fast Web Page Loading',
       scenario: 'A web designer has a 4.2 MB JPEG photograph straight from a digital camera that is slowing down website loading times and hurting Core Web Vitals.',
-      action: 'Upload the photo into the [Image Compressor](/tools/image-compressor), keep dimensions intact, set the quality slider to 78%, and enable the WebP toggle.',
+      action: 'Upload the photo into the [Image Compressor](/tools/image-compressor), keep dimensions intact, set the quality slider to 75%, and enable the WebP toggle.',
       result: 'Substantially reduces file size to a fraction of its original weight with crisp edge clarity on high-DPI retina screens, ready for web deployment.',
     },
     whyUse: [
@@ -321,7 +321,7 @@ export const TOOLS: ToolItem[] = [
         answer: 'No. All compression executes entirely inside your browser memory using the HTML5 Canvas API and WebAssembly libraries. Files remain strictly on your local device.',
       },
     ],
-    relatedSlugs: ['photo-size-reducer', 'image-resizer', 'jpg-to-webp', 'crop-image', 'image-to-pdf'],
+    relatedSlugs: ['photo-size-reducer', 'image-resizer', 'crop-image', 'passport-photo-resizer', 'flip-image'],
   },
 
   // 2. IMAGE RESIZER
@@ -1028,7 +1028,7 @@ export const TOOLS: ToolItem[] = [
         answer: 'No. Image slicing is executed locally in your browser using client-side HTML5 canvas APIs. Your files remain on your device.',
       },
     ],
-    relatedSlugs: ['image-resizer', 'aspect-ratio-calculator', 'social-media-resizer', 'rotate-flip-image', 'image-compressor'],
+    relatedSlugs: ['image-resizer', 'photo-size-reducer', 'image-compressor', 'flip-image', 'rotate-flip-image'],
   },
 
   // 11. ROTATE & FLIP IMAGE

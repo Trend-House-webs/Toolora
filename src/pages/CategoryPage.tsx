@@ -5,6 +5,7 @@ import { getGuidesByCategory } from '../data/guides';
 import { Breadcrumbs } from '../components/common/Breadcrumbs';
 import { ToolCard } from '../components/common/ToolCard';
 import { SEO } from '../components/common/SEO';
+import { AdSenseBanner } from '../components/common/AdSenseBanner';
 import { SITE_URL } from '../config/site';
 import { Link } from '../context/RouterContext';
 
@@ -316,6 +317,9 @@ export function CategoryPage({ categorySlug }: CategoryPageProps) {
           </button>
         </div>
       )}
+
+      {/* AdSense Placement (Between Tools and Guides/Educational sections) */}
+      <AdSenseBanner className="my-8" />
 
       {/* Helpful Guides for Category */}
       {categoryGuides.length > 0 && (

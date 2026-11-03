@@ -3,6 +3,7 @@ import { BookOpen, Clock, ArrowRight, ShieldCheck, Sparkles, Layers, Image as Im
 import { GUIDES } from '../data/guides';
 import { Breadcrumbs } from '../components/common/Breadcrumbs';
 import { SEO } from '../components/common/SEO';
+import { AdSenseBanner } from '../components/common/AdSenseBanner';
 import { SITE_URL } from '../config/site';
 import { Link } from '../context/RouterContext';
 
@@ -144,6 +145,9 @@ export function GuidesPage() {
           </article>
         ))}
       </div>
+
+      {/* AdSense Placement (Between Guides directory and Category jump) */}
+      <AdSenseBanner className="mb-14" />
 
       {/* Quick Category Jump Navigation */}
       <div className="p-8 rounded-2xl bg-slate-900 text-white">

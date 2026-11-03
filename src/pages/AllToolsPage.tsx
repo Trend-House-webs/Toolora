@@ -5,6 +5,7 @@ import { GUIDES } from '../data/guides';
 import { Breadcrumbs } from '../components/common/Breadcrumbs';
 import { ToolCard } from '../components/common/ToolCard';
 import { SEO } from '../components/common/SEO';
+import { AdSenseBanner } from '../components/common/AdSenseBanner';
 import { SITE_URL } from '../config/site';
 import { Link } from '../context/RouterContext';
 
@@ -198,6 +199,9 @@ export function AllToolsPage() {
           <p className="text-xs text-slate-400 mt-1">Try resetting the search or category filter.</p>
         </div>
       )}
+
+      {/* AdSense Unit (Between Tools Directory and Guides) */}
+      <AdSenseBanner className="my-8" />
 
       {/* Practical Guides & Workflow Tutorials */}
       <section className="pt-10 border-t border-slate-200">
