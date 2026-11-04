@@ -63,6 +63,7 @@ export function AdSenseBanner({
     <div
       className={`my-8 sm:my-10 flex flex-col items-center justify-center overflow-hidden transition-all ${className}`}
       aria-label={label}
+      style={{ contain: 'layout paint' }}
     >
       <div className="w-full max-w-5xl mx-auto">
         <div className="flex items-center justify-center gap-2 mb-1.5 select-none">
@@ -71,7 +72,7 @@ export function AdSenseBanner({
           </span>
         </div>
 
-        <div className="min-h-[100px] sm:min-h-[120px] w-full flex items-center justify-center bg-slate-50/70 border border-slate-200/60 rounded-xl p-2 sm:p-3 overflow-hidden text-center">
+        <div className="min-h-[280px] sm:min-h-[250px] lg:min-h-[120px] w-full flex items-center justify-center bg-slate-50/70 border border-slate-200/60 rounded-xl p-2 sm:p-3 overflow-hidden text-center">
           <ins
             ref={adRef}
             className="adsbygoogle"

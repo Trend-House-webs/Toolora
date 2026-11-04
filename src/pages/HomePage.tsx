@@ -38,7 +38,7 @@ export function HomePage({ onOpenSearchModal }: HomePageProps) {
 
   const displayedCategoryTools =
     selectedCategoryTab === 'all'
-      ? TOOLS
+      ? TOOLS.slice(0, 12)
       : selectedCategoryTab === 'image'
       ? IMAGE_TOOLS
       : selectedCategoryTab === 'pdf'
@@ -88,12 +88,12 @@ export function HomePage({ onOpenSearchModal }: HomePageProps) {
                 value={heroSearch}
                 onChange={(e) => setHeroSearch(e.target.value)}
                 placeholder="Search a tool..."
-                className="w-full py-2.5 px-3 text-sm sm:text-base text-slate-900 placeholder:text-slate-400 bg-transparent focus:outline-hidden"
+                className="w-full py-2.5 px-3 min-h-[44px] text-sm sm:text-base text-slate-900 placeholder:text-slate-400 bg-transparent focus:outline-hidden"
                 aria-label="Search tools"
               />
               <button
                 type="submit"
-                className="px-4 py-2.5 bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white text-xs sm:text-sm font-semibold rounded-lg transition-colors cursor-pointer shrink-0"
+                className="px-4 py-2.5 min-h-[44px] bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white text-xs sm:text-sm font-semibold rounded-lg transition-colors cursor-pointer shrink-0 flex items-center justify-center"
               >
                 Search
               </button>
@@ -290,13 +290,18 @@ export function HomePage({ onOpenSearchModal }: HomePageProps) {
             </h2>
           </div>
 
-          {/* Category Tabs */}
-          <div className="flex items-center gap-1 p-1 bg-slate-100 rounded-xl overflow-x-auto" role="tablist">
+          {/* Category Tabs with mobile touch scrolling */}
+          <div
+            className="flex items-center gap-1.5 p-1 bg-slate-100 rounded-xl overflow-x-auto max-w-full"
+            style={{ WebkitOverflowScrolling: 'touch', scrollbarWidth: 'none' }}
+            role="tablist"
+            aria-label="Filter tools by category"
+          >
             <button
               role="tab"
               aria-selected={selectedCategoryTab === 'all'}
               onClick={() => setSelectedCategoryTab('all')}
-              className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors cursor-pointer whitespace-nowrap ${
+              className={`min-h-[40px] px-3.5 py-2 text-xs font-semibold rounded-lg transition-colors cursor-pointer whitespace-nowrap shrink-0 flex items-center justify-center ${
                 selectedCategoryTab === 'all'
                   ? 'bg-white text-slate-900 shadow-xs'
                   : 'text-slate-600 hover:text-slate-900'
@@ -308,7 +313,7 @@ export function HomePage({ onOpenSearchModal }: HomePageProps) {
               role="tab"
               aria-selected={selectedCategoryTab === 'image'}
               onClick={() => setSelectedCategoryTab('image')}
-              className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors cursor-pointer whitespace-nowrap ${
+              className={`min-h-[40px] px-3.5 py-2 text-xs font-semibold rounded-lg transition-colors cursor-pointer whitespace-nowrap shrink-0 flex items-center justify-center ${
                 selectedCategoryTab === 'image'
                   ? 'bg-white text-slate-900 shadow-xs'
                   : 'text-slate-600 hover:text-slate-900'
@@ -320,7 +325,7 @@ export function HomePage({ onOpenSearchModal }: HomePageProps) {
               role="tab"
               aria-selected={selectedCategoryTab === 'pdf'}
               onClick={() => setSelectedCategoryTab('pdf')}
-              className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors cursor-pointer whitespace-nowrap ${
+              className={`min-h-[40px] px-3.5 py-2 text-xs font-semibold rounded-lg transition-colors cursor-pointer whitespace-nowrap shrink-0 flex items-center justify-center ${
                 selectedCategoryTab === 'pdf'
                   ? 'bg-white text-slate-900 shadow-xs'
                   : 'text-slate-600 hover:text-slate-900'
@@ -332,7 +337,7 @@ export function HomePage({ onOpenSearchModal }: HomePageProps) {
               role="tab"
               aria-selected={selectedCategoryTab === 'student'}
               onClick={() => setSelectedCategoryTab('student')}
-              className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors cursor-pointer whitespace-nowrap ${
+              className={`min-h-[40px] px-3.5 py-2 text-xs font-semibold rounded-lg transition-colors cursor-pointer whitespace-nowrap shrink-0 flex items-center justify-center ${
                 selectedCategoryTab === 'student'
                   ? 'bg-white text-slate-900 shadow-xs'
                   : 'text-slate-600 hover:text-slate-900'
@@ -344,7 +349,7 @@ export function HomePage({ onOpenSearchModal }: HomePageProps) {
               role="tab"
               aria-selected={selectedCategoryTab === 'utility'}
               onClick={() => setSelectedCategoryTab('utility')}
-              className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors cursor-pointer whitespace-nowrap ${
+              className={`min-h-[40px] px-3.5 py-2 text-xs font-semibold rounded-lg transition-colors cursor-pointer whitespace-nowrap shrink-0 flex items-center justify-center ${
                 selectedCategoryTab === 'utility'
                   ? 'bg-white text-slate-900 shadow-xs'
                   : 'text-slate-600 hover:text-slate-900'
@@ -355,130 +360,31 @@ export function HomePage({ onOpenSearchModal }: HomePageProps) {
           </div>
         </div>
 
-        {/* Category Cards Overview */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3.5 mb-6">
-          <Link
-            to="/category/image-tools"
-            className="group p-4 sm:p-5 rounded-2xl bg-white border border-slate-200/90 hover:border-blue-500/60 hover:shadow-xs transition-all flex flex-col justify-between"
-          >
-            <div>
-              <div className="w-9 h-9 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0 group-hover:bg-blue-600 group-hover:text-white transition-colors mb-3">
-                <ImageIcon className="w-4 h-4" />
-              </div>
-              <div className="flex items-center justify-between gap-1">
-                <h3 className="text-sm font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
-                  Image Tools
-                </h3>
-                <span className="text-2xs text-slate-400 font-medium">{IMAGE_TOOLS.length}</span>
-              </div>
-              <p className="text-xs text-slate-600 mt-1 leading-relaxed line-clamp-2">
-                Compress, convert, resize, crop, rotate, and format photos in-browser.
-              </p>
-            </div>
-            <span className="inline-flex items-center gap-1 text-xs font-semibold text-blue-600 mt-3 group-hover:translate-x-0.5 transition-transform">
-              Browse Image Tools <ArrowRight className="w-3 h-3" />
-            </span>
-          </Link>
-
-          <Link
-            to="/category/pdf-tools"
-            className="group p-4 sm:p-5 rounded-2xl bg-white border border-slate-200/90 hover:border-blue-500/60 hover:shadow-xs transition-all flex flex-col justify-between"
-          >
-            <div>
-              <div className="w-9 h-9 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0 group-hover:bg-blue-600 group-hover:text-white transition-colors mb-3">
-                <FileText className="w-4 h-4" />
-              </div>
-              <div className="flex items-center justify-between gap-1">
-                <h3 className="text-sm font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
-                  PDF Tools
-                </h3>
-                <span className="text-2xs text-slate-400 font-medium">{PDF_TOOLS.length}</span>
-              </div>
-              <p className="text-xs text-slate-600 mt-1 leading-relaxed line-clamp-2">
-                Merge, split, rotate, convert JPG/PNG to PDF, and inspect metadata.
-              </p>
-            </div>
-            <span className="inline-flex items-center gap-1 text-xs font-semibold text-blue-600 mt-3 group-hover:translate-x-0.5 transition-transform">
-              Browse PDF Tools <ArrowRight className="w-3 h-3" />
-            </span>
-          </Link>
-
-          <Link
-            to="/category/student-tools"
-            className="group p-4 sm:p-5 rounded-2xl bg-white border border-slate-200/90 hover:border-blue-500/60 hover:shadow-xs transition-all flex flex-col justify-between"
-          >
-            <div>
-              <div className="w-9 h-9 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0 group-hover:bg-blue-600 group-hover:text-white transition-colors mb-3">
-                <GraduationCap className="w-4 h-4" />
-              </div>
-              <div className="flex items-center justify-between gap-1">
-                <h3 className="text-sm font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
-                  Student Tools
-                </h3>
-                <span className="text-2xs text-slate-400 font-medium">{STUDENT_TOOLS.length}</span>
-              </div>
-              <p className="text-xs text-slate-600 mt-1 leading-relaxed line-clamp-2">
-                CGPA, weighted grades, fractions, ratios, scientific math, and timers.
-              </p>
-            </div>
-            <span className="inline-flex items-center gap-1 text-xs font-semibold text-blue-600 mt-3 group-hover:translate-x-0.5 transition-transform">
-              Browse Student Tools <ArrowRight className="w-3 h-3" />
-            </span>
-          </Link>
-
-          <Link
-            to="/category/utility-tools"
-            className="group p-4 sm:p-5 rounded-2xl bg-white border border-slate-200/90 hover:border-blue-500/60 hover:shadow-xs transition-all flex flex-col justify-between"
-          >
-            <div>
-              <div className="w-9 h-9 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0 group-hover:bg-blue-600 group-hover:text-white transition-colors mb-3">
-                <Wrench className="w-4 h-4" />
-              </div>
-              <div className="flex items-center justify-between gap-1">
-                <h3 className="text-sm font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
-                  Daily Utilities
-                </h3>
-                <span className="text-2xs text-slate-400 font-medium">{UTILITY_TOOLS.length}</span>
-              </div>
-              <p className="text-xs text-slate-600 mt-1 leading-relaxed line-clamp-2">
-                UUIDs, timestamps, text cleaner, password generator, Base64 & QR codes.
-              </p>
-            </div>
-            <span className="inline-flex items-center gap-1 text-xs font-semibold text-blue-600 mt-3 group-hover:translate-x-0.5 transition-transform">
-              Browse Utility Tools <ArrowRight className="w-3 h-3" />
-            </span>
-          </Link>
-
-          <Link
-            to="/category/student-utility"
-            className="group p-4 sm:p-5 rounded-2xl bg-white border border-slate-200/90 hover:border-blue-500/60 hover:shadow-xs transition-all flex flex-col justify-between col-span-1 sm:col-span-2 lg:col-span-1"
-          >
-            <div>
-              <div className="w-9 h-9 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0 group-hover:bg-blue-600 group-hover:text-white transition-colors mb-3">
-                <Layers className="w-4 h-4" />
-              </div>
-              <div className="flex items-center justify-between gap-1">
-                <h3 className="text-sm font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
-                  Productivity Hub
-                </h3>
-                <span className="text-2xs text-slate-400 font-medium">{STUDENT_UTILITY_TOOLS.length}</span>
-              </div>
-              <p className="text-xs text-slate-600 mt-1 leading-relaxed line-clamp-2">
-                Unified workspace combining academic solvers and daily productivity utilities.
-              </p>
-            </div>
-            <span className="inline-flex items-center gap-1 text-xs font-semibold text-blue-600 mt-3 group-hover:translate-x-0.5 transition-transform">
-              Browse Productivity Hub <ArrowRight className="w-3 h-3" />
-            </span>
-          </Link>
-        </div>
-
         {/* Tools Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {displayedCategoryTools.map((tool) => (
             <ToolCard key={tool.id} tool={tool} />
           ))}
         </div>
+
+        {/* Directory CTA when "All" tab is active */}
+        {selectedCategoryTab === 'all' && (
+          <div className="mt-8 text-center bg-white border border-slate-200/90 rounded-2xl p-6 sm:p-8 shadow-xs">
+            <h3 className="text-base sm:text-lg font-bold text-slate-900 mb-1.5">
+              Looking for our full tool collection?
+            </h3>
+            <p className="text-xs sm:text-sm text-slate-600 max-w-xl mx-auto mb-5 leading-relaxed">
+              Explore our complete directory of all {TOOLS.length} free browser tools across Image, PDF, Academic, and Utility categories with instant search and filtering.
+            </p>
+            <Link
+              to="/tools"
+              className="inline-flex items-center gap-2 px-5 py-2.5 min-h-[44px] bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white font-semibold text-xs sm:text-sm rounded-xl shadow-xs transition-colors"
+            >
+              <span>Explore All {TOOLS.length} Tools in Directory</span>
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+        )}
       </section>
 
       {/* AdSense Unit (Between Catalog and Guides) */}

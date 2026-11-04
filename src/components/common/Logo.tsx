@@ -30,6 +30,8 @@ export function TooloraIcon({
   if (roundedWhiteBg) {
     return (
       <svg
+        width="32"
+        height="32"
         viewBox="0 0 64 64"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -70,6 +72,8 @@ export function TooloraIcon({
 
   return (
     <svg
+      width="32"
+      height="32"
       viewBox="0 0 64 64"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

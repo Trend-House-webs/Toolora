@@ -26,7 +26,7 @@ export function ToolCard({ tool, variant = 'default' }: ToolCardProps) {
       <Link
         to={`/tools/${tool.slug}`}
         aria-label={`Open ${tool.name}`}
-        className="group flex items-start gap-4 p-4 rounded-xl bg-white border border-slate-200/80 hover:border-blue-500/60 hover:shadow-md transition-all duration-200"
+        className="group flex items-start gap-4 p-4 min-h-[76px] rounded-xl bg-white border border-slate-200/80 hover:border-blue-500/60 hover:shadow-md transition-all duration-200"
       >
         <div className="w-10 h-10 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center shrink-0 group-hover:bg-blue-600 group-hover:text-white transition-colors duration-200">
           <IconRenderer name={tool.icon} className="w-5 h-5" />
@@ -50,7 +50,7 @@ export function ToolCard({ tool, variant = 'default' }: ToolCardProps) {
     <Link
       to={`/tools/${tool.slug}`}
       aria-label={`Open ${tool.name}`}
-      className="group relative flex flex-col justify-between p-6 rounded-2xl bg-white border border-slate-200/80 hover:border-blue-500/60 hover:shadow-lg transition-all duration-200"
+      className="group relative flex flex-col justify-between p-6 min-h-[210px] rounded-2xl bg-white border border-slate-200/80 hover:border-blue-500/60 hover:shadow-lg transition-all duration-200"
     >
       <div>
         <div className="flex items-start justify-between mb-4">

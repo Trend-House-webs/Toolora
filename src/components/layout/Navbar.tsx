@@ -57,7 +57,7 @@ export function Navbar({ onOpenSearch }: NavbarProps) {
           <div className="flex items-center gap-2">
             <button
               onClick={onOpenSearch}
-              className="flex items-center gap-2 px-3 py-1.5 text-xs text-slate-600 bg-slate-100 hover:bg-slate-200/80 active:bg-slate-200 rounded-lg border border-slate-200 transition-colors cursor-pointer"
+              className="flex items-center gap-2 px-3 py-2 min-h-[40px] text-xs text-slate-600 bg-slate-100 hover:bg-slate-200/80 active:bg-slate-200 rounded-lg border border-slate-200 transition-colors cursor-pointer"
               aria-label="Search all tools"
             >
               <Search className="w-4 h-4 text-slate-500" />
@@ -70,7 +70,7 @@ export function Navbar({ onOpenSearch }: NavbarProps) {
             {/* Mobile menu trigger */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden p-2 rounded-lg text-slate-600 hover:bg-slate-100 transition-colors"
+              className="md:hidden p-2 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg text-slate-600 hover:bg-slate-100 active:bg-slate-200 transition-colors cursor-pointer"
               aria-label={mobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
               aria-expanded={mobileMenuOpen}
             >
