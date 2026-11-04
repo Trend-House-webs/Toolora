@@ -508,7 +508,7 @@ export const ADDITIONAL_TOOLS: ToolItem[] = [
       '4 interactive test backdrops: toggle between Checkerboard, Pure White, Solid Black, and Custom Color',
       'Edge fringe and halo inspection: reveals unblended white borders, feathering errors, and compression noise around cutout edges',
       'Pixel telemetry: calculates exact transparent pixel count, opaque pixel count, and transparency percentage',
-      '100% client-side inspection: check PNG transparency in local memory without transmitting graphics to remote servers',
+      'Client-side inspection: check PNG transparency in local memory without transmitting graphics to remote servers',
     ],
     howToUse: [
       { step: 1, title: 'Upload Image or Cutout', description: 'Upload any PNG, WebP, SVG, or GIF file into our transparent background checker dropzone.' },
@@ -1159,16 +1159,20 @@ export const ADDITIONAL_TOOLS: ToolItem[] = [
     ],
     faq: [
       {
-        question: 'What is the difference between calendar days and business days?',
-        answer: 'Calendar days count every consecutive 24-hour day on the calendar, including Saturdays and Sundays. Business days count only Monday through Friday working days, excluding weekend days and any user-specified public holidays.',
+        question: 'How do I calculate days between dates?',
+        answer: 'Select your starting date and ending date using the interactive date pickers above. The tool immediately calculates total elapsed calendar days, elapsed weeks, total hours, and an exact breakdown in calendar years, months, and days in real time.',
       },
       {
-        question: 'Does the calculator include both the start date and end date?',
-        answer: 'By default, the "Include end date in calculation (+1 day)" checkbox is checked, making the calculation inclusive (e.g., May 1 to May 2 = 2 days). If you uncheck the box, it performs exclusive subtraction (May 1 to May 2 = 1 day).',
+        question: 'Should I include the end date in the date calculation?',
+        answer: 'By default, the "Include end date in calculation (+1 day)" checkbox is enabled, which performs an inclusive calculation (for example, May 1 to May 2 counts as 2 full days). This is standard for hotel bookings, equipment rentals, and vacation intervals. If you need strict mathematical day subtraction or date gaps, uncheck the box (May 1 to May 2 = 1 day gap).',
+      },
+      {
+        question: 'What is the difference between business days and calendar days?',
+        answer: 'Calendar days measure every consecutive 24-hour day on the calendar, including Saturdays and Sundays. Business days isolate Monday through Friday working weekdays, excluding weekend days and any user-specified public holidays.',
       },
       {
         question: 'Are public bank holidays automatically deducted from business days?',
-        answer: 'No. Because statutory public and government bank holidays vary widely by country, state, and organization, the tool does not automatically deduct arbitrary holidays. Instead, you can open the "Optional: Exclude Custom Public Holidays" section to deduct your specific jurisdiction\'s off-days.',
+        answer: 'No. The business days calculator strictly evaluates standard Monday through Friday weekdays. Because statutory public and government bank holidays vary widely by country, state, and organization, Toolora does not automatically deduct external holidays. However, you can expand the "Optional: Exclude Custom Public Holidays" section to manually add your specific jurisdiction\'s statutory off-days to deduct them from the working day total.',
       },
       {
         question: 'What information does the date duration breakdown provide?',
@@ -2023,7 +2027,7 @@ export const ADDITIONAL_TOOLS: ToolItem[] = [
       },
       {
         question: 'Is my data or customer list uploaded to a server?',
-        answer: 'No. All deduplication and sorting runs 100% in your local browser memory using JavaScript Sets. Your lists are never stored or transmitted.',
+        answer: 'No. All deduplication and sorting runs directly in your local browser memory using JavaScript Sets. Your text is processed locally on your device without server file uploads.',
       },
     ],
     relatedSlugs: ['text-cleaner', 'word-counter', 'character-counter', 'text-case-converter'],

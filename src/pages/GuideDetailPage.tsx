@@ -299,6 +299,42 @@ export function GuideDetailPage({ guide }: GuideDetailPageProps) {
               </div>
             )}
 
+            {/* Comparison or Data Table */}
+            {section.table && (
+              <div className="mt-6 overflow-x-auto rounded-xl border border-slate-200 shadow-2xs bg-white">
+                <table className="min-w-full divide-y divide-slate-200 text-left text-xs sm:text-sm">
+                  {section.table.caption && (
+                    <caption className="p-3 bg-slate-50 font-bold text-slate-800 text-left border-b border-slate-200">
+                      {section.table.caption}
+                    </caption>
+                  )}
+                  <thead className="bg-slate-100/90 text-slate-700 font-semibold">
+                    <tr>
+                      {section.table.headers.map((h, i) => (
+                        <th key={i} className="px-4 py-3 font-bold text-slate-900">
+                          {h}
+                        </th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-slate-100 bg-white">
+                    {section.table.rows.map((row, rIdx) => (
+                      <tr
+                        key={rIdx}
+                        className={rIdx % 2 === 0 ? 'bg-white hover:bg-slate-50/50' : 'bg-slate-50/50 hover:bg-slate-50'}
+                      >
+                        {row.map((cell, cIdx) => (
+                          <td key={cIdx} className="px-4 py-3 text-slate-700 leading-relaxed">
+                            {renderFormattedText(cell)}
+                          </td>
+                        ))}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
+
             {/* Practical Scenario Box */}
             {section.practicalScenario && (
               <div className="mt-6 p-5 rounded-2xl bg-slate-900 text-white shadow-xs space-y-3.5">

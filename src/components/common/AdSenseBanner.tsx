@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import { ADSENSE_CONFIG, isAdSenseReady } from '../../config/adsense';
 
 declare global {
   interface Window {
@@ -19,17 +20,23 @@ interface AdSenseBannerProps {
  * Reusable, responsive Google AdSense banner component.
  * Safely initializes adsbygoogle in React SPAs and handles client-side route changes,
  * SSR prerendering, and adblocker presence without throwing uncaught errors.
+ * Returns null if AdSense configuration is disabled or not ready.
  */
 export function AdSenseBanner({
-  slot = '8603656892',
-  client = 'ca-pub-6848191601714172',
-  format = 'auto',
+  slot = ADSENSE_CONFIG.defaultSlot,
+  client = ADSENSE_CONFIG.client,
+  format = ADSENSE_CONFIG.defaultFormat,
   responsive = true,
   className = '',
   label = 'Advertisement',
 }: AdSenseBannerProps) {
   const adRef = useRef<HTMLModElement>(null);
   const isPushedRef = useRef(false);
+
+  // If AdSense is disabled or credentials are not configured, do not render or request
+  if (!isAdSenseReady()) {
+    return null;
+  }
 
   useEffect(() => {
     // Only execute on browser client

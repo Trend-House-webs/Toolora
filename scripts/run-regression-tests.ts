@@ -351,8 +351,15 @@ const hasAdUnitInTool = toolPageHtml.includes('class="adsbygoogle"') && toolPage
 assert('AdSense Integration', 'AdSense ad units are present on tool pages outside interactive workspace', hasAdUnitInTool);
 
 const cspMatches = vercelConfig.headers?.some(
-  (h: any) => h.headers?.some((item: any) => item.key === 'Content-Security-Policy' && item.value.includes('pagead2.googlesyndication.com'))
+  (h: any) => h.headers?.some((item: any) => item.key === 'Content-Security-Policy' && item.value.includes('pagead2.googlesyndication.com') && item.value.includes('doubleclick.net'))
 );
+assert('AdSense Integration', 'Content Security Policy allows official Google AdSense origins and required directives', cspMatches === true);
+
+const adsTxtExists = fs.existsSync(path.join('public', 'ads.txt')) && fs.existsSync(path.join(distDir, 'ads.txt'));
+const adsTxtContent = adsTxtExists ? fs.readFileSync(path.join('public', 'ads.txt'), 'utf8') : '';
+const adsTxtValid = adsTxtContent.includes('pub-6848191601714172') && adsTxtContent.includes('google.com') && adsTxtContent.includes('DIRECT');
+assert('AdSense Integration', 'ads.txt exists in public and dist with valid publisher record', adsTxtExists && adsTxtValid);
+
 // -------------------------------------------------------------
 // Suite 11: Calculator & Utility Mathematical Integrity
 // -------------------------------------------------------------

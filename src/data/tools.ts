@@ -1543,7 +1543,7 @@ export const TOOLS: ToolItem[] = [
       'Document word frequency table with stop word filtering and alphabetical/frequency sorting',
       'Local browser autosave with instant draft restoration and one-click data purge',
       'Direct plain .txt file import and export with zero server file transmission',
-      '100% client-side privacy: text is analyzed entirely in local browser RAM',
+      'Client-side text processing: text is analyzed entirely in local browser RAM without server file uploads',
     ],
     howToUse: [
       { step: 1, title: 'Type, Paste, or Import Plain Text', description: 'Enter your draft into the empty editor, paste copied copy, click "Import .txt" to load a file from your device, or click "Load Sample Text" to test features.' },
@@ -1581,7 +1581,7 @@ export const TOOLS: ToolItem[] = [
       'Pace Public Presentations: Use custom speaking duration (adjustable in WPM) to accurately pace conference keynotes, podcasts, and video voiceovers.',
       'Track Document Readability: Verify Flesch Reading Ease scores to ensure your writing matches your target audience (from 5th-grade conversational to college academic).',
       'Spot Word Repetition: Use the interactive word frequency table with stop word filtering to identify overused words and improve prose variety.',
-      'Zero Uploads, 100% Client-Side: Your writing, manuscripts, and private notes are processed entirely in browser memory without sending data to servers or AI models.',
+      'Local In-Browser Processing: Your writing, manuscripts, and private notes are processed directly in browser memory without sending file data to servers or external AI models.',
     ],
     tips: [
       'Average silent reading speed for adults is estimated at 225 words per minute, while conversational presentation speech averages around 130 words per minute. Use the Pacing tab to customize these benchmarks.',
@@ -1593,7 +1593,7 @@ export const TOOLS: ToolItem[] = [
     ],
     faq: [
       {
-        question: 'How many words are in this text?',
+        question: 'How many words is this text?',
         answer: 'Simply paste or type your draft into the editor above. The word counter immediately evaluates your writing and displays the total word count in the blue metric card in real time with zero latency. If you have a document file, click "Import .txt" to load plain text directly from your computer.',
       },
       {

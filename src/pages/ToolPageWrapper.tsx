@@ -10,6 +10,8 @@ import { Link } from '../context/RouterContext';
 import { SITE_URL } from '../config/site';
 import { getGuidesForTool } from '../data/guides';
 import { AdSenseBanner } from '../components/common/AdSenseBanner';
+import { getWorkflowForTool } from '../data/workflows';
+import { WorkflowKit } from '../components/common/WorkflowKit';
 
 // Tool workspace components
 import { ImageCompressor } from '../components/tools/image/ImageCompressor';
@@ -345,6 +347,7 @@ export function ToolPageWrapper({ tool }: ToolPageWrapperProps) {
   const relatedTools = [...explicitRelated, ...fallbackRelated].slice(0, 4);
 
   const relevantGuides = getGuidesForTool(tool.slug);
+  const activeWorkflow = getWorkflowForTool(tool.slug);
 
   // Schema.org WebApplication specification
   const webAppSchema = {
@@ -621,6 +624,13 @@ export function ToolPageWrapper({ tool }: ToolPageWrapperProps) {
             ))}
           </div>
         </section>
+      )}
+
+      {/* Connected Multi-Tool Workflow Kit */}
+      {activeWorkflow && (
+        <div className="mb-14">
+          <WorkflowKit workflow={activeWorkflow} currentToolSlug={tool.slug} />
+        </div>
       )}
 
       {/* FAQ Section with Accordion */}

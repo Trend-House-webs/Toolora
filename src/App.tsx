@@ -77,7 +77,10 @@ function AppContent() {
       return <GuidesPage />;
     }
     if (path.startsWith('/guides/')) {
-      const slug = path.replace('/guides/', '');
+      let slug = path.replace('/guides/', '');
+      if (slug === 'how-to-compress-images-without-losing-quality') {
+        slug = 'how-to-compress-images-online';
+      }
       const guide = getGuideBySlug(slug);
       if (guide) {
         return <GuideDetailPage guide={guide} />;

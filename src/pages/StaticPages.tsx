@@ -264,7 +264,7 @@ export function PrivacyPage() {
         <div>
           <h2 className="text-base font-bold text-slate-900 mb-2">5. Advertising & Cookies</h2>
           <p>
-            Toolora may display advertisements served by third-party advertising partners (such as Google AdSense). These third-party vendors may use cookies, web beacons, or unique device identifiers to serve ads based on prior visits to this or other websites. Users may opt out of personalized advertising by visiting Google Ads Settings or www.aboutads.info.
+            Toolora is technically configured for third-party advertising partners (such as Google AdSense). When advertising is active, third-party advertising partners and ad servers may use cookies, web beacons, or unique device identifiers to deliver relevant advertisements based on visits to this and other websites across the internet. Users may choose to manage or opt out of personalized advertising at any time by visiting Google Ads Settings (https://adssettings.google.com) or www.aboutads.info. For regional privacy compliance decisions (such as GDPR/EEA or CCPA/CPRA consent banners), users may configure their advertising preferences through standard browser privacy controls and ad-choice frameworks.
           </p>
         </div>
 

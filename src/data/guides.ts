@@ -21,6 +21,11 @@ export interface GuideSection {
     solution: string;
     result: string;
   };
+  table?: {
+    caption?: string;
+    headers: string[];
+    rows: string[][];
+  };
 }
 
 export interface RelatedToolLink {
@@ -151,6 +156,15 @@ export const GUIDES: GuideItem[] = [
           'Lossy compression selectively removes subtle color variations and high-frequency details that the human eye cannot easily discern in complex photographic scenes. In our [Image Compressor](/tools/image-compressor), adjusting the quality parameter between 75% and 85% typically achieves 60% to 85% reductions in file size while keeping images visually crisp.',
           'There is always an inherent trade-off: higher compression drastically cuts file size, but pushing compression too aggressively (below 50%) introduces noticeable blocky pixelation and color banding. Staying in the 75% to 85% range delivers the optimal balance for website publishing and digital sharing.',
         ],
+        table: {
+          caption: 'Toolora Image Compression Approaches: Quality Slider vs. Target KB Cap',
+          headers: ['Tool / Workflow', 'Primary Goal', 'Compression Control', 'Supported Formats', 'Ideal Use Case'],
+          rows: [
+            ['[Image Compressor](/tools/image-compressor)', 'Visual quality optimization', 'Interactive Quality Slider (1% to 100%)', 'JPG, PNG, WebP', 'Web publishing, portfolio galleries, blog photos'],
+            ['[Photo Size Reducer](/tools/photo-size-reducer)', 'Strict file size ceiling', 'Target Kilobyte Cap (e.g. 100 KB, 200 KB, 500 KB)', 'JPG (JPEG)', 'Government exam portals, visa uploads, job applications'],
+            ['[JPG to WebP](/tools/jpg-to-webp)', 'Modern format efficiency', 'Predictive modern web encoding', 'JPG to WebP', 'Cutting website asset weight by 25%–35% baseline'],
+          ],
+        },
         callout: {
           type: 'info',
           title: 'The 75% to 85% Sweet Spot',
@@ -334,7 +348,22 @@ export const GUIDES: GuideItem[] = [
           '2. Alpha Transparency Support: JPG does not support transparency; transparent areas flatten to solid white or black. PNG and WebP both support full 8-bit alpha channels with smooth anti-aliased edges.',
           '3. Browser & Software Compatibility: JPG and PNG are universally supported across every operating system, web browser, and legacy desktop software program created in the last 30 years. WebP is supported across all modern web browsers (Chrome, Edge, Safari, Firefox), but legacy desktop editors (like older Photoshop releases) may require [WebP to PNG](/tools/webp-to-png) conversion.',
           '4. Storage Efficiency: For real-world photographs, WebP typically delivers files 25% to 35% lighter than JPG at equal visual quality. For transparent graphics, WebP can achieve 60% to 80% size reductions compared to heavyweight PNG files via [PNG to WebP](/tools/png-to-webp).',
+          'Importantly, no single format is universally superior in every situation: JPEG excels at universal camera photo compatibility, PNG is essential for alpha transparency in graphic design, and WebP offers optimal performance for modern web publishing.',
         ],
+        table: {
+          caption: 'Technical Comparison: JPG vs. PNG vs. WebP Image Formats',
+          headers: ['Feature / Dimension', 'JPG (JPEG)', 'PNG', 'WebP'],
+          rows: [
+            ['Primary Use Case', 'Photographs, portraits, scenery, email attachments', 'Logos, UI screenshots, icons, text graphics', 'Modern websites, responsive web apps, mobile delivery'],
+            ['Compression Method', 'Lossy (Discrete Cosine Transform)', 'Lossless (DEFLATE algorithm)', 'Dual mode: Lossy (VP8 prediction) and Lossless'],
+            ['Alpha Transparency', 'No (Opaque solid color fill only)', 'Yes (Full 8-bit alpha channel transparency)', 'Yes (Full 8-bit alpha channel transparency)'],
+            ['Typical File Weight', 'Small (aggressive lossy compression)', 'Large for photos; compact for flat vectors/text', '25%–35% lighter than JPG; 60%–80% lighter than PNG'],
+            ['Browser Compatibility', 'Universal (100% of all devices and browsers)', 'Universal (100% of all devices and browsers)', 'All modern browsers (Chrome, Safari, Firefox, Edge)'],
+            ['Desktop Editor Support', 'Universal across all graphics and viewer apps', 'Universal across all graphics and document apps', 'Modern editors; older software may require PNG conversion'],
+            ['Core Trade-Off', 'Lacks transparency; halo artifacts on sharp text', 'Oversized file sizes for real-world photos', 'Requires conversion for legacy offline desktop tools'],
+            ['Recommended Toolora Tool', '[PNG to JPG](/tools/png-to-jpg) or [WebP to JPG](/tools/webp-to-jpg)', '[JPG to PNG](/tools/jpg-to-png) or [WebP to PNG](/tools/webp-to-png)', '[JPG to WebP](/tools/jpg-to-webp) or [PNG to WebP](/tools/png-to-webp)'],
+          ],
+        },
         callout: {
           type: 'info',
           title: 'Quick Format Selection Rule',
@@ -479,6 +508,16 @@ export const GUIDES: GuideItem[] = [
           'Downsampling (reducing pixel dimensions) combines adjacent pixels using interpolation algorithms like bicubic resampling. Because you are condensing rich visual information into a tighter grid, downscaled images typically look remarkably sharp and detailed.',
           'Upscaling (enlarging pixel dimensions) does the exact opposite: it attempts to create new pixels where none existed before. Because the computer must mathematically guess intermediate color values, upscaled images look soft, fuzzy, or visibly pixelated. Resizing is an interpolation process that alters the raster grid; while downsampling preserves visual sharpness, raster resizing is not mathematically lossless.',
         ],
+        table: {
+          caption: 'Downscaling vs. Upscaling: Pixel Grid Mechanics & Visual Sharpness',
+          headers: ['Resizing Operation', 'Input Dimensions', 'Target Output', 'Pixel Grid Impact', 'Visual Sharpness Outcome'],
+          rows: [
+            ['Downscaling (Case A)', '4000 × 3000 (12.0 MP)', '1200 × 900 (1.08 MP)', '12M pixels condensed into 1.08M pixels', 'Razor-sharp; crisp edges; smooth bicubic interpolation'],
+            ['Upscaling (Case B)', '400 × 300 (0.12 MP)', '1200 × 900 (1.08 MP)', 'Each original pixel stretched over 9× area', 'Soft, blurry, and pixelated; missing optical detail cannot be created'],
+            ['Stretched Width (No Lock)', '4000 × 3000 (4:3 ratio)', '1200 × 1200 (1:1 ratio)', 'Horizontal pixels squeezed relative to vertical', 'Distorted proportions; squished faces; warped typography'],
+            ['Locked Ratio Resizing', '4000 × 3000 (4:3 ratio)', '1200 × 900 (4:3 ratio)', 'Uniform proportional transformation', 'Perfect geometric fidelity with zero distortion'],
+          ],
+        },
         callout: {
           type: 'info',
           title: 'Rule of Thumb',
@@ -642,6 +681,15 @@ export const GUIDES: GuideItem[] = [
           'When you send someone an image, their photo viewer might scale it unpredictably, rotate it according to differing orientation metadata, or split it onto multiple paper pages when printed. PDF locks down page boundaries, margins, and resolution so the document looks identical on every phone, tablet, computer, and printer.',
           'Toolora offers three dedicated utilities for this conversion: the versatile [Image to PDF](/tools/image-to-pdf) tool for compiling multiple photos with page and margin controls, the focused [JPG to PDF](/tools/jpg-to-pdf) converter for quick photo packaging, and the [PNG to PDF](/tools/png-to-pdf) tool for crisp digital screenshots.',
         ],
+        table: {
+          caption: 'Toolora PDF Conversion Options: Comparing Focused Tools & Settings',
+          headers: ['Tool Name', 'Primary Input Focus', 'Key Settings & Controls', 'Supported Formats', 'Recommended Context'],
+          rows: [
+            ['[Image to PDF](/tools/image-to-pdf)', 'Multi-image packets & scanned papers', 'A4 / US Letter / Fit sizing, Portrait/Landscape, Margins, Page Reordering', 'JPG, PNG, WebP', 'Academic assignments, visa document packets, multi-receipt expenses'],
+            ['[JPG to PDF](/tools/jpg-to-pdf)', 'Camera photos & smartphone captures', 'Rapid 1-click photo packaging into standardized document pages', 'JPEG / JPG', 'Single or multiple mobile photos without requiring layout adjustments'],
+            ['[PNG to PDF](/tools/png-to-pdf)', 'Digital screenshots & graphic diagrams', 'Preserves crisp line art, text, and vector boundaries', 'PNG', 'Technical reports, software screenshots, digital receipts, code snippets'],
+          ],
+        },
         keyPoints: [
           'Combine multiple separate photos into a single paginated document using [Image to PDF](/tools/image-to-pdf).',
           'Convert standard camera photos quickly with [JPG to PDF](/tools/jpg-to-pdf).',
