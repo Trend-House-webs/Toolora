@@ -347,7 +347,12 @@ export function GpaCalculator() {
             />
           </div>
         </div>
+
+        <p className="text-2xs text-slate-500 mt-4 leading-relaxed bg-slate-50 p-3 rounded-lg border border-slate-200">
+          * Note: College grading policies, plus/minus values, and honors weights differ across universities. This tool implements the standard credit-weighted formula: <code className="font-mono text-slate-800 font-semibold">Semester GPA = ∑(Credits × Grade Points) ÷ Total Credits</code>. Consult your university syllabus or registrar for institution-specific plus/minus variations.
+        </p>
       </div>
     </div>
   );
 }
+

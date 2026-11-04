@@ -157,7 +157,11 @@ export function CgpaCalculator() {
             <div className="text-3xl font-extrabold text-slate-800 mt-1">
               {percentageEquivalent.toFixed(1)}%
             </div>
-            <p className="text-2xs text-slate-500 mt-1">Standard academic conversion</p>
+            <p className="text-2xs text-slate-500 mt-1">
+              {scale === 10
+                ? 'Formula: CGPA × 9.5 (CBSE/AICTE)'
+                : `Formula: (CGPA ÷ ${scale}.0) × 100`}
+            </p>
           </div>
         </div>
 

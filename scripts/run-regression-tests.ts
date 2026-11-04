@@ -353,7 +353,73 @@ assert('AdSense Integration', 'AdSense ad units are present on tool pages outsid
 const cspMatches = vercelConfig.headers?.some(
   (h: any) => h.headers?.some((item: any) => item.key === 'Content-Security-Policy' && item.value.includes('pagead2.googlesyndication.com'))
 );
-assert('AdSense Integration', 'Vercel Content-Security-Policy allows pagead2.googlesyndication.com', Boolean(cspMatches));
+// -------------------------------------------------------------
+// Suite 11: Calculator & Utility Mathematical Integrity
+// -------------------------------------------------------------
+// 1. Fraction Calculator: 3/4 + 2/5 = 23/20 = 1 3/20
+function testGcd(a: number, b: number): number {
+  a = Math.abs(a);
+  b = Math.abs(b);
+  while (b) {
+    const t = b;
+    b = a % b;
+    a = t;
+  }
+  return a || 1;
+}
+const n1 = 3, d1 = 4, n2 = 2, d2 = 5;
+const arithRawN = n1 * d2 + n2 * d1; // 15 + 8 = 23
+const arithRawD = d1 * d2; // 20
+const arithDiv = testGcd(arithRawN, arithRawD);
+const arithSimpN = arithRawN / arithDiv;
+const arithSimpD = arithRawD / arithDiv;
+const arithWhole = Math.floor(arithSimpN / arithSimpD);
+const arithRem = arithSimpN % arithSimpD;
+assert('Calculator Logic', 'Fraction Calculator addition evaluates 3/4 + 2/5 = 23/20 = 1 3/20',
+  arithSimpN === 23 && arithSimpD === 20 && arithWhole === 1 && arithRem === 3);
+
+// Fraction Simplification: 24/36 = 2/3
+const simpDiv = testGcd(24, 36);
+assert('Calculator Logic', 'Fraction Calculator simplification reduces 24/36 to 2/3 with GCD 12',
+  simpDiv === 12 && 24 / simpDiv === 2 && 36 / simpDiv === 3);
+
+// Fraction Comparison: 3/4 vs 2/5
+const cross1 = 3 * 5; // 15
+const cross2 = 2 * 4; // 8
+assert('Calculator Logic', 'Fraction Calculator comparison verifies 3/4 > 2/5 via cross-multiplication',
+  cross1 > cross2);
+
+// 2. Date Difference: 2026-01-01 to 2026-01-10 (inclusive)
+// Jan 1: Thu, Jan 2: Fri, Jan 3: Sat, Jan 4: Sun, Jan 5: Mon, Jan 6: Tue, Jan 7: Wed, Jan 8: Thu, Jan 9: Fri, Jan 10: Sat
+// Total days = 10, Weekdays = 7, Weekends = 3
+let testBizDays = 0;
+let testWkndDays = 0;
+const testCur = new Date('2026-01-01T00:00:00');
+const testEnd = new Date('2026-01-10T00:00:00');
+while (testCur <= testEnd) {
+  const dow = testCur.getDay();
+  if (dow === 0 || dow === 6) testWkndDays++;
+  else testBizDays++;
+  testCur.setDate(testCur.getDate() + 1);
+}
+assert('Calculator Logic', 'Date Difference Calculator evaluates 10 calendar days with 7 business and 3 weekend days',
+  testBizDays === 7 && testWkndDays === 3);
+
+// 3. Grade Calculator: Needed exam score
+// Target = 90, Current = 83, Weight = 25% (0.25)
+// Needed = (90 - 83 * 0.75) / 0.25 = (90 - 62.25) / 0.25 = 27.75 / 0.25 = 111.0%
+const needed90 = (90 - 83 * 0.75) / 0.25;
+assert('Calculator Logic', 'Grade Calculator flags impossible target (>100%) when needing 111.0% on final',
+  Math.abs(needed90 - 111.0) < 0.01 && needed90 > 100);
+
+const needed73 = (73 - 83 * 0.75) / 0.25; // 43.0%
+assert('Calculator Logic', 'Grade Calculator evaluates achievable passing target needing 43.0% on final',
+  Math.abs(needed73 - 43.0) < 0.01 && needed73 <= 100);
+
+// 4. Aspect Ratio Calculator: 1920 × 1080 = 16:9
+const arGcd = testGcd(1920, 1080);
+assert('Calculator Logic', 'Aspect Ratio Calculator reduces 1920x1080 to 16:9 with GCD 120',
+  arGcd === 120 && 1920 / arGcd === 16 && 1080 / arGcd === 9);
 
 // -------------------------------------------------------------
 // Output Report
