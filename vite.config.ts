@@ -11,6 +11,29 @@ export default defineConfig(() => {
         '@': path.resolve(import.meta.dirname, '.'),
       },
     },
+    build: {
+      rollupOptions: {
+        output: {
+          manualChunks(id) {
+            if (id.includes('node_modules/pdf-lib')) {
+              return 'vendor-pdf';
+            }
+            if (id.includes('node_modules/jszip')) {
+              return 'vendor-zip';
+            }
+            if (id.includes('node_modules/qrcode')) {
+              return 'vendor-qrcode';
+            }
+            if (id.includes('node_modules/upng-js')) {
+              return 'vendor-upng';
+            }
+            if (id.includes('node_modules/lucide-react')) {
+              return 'vendor-icons';
+            }
+          },
+        },
+      },
+    },
     server: {
       host: '0.0.0.0',
       port: 3000,

@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react';
-import QRCode from 'qrcode';
 import { Download, Copy, Check, QrCode as QrIcon, RefreshCw, Trash2 } from 'lucide-react';
 import { downloadBlob } from '../../../utils/fileHelpers';
 import { SITE_URL } from '../../../config/site';
@@ -45,21 +44,24 @@ export function QrCodeGenerator() {
       return;
     }
 
-    QRCode.toDataURL(payload, {
-      width: 400,
-      margin: 2,
-      color: {
-        dark: fgColor,
-        light: bgColor,
-      },
-      errorCorrectionLevel: 'H',
-    })
-      .then((url) => {
-        setQrDataUrl(url);
+    import('qrcode').then((QRCodeModule) => {
+      const QRCode = QRCodeModule.default || QRCodeModule;
+      QRCode.toDataURL(payload, {
+        width: 400,
+        margin: 2,
+        color: {
+          dark: fgColor,
+          light: bgColor,
+        },
+        errorCorrectionLevel: 'H',
       })
-      .catch((err) => {
-        console.error('QR code generation error', err);
-      });
+        .then((url) => {
+          setQrDataUrl(url);
+        })
+        .catch((err) => {
+          console.error('Failed to generate QR code:', err);
+        });
+    });
   }, [qrType, urlVal, textVal, wifiSsid, wifiPass, wifiType, emailTo, emailSubject, phoneVal, fgColor, bgColor]);
 
   const handleDownload = () => {

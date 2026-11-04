@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { PDFDocument } from 'pdf-lib';
 import { Download, RefreshCw, ShieldCheck, AlertCircle, FileText, CheckCircle2, Scissors } from 'lucide-react';
 import { formatBytes, validatePdfFile } from '../../../utils/fileHelpers';
 
@@ -27,6 +26,7 @@ export function SplitPdfTool() {
     setSelectedFile(file);
 
     try {
+      const { PDFDocument } = await import('pdf-lib');
       const buffer = await file.arrayBuffer();
       const doc = await PDFDocument.load(buffer, { ignoreEncryption: true });
       const pages = doc.getPageCount();
@@ -93,6 +93,7 @@ export function SplitPdfTool() {
         }
       }
 
+      const { PDFDocument } = await import('pdf-lib');
       const buffer = await selectedFile.arrayBuffer();
       const srcDoc = await PDFDocument.load(buffer, { ignoreEncryption: true });
       const newDoc = await PDFDocument.create();

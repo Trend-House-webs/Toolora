@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { PDFDocument } from 'pdf-lib';
 import { Download, Trash2, ArrowUp, ArrowDown, Plus, ShieldCheck, AlertCircle, FileText, CheckCircle2 } from 'lucide-react';
 import { formatBytes, validatePdfFile } from '../../../utils/fileHelpers';
 
@@ -23,6 +22,9 @@ export function MergePdfTool() {
     setSuccessInfo(null);
 
     const newItems: PdfFileItem[] = [];
+
+    // Dynamically load pdf-lib only when files are selected
+    const { PDFDocument } = await import('pdf-lib');
 
     for (let i = 0; i < files.length; i++) {
       const file = files[i];
@@ -82,6 +84,7 @@ export function MergePdfTool() {
     setSuccessInfo(null);
 
     try {
+      const { PDFDocument } = await import('pdf-lib');
       const mergedPdf = await PDFDocument.create();
       let totalPages = 0;
 

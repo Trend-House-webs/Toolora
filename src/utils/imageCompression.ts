@@ -1,5 +1,3 @@
-import UPNG from 'upng-js';
-
 export interface CompressionResult {
   blob: Blob;
   outputSize: number;
@@ -105,6 +103,7 @@ export async function compressImageClientSide(
     }
 
     // UPNG.encode returns an ArrayBuffer containing PNG binary
+    const UPNG = (await import('upng-js')).default;
     const pngArrayBuffer = UPNG.encode([rgbaBuffer], width, height, cnum);
     outputBlob = new Blob([pngArrayBuffer], { type: 'image/png' });
   } else {

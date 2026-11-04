@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { PDFDocument } from 'pdf-lib';
 import { FileText, RefreshCw, ShieldCheck, AlertCircle, Copy, Check, Hash } from 'lucide-react';
 import { formatBytes, validatePdfFile } from '../../../utils/fileHelpers';
 
@@ -46,6 +45,7 @@ export function PdfPageCounter() {
     setErrorMessage(null);
 
     try {
+      const { PDFDocument } = await import('pdf-lib');
       const buffer = await file.arrayBuffer();
       const doc = await PDFDocument.load(buffer, { ignoreEncryption: true });
       const pages = doc.getPages();

@@ -13,7 +13,6 @@ import {
   ArrowRight,
   Sparkles,
 } from 'lucide-react';
-import JSZip from 'jszip';
 import { ImageDropzone } from './ImageDropzone';
 import { validateImageFile, downloadBlob, formatBytes } from '../../../utils/fileHelpers';
 import { loadImageFromFile } from '../../../utils/imageCompression';
@@ -197,6 +196,7 @@ export function FlipTool() {
     setBatchProgress({ current: 0, total: items.length });
     setGeneralError(null);
 
+    const JSZip = (await import('jszip')).default;
     const zip = new JSZip();
     const usedNames = new Set<string>();
     let successCount = 0;

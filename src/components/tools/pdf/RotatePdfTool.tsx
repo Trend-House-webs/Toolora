@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { PDFDocument, degrees } from 'pdf-lib';
 import { Download, RefreshCw, ShieldCheck, AlertCircle, FileText, CheckCircle2, RotateCw } from 'lucide-react';
 import { formatBytes, validatePdfFile } from '../../../utils/fileHelpers';
 
@@ -27,6 +26,7 @@ export function RotatePdfTool() {
     setSelectedFile(file);
 
     try {
+      const { PDFDocument } = await import('pdf-lib');
       const buffer = await file.arrayBuffer();
       const doc = await PDFDocument.load(buffer, { ignoreEncryption: true });
       const pages = doc.getPageCount();
@@ -70,6 +70,7 @@ export function RotatePdfTool() {
     setIsProcessing(true);
 
     try {
+      const { PDFDocument, degrees } = await import('pdf-lib');
       const buffer = await selectedFile.arrayBuffer();
       const pdfDoc = await PDFDocument.load(buffer, { ignoreEncryption: true });
       const pages = pdfDoc.getPages();
