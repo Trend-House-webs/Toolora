@@ -113,7 +113,7 @@ export function AllToolsPage() {
             All Free Online Tools ({TOOLS.length})
           </h1>
           <p className="text-sm sm:text-base text-slate-600 mt-2 leading-relaxed max-w-2xl">
-            Browse 63 browser-based tools for image editing, PDF tasks, academic calculations, and everyday utilities. Use the category links or search to find the tool you need. Supported file processing and calculations run locally in your browser; no account is required.
+            Browse {TOOLS.length} browser-based tools for image editing, PDF tasks, academic calculations, and everyday utilities. Use the category links or search to find the tool you need. Supported file processing and calculations run locally in your browser; no account is required.
           </p>
         </div>
 
