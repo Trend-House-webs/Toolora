@@ -50,10 +50,10 @@ export function AboutPage() {
         <section className="p-6 sm:p-8 bg-white rounded-2xl border border-slate-200/90 shadow-xs space-y-4">
           <h2 className="text-xl font-bold text-slate-900">Our Mission & Purpose</h2>
           <p>
-            The web was conceived to empower people with accessible, friction-free utilities. Yet today, basic everyday digital tasks—such as resizing a photo, calculating a weighted semester grade, converting an image format, or merging PDF documents—are all too often locked behind mandatory account registrations, monthly paywalls, intrusive advertisements, or remote upload queues.
+            Everyday digital tasks—such as resizing a photo, calculating a course grade, converting an image, or combining PDF documents—should be straightforward. People should not need complicated software or a paid subscription for common, focused tasks.
           </p>
           <p>
-            <strong>Toolora</strong> was created to offer an open, respectful alternative: a suite of <strong>Toolora free tools</strong> and fast <strong>Toolora browser utilities</strong> that anyone can use instantly. You do not need to create an account, enter a password, provide a credit card, or wait in server queues to get everyday tasks done.
+            <strong>Toolora</strong> brings these utilities together in one free, browser-based workspace. Open the tool that fits your task, complete the operation, then download or copy the result without creating an account.
           </p>
         </section>
 
