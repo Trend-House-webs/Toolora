@@ -113,7 +113,7 @@ export function AllToolsPage() {
             All Free Online Tools ({TOOLS.length})
           </h1>
           <p className="text-sm sm:text-base text-slate-600 mt-2 leading-relaxed max-w-2xl">
-            Welcome to the complete Toolora tools directory. Browse online tools across image editing, PDF document assembly, student GPA calculators, and everyday utilities. This comprehensive browser utilities index and free web tools list runs client-side in your device memory with zero accounts, subscriptions, or server file uploads.
+            Browse {TOOLS.length} browser-based tools for image editing, PDF tasks, academic calculations, and everyday utilities. Use the category links or search to find the tool you need. Supported file processing and calculations run locally in your browser; no account is required.
           </p>
         </div>
 
