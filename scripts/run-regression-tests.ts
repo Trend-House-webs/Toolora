@@ -55,7 +55,7 @@ for (const r of expectedRoutes) {
     missingDistFiles++;
   }
 }
-assert('Build Output', 'All 80 canonical route HTML files exist in dist', missingDistFiles === 0, `${missingDistFiles} files missing`);
+assert('Build Output', 'All canonical route HTML files exist in dist', missingDistFiles === 0, `${missingDistFiles} files missing`);
 assert('Build Output', '404.html exists in dist', fs.existsSync(path.join(distDir, '404.html')));
 assert('Build Output', 'sitemap.xml exists in dist and public', fs.existsSync(path.join(distDir, 'sitemap.xml')) && fs.existsSync('public/sitemap.xml'));
 assert('Build Output', 'robots.txt exists in dist and public', fs.existsSync(path.join(distDir, 'robots.txt')) && fs.existsSync('public/robots.txt'));
@@ -66,7 +66,7 @@ assert('Build Output', 'robots.txt exists in dist and public', fs.existsSync(pat
 const sitemapContent = fs.readFileSync(path.join(distDir, 'sitemap.xml'), 'utf8');
 const sitemapUrls = Array.from(sitemapContent.matchAll(/<loc>(.*?)<\/loc>/g)).map((m) => m[1]);
 
-assert('Sitemap', 'Sitemap contains exactly 80 URLs', sitemapUrls.length === 80, `Found ${sitemapUrls.length}`);
+assert('Sitemap', 'Sitemap contains one URL for every expected canonical route', sitemapUrls.length === expectedRoutes.length, `Found ${sitemapUrls.length}`);
 const uniqueUrls = new Set(sitemapUrls);
 assert('Sitemap', 'All sitemap URLs are unique', uniqueUrls.size === sitemapUrls.length, `Duplicates found`);
 assert('Sitemap', 'No fabricated lastmod dates present', !sitemapContent.includes('<lastmod>'));
@@ -147,8 +147,8 @@ for (const r of expectedRoutes) {
     emptyBodyCount++;
   }
 }
-assert('SSR / Prerendering', 'All 80 routes have an H1 tag in static HTML', missingH1Count === 0);
-assert('SSR / Prerendering', 'All 80 routes have prerendered DOM inside root container', emptyBodyCount === 0);
+assert('SSR / Prerendering', 'All expected routes have an H1 tag in static HTML', missingH1Count === 0);
+assert('SSR / Prerendering', 'All expected routes have prerendered DOM inside root container', emptyBodyCount === 0);
 
 // Check that no tool pages contain Suspense fallback or aborted server rendering
 let suspenseAbortCount = 0;
@@ -215,8 +215,8 @@ for (const r of expectedRoutes) {
     descMap.set(desc, r);
   }
 }
-assert('Metadata', 'Zero duplicate page titles across all 80 pages', titleDups === 0, `${titleDups} duplicates`);
-assert('Metadata', 'Zero duplicate meta descriptions across all 80 pages', descDups === 0, `${descDups} duplicates`);
+assert('Metadata', 'Zero duplicate page titles across all expected routes', titleDups === 0, `${titleDups} duplicates`);
+assert('Metadata', 'Zero duplicate meta descriptions across all expected routes', descDups === 0, `${descDups} duplicates`);
 
 // -------------------------------------------------------------
 // Suite 6: Structured Data (JSON-LD) Validation
@@ -240,7 +240,7 @@ for (const r of expectedRoutes) {
     schemaErrors++;
   }
 }
-assert('Structured Data', 'All 80 canonical pages have valid Schema.org JSON-LD', schemaErrors === 0 && totalSchemas === 80);
+assert('Structured Data', 'All expected canonical pages have valid Schema.org JSON-LD', schemaErrors === 0 && totalSchemas === expectedRoutes.length);
 
 // -------------------------------------------------------------
 // Suite 7: Internal Links Verification
