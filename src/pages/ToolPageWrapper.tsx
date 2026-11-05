@@ -85,7 +85,7 @@ function WorkspaceSkeleton({ toolName }: { toolName: string }) {
     >
       <div className="w-9 h-9 border-3 border-blue-600 border-t-transparent rounded-full animate-spin mb-3" />
       <span className="text-sm font-semibold text-slate-800">Loading {toolName}...</span>
-      <span className="text-xs text-slate-400 mt-1">Initializing client-side workspace in your browser</span>
+      <span className="text-xs text-slate-500 mt-1">Initializing client-side workspace in your browser</span>
     </div>
   );
 }

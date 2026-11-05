@@ -273,7 +273,7 @@ export function CategoryPage({ categorySlug }: CategoryPageProps) {
                 </div>
 
                 <div className="pt-2 border-t border-slate-200/60">
-                  <span className="text-2xs uppercase tracking-wider font-semibold text-slate-400 block mb-1.5">
+                  <span className="text-2xs uppercase tracking-wider font-semibold text-slate-500 block mb-1.5">
                     Included tools:
                   </span>
                   <div className="flex flex-wrap gap-1.5">
@@ -308,7 +308,7 @@ export function CategoryPage({ categorySlug }: CategoryPageProps) {
       ) : (
         <div className="py-16 text-center text-slate-500 bg-white rounded-2xl border border-slate-200">
           <p className="text-base font-semibold">No tools found matching "{filterQuery}"</p>
-          <p className="text-xs text-slate-400 mt-1">Try another search keyword or clear your filter.</p>
+          <p className="text-xs text-slate-500 mt-1">Try another search keyword or clear your filter.</p>
           <button
             onClick={() => setFilterQuery('')}
             className="mt-4 px-4 py-2 text-xs font-semibold text-blue-600 bg-blue-50 hover:bg-blue-100 rounded-lg transition-colors cursor-pointer"

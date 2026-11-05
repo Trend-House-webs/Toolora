@@ -113,7 +113,7 @@ export function HomePage({ onOpenSearchModal }: HomePageProps) {
 
           {/* Choose a Tool Category (Immediate First Visible Action) */}
           <div className="pt-5 max-w-4xl mx-auto text-left">
-            <div className="text-2xs sm:text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2.5 text-center">
+            <div className="text-2xs sm:text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2.5 text-center">
               Choose a Tool Category
             </div>
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2.5">

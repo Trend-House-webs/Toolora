@@ -105,7 +105,7 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
           />
           <button
             onClick={onClose}
-            className="p-1.5 text-slate-400 hover:text-slate-600 rounded-lg hover:bg-slate-200/50 transition-colors"
+            className="p-1.5 min-w-[36px] min-h-[36px] flex items-center justify-center text-slate-500 hover:text-slate-700 rounded-lg hover:bg-slate-200/60 focus-visible:ring-2 focus-visible:ring-blue-500 focus:outline-hidden transition-colors cursor-pointer"
             aria-label="Close search"
           >
             <X className="w-5 h-5" />
@@ -117,7 +117,7 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
           {filteredTools.length === 0 ? (
             <div className="py-12 text-center text-slate-500">
               <p className="text-base font-medium">No tools match "{query}"</p>
-              <p className="text-xs text-slate-400 mt-1">Try searching for "image", "calculator", "resizer", or "word".</p>
+              <p className="text-xs text-slate-500 mt-1">Try searching for "image", "calculator", "resizer", or "word".</p>
             </div>
           ) : (
             filteredTools.map((tool, index) => {
@@ -127,7 +127,7 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
                   key={tool.id}
                   onClick={() => handleSelect(tool.slug)}
                   onMouseEnter={() => setSelectedIndex(index)}
-                  className={`w-full text-left flex items-center justify-between p-3 rounded-xl transition-colors ${
+                  className={`w-full text-left flex items-center justify-between p-3 rounded-xl transition-colors focus-visible:ring-2 focus-visible:ring-blue-500 focus:outline-hidden cursor-pointer ${
                     isSelected ? 'bg-blue-50 text-blue-900' : 'hover:bg-slate-50 text-slate-800'
                   }`}
                 >
@@ -142,11 +142,11 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
                     <div className="min-w-0">
                       <div className="flex items-center gap-2">
                         <span className="font-medium text-sm text-slate-900 truncate">{tool.name}</span>
-                        <span className="text-xs text-slate-400 font-normal">
+                        <span className="text-xs text-slate-500 font-normal">
                           {tool.category === 'image' ? 'Image' : 'Utility'}
                         </span>
                       </div>
-                      <p className="text-xs text-slate-500 truncate">{tool.description}</p>
+                      <p className="text-xs text-slate-600 truncate">{tool.description}</p>
                     </div>
                   </div>
 

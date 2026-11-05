@@ -33,12 +33,12 @@ export function ToolCard({ tool, variant = 'default' }: ToolCardProps) {
         </div>
         <div className="min-w-0 flex-1">
           <div className="flex items-center justify-between gap-2">
-            <h4 className="text-sm font-semibold text-slate-900 group-hover:text-blue-600 transition-colors truncate">
+            <span className="text-sm font-semibold text-slate-900 group-hover:text-blue-600 transition-colors truncate block">
               {tool.name}
-            </h4>
+            </span>
             <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-blue-600 group-hover:translate-x-0.5 transition-all shrink-0" />
           </div>
-          <p className="text-xs text-slate-500 line-clamp-1 mt-0.5">
+          <p className="text-xs text-slate-600 line-clamp-1 mt-0.5">
             {tool.description}
           </p>
         </div>
@@ -58,7 +58,7 @@ export function ToolCard({ tool, variant = 'default' }: ToolCardProps) {
             <IconRenderer name={tool.icon} className="w-6 h-6" />
           </div>
 
-          <div className="flex items-center gap-1.5 text-xs text-slate-400 font-medium">
+          <div className="flex items-center gap-1.5 text-xs text-slate-500 font-medium">
             <span>{categoryLabel}</span>
             {tool.badge && (
               <>
@@ -83,7 +83,7 @@ export function ToolCard({ tool, variant = 'default' }: ToolCardProps) {
           <span>Open {tool.name}</span>
           <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
         </span>
-        <span className="text-xs font-normal text-slate-400">Browser-only</span>
+        <span className="text-xs font-medium text-slate-500">Browser-only</span>
       </div>
     </Link>
   );

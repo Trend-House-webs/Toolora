@@ -196,7 +196,7 @@ export function AllToolsPage() {
       ) : (
         <div className="py-16 text-center text-slate-500">
           <p className="text-base font-semibold">No tools found matching your criteria</p>
-          <p className="text-xs text-slate-400 mt-1">Try resetting the search or category filter.</p>
+          <p className="text-xs text-slate-500 mt-1">Try resetting the search or category filter.</p>
         </div>
       )}
 

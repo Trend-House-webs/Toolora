@@ -67,7 +67,7 @@ export function AdSenseBanner({
     >
       <div className="w-full max-w-5xl mx-auto">
         <div className="flex items-center justify-center gap-2 mb-1.5 select-none">
-          <span className="text-[10px] font-medium tracking-wider uppercase text-slate-400">
+          <span className="text-[10px] font-semibold tracking-wider uppercase text-slate-500">
             {label}
           </span>
         </div>
