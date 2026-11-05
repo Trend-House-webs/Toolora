@@ -431,7 +431,7 @@ export function ToolPageWrapper({ tool }: ToolPageWrapperProps) {
         </h1>
 
         <p className="text-sm sm:text-base text-slate-600 mt-3 leading-relaxed">
-          {renderFormattedText(tool.detailedDescription || tool.description)}
+          {renderFormattedText(tool.description)}
         </p>
 
         {/* Real browser trust markers */}
