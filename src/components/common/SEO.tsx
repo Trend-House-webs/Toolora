@@ -60,10 +60,7 @@ export function SEO({
     if (noindex) {
       setMeta('name', 'robots', 'noindex, nofollow');
     } else {
-      const robotsEl = document.querySelector('meta[name="robots"]');
-      if (robotsEl) {
-        robotsEl.remove();
-      }
+      setMeta('name', 'robots', 'index, follow');
     }
 
     // 3. Open Graph Tags

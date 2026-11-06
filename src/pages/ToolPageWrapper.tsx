@@ -453,7 +453,7 @@ export function ToolPageWrapper({ tool }: ToolPageWrapperProps) {
         </div>
 
         {/* Direct Answer / Core Purpose Callout */}
-        {tool.directAnswer && (
+        {tool.directAnswer && tool.slug !== 'date-difference-calculator' && (
           <div className="mt-5 p-4 rounded-xl bg-blue-50/80 border border-blue-200/80 text-xs sm:text-sm text-slate-800 leading-relaxed flex items-start gap-3">
             <div className="font-bold text-blue-700 shrink-0">Purpose:</div>
             <div>{renderFormattedText(tool.directAnswer)}</div>
@@ -472,6 +472,14 @@ export function ToolPageWrapper({ tool }: ToolPageWrapperProps) {
       >
         {renderWorkspace()}
       </section>
+
+      {/* Purpose Callout for Date Difference Calculator positioned logically below the calculator */}
+      {tool.directAnswer && tool.slug === 'date-difference-calculator' && (
+        <div className="mb-14 p-5 rounded-2xl bg-blue-50/80 border border-blue-200/80 text-xs sm:text-sm text-slate-800 leading-relaxed flex items-start gap-3">
+          <div className="font-bold text-blue-700 shrink-0">Purpose:</div>
+          <div>{renderFormattedText(tool.directAnswer)}</div>
+        </div>
+      )}
 
       {/* Non-intrusive Ad Placement (Separated from tool interactive workspace) */}
       <AdSenseBanner className="mb-14" />

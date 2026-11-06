@@ -360,6 +360,10 @@ function customizeHtml(html: string, page: PageMetadata, bodyContent?: string): 
     if (!updated.includes('name="robots"')) {
       updated = updated.replace('</head>', '  <meta name="robots" content="noindex, nofollow" />\n  </head>');
     }
+  } else {
+    if (!updated.includes('name="robots"')) {
+      updated = updated.replace('</head>', '  <meta name="robots" content="index, follow" />\n  </head>');
+    }
   }
 
   // Inject prerendered semantic body content into <div id="root">
