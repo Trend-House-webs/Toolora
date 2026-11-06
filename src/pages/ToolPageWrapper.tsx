@@ -462,7 +462,14 @@ export function ToolPageWrapper({ tool }: ToolPageWrapperProps) {
       </div>
 
       {/* Primary Tool Workspace */}
-      <section aria-label={`${tool.name} Workspace`} className="mb-14">
+      <section
+        aria-label={
+          tool.slug === 'fraction-calculator'
+            ? 'Fraction Calculator with Steps Workspace'
+            : `${tool.name} Workspace`
+        }
+        className="mb-14"
+      >
         {renderWorkspace()}
       </section>
 
