@@ -1165,47 +1165,47 @@ export const ADDITIONAL_TOOLS: ToolItem[] = [
     ],
     faq: [
       {
-        question: 'How do I calculate days between two dates?',
-        answer: 'Select your starting date and ending date using the interactive date pickers or pick a quick preset. The calculator immediately computes the total elapsed calendar days, exact years/months/days breakdown, dual weeks representation, total hours (24h/day), and working business days in real time.',
+        question: 'How do I calculate the number of days between two dates?',
+        answer: 'Select your start date and end date using the date pickers or pick a quick preset (such as Last 30 Days or This Month). The calculator immediately subtracts the dates using Gregorian calendar arithmetic, giving you total elapsed calendar days, a breakdown in years, months, and days, the span in weeks, total elapsed hours (at 24 hours per calendar day), and the number of business working days.',
       },
       {
-        question: 'How do I calculate business days between two dates?',
-        answer: 'By default, the calculator counts Monday through Friday as working days and excludes Saturday and Sunday. You can customize which days of the week count as working days (for example, enabling Saturday for a 6-day work week) and add custom holiday dates to deduct statutory off-days.',
+        question: 'What is the difference between calendar days and business days?',
+        answer: 'Calendar days count every consecutive 24-hour day on the calendar, including Saturdays and Sundays. Business days (or working days) isolate only the days of the week when commercial offices and institutions typically operate—by default, Monday through Friday—excluding weekends and any custom holidays you choose to exclude.',
       },
       {
-        question: 'Should the start date or end date be included in the calculation?',
-        answer: 'By default, "Include end date in calculation (+1 day)" is checked, performing an inclusive calculation (for example, May 1 to May 2 counts both days = 2 days). This matches standard hotel bookings, rental contracts, and employee leave intervals. If you need strict mathematical day subtraction (May 1 to May 2 = 1 day gap), simply uncheck the box.',
+        question: 'Should I include the start and end dates?',
+        answer: 'It depends on your use case. In inclusive mode (checked by default, adding +1 day), both the start date and the end date are counted as full days. This is standard for hotel reservations, vehicle rentals, and project milestones (for example, May 1 to May 2 counts as 2 full days). If you uncheck the box for exclusive mode, the calculator measures the mathematical difference or gap between dates (May 1 to May 2 equals a 1-day difference).',
       },
       {
-        question: 'How do weekend days affect date difference calculations?',
-        answer: 'Calendar days count all 7 consecutive days of the week regardless of weekends. Business days separate working weekdays from weekend days. Any day that is not checked in your working weekdays selector is classified as a weekend/off-day.',
+        question: 'Are public holidays automatically excluded?',
+        answer: 'No. Statutory, government, and bank holidays vary significantly across countries, states, provinces, and individual corporate policies. Toolora does not make assumptions about your local jurisdiction. Instead, you can expand the Custom Public Holidays & Off-Days section and add your specific holiday dates. The calculator audits each holiday and deducts it from working days only if it falls on an active working weekday, preventing double-deduction on weekends.',
       },
       {
-        question: 'How do custom holidays work, and why are public holidays not automatically deducted?',
-        answer: 'Because statutory, public, and bank holidays differ significantly across countries, states, provinces, and individual corporate policies, Toolora does not assume public holidays automatically. Instead, you can add your specific jurisdiction holidays in the Custom Holidays section. Toolora audits each holiday to ensure that if it falls on an already non-working weekend day, it is not double-deducted from your business days.',
+        question: 'Can I count Saturday as a business day?',
+        answer: 'Yes. In the Working Weekdays Schedule section, you can customize which days of the week are considered working days. You can select Saturday for a 6-day workweek (Monday through Saturday), choose a 4-day workweek (Monday through Thursday), or select all 7 days for continuous operations. At least one working day must remain selected.',
       },
       {
-        question: 'How are fractional or decimal weeks represented in results?',
-        answer: 'The calculator provides a dual weeks representation: a decimal figure rounded to one decimal place (e.g. 10.6 weeks) for quick mathematical comparison, alongside an exact integer breakdown (e.g. 10 weeks and 4 days) so you never have to guess what decimal days represent.',
+        question: 'Does the calculator account for leap years?',
+        answer: 'Yes. Toolora strictly follows Gregorian calendar rules. Leap years (such as 2024, 2028, and 2032) accurately include February 29th as a 29th day. For example, calculating the span between February 27, 2028 and March 2, 2028 evaluates exactly 5 calendar days inclusively (including Tuesday, February 29) rather than 4 days.',
       },
       {
-        question: 'How do leap years and varying month lengths affect date difference?',
-        answer: 'The calculation uses Gregorian calendar arithmetic, accurately accounting for 28-day, 29-day (leap year), 30-day, and 31-day months. When computing year, month, and day breakdowns, it iterates whole calendar months from the start date to maintain true calendar fidelity.',
+        question: 'Can I calculate the difference between dates in different years?',
+        answer: 'Yes. You can select any start and end dates across multiple years, decades, or centuries. The calculator provides both the total elapsed calendar days and an exact breakdown in elapsed years, full calendar months, and remaining days. For example, January 1, 2025 to January 1, 2026 computes exactly 365 calendar days exclusively (or 366 days inclusively).',
       },
       {
-        question: 'How does the calculator handle time zones and daylight saving time (DST) shifts?',
-        answer: 'Calculations run on pure calendar dates (year, month, day at midnight) rather than raw millisecond differences with UTC offsets. This eliminates off-by-one errors caused by 23-hour "spring forward" or 25-hour "fall back" daylight saving transitions and local time zone boundaries.',
+        question: 'How do I calculate working days excluding weekends?',
+        answer: 'Leave the default Monday through Friday schedule active. The calculator automatically inspects each consecutive date in your range, classifies Saturdays and Sundays as weekend/off-days, and tallies only Monday through Friday as business days.',
       },
       {
-        question: 'What is the difference between this Date Difference Calculator and the Age Calculator?',
-        answer: 'Date Difference Calculator computes intervals, working days, and durations between any two arbitrary dates. [Age Calculator](/tools/age-calculator) is specialized for birthdates, computing exact chronological age, next birthday countdowns, and milestone dates.',
+        question: 'Can I calculate days between dates in Excel?',
+        answer: 'Yes. In Microsoft Excel and Google Sheets, you can calculate calendar days by simple subtraction (=B2 - A2 for exclusive, or =B2 - A2 + 1 for inclusive). To calculate business days excluding weekends, use the formula =NETWORKDAYS(A2, B2) or =NETWORKDAYS.INTL(A2, B2, 1, holiday_range) to exclude custom holidays. Toolora gives you the same verified results instantly in your browser without writing spreadsheet formulas.',
       },
       {
-        question: 'How can I share, copy, or print my date calculation results?',
-        answer: 'Click "Copy All Results" to copy a structured text report to your clipboard. Click "Share Calculation" to generate a shareable link encoding your exact start date, end date, inclusivity mode, and working schedule into URL parameters. Click "Print Results" for a clean, distraction-free print summary.',
+        question: 'Does the calculator work for past and future dates?',
+        answer: 'Yes. You can compute historical intervals (such as historical war dates or past lease agreements) or future projections (such as upcoming project deadlines or countdowns to retirement). If you enter a start date that is later than your end date, the calculator automatically evaluates the absolute duration and displays a notice with a 1-click Swap button.',
       },
     ],
-    relatedSlugs: ['age-calculator', 'timestamp-converter', 'study-timer'],
+    relatedSlugs: ['timestamp-converter', 'age-calculator', 'study-timer'],
   },
 
   // 37. READING TIME CALCULATOR

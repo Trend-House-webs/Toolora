@@ -64,6 +64,7 @@ import { PercentageIncreaseCalc } from '../components/tools/student/PercentageIn
 import { PercentageDecreaseCalc } from '../components/tools/student/PercentageDecreaseCalc';
 import { MarksPercentageCalc } from '../components/tools/student/MarksPercentageCalc';
 import { DateDifferenceCalc } from '../components/tools/student/DateDifferenceCalc';
+import { DateDifferenceEducationalContent } from '../components/tools/student/DateDifferenceEducationalContent';
 import { ReadingTimeCalc } from '../components/tools/student/ReadingTimeCalc';
 import { AverageCalc } from '../components/tools/student/AverageCalc';
 import { RandomNumberGen } from '../components/tools/student/RandomNumberGen';
@@ -473,19 +474,19 @@ export function ToolPageWrapper({ tool }: ToolPageWrapperProps) {
         {renderWorkspace()}
       </section>
 
-      {/* Purpose Callout for Date Difference Calculator positioned logically below the calculator */}
-      {tool.directAnswer && tool.slug === 'date-difference-calculator' && (
-        <div className="mb-14 p-5 rounded-2xl bg-blue-50/80 border border-blue-200/80 text-xs sm:text-sm text-slate-800 leading-relaxed flex items-start gap-3">
-          <div className="font-bold text-blue-700 shrink-0">Purpose:</div>
-          <div>{renderFormattedText(tool.directAnswer)}</div>
-        </div>
-      )}
-
       {/* Non-intrusive Ad Placement (Separated from tool interactive workspace) */}
       <AdSenseBanner className="mb-14" />
 
-      {/* How to Use Step-by-Step Guide */}
-      {tool.howToUse && tool.howToUse.length > 0 && (
+      {/* Dedicated Educational Content for Date Difference Calculator */}
+      {tool.slug === 'date-difference-calculator' && (
+        <DateDifferenceEducationalContent />
+      )}
+
+      {/* Generic Tool Sections (for all tools except date-difference-calculator) */}
+      {tool.slug !== 'date-difference-calculator' && (
+        <>
+          {/* How to Use Step-by-Step Guide */}
+          {tool.howToUse && tool.howToUse.length > 0 && (
         <section className="mb-14 bg-white rounded-2xl border border-slate-200/90 p-6 sm:p-8 shadow-xs">
           <h2 className="text-lg sm:text-xl font-bold text-slate-900 mb-6 flex items-center gap-2">
             <span>How to Use {tool.name}</span>
@@ -737,6 +738,8 @@ export function ToolPageWrapper({ tool }: ToolPageWrapperProps) {
             ))}
           </div>
         </section>
+      )}
+        </>
       )}
     </div>
   );
