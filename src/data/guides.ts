@@ -128,17 +128,17 @@ export const GUIDES: GuideItem[] = [
       'Image file size depends on pixel dimensions, color data precision, and embedded metadata.',
       'A quality setting between 75% and 85% delivers 60% to 80% file size reduction with virtually no noticeable visual degradation on standard screens.',
       'Distinguish general compression (quality slider in Image Compressor) from target-size workflows (strict kilobyte caps in Photo Size Reducer).',
-      'Format matters: use JPG for photos, PNG for graphics with transparency, and WebP for lightweight web publishing.',
-      'Toolora performs compression client-side in your browser canvas, keeping your personal photos private.',
+      'Format matters: use JPG for natural photos, PNG for graphics with alpha transparency, and WebP for lightweight web publishing.',
+      'Toolora performs compression client-side in your browser canvas without server file uploads.',
     ],
     sections: [
       {
         id: 'why-images-get-large',
         heading: 'Why Image Files Become Unnecessarily Large',
         paragraphs: [
-          'Modern smartphone cameras and digital photography sensors routinely capture images at 12 to 48 megapixels. While this high resolution is fantastic for large-format physical printing, it results in raw photo files between 4 MB and 15 MB in size.',
-          'When you attempt to upload these images to a job portal, government application, or attach them to an email, oversized files cause upload failures, exceed mailbox limits, and dramatically slow down web pages. Learning how to compress images online solves this instantly.',
-          'If you need to optimize files immediately, use our browser-based [Image Compressor](/tools/image-compressor) to adjust visual quality with a live slider, or use [Photo Size Reducer](/tools/photo-size-reducer) to compress directly to a target kilobyte ceiling (such as under 200 KB or 500 KB). Both tools operate locally in browser memory without server file uploads.',
+          'In this guide, you will learn how digital image compression works, the technical difference between lossy and lossless algorithms, and how to shrink image file sizes without noticeable loss of visual quality. Whether optimizing pictures for web pages, attaching photos to emails, or satisfying strict file caps on government and job portals, understanding compression trade-offs helps you achieve the right balance between visual sharpness and byte savings.',
+          'Modern smartphone cameras and digital photography sensors routinely capture images at 12 to 48 megapixels. While this high resolution is valuable for large-format physical printing, it results in raw photo files between 4 MB and 15 MB. Overly large image files degrade user experience, consume mobile bandwidth, and slow down Largest Contentful Paint (documented in [web.dev Core Web Vitals Guidance](https://web.dev/articles/vitals)).',
+          'If you need to optimize files immediately, use our browser-based [Image Compressor](/tools/image-compressor) to adjust visual quality with an interactive slider (10% to 100%), or use [Photo Size Reducer](/tools/photo-size-reducer) to compress directly to a target kilobyte ceiling (such as under 100 KB, 200 KB, or 500 KB). Both tools operate locally in browser memory without server file uploads.',
         ],
         keyPoints: [
           'Camera sensors embed extensive uncompressed color data and EXIF metadata (camera model, GPS coordinates, capture date).',
@@ -151,16 +151,16 @@ export const GUIDES: GuideItem[] = [
         id: 'lossy-vs-lossless',
         heading: 'Lossy vs. Lossless Compression: Balancing File Size and Quality',
         paragraphs: [
-          'Image compression operates through two distinct technical approaches: lossy compression and lossless compression. Choosing the right method depends on your intended use case.',
-          'Lossless compression optimizes how pixel data is encoded and strips non-visual metadata tags without modifying the original pixel values. This typically reduces file size by 10% to 30% and is ideal for diagrams, technical screenshots, and pixel-art graphics.',
-          'Lossy compression selectively removes subtle color variations and high-frequency details that the human eye cannot easily discern in complex photographic scenes. In our [Image Compressor](/tools/image-compressor), adjusting the quality parameter between 75% and 85% typically achieves 60% to 85% reductions in file size while keeping images visually crisp.',
+          'Image compression operates through two distinct technical approaches: lossy compression and lossless compression. Choosing the right method depends on your intended use case and asset type.',
+          'Lossless compression optimizes how pixel data is encoded and strips non-visual metadata tags without modifying original pixel values (standardized in the [W3C PNG Specification](https://www.w3.org/TR/png/)). This typically reduces file size by 10% to 30% and is ideal for diagrams, technical screenshots, icons, and graphics where exact line clarity and transparency are essential.',
+          'Lossy compression selectively removes subtle color variations and high-frequency details that the human eye cannot easily discern in complex photographic scenes (the basis of the [ITU-T T.81 / JPEG Standard](https://www.w3.org/Graphics/JPEG/itu-t81.pdf)). In our [Image Compressor](/tools/image-compressor), adjusting the quality parameter between 75% and 85% typically achieves 60% to 80% reductions in file size while keeping images visually crisp.',
           'There is always an inherent trade-off: higher compression drastically cuts file size, but pushing compression too aggressively (below 50%) introduces noticeable blocky pixelation and color banding. Staying in the 75% to 85% range delivers the optimal balance for website publishing and digital sharing.',
         ],
         table: {
           caption: 'Toolora Image Compression Approaches: Quality Slider vs. Target KB Cap',
           headers: ['Tool / Workflow', 'Primary Goal', 'Compression Control', 'Supported Formats', 'Ideal Use Case'],
           rows: [
-            ['[Image Compressor](/tools/image-compressor)', 'Visual quality optimization', 'Interactive Quality Slider (1% to 100%)', 'JPG, PNG, WebP', 'Web publishing, portfolio galleries, blog photos'],
+            ['[Image Compressor](/tools/image-compressor)', 'Visual quality optimization', 'Interactive Quality Slider (10% to 100%)', 'JPG, PNG, WebP', 'Web publishing, portfolio galleries, blog photos'],
             ['[Photo Size Reducer](/tools/photo-size-reducer)', 'Strict file size ceiling', 'Target Kilobyte Cap (e.g. 100 KB, 200 KB, 500 KB)', 'JPG (JPEG)', 'Government exam portals, visa uploads, job applications'],
             ['[JPG to WebP](/tools/jpg-to-webp)', 'Modern format efficiency', 'Predictive modern web encoding', 'JPG to WebP', 'Cutting website asset weight by 25%–35% baseline'],
           ],
@@ -178,7 +178,7 @@ export const GUIDES: GuideItem[] = [
           'Choosing the right format before compressing can significantly reduce file weight even before adjusting quality settings:',
           '• JPG (JPEG): Best for continuous-tone photography, portraits, and scenery. Its discrete cosine transform algorithms compress complex color gradations efficiently.',
           '• PNG: Essential for logos, user interface screenshots, and graphics requiring alpha transparency. PNG uses lossless compression, which produces larger files for real-world photos but maintains perfect edge sharpness.',
-          '• WebP: Modern web format that supports both lossy and lossless modes as well as alpha transparency. Converting photos with [JPG to WebP](/tools/jpg-to-webp) often saves an additional 25% to 35% compared to standard JPEG compression.',
+          '• WebP: Modern web format that supports both lossy and lossless modes as well as alpha transparency. Converting photos with [JPG to WebP](/tools/jpg-to-webp) often saves an additional 25% to 35% compared to standard JPEG compression (documented in [Google\'s WebP Documentation](https://developers.google.com/speed/webp)).',
         ],
       },
       {
@@ -201,12 +201,12 @@ export const GUIDES: GuideItem[] = [
           {
             step: 3,
             title: 'Set Quality or Target Kilobyte Cap',
-            description: 'In the Image Compressor, slide the quality control to 75%–80%. In the Photo Size Reducer, type your maximum file size limit (e.g. 200 KB or 500 KB).',
+            description: 'In the Image Compressor, slide the quality control to 75%–80% (or click a preset). In the Photo Size Reducer, choose a preset (e.g. 50 KB, 100 KB, 200 KB) or enter a custom kilobyte limit.',
           },
           {
             step: 4,
             title: 'Review Savings and Download',
-            description: 'Compare the before-and-after file weights and visual preview. Click Download to save your compressed image directly to your device with no watermarks.',
+            description: 'Compare the before-and-after file weights and visual preview tabs. Click Download to save your compressed image directly to your device with no watermarks.',
           },
         ],
       },
@@ -219,8 +219,8 @@ export const GUIDES: GuideItem[] = [
         practicalScenario: {
           title: 'Resume Profile Headshot',
           scenario: 'A smartphone camera photo is 4.8 MB with dimensions of 4032x3024 pixels. The application portal rejects files larger than 500 KB.',
-          solution: 'First, use the [Image Resizer](/tools/image-resizer) to scale the dimensions down to 1200x900 pixels. Then, pass the image through the [Image Compressor](/tools/image-compressor) at 82% quality, or set a 450 KB cap in the [Photo Size Reducer](/tools/photo-size-reducer).',
-          result: 'The final file drops from 4.8 MB down to 285 KB (over 94% reduction) with no noticeable loss in visual clarity on desktop and mobile screens.',
+          solution: 'First, use the [Image Resizer](/tools/image-resizer) to scale the dimensions down to 1200x900 pixels. Then, pass the image through the [Image Compressor](/tools/image-compressor) at 75%–80% quality, or set a 450 KB cap in the [Photo Size Reducer](/tools/photo-size-reducer).',
+          result: 'The final file drops from 4.8 MB down to approximately 285 KB (over 94% reduction) with no noticeable loss in visual clarity on desktop and mobile screens.',
         },
       },
       {
@@ -232,7 +232,7 @@ export const GUIDES: GuideItem[] = [
         keyPoints: [
           'Avoid re-compressing an already heavily compressed JPEG: Each generation of lossy encoding compounds compression artifacts.',
           'Keep an uncompressed master copy: Always preserve your original high-resolution camera photograph in case you need it for print later.',
-          'Resize before compressing: If an image is 5000 pixels wide but will only be displayed in a 800-pixel card, downsizing dimensions with [Image Resizer](/tools/image-resizer) first will reduce file size far more effectively than cranking up compression alone.',
+          'Resize before compressing: If an image is 5000 pixels wide but will only be displayed in an 800-pixel card, downsizing dimensions with [Image Resizer](/tools/image-resizer) first will reduce file size far more effectively than cranking up compression alone.',
         ],
       },
     ],
@@ -347,7 +347,7 @@ export const GUIDES: GuideItem[] = [
           '1. Compression Algorithm: JPG uses lossy mathematical approximations that discard fine variance in photographic gradients. PNG uses lossless DEFLATE compression preserving exact pixel values. WebP supports both lossy VP8 prediction and lossless modes.',
           '2. Alpha Transparency Support: JPG does not support transparency; transparent areas flatten to solid white or black. PNG and WebP both support full 8-bit alpha channels with smooth anti-aliased edges.',
           '3. Browser & Software Compatibility: JPG and PNG are universally supported across every operating system, web browser, and legacy desktop software program created in the last 30 years. WebP is supported across all modern web browsers (Chrome, Edge, Safari, Firefox), but legacy desktop editors (like older Photoshop releases) may require [WebP to PNG](/tools/webp-to-png) conversion.',
-          '4. Storage Efficiency: For real-world photographs, WebP typically delivers files 25% to 35% lighter than JPG at equal visual quality. For transparent graphics, WebP can achieve 60% to 80% size reductions compared to heavyweight PNG files via [PNG to WebP](/tools/png-to-webp).',
+          '4. Storage Efficiency: For real-world photographs, WebP typically delivers files 25% to 35% lighter than JPG at equal visual quality (as documented in [Google\'s WebP Documentation](https://developers.google.com/speed/webp)). For transparent graphics, WebP can achieve 60% to 80% size reductions compared to heavyweight PNG files via [PNG to WebP](/tools/png-to-webp).',
           'Importantly, no single format is universally superior in every situation: JPEG excels at universal camera photo compatibility, PNG is essential for alpha transparency in graphic design, and WebP offers optimal performance for modern web publishing.',
         ],
         table: {
@@ -677,7 +677,7 @@ export const GUIDES: GuideItem[] = [
         id: 'why-convert-to-pdf',
         heading: 'Why Convert Images to PDF Format?',
         paragraphs: [
-          'While image formats like JPG and PNG are designed for visual display, PDF (Portable Document Format) is designed for document preservation and universal interchange.',
+          'While image formats like JPG and PNG are designed for visual display, PDF (Portable Document Format, standardized internationally under [ISO 32000](https://www.iso.org/standard/75822.html)) is designed for document preservation and universal interchange.',
           'When you send someone an image, their photo viewer might scale it unpredictably, rotate it according to differing orientation metadata, or split it onto multiple paper pages when printed. PDF locks down page boundaries, margins, and resolution so the document looks identical on every phone, tablet, computer, and printer.',
           'Toolora offers three dedicated utilities for this conversion: the versatile [Image to PDF](/tools/image-to-pdf) tool for compiling multiple photos with page and margin controls, the focused [JPG to PDF](/tools/jpg-to-pdf) converter for quick photo packaging, and the [PNG to PDF](/tools/png-to-pdf) tool for crisp digital screenshots.',
         ],

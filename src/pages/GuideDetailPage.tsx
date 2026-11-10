@@ -83,6 +83,10 @@ export function GuideDetailPage({ guide }: GuideDetailPageProps) {
       '@type': 'Organization',
       name: 'Toolora',
       url: `${SITE_URL}/`,
+      logo: {
+        '@type': 'ImageObject',
+        url: `${SITE_URL}/brand/toolora-logo-dark.svg`,
+      },
     },
   };
 

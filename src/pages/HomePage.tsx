@@ -53,16 +53,31 @@ export function HomePage({ onOpenSearchModal }: HomePageProps) {
     name: 'Toolora',
     url: `${SITE_URL}/`,
     description: 'Everyday tools, made simple. Fast, free tools for images, files, calculations and everyday tasks.',
+    publisher: {
+      '@type': 'Organization',
+      name: 'Toolora',
+      url: `${SITE_URL}/`,
+      logo: `${SITE_URL}/brand/toolora-logo-dark.svg`,
+    },
+  };
+
+  const organizationSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'Toolora',
+    url: `${SITE_URL}/`,
+    logo: `${SITE_URL}/brand/toolora-logo-dark.svg`,
+    description: 'Toolora provides fast, free tools for images, files, calculations and everyday tasks with client-side browser processing.',
   };
 
   return (
     <div className="space-y-16 sm:space-y-20 lg:space-y-24 pb-16">
-      {/* Dynamic SEO Tags & WebSite Structured Data */}
+      {/* Dynamic SEO Tags & Structured Data */}
       <SEO
         title="Toolora — Everyday tools, made simple."
         description={SITE_DESCRIPTION}
         canonicalPath="/"
-        schema={websiteSchema}
+        schema={[websiteSchema, organizationSchema]}
       />
 
       {/* 1. Spacious, Modern Hero Section */}

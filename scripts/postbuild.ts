@@ -178,7 +178,12 @@ const toolPages: PageMetadata[] = TOOLS.map((tool) => {
       name: tool.name,
       url: `${SITE_URL}/tools/${tool.slug}`,
       description: tool.detailedDescription || tool.description,
-      applicationCategory: tool.category === 'image' ? 'MultimediaApplication' : 'UtilitiesApplication',
+      applicationCategory:
+        tool.category === 'image'
+          ? 'MultimediaApplication'
+          : tool.category === 'student'
+          ? 'EducationalApplication'
+          : 'UtilitiesApplication',
       operatingSystem: 'All',
       browserRequirements: 'Requires JavaScript. Requires HTML5.',
     },
@@ -264,6 +269,10 @@ const guidePages: PageMetadata[] = GUIDES.map((guide) => ({
         '@type': 'Organization',
         name: 'Toolora',
         url: `${SITE_URL}/`,
+        logo: {
+          '@type': 'ImageObject',
+          url: `${SITE_URL}/brand/toolora-logo-dark.svg`,
+        },
       },
     },
     {
@@ -396,16 +405,32 @@ for (const page of allPages) {
   generatedCount++;
 }
 
-// Update dist/index.html (Homepage root) with WebSite Schema and prerendered DOM
-const homepageSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'WebSite',
-  name: 'Toolora',
-  url: `${SITE_URL}/`,
-  description: 'Everyday tools, made simple. Fast, free tools for images, files, calculations and everyday tasks.',
-};
+// Update dist/index.html (Homepage root) with WebSite and Organization Schema and prerendered DOM
+const homepageSchemas = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'Toolora',
+    url: `${SITE_URL}/`,
+    description: 'Everyday tools, made simple. Fast, free tools for images, files, calculations and everyday tasks.',
+    publisher: {
+      '@type': 'Organization',
+      name: 'Toolora',
+      url: `${SITE_URL}/`,
+      logo: `${SITE_URL}/brand/toolora-logo-dark.svg`,
+    },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'Toolora',
+    url: `${SITE_URL}/`,
+    logo: `${SITE_URL}/brand/toolora-logo-dark.svg`,
+    description: 'Toolora provides fast, free tools for images, files, calculations and everyday tasks with client-side browser processing.',
+  },
+];
 let homepageHtml = baseHtml;
-const hpJsonLd = serializeSchema(homepageSchema);
+const hpJsonLd = serializeSchema(homepageSchemas);
 homepageHtml = homepageHtml.replace('</head>', `  <script id="seo-structured-data" type="application/ld+json">\n${hpJsonLd}\n  </script>\n</head>`);
 try {
   const hpBody = renderToString(React.createElement(App as React.ComponentType<{ initialPath?: string }>, { initialPath: '/' }));

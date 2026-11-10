@@ -357,7 +357,12 @@ export function ToolPageWrapper({ tool }: ToolPageWrapperProps) {
     name: tool.name,
     url: `${SITE_URL}/tools/${tool.slug}`,
     description: tool.detailedDescription || tool.description,
-    applicationCategory: tool.category === 'image' ? 'MultimediaApplication' : 'UtilitiesApplication',
+    applicationCategory:
+      tool.category === 'image'
+        ? 'MultimediaApplication'
+        : tool.category === 'student'
+        ? 'EducationalApplication'
+        : 'UtilitiesApplication',
     operatingSystem: 'All',
     browserRequirements: 'Requires JavaScript. Requires HTML5.',
   };
