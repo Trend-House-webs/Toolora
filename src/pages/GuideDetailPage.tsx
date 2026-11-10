@@ -137,19 +137,20 @@ export function GuideDetailPage({ guide }: GuideDetailPageProps) {
       </div>
 
       {/* Article Header */}
-      <header className="mb-10 pb-8 border-b border-slate-200">
+      {/* Article Header */}
+      <header className="mb-10 pb-8 border-b border-[#E5EAF2]">
         <div className="flex flex-wrap items-center gap-2.5 mb-4 text-xs">
           <Link
             to={guide.categoryPath}
-            className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full font-semibold bg-blue-50 text-blue-700 hover:bg-blue-100 transition-colors"
+            className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full font-bold bg-blue-50 text-blue-700 hover:bg-blue-100 transition-colors"
           >
             <span>{guide.categoryName}</span>
           </Link>
-          <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-slate-100 text-slate-600 font-medium">
+          <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-medium">
             <Clock className="w-3.5 h-3.5" />
             {guide.readTime}
           </span>
-          <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 font-medium">
+          <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 font-medium">
             <ShieldCheck className="w-3.5 h-3.5" />
             Client-Side & Free
           </span>
@@ -159,33 +160,33 @@ export function GuideDetailPage({ guide }: GuideDetailPageProps) {
           {guide.title}
         </h1>
 
-        <p className="mt-4 text-base sm:text-lg text-slate-600 leading-relaxed font-normal">
+        <p className="mt-4 text-sm sm:text-base text-slate-600 leading-relaxed font-normal">
           {guide.summary}
         </p>
 
         {/* Featured Tools Callout Box (Linked Near the Beginning) */}
         {guide.featuredTools && guide.featuredTools.length > 0 ? (
-          <div className="mt-6 p-5 sm:p-6 rounded-2xl bg-gradient-to-br from-blue-50/90 via-indigo-50/50 to-slate-50 border border-blue-200/90 space-y-4">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-blue-100">
+          <div className="mt-6 p-6 sm:p-8 rounded-3xl bg-white border border-[#E5EAF2] shadow-[0_2px_12px_rgba(15,23,42,0.03)] space-y-4">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-[#E5EAF2]">
               <div>
-                <div className="text-xs font-bold uppercase tracking-wider text-blue-700 flex items-center gap-1.5">
+                <div className="text-2xs font-bold uppercase tracking-wider text-blue-600 flex items-center gap-1.5">
                   <Sparkles className="w-3.5 h-3.5" />
                   <span>Featured Client-Side Tools</span>
                 </div>
-                <div className="text-base font-bold text-slate-900 mt-0.5">
+                <div className="text-base font-extrabold text-slate-900 mt-0.5">
                   Tools Used in This Tutorial
                 </div>
               </div>
               <span className="text-2xs font-medium text-slate-500">
-                Client-Side In-Browser Execution · No Server File Uploads
+                In-Browser Execution · No Server File Uploads
               </span>
             </div>
 
-            <div className={`grid grid-cols-1 ${guide.featuredTools.length > 2 ? 'sm:grid-cols-2 lg:grid-cols-3' : 'sm:grid-cols-2'} gap-3`}>
+            <div className={`grid grid-cols-1 ${guide.featuredTools.length > 2 ? 'sm:grid-cols-2 lg:grid-cols-3' : 'sm:grid-cols-2'} gap-3.5`}>
               {guide.featuredTools.map((tool) => (
                 <div
                   key={tool.slug}
-                  className="p-3.5 bg-white rounded-xl border border-blue-100/80 shadow-2xs flex flex-col justify-between space-y-2.5"
+                  className="p-4 bg-[#F8FAFC] rounded-2xl border border-[#E5EAF2] flex flex-col justify-between space-y-3"
                 >
                   <div className="space-y-1">
                     <div className="font-bold text-slate-900 text-sm">
@@ -197,7 +198,7 @@ export function GuideDetailPage({ guide }: GuideDetailPageProps) {
                   </div>
                   <Link
                     to={tool.path}
-                    className="inline-flex items-center justify-between px-3 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs transition-colors"
+                    className="inline-flex items-center justify-between px-3.5 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs transition-colors shadow-2xs"
                   >
                     <span>{tool.actionLabel}</span>
                     <ArrowRight className="w-3.5 h-3.5" />
@@ -207,22 +208,22 @@ export function GuideDetailPage({ guide }: GuideDetailPageProps) {
             </div>
           </div>
         ) : (
-          <div className="mt-6 p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-blue-50/80 to-indigo-50/50 border border-blue-200/80 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div className="mt-6 p-6 rounded-3xl bg-white border border-[#E5EAF2] shadow-[0_2px_12px_rgba(15,23,42,0.03)] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div className="space-y-1">
-              <div className="text-xs font-bold uppercase tracking-wider text-blue-700 flex items-center gap-1.5">
+              <div className="text-2xs font-bold uppercase tracking-wider text-blue-600 flex items-center gap-1.5">
                 <Sparkles className="w-3.5 h-3.5" />
                 Featured Free Tool
               </div>
-              <div className="text-base font-bold text-slate-900">
+              <div className="text-base font-extrabold text-slate-900">
                 {guide.primaryTool.name}
               </div>
-              <p className="text-xs text-slate-600">
+              <p className="text-xs text-slate-600 font-normal">
                 Run this tool directly in your browser with zero server uploads and no account required.
               </p>
             </div>
             <Link
               to={guide.primaryTool.path}
-              className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs sm:text-sm shadow-xs transition-colors shrink-0"
+              className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs sm:text-sm shadow-xs transition-colors shrink-0"
             >
               {guide.primaryTool.actionLabel}
               <ArrowRight className="w-4 h-4" />
@@ -362,12 +363,12 @@ export function GuideDetailPage({ guide }: GuideDetailPageProps) {
         ))}
 
         {/* Key Takeaways Card */}
-        <section className="p-6 rounded-2xl bg-emerald-50/50 border border-emerald-200/80 shadow-2xs">
-          <h2 className="text-lg sm:text-xl font-bold text-emerald-950 mb-4 flex items-center gap-2">
+        <section className="p-6 sm:p-8 rounded-3xl bg-emerald-50/60 border border-emerald-200/80 shadow-2xs">
+          <h2 className="text-lg sm:text-xl font-extrabold text-emerald-950 mb-4 flex items-center gap-2">
             <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
             Key Takeaways
           </h2>
-          <ul className="space-y-3 text-xs sm:text-sm text-emerald-900/90 leading-relaxed">
+          <ul className="space-y-3 text-xs sm:text-sm text-emerald-900/90 leading-relaxed font-normal">
             {guide.keyTakeaways.map((item, idx) => (
               <li key={idx} className="flex items-start gap-2.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 mt-2 shrink-0" />
@@ -378,22 +379,22 @@ export function GuideDetailPage({ guide }: GuideDetailPageProps) {
         </section>
 
         {/* Related Tools Internal Linking Cluster */}
-        <section className="pt-8 border-t border-slate-200">
-          <div className="mb-4">
-            <h2 className="text-xl font-bold text-slate-900 tracking-tight">
+        <section className="pt-10 border-t border-[#E5EAF2]">
+          <div className="mb-6">
+            <h2 className="text-xl font-extrabold text-slate-900 tracking-tight sm:text-2xl">
               Related Tools to Explore
             </h2>
-            <p className="text-xs sm:text-sm text-slate-600 mt-1">
+            <p className="text-xs sm:text-sm text-slate-600 mt-1 font-normal">
               Complementary client-side utilities that connect directly with this workflow:
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {guide.relatedTools.map((relTool) => (
               <Link
                 key={relTool.slug}
                 to={relTool.path}
-                className="group p-4 rounded-xl bg-white border border-slate-200 hover:border-blue-300 hover:shadow-xs transition-all flex flex-col justify-between"
+                className="group p-5 rounded-2xl bg-white border border-[#E5EAF2] hover:border-blue-400 hover:shadow-xs transition-all flex flex-col justify-between cursor-pointer"
               >
                 <div>
                   <div className="flex items-center justify-between gap-2">
@@ -415,54 +416,55 @@ export function GuideDetailPage({ guide }: GuideDetailPageProps) {
         <AdSenseBanner className="my-10" />
 
         {/* Category Connection Banner */}
-        <section className="p-6 rounded-2xl bg-slate-100 border border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <section className="p-6 sm:p-8 rounded-3xl bg-white border border-[#E5EAF2] shadow-[0_2px_12px_rgba(15,23,42,0.03)] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <h3 className="text-base font-bold text-slate-900">
+            <h3 className="text-base font-extrabold text-slate-900">
               Browse More in {guide.categoryName}
             </h3>
-            <p className="text-xs sm:text-sm text-slate-600 mt-1">
+            <p className="text-xs sm:text-sm text-slate-600 mt-1 font-normal">
               Explore the entire collection of browser-based utilities with zero file uploads.
             </p>
           </div>
           <Link
             to={guide.categoryPath}
-            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-white border border-slate-300 hover:bg-slate-50 text-slate-800 text-xs sm:text-sm font-semibold transition-colors shrink-0"
+            className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs sm:text-sm font-bold shadow-xs transition-colors shrink-0"
           >
             <span>View All {guide.categoryName}</span>
-            <ChevronRight className="w-4 h-4 text-slate-400" />
+            <ChevronRight className="w-4 h-4 text-white" />
           </Link>
         </section>
 
         {/* Other Guides Discovery */}
         {otherGuides.length > 0 && (
-          <section className="pt-8 border-t border-slate-200">
-            <div className="flex items-center justify-between mb-4">
-              <h2 className="text-lg font-bold text-slate-900">
+          <section className="pt-10 border-t border-[#E5EAF2]">
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-lg font-extrabold text-slate-900">
                 More Practical Guides
               </h2>
               <Link
                 to="/guides"
-                className="text-xs sm:text-sm font-semibold text-blue-600 hover:text-blue-700 hover:underline"
+                className="text-xs sm:text-sm font-bold text-blue-600 hover:text-blue-700 flex items-center gap-1 group"
               >
-                All Guides →
+                <span>All Guides</span>
+                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
               </Link>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               {otherGuides.map((og) => (
                 <Link
                   key={og.slug}
                   to={`/guides/${og.slug}`}
-                  className="p-4 rounded-xl bg-white border border-slate-200 hover:border-slate-300 hover:shadow-2xs transition-all flex flex-col justify-between"
+                  className="p-5 rounded-2xl bg-white border border-[#E5EAF2] hover:border-blue-400 hover:shadow-xs transition-all flex flex-col justify-between cursor-pointer"
                 >
                   <div>
-                    <span className="text-2xs font-semibold uppercase tracking-wider text-blue-600">
+                    <span className="text-2xs font-bold uppercase tracking-wider text-blue-600 bg-blue-50 px-2 py-0.5 rounded-md">
                       {og.categoryName}
                     </span>
-                    <h3 className="text-xs sm:text-sm font-bold text-slate-900 mt-1 line-clamp-2">
+                    <h3 className="text-xs sm:text-sm font-bold text-slate-900 mt-2 line-clamp-2">
                       {og.title}
                     </h3>
                   </div>
-                  <div className="flex items-center gap-1 text-2xs text-slate-500 mt-3">
+                  <div className="flex items-center gap-1 text-2xs text-slate-500 mt-3 font-medium">
                     <Clock className="w-3 h-3" />
                     <span>{og.readTime}</span>
                   </div>
@@ -474,7 +476,7 @@ export function GuideDetailPage({ guide }: GuideDetailPageProps) {
       </article>
 
       {/* Footer Return Link */}
-      <div className="mt-12 pt-6 border-t border-slate-200 flex items-center justify-between text-xs text-slate-500">
+      <div className="mt-12 pt-6 border-t border-[#E5EAF2] flex items-center justify-between text-xs text-slate-500">
         <Link
           to="/guides"
           className="inline-flex items-center gap-1.5 text-blue-600 hover:underline font-semibold"

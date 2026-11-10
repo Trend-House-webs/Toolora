@@ -116,10 +116,10 @@ export function CategoryPage({ categorySlug }: CategoryPageProps) {
       <Breadcrumbs items={[{ label: category.title }]} />
 
       {/* Header with clear single H1 */}
-      <div className="pb-6 border-b border-slate-200">
+      <div className="pb-6 border-b border-[#E5EAF2]">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div className="max-w-3xl">
-            <div className="flex items-center gap-2 text-xs font-semibold text-blue-600 uppercase tracking-wider mb-2">
+            <div className="flex items-center gap-2 text-2xs sm:text-xs font-bold text-blue-600 uppercase tracking-wider mb-2">
               <span>Directory</span>
               <span aria-hidden="true" className="text-slate-300">·</span>
               <span>{baseCategoryTools.length} Free Browser Tools</span>
@@ -129,20 +129,20 @@ export function CategoryPage({ categorySlug }: CategoryPageProps) {
               {category.title}
             </h1>
 
-            <p className="text-sm sm:text-base text-slate-600 mt-2 leading-relaxed">
+            <p className="text-xs sm:text-sm text-slate-600 mt-2 leading-relaxed font-normal">
               {category.description}
             </p>
           </div>
 
           {/* Filter input */}
           <div className="relative w-full md:w-72 shrink-0">
-            <Search className="w-4 h-4 text-slate-400 absolute left-3 top-3" />
+            <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-3" />
             <input
               type="text"
               value={filterQuery}
               onChange={(e) => setFilterQuery(e.target.value)}
               placeholder={`Search ${category.title}...`}
-              className="w-full pl-9 pr-3 py-2 bg-white border border-slate-300 rounded-xl text-xs sm:text-sm text-slate-800 placeholder:text-slate-400 focus:outline-hidden focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
+              className="w-full pl-9 pr-3 py-2 bg-white border border-[#E5EAF2] rounded-xl text-xs sm:text-sm text-slate-800 placeholder:text-slate-400 focus:outline-hidden focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all"
               aria-label={`Search ${category.title}`}
             />
           </div>
@@ -150,16 +150,16 @@ export function CategoryPage({ categorySlug }: CategoryPageProps) {
 
         {/* Distinct purpose banner and sub-tabs for student-utility */}
         {category.id === 'student-utility' && (
-          <div className="mt-6 pt-6 border-t border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-            <div className="flex items-center gap-2" role="tablist">
+          <div className="mt-6 pt-6 border-t border-[#E5EAF2] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div className="flex items-center gap-1.5 p-1 bg-white border border-[#E5EAF2] rounded-2xl shadow-2xs" role="tablist">
               <button
                 role="tab"
                 aria-selected={studentUtilityTab === 'all'}
                 onClick={() => setStudentUtilityTab('all')}
-                className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors cursor-pointer ${
+                className={`px-3.5 py-1.5 text-xs font-bold rounded-xl transition-all cursor-pointer ${
                   studentUtilityTab === 'all'
                     ? 'bg-blue-600 text-white shadow-xs'
-                    : 'bg-slate-100 text-slate-600 hover:text-slate-900 hover:bg-slate-200/70'
+                    : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
                 }`}
               >
                 All Productivity ({baseCategoryTools.length})
@@ -168,10 +168,10 @@ export function CategoryPage({ categorySlug }: CategoryPageProps) {
                 role="tab"
                 aria-selected={studentUtilityTab === 'student'}
                 onClick={() => setStudentUtilityTab('student')}
-                className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors cursor-pointer ${
+                className={`px-3.5 py-1.5 text-xs font-bold rounded-xl transition-all cursor-pointer ${
                   studentUtilityTab === 'student'
                     ? 'bg-blue-600 text-white shadow-xs'
-                    : 'bg-slate-100 text-slate-600 hover:text-slate-900 hover:bg-slate-200/70'
+                    : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
                 }`}
               >
                 Academic Solvers ({studentCount})
@@ -180,10 +180,10 @@ export function CategoryPage({ categorySlug }: CategoryPageProps) {
                 role="tab"
                 aria-selected={studentUtilityTab === 'utility'}
                 onClick={() => setStudentUtilityTab('utility')}
-                className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors cursor-pointer ${
+                className={`px-3.5 py-1.5 text-xs font-bold rounded-xl transition-all cursor-pointer ${
                   studentUtilityTab === 'utility'
                     ? 'bg-blue-600 text-white shadow-xs'
-                    : 'bg-slate-100 text-slate-600 hover:text-slate-900 hover:bg-slate-200/70'
+                    : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
                 }`}
               >
                 Daily Utilities ({utilityCount})
@@ -194,14 +194,14 @@ export function CategoryPage({ categorySlug }: CategoryPageProps) {
               <span>Dedicated sections:</span>
               <Link
                 to="/category/student-tools"
-                className="text-blue-600 hover:underline font-semibold flex items-center gap-1"
+                className="text-blue-600 hover:underline font-bold flex items-center gap-1"
               >
                 Student Tools <ArrowRight className="w-3 h-3" />
               </Link>
               <span>·</span>
               <Link
                 to="/category/utility-tools"
-                className="text-blue-600 hover:underline font-semibold flex items-center gap-1"
+                className="text-blue-600 hover:underline font-bold flex items-center gap-1"
               >
                 Daily Utilities <ArrowRight className="w-3 h-3" />
               </Link>
@@ -212,21 +212,21 @@ export function CategoryPage({ categorySlug }: CategoryPageProps) {
 
       {/* Visible Category Introduction & Capabilities */}
       {(category.introParagraph || (category.highlights && category.highlights.length > 0)) && (
-        <div className="bg-white rounded-2xl border border-slate-200/90 p-6 sm:p-8 space-y-5">
+        <div className="bg-white rounded-3xl border border-[#E5EAF2] p-6 sm:p-8 shadow-[0_2px_12px_rgba(15,23,42,0.03)] space-y-5">
           {category.introParagraph && (
-            <p className="text-sm sm:text-base text-slate-700 leading-relaxed">
+            <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
               {category.introParagraph}
             </p>
           )}
 
           {category.highlights && category.highlights.length > 0 && (
-            <div className="pt-2 border-t border-slate-100">
-              <h2 className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-3">
+            <div className="pt-4 border-t border-[#E5EAF2]">
+              <h2 className="text-2xs sm:text-xs font-bold text-slate-700 uppercase tracking-wider mb-3">
                 Key Capabilities in this Suite
               </h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {category.highlights.map((highlight, idx) => (
-                  <div key={idx} className="flex items-start gap-2 text-xs sm:text-sm text-slate-700">
+                  <div key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-700">
                     <CheckCircle2 className="w-4 h-4 text-emerald-600 mt-0.5 shrink-0" />
                     <span>{highlight}</span>
                   </div>
@@ -239,15 +239,15 @@ export function CategoryPage({ categorySlug }: CategoryPageProps) {
 
       {/* Types of Tools & Selection Guide */}
       {category.toolTypes && category.toolTypes.length > 0 && (
-        <div className="bg-white rounded-2xl border border-slate-200/90 p-6 sm:p-8 space-y-6">
+        <div className="bg-white rounded-3xl border border-[#E5EAF2] p-6 sm:p-8 shadow-[0_2px_12px_rgba(15,23,42,0.03)] space-y-6">
           <div>
-            <div className="text-xs font-semibold text-blue-600 uppercase tracking-wider mb-1">
+            <div className="text-2xs sm:text-xs font-bold text-blue-600 uppercase tracking-wider mb-1">
               Category Guide
             </div>
-            <h2 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">
+            <h2 className="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">
               Tool Types & Selection Guide
             </h2>
-            <p className="text-xs sm:text-sm text-slate-600 mt-1 leading-relaxed">
+            <p className="text-xs sm:text-sm text-slate-600 mt-1 leading-relaxed font-normal">
               Understand which utilities belong in this collection and when to choose each tool for your task.
             </p>
           </div>
@@ -256,7 +256,7 @@ export function CategoryPage({ categorySlug }: CategoryPageProps) {
             {category.toolTypes.map((type, idx) => (
               <div
                 key={idx}
-                className="p-5 rounded-xl bg-slate-50/70 border border-slate-200/80 hover:border-slate-300 transition-colors flex flex-col justify-between space-y-4"
+                className="p-5 rounded-2xl bg-[#F8FAFC] border border-[#E5EAF2] hover:bg-white hover:border-blue-400 hover:shadow-xs transition-all flex flex-col justify-between space-y-4"
               >
                 <div className="space-y-2">
                   <h3 className="text-base font-bold text-slate-900 flex items-center gap-2">
@@ -266,14 +266,14 @@ export function CategoryPage({ categorySlug }: CategoryPageProps) {
                   <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
                     {type.description}
                   </p>
-                  <div className="p-3 bg-white rounded-lg border border-slate-200/60 text-xs text-slate-700 leading-relaxed">
-                    <strong className="text-slate-900 font-semibold block mb-0.5">When to choose:</strong>
+                  <div className="p-3 bg-white rounded-xl border border-[#E5EAF2] text-xs text-slate-700 leading-relaxed font-normal">
+                    <strong className="text-slate-900 font-bold block mb-0.5">When to choose:</strong>
                     <span>{type.whenToChoose}</span>
                   </div>
                 </div>
 
-                <div className="pt-2 border-t border-slate-200/60">
-                  <span className="text-2xs uppercase tracking-wider font-semibold text-slate-500 block mb-1.5">
+                <div className="pt-2 border-t border-[#E5EAF2]">
+                  <span className="text-2xs uppercase tracking-wider font-bold text-slate-500 block mb-1.5">
                     Included tools:
                   </span>
                   <div className="flex flex-wrap gap-1.5">
@@ -284,7 +284,7 @@ export function CategoryPage({ categorySlug }: CategoryPageProps) {
                         <Link
                           key={slug}
                           to={`/tools/${slug}`}
-                          className="px-2.5 py-1 text-2xs sm:text-xs font-medium text-slate-700 bg-white hover:bg-blue-50 hover:text-blue-600 border border-slate-200 rounded-md transition-colors"
+                          className="px-2.5 py-1 text-2xs sm:text-xs font-medium text-slate-700 bg-white hover:bg-blue-50 hover:text-blue-600 border border-[#E5EAF2] rounded-lg transition-colors cursor-pointer"
                         >
                           {t.name}
                         </Link>
@@ -306,12 +306,12 @@ export function CategoryPage({ categorySlug }: CategoryPageProps) {
           ))}
         </div>
       ) : (
-        <div className="py-16 text-center text-slate-500 bg-white rounded-2xl border border-slate-200">
-          <p className="text-base font-semibold">No tools found matching "{filterQuery}"</p>
+        <div className="py-16 text-center text-slate-500 bg-white rounded-3xl border border-[#E5EAF2] p-8">
+          <p className="text-base font-bold text-slate-800">No tools found matching "{filterQuery}"</p>
           <p className="text-xs text-slate-500 mt-1">Try another search keyword or clear your filter.</p>
           <button
             onClick={() => setFilterQuery('')}
-            className="mt-4 px-4 py-2 text-xs font-semibold text-blue-600 bg-blue-50 hover:bg-blue-100 rounded-lg transition-colors cursor-pointer"
+            className="mt-4 px-4 py-2 text-xs font-bold text-blue-600 bg-blue-50 hover:bg-blue-100 rounded-xl transition-colors cursor-pointer"
           >
             Clear Filter
           </button>
@@ -323,25 +323,26 @@ export function CategoryPage({ categorySlug }: CategoryPageProps) {
 
       {/* Helpful Guides for Category */}
       {categoryGuides.length > 0 && (
-        <section className="pt-10 border-t border-slate-200">
-          <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
+        <section className="bg-white rounded-3xl border border-[#E5EAF2] p-8 sm:p-10 shadow-[0_2px_12px_rgba(15,23,42,0.03)] space-y-6">
+          <div className="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-[#E5EAF2]">
             <div>
-              <div className="inline-flex items-center gap-1.5 text-xs font-bold text-blue-700 uppercase tracking-wider mb-1">
+              <div className="inline-flex items-center gap-1.5 text-2xs sm:text-xs font-bold text-blue-600 uppercase tracking-wider mb-1">
                 <BookOpen className="w-3.5 h-3.5" />
                 <span>Helpful Guides & Tutorials</span>
               </div>
-              <h2 className="text-xl font-bold text-slate-900 tracking-tight sm:text-2xl">
+              <h2 className="text-xl font-extrabold text-slate-900 tracking-tight sm:text-2xl">
                 Practical Guides for {category.title}
               </h2>
-              <p className="text-xs sm:text-sm text-slate-600 mt-1">
+              <p className="text-xs sm:text-sm text-slate-600 mt-1 font-normal">
                 Step-by-step walk-throughs and format comparisons to help you get the best results.
               </p>
             </div>
             <Link
               to="/guides"
-              className="text-xs sm:text-sm font-semibold text-blue-600 hover:text-blue-700 hover:underline flex items-center gap-1"
+              className="text-xs sm:text-sm font-bold text-blue-600 hover:text-blue-700 flex items-center gap-1 group"
             >
-              All Guides <ArrowRight className="w-3.5 h-3.5" />
+              <span>All Guides</span>
+              <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
             </Link>
           </div>
 
@@ -350,12 +351,12 @@ export function CategoryPage({ categorySlug }: CategoryPageProps) {
               <Link
                 key={g.slug}
                 to={`/guides/${g.slug}`}
-                className="group p-5 rounded-xl bg-white border border-slate-200 hover:border-blue-300 hover:shadow-xs transition-all flex flex-col justify-between"
+                className="group p-5 rounded-2xl bg-[#F8FAFC] border border-[#E5EAF2] hover:bg-white hover:border-blue-400 hover:shadow-[0_4px_16px_rgba(37,99,235,0.06)] hover:-translate-y-0.5 transition-all flex flex-col justify-between cursor-pointer"
               >
                 <div>
                   <div className="flex items-center justify-between text-2xs text-slate-500 mb-2">
-                    <span className="font-semibold text-blue-600">{g.categoryName}</span>
-                    <span className="flex items-center gap-1">
+                    <span className="font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded-md">{g.categoryName}</span>
+                    <span className="flex items-center gap-1 font-medium text-slate-500">
                       <Clock className="w-3 h-3" />
                       {g.readTime}
                     </span>
@@ -363,11 +364,11 @@ export function CategoryPage({ categorySlug }: CategoryPageProps) {
                   <h3 className="text-sm font-bold text-slate-900 group-hover:text-blue-600 transition-colors leading-snug">
                     {g.title}
                   </h3>
-                  <p className="text-xs text-slate-600 mt-2 line-clamp-2 leading-relaxed">
+                  <p className="text-xs text-slate-600 mt-2 line-clamp-2 leading-relaxed font-normal">
                     {g.summary}
                   </p>
                 </div>
-                <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-blue-600 font-semibold group-hover:text-blue-700">
+                <div className="mt-4 pt-3 border-t border-[#E5EAF2] flex items-center justify-between text-xs text-blue-600 font-bold group-hover:text-blue-700">
                   <span>Read Tutorial</span>
                   <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
                 </div>
@@ -378,21 +379,21 @@ export function CategoryPage({ categorySlug }: CategoryPageProps) {
       )}
 
       {/* Contextual Category Cross-Links for Site Hierarchy */}
-      <section className="pt-10 border-t border-slate-200">
-        <h2 className="text-base sm:text-lg font-bold text-slate-900 mb-4">
+      <section className="bg-white rounded-3xl border border-[#E5EAF2] p-8 sm:p-10 shadow-[0_2px_12px_rgba(15,23,42,0.03)] space-y-5">
+        <h2 className="text-base sm:text-lg font-extrabold text-slate-900 mb-1">
           Explore Other Toolora Categories
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {category.id !== 'image' && (
             <Link
               to="/category/image-tools"
-              className="p-4 rounded-xl bg-white border border-slate-200 hover:border-blue-500 hover:shadow-xs transition-all group"
+              className="p-4 rounded-2xl bg-[#F8FAFC] border border-[#E5EAF2] hover:bg-white hover:border-blue-400 hover:shadow-xs transition-all group cursor-pointer"
             >
               <div className="flex items-center gap-2.5 text-slate-900 font-bold text-sm group-hover:text-blue-600">
                 <ImageIcon className="w-4 h-4 text-blue-600" />
                 <span>Image Tools</span>
               </div>
-              <p className="text-xs text-slate-500 mt-1.5 line-clamp-2">
+              <p className="text-xs text-slate-600 mt-1.5 line-clamp-2 font-normal">
                 Compress, resize, convert, and edit photos directly in your browser.
               </p>
             </Link>
@@ -401,13 +402,13 @@ export function CategoryPage({ categorySlug }: CategoryPageProps) {
           {category.id !== 'pdf' && (
             <Link
               to="/category/pdf-tools"
-              className="p-4 rounded-xl bg-white border border-slate-200 hover:border-blue-500 hover:shadow-xs transition-all group"
+              className="p-4 rounded-2xl bg-[#F8FAFC] border border-[#E5EAF2] hover:bg-white hover:border-blue-400 hover:shadow-xs transition-all group cursor-pointer"
             >
               <div className="flex items-center gap-2.5 text-slate-900 font-bold text-sm group-hover:text-blue-600">
                 <FileText className="w-4 h-4 text-blue-600" />
                 <span>PDF Tools</span>
               </div>
-              <p className="text-xs text-slate-500 mt-1.5 line-clamp-2">
+              <p className="text-xs text-slate-600 mt-1.5 line-clamp-2 font-normal">
                 Merge, split, rotate, convert, and inspect PDF files without uploads.
               </p>
             </Link>
@@ -416,13 +417,13 @@ export function CategoryPage({ categorySlug }: CategoryPageProps) {
           {category.id !== 'student' && (
             <Link
               to="/category/student-tools"
-              className="p-4 rounded-xl bg-white border border-slate-200 hover:border-blue-500 hover:shadow-xs transition-all group"
+              className="p-4 rounded-2xl bg-[#F8FAFC] border border-[#E5EAF2] hover:bg-white hover:border-blue-400 hover:shadow-xs transition-all group cursor-pointer"
             >
               <div className="flex items-center gap-2.5 text-slate-900 font-bold text-sm group-hover:text-blue-600">
                 <GraduationCap className="w-4 h-4 text-blue-600" />
                 <span>Student Tools</span>
               </div>
-              <p className="text-xs text-slate-500 mt-1.5 line-clamp-2">
+              <p className="text-xs text-slate-600 mt-1.5 line-clamp-2 font-normal">
                 CGPA, weighted grades, fractions, ratios, and academic study timers.
               </p>
             </Link>
@@ -431,13 +432,13 @@ export function CategoryPage({ categorySlug }: CategoryPageProps) {
           {category.id !== 'utility' && (
             <Link
               to="/category/utility-tools"
-              className="p-4 rounded-xl bg-white border border-slate-200 hover:border-blue-500 hover:shadow-xs transition-all group"
+              className="p-4 rounded-2xl bg-[#F8FAFC] border border-[#E5EAF2] hover:bg-white hover:border-blue-400 hover:shadow-xs transition-all group cursor-pointer"
             >
               <div className="flex items-center gap-2.5 text-slate-900 font-bold text-sm group-hover:text-blue-600">
                 <Wrench className="w-4 h-4 text-blue-600" />
                 <span>Daily Utilities</span>
               </div>
-              <p className="text-xs text-slate-500 mt-1.5 line-clamp-2">
+              <p className="text-xs text-slate-600 mt-1.5 line-clamp-2 font-normal">
                 UUIDs, Unix timestamps, JSON formatters, text cleaners, and encoders.
               </p>
             </Link>
@@ -446,13 +447,13 @@ export function CategoryPage({ categorySlug }: CategoryPageProps) {
           {category.id !== 'student-utility' && (
             <Link
               to="/category/student-utility"
-              className="p-4 rounded-xl bg-white border border-slate-200 hover:border-blue-500 hover:shadow-xs transition-all group"
+              className="p-4 rounded-2xl bg-[#F8FAFC] border border-[#E5EAF2] hover:bg-white hover:border-blue-400 hover:shadow-xs transition-all group cursor-pointer"
             >
               <div className="flex items-center gap-2.5 text-slate-900 font-bold text-sm group-hover:text-blue-600">
                 <Layers className="w-4 h-4 text-blue-600" />
                 <span>Student & Utility Hub</span>
               </div>
-              <p className="text-xs text-slate-500 mt-1.5 line-clamp-2">
+              <p className="text-xs text-slate-600 mt-1.5 line-clamp-2 font-normal">
                 Unified workspace combining academic solvers and daily productivity tools.
               </p>
             </Link>

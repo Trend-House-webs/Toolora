@@ -417,12 +417,12 @@ export function ToolPageWrapper({ tool }: ToolPageWrapperProps) {
 
       {/* Header section with Single H1 */}
       <div className="max-w-3xl mb-8">
-        <div className="flex items-center gap-2 text-xs font-semibold text-blue-600 mb-2">
+        <div className="flex items-center gap-2 text-2xs sm:text-xs font-bold text-blue-600 mb-2">
           <span>{categoryName.toUpperCase()}</span>
           {tool.badge && (
             <>
               <span aria-hidden="true" className="text-slate-300">·</span>
-              <span className="text-slate-500 font-normal">{tool.badge}</span>
+              <span className="text-slate-500 font-medium">{tool.badge}</span>
             </>
           )}
         </div>
@@ -431,13 +431,13 @@ export function ToolPageWrapper({ tool }: ToolPageWrapperProps) {
           {tool.name}
         </h1>
 
-        <p className="text-sm sm:text-base text-slate-600 mt-3 leading-relaxed">
+        <p className="text-xs sm:text-sm text-slate-600 mt-2.5 leading-relaxed font-normal">
           {renderFormattedText(tool.detailedDescription || tool.description)}
         </p>
 
         {/* Real browser trust markers */}
-        <div className="flex flex-wrap items-center gap-4 text-xs text-slate-500 mt-4">
-          <span className="flex items-center gap-1.5 font-medium text-slate-700">
+        <div className="flex flex-wrap items-center gap-4 text-xs text-slate-600 mt-4 font-medium">
+          <span className="flex items-center gap-1.5 text-slate-700">
             <ShieldCheck className="w-4 h-4 text-emerald-600" />
             Client-Side Processing
           </span>
@@ -455,7 +455,7 @@ export function ToolPageWrapper({ tool }: ToolPageWrapperProps) {
 
         {/* Direct Answer / Core Purpose Callout */}
         {tool.directAnswer && tool.slug !== 'date-difference-calculator' && (
-          <div className="mt-5 p-4 rounded-xl bg-blue-50/80 border border-blue-200/80 text-xs sm:text-sm text-slate-800 leading-relaxed flex items-start gap-3">
+          <div className="mt-5 p-4 rounded-2xl bg-blue-50/80 border border-blue-200/80 text-xs sm:text-sm text-slate-800 leading-relaxed flex items-start gap-3">
             <div className="font-bold text-blue-700 shrink-0">Purpose:</div>
             <div>{renderFormattedText(tool.directAnswer)}</div>
           </div>
@@ -487,8 +487,8 @@ export function ToolPageWrapper({ tool }: ToolPageWrapperProps) {
         <>
           {/* How to Use Step-by-Step Guide */}
           {tool.howToUse && tool.howToUse.length > 0 && (
-        <section className="mb-14 bg-white rounded-2xl border border-slate-200/90 p-6 sm:p-8 shadow-xs">
-          <h2 className="text-lg sm:text-xl font-bold text-slate-900 mb-6 flex items-center gap-2">
+        <section className="mb-14 bg-white rounded-3xl border border-[#E5EAF2] p-6 sm:p-8 shadow-[0_2px_12px_rgba(15,23,42,0.03)]">
+          <h2 className="text-lg sm:text-xl font-extrabold text-slate-900 mb-6 flex items-center gap-2">
             <span>How to Use {tool.name}</span>
           </h2>
           <div className={`grid grid-cols-1 ${tool.howToUse.length >= 4 ? 'sm:grid-cols-2 lg:grid-cols-4' : 'md:grid-cols-3'} gap-6`}>
@@ -511,24 +511,24 @@ export function ToolPageWrapper({ tool }: ToolPageWrapperProps) {
 
       {/* Supported Formats & Technical Limitations */}
       {tool.technicalDetails && (
-        <section className="mb-14 bg-white rounded-2xl border border-slate-200/90 p-6 sm:p-8 shadow-xs space-y-5">
+        <section className="mb-14 bg-white rounded-3xl border border-[#E5EAF2] p-6 sm:p-8 shadow-[0_2px_12px_rgba(15,23,42,0.03)] space-y-5">
           <div>
-            <h2 className="text-lg sm:text-xl font-bold text-slate-900 tracking-tight">
+            <h2 className="text-lg sm:text-xl font-extrabold text-slate-900 tracking-tight">
               Supported Formats & Technical Limitations
             </h2>
-            <p className="text-xs sm:text-sm text-slate-600 mt-1">
+            <p className="text-xs sm:text-sm text-slate-600 mt-1 font-normal">
               Verified browser specifications, format handling, and processing boundaries for {tool.name}.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-1">
-            <div className="p-4 rounded-xl bg-slate-50 border border-slate-200/80 space-y-2">
-              <span className="text-2xs font-bold text-slate-500 uppercase tracking-wider block">
+            <div className="p-5 rounded-2xl bg-[#F8FAFC] border border-[#E5EAF2] space-y-2">
+              <span className="text-2xs font-bold text-slate-600 uppercase tracking-wider block">
                 Accepted Inputs
               </span>
               <ul className="space-y-1.5 text-xs text-slate-700">
                 {tool.technicalDetails.supportedInputs.map((input, idx) => (
-                  <li key={idx} className="flex items-center gap-1.5">
+                  <li key={idx} className="flex items-center gap-2">
                     <span className="w-1.5 h-1.5 rounded-full bg-blue-600 shrink-0" />
                     <span>{renderFormattedText(input)}</span>
                   </li>
@@ -536,22 +536,22 @@ export function ToolPageWrapper({ tool }: ToolPageWrapperProps) {
               </ul>
             </div>
 
-            <div className="p-4 rounded-xl bg-slate-50 border border-slate-200/80 space-y-2">
-              <span className="text-2xs font-bold text-slate-500 uppercase tracking-wider block">
+            <div className="p-5 rounded-2xl bg-[#F8FAFC] border border-[#E5EAF2] space-y-2">
+              <span className="text-2xs font-bold text-slate-600 uppercase tracking-wider block">
                 Output Handling
               </span>
-              <p className="text-xs text-slate-700 leading-relaxed">
+              <p className="text-xs text-slate-700 leading-relaxed font-normal">
                 {renderFormattedText(tool.technicalDetails.outputFormat)}
               </p>
             </div>
 
-            <div className="p-4 rounded-xl bg-slate-50 border border-slate-200/80 space-y-2">
-              <span className="text-2xs font-bold text-slate-500 uppercase tracking-wider block">
+            <div className="p-5 rounded-2xl bg-[#F8FAFC] border border-[#E5EAF2] space-y-2">
+              <span className="text-2xs font-bold text-slate-600 uppercase tracking-wider block">
                 Processing Limitations
               </span>
               <ul className="space-y-1.5 text-xs text-slate-700">
                 {tool.technicalDetails.limitations.map((lim, idx) => (
-                  <li key={idx} className="flex items-start gap-1.5">
+                  <li key={idx} className="flex items-start gap-2">
                     <span className="w-1.5 h-1.5 rounded-full bg-amber-500 mt-1.5 shrink-0" />
                     <span>{renderFormattedText(lim)}</span>
                   </li>
@@ -564,12 +564,12 @@ export function ToolPageWrapper({ tool }: ToolPageWrapperProps) {
 
       {/* Practical Example */}
       {tool.practicalExample && (
-        <section className="mb-14 p-6 sm:p-7 rounded-2xl bg-slate-900 text-white shadow-xs space-y-3.5">
-          <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-blue-400">
+        <section className="mb-14 p-6 sm:p-8 rounded-3xl bg-slate-900 text-white shadow-xs space-y-4 border border-slate-800">
+          <div className="flex items-center gap-2 text-2xs sm:text-xs font-bold uppercase tracking-wider text-blue-400">
             <BookOpen className="w-4 h-4" />
             <span>Practical Example: {tool.practicalExample.title}</span>
           </div>
-          <div className="space-y-2.5 text-xs sm:text-sm text-slate-300 leading-relaxed">
+          <div className="space-y-3 text-xs sm:text-sm text-slate-300 leading-relaxed">
             <p>
               <strong className="text-white">Scenario: </strong>
               {renderFormattedText(tool.practicalExample.scenario)}
@@ -578,7 +578,7 @@ export function ToolPageWrapper({ tool }: ToolPageWrapperProps) {
               <strong className="text-white">Action: </strong>
               {renderFormattedText(tool.practicalExample.action)}
             </p>
-            <p className="p-3 rounded-lg bg-slate-800 text-emerald-300 border border-slate-700/80">
+            <p className="p-4 rounded-xl bg-slate-800/90 text-emerald-300 border border-slate-700/80">
               <strong className="text-emerald-200">Outcome: </strong>
               {renderFormattedText(tool.practicalExample.result)}
             </p>
@@ -588,15 +588,15 @@ export function ToolPageWrapper({ tool }: ToolPageWrapperProps) {
 
       {/* Why Choose Toolora / Use Cases */}
       {tool.whyUse && tool.whyUse.length > 0 && (
-        <section className="mb-14 bg-white rounded-2xl border border-slate-200/90 p-6 sm:p-8 shadow-xs">
-          <h2 className="text-lg sm:text-xl font-bold text-slate-900 mb-6">
+        <section className="mb-14 bg-white rounded-3xl border border-[#E5EAF2] p-6 sm:p-8 shadow-[0_2px_12px_rgba(15,23,42,0.03)]">
+          <h2 className="text-lg sm:text-xl font-extrabold text-slate-900 mb-6">
             Why Use Toolora for {tool.name}?
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {tool.whyUse.map((reason, idx) => (
-              <div key={idx} className="flex items-start gap-3 p-3.5 rounded-xl bg-slate-50/80 border border-slate-100">
+              <div key={idx} className="flex items-start gap-3 p-4 rounded-2xl bg-[#F8FAFC] border border-[#E5EAF2]">
                 <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                <p className="text-sm text-slate-700 leading-relaxed font-normal">
+                <p className="text-xs sm:text-sm text-slate-700 leading-relaxed font-normal">
                   {renderFormattedText(reason)}
                 </p>
               </div>
@@ -607,7 +607,7 @@ export function ToolPageWrapper({ tool }: ToolPageWrapperProps) {
 
       {/* Pro Tips for Best Results */}
       {tool.tips && tool.tips.length > 0 && (
-        <section className="mb-14 bg-amber-50/50 rounded-2xl border border-amber-200/70 p-6 sm:p-8">
+        <section className="mb-14 bg-amber-50/60 rounded-3xl border border-amber-200/70 p-6 sm:p-8">
           <div className="flex items-center gap-2.5 mb-4">
             <Lightbulb className="w-5 h-5 text-amber-600 shrink-0" />
             <h2 className="text-base sm:text-lg font-bold text-amber-950">
@@ -627,13 +627,13 @@ export function ToolPageWrapper({ tool }: ToolPageWrapperProps) {
 
       {/* Key Features */}
       {tool.features && tool.features.length > 0 && (
-        <section className="mb-14 bg-white rounded-2xl border border-slate-200/80 p-6 sm:p-8 shadow-xs">
-          <h2 className="text-base sm:text-lg font-bold text-slate-900 mb-4">
+        <section className="mb-14 bg-white rounded-3xl border border-[#E5EAF2] p-6 sm:p-8 shadow-[0_2px_12px_rgba(15,23,42,0.03)]">
+          <h2 className="text-base sm:text-lg font-extrabold text-slate-900 mb-4">
             Key Features of {tool.name}
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
             {tool.features.map((feat, idx) => (
-              <div key={idx} className="flex items-start gap-2.5 text-sm text-slate-700">
+              <div key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-700">
                 <span className="w-1.5 h-1.5 rounded-full bg-blue-600 mt-2 shrink-0" />
                 <span>{feat}</span>
               </div>
@@ -661,22 +661,23 @@ export function ToolPageWrapper({ tool }: ToolPageWrapperProps) {
 
       {/* Relevant Step-by-Step Guides & Tutorials */}
       {relevantGuides.length > 0 && (
-        <section className="mb-14 p-6 sm:p-7 rounded-2xl bg-gradient-to-r from-blue-50/70 via-indigo-50/40 to-slate-50 border border-blue-100 shadow-2xs">
-          <div className="flex flex-wrap items-center justify-between gap-4 mb-4">
+        <section className="mb-14 p-6 sm:p-8 rounded-3xl bg-white border border-[#E5EAF2] shadow-[0_2px_12px_rgba(15,23,42,0.03)]">
+          <div className="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-[#E5EAF2] mb-6">
             <div>
-              <div className="inline-flex items-center gap-1.5 text-xs font-bold text-blue-700 uppercase tracking-wider mb-1">
+              <div className="inline-flex items-center gap-1.5 text-2xs sm:text-xs font-bold text-blue-600 uppercase tracking-wider mb-1">
                 <BookOpen className="w-3.5 h-3.5" />
                 <span>Helpful Guide & Tutorial</span>
               </div>
-              <h2 className="text-lg sm:text-xl font-bold text-slate-900 tracking-tight">
+              <h2 className="text-lg sm:text-xl font-extrabold text-slate-900 tracking-tight">
                 Recommended Reading for This Workflow
               </h2>
             </div>
             <Link
               to="/guides"
-              className="text-xs sm:text-sm font-semibold text-blue-600 hover:text-blue-700 hover:underline flex items-center gap-1"
+              className="text-xs sm:text-sm font-bold text-blue-600 hover:text-blue-700 flex items-center gap-1 group"
             >
-              All Guides <ArrowRight className="w-3.5 h-3.5" />
+              <span>All Guides</span>
+              <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
             </Link>
           </div>
 
@@ -685,21 +686,21 @@ export function ToolPageWrapper({ tool }: ToolPageWrapperProps) {
               <Link
                 key={guide.slug}
                 to={`/guides/${guide.slug}`}
-                className="group p-4 rounded-xl bg-white border border-slate-200 hover:border-blue-300 hover:shadow-xs transition-all flex flex-col justify-between"
+                className="group p-5 rounded-2xl bg-[#F8FAFC] border border-[#E5EAF2] hover:bg-white hover:border-blue-400 hover:shadow-xs transition-all flex flex-col justify-between cursor-pointer"
               >
                 <div>
-                  <div className="flex items-center justify-between text-2xs text-slate-500 mb-1.5">
-                    <span className="font-semibold text-blue-600">{guide.categoryName}</span>
-                    <span>{guide.readTime}</span>
+                  <div className="flex items-center justify-between text-2xs text-slate-500 mb-2">
+                    <span className="font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded-md">{guide.categoryName}</span>
+                    <span className="font-medium text-slate-500">{guide.readTime}</span>
                   </div>
                   <h3 className="text-sm font-bold text-slate-900 group-hover:text-blue-600 transition-colors leading-snug">
                     {guide.title}
                   </h3>
-                  <p className="text-xs text-slate-600 mt-1.5 line-clamp-2 leading-relaxed">
+                  <p className="text-xs text-slate-600 mt-1.5 line-clamp-2 leading-relaxed font-normal">
                     {guide.summary}
                   </p>
                 </div>
-                <div className="mt-3 pt-2.5 border-t border-slate-100 flex items-center justify-between text-xs text-blue-600 font-semibold group-hover:text-blue-700">
+                <div className="mt-4 pt-3 border-t border-[#E5EAF2] flex items-center justify-between text-xs text-blue-600 font-bold group-hover:text-blue-700">
                   <span>Read Tutorial</span>
                   <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
                 </div>
@@ -714,21 +715,22 @@ export function ToolPageWrapper({ tool }: ToolPageWrapperProps) {
 
       {/* Related Tools (Internal Linking) */}
       {relatedTools.length > 0 && (
-        <section className="mt-14 pt-10 border-t border-slate-200">
+        <section className="mt-14 pt-10 border-t border-[#E5EAF2]">
           <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
             <div>
-              <h2 className="text-xl font-bold text-slate-900 tracking-tight sm:text-2xl">
+              <h2 className="text-xl font-extrabold text-slate-900 tracking-tight sm:text-2xl">
                 Related Free Tools
               </h2>
-              <p className="text-xs sm:text-sm text-slate-600 mt-1">
+              <p className="text-xs sm:text-sm text-slate-600 mt-1 font-normal">
                 Explore more client-side utilities that pair well with {tool.name}.
               </p>
             </div>
             <Link
               to={categoryHref}
-              className="text-xs sm:text-sm font-semibold text-blue-600 hover:text-blue-700 hover:underline flex items-center gap-1"
+              className="text-xs sm:text-sm font-bold text-blue-600 hover:text-blue-700 flex items-center gap-1 group"
             >
-              All {categoryName} <ArrowRight className="w-3.5 h-3.5" />
+              <span>All {categoryName}</span>
+              <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
             </Link>
           </div>
 

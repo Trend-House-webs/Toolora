@@ -61,13 +61,13 @@ export function AllToolsPage() {
       <Breadcrumbs items={[{ label: 'All Tools Directory' }]} />
 
       {/* Category Jump Links & Short Descriptions */}
-      <section className="bg-slate-50/90 rounded-2xl border border-slate-200/90 p-5 sm:p-6 space-y-4">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+      <section className="bg-white rounded-3xl border border-[#E5EAF2] p-6 sm:p-8 shadow-[0_2px_12px_rgba(15,23,42,0.03)] space-y-5">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-[#E5EAF2]">
           <div>
-            <h2 className="text-base sm:text-lg font-bold text-slate-900">
+            <h2 className="text-base sm:text-lg font-extrabold text-slate-900">
               Browse Tools by Category
             </h2>
-            <p className="text-xs sm:text-sm text-slate-600">
+            <p className="text-xs sm:text-sm text-slate-600 font-normal">
               Jump directly to specialized category hubs or browse the unified index below.
             </p>
           </div>
@@ -81,51 +81,51 @@ export function AllToolsPage() {
             <Link
               key={cat.id}
               to={`/category/${cat.slug}`}
-              className="group p-4 bg-white rounded-xl border border-slate-200/90 hover:border-blue-500/80 hover:shadow-xs transition-all flex flex-col justify-between"
+              className="group p-4 bg-[#F8FAFC] rounded-2xl border border-[#E5EAF2] hover:bg-white hover:border-blue-400 hover:shadow-[0_4px_16px_rgba(37,99,235,0.06)] hover:-translate-y-0.5 transition-all flex flex-col justify-between cursor-pointer"
             >
               <div>
                 <div className="flex items-center justify-between gap-1 mb-2">
                   <div className="font-bold text-xs sm:text-sm text-slate-900 group-hover:text-blue-600 transition-colors">
                     {cat.title}
                   </div>
-                  <span className="text-2xs font-semibold text-blue-600 bg-blue-50 px-1.5 py-0.5 rounded">
+                  <span className="text-2xs font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded-md font-mono">
                     {cat.count}
                   </span>
                 </div>
-                <p className="text-xs text-slate-500 line-clamp-2 leading-relaxed font-normal">
+                <p className="text-xs text-slate-600 line-clamp-2 leading-relaxed font-normal">
                   {cat.description}
                 </p>
               </div>
-              <span className="text-xs font-semibold text-blue-600 flex items-center gap-1 mt-3 group-hover:translate-x-0.5 transition-transform">
-                Explore Hub <ArrowRight className="w-3 h-3" />
+              <span className="text-xs font-bold text-blue-600 flex items-center gap-1 mt-4 group-hover:translate-x-0.5 transition-transform">
+                Explore Hub <ArrowRight className="w-3.5 h-3.5" />
               </span>
             </Link>
           ))}
         </div>
       </section>
 
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-slate-200">
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-[#E5EAF2]">
         <div>
-          <div className="text-xs font-semibold text-blue-600 uppercase tracking-wider mb-2">
+          <div className="text-2xs sm:text-xs font-bold text-blue-600 uppercase tracking-wider mb-2">
             Complete Index
           </div>
           <h1 className="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
             All Free Online Tools ({TOOLS.length})
           </h1>
-          <p className="text-sm sm:text-base text-slate-600 mt-2 leading-relaxed max-w-2xl">
+          <p className="text-xs sm:text-sm text-slate-600 mt-2 leading-relaxed max-w-2xl font-normal">
             Welcome to the complete Toolora tools directory. Browse online tools across image editing, PDF document assembly, student GPA calculators, and everyday utilities. This comprehensive browser utilities index and free web tools list runs client-side in your device memory with zero accounts, subscriptions, or server file uploads.
           </p>
         </div>
 
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
           {/* Category tabs */}
-          <div className="flex items-center gap-1 p-1 bg-slate-100 rounded-xl overflow-x-auto" role="tablist">
+          <div className="flex items-center gap-1 p-1 bg-white border border-[#E5EAF2] rounded-2xl shadow-2xs overflow-x-auto" role="tablist">
             <button
               role="tab"
               aria-selected={filter === 'all'}
               onClick={() => setFilter('all')}
-              className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors cursor-pointer whitespace-nowrap ${
-                filter === 'all' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600 hover:text-slate-900'
+              className={`px-3.5 py-1.5 text-xs font-bold rounded-xl transition-all cursor-pointer whitespace-nowrap ${
+                filter === 'all' ? 'bg-blue-600 text-white shadow-xs' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
               }`}
             >
               All ({TOOLS.length})
@@ -134,8 +134,8 @@ export function AllToolsPage() {
               role="tab"
               aria-selected={filter === 'image'}
               onClick={() => setFilter('image')}
-              className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors cursor-pointer whitespace-nowrap ${
-                filter === 'image' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600 hover:text-slate-900'
+              className={`px-3.5 py-1.5 text-xs font-bold rounded-xl transition-all cursor-pointer whitespace-nowrap ${
+                filter === 'image' ? 'bg-blue-600 text-white shadow-xs' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
               }`}
             >
               Image ({imageCount})
@@ -144,8 +144,8 @@ export function AllToolsPage() {
               role="tab"
               aria-selected={filter === 'pdf'}
               onClick={() => setFilter('pdf')}
-              className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors cursor-pointer whitespace-nowrap ${
-                filter === 'pdf' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600 hover:text-slate-900'
+              className={`px-3.5 py-1.5 text-xs font-bold rounded-xl transition-all cursor-pointer whitespace-nowrap ${
+                filter === 'pdf' ? 'bg-blue-600 text-white shadow-xs' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
               }`}
             >
               PDF ({pdfCount})
@@ -154,8 +154,8 @@ export function AllToolsPage() {
               role="tab"
               aria-selected={filter === 'student'}
               onClick={() => setFilter('student')}
-              className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors cursor-pointer whitespace-nowrap ${
-                filter === 'student' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600 hover:text-slate-900'
+              className={`px-3.5 py-1.5 text-xs font-bold rounded-xl transition-all cursor-pointer whitespace-nowrap ${
+                filter === 'student' ? 'bg-blue-600 text-white shadow-xs' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
               }`}
             >
               Student ({studentCount})
@@ -164,8 +164,8 @@ export function AllToolsPage() {
               role="tab"
               aria-selected={filter === 'utility'}
               onClick={() => setFilter('utility')}
-              className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors cursor-pointer whitespace-nowrap ${
-                filter === 'utility' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600 hover:text-slate-900'
+              className={`px-3.5 py-1.5 text-xs font-bold rounded-xl transition-all cursor-pointer whitespace-nowrap ${
+                filter === 'utility' ? 'bg-blue-600 text-white shadow-xs' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
               }`}
             >
               Utility ({utilityCount})
@@ -180,7 +180,7 @@ export function AllToolsPage() {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search all tools..."
-              className="w-full pl-9 pr-3 py-2 bg-white border border-slate-300 rounded-xl text-xs sm:text-sm text-slate-800 placeholder:text-slate-400 focus:outline-hidden focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
+              className="w-full pl-9 pr-3 py-2 bg-white border border-[#E5EAF2] rounded-xl text-xs sm:text-sm text-slate-800 placeholder:text-slate-400 focus:outline-hidden focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all"
               aria-label="Search all tools directory"
             />
           </div>
@@ -194,8 +194,8 @@ export function AllToolsPage() {
           ))}
         </div>
       ) : (
-        <div className="py-16 text-center text-slate-500">
-          <p className="text-base font-semibold">No tools found matching your criteria</p>
+        <div className="py-16 text-center text-slate-500 bg-white rounded-3xl border border-[#E5EAF2] p-8">
+          <p className="text-base font-bold text-slate-800">No tools found matching your criteria</p>
           <p className="text-xs text-slate-500 mt-1">Try resetting the search or category filter.</p>
         </div>
       )}
@@ -204,26 +204,26 @@ export function AllToolsPage() {
       <AdSenseBanner className="my-8" />
 
       {/* Practical Guides & Workflow Tutorials */}
-      <section className="pt-10 border-t border-slate-200">
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6">
+      <section className="bg-white rounded-3xl border border-[#E5EAF2] p-8 sm:p-10 shadow-[0_2px_12px_rgba(15,23,42,0.03)] space-y-6">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-4 border-b border-[#E5EAF2]">
           <div>
-            <div className="inline-flex items-center gap-1.5 text-xs font-bold text-blue-700 uppercase tracking-wider mb-1">
+            <div className="inline-flex items-center gap-1.5 text-2xs sm:text-xs font-bold text-blue-600 uppercase tracking-wider mb-1">
               <BookOpen className="w-3.5 h-3.5" />
               <span>Step-by-Step Tutorials</span>
             </div>
-            <h2 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">
+            <h2 className="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">
               Practical Guides for Toolora Workflows
             </h2>
-            <p className="text-xs sm:text-sm text-slate-600 mt-1">
+            <p className="text-xs sm:text-sm text-slate-600 mt-1 font-normal">
               Learn how to get the cleanest compression, correct photo dimensions, and assemble documents.
             </p>
           </div>
           <Link
             to="/guides"
-            className="inline-flex items-center gap-1 text-xs sm:text-sm font-semibold text-blue-600 hover:text-blue-700 hover:underline shrink-0"
+            className="inline-flex items-center gap-1 text-xs sm:text-sm font-bold text-blue-600 hover:text-blue-700 transition-colors shrink-0 group"
           >
             <span>All Guides & Tutorials</span>
-            <ArrowRight className="w-3.5 h-3.5" />
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
           </Link>
         </div>
 
@@ -232,12 +232,12 @@ export function AllToolsPage() {
             <Link
               key={g.slug}
               to={`/guides/${g.slug}`}
-              className="group p-4 bg-white rounded-xl border border-slate-200 hover:border-blue-300 hover:shadow-xs transition-all flex flex-col justify-between"
+              className="group p-5 bg-[#F8FAFC] rounded-2xl border border-[#E5EAF2] hover:bg-white hover:border-blue-400 hover:shadow-[0_4px_16px_rgba(37,99,235,0.06)] hover:-translate-y-0.5 transition-all flex flex-col justify-between cursor-pointer"
             >
               <div>
                 <div className="flex items-center justify-between text-2xs text-slate-500 mb-2">
-                  <span className="font-semibold text-blue-600">{g.categoryName}</span>
-                  <span className="flex items-center gap-1">
+                  <span className="font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded-md">{g.categoryName}</span>
+                  <span className="flex items-center gap-1 font-medium text-slate-500">
                     <Clock className="w-3 h-3" />
                     {g.readTime}
                   </span>
@@ -249,7 +249,7 @@ export function AllToolsPage() {
                   {g.summary}
                 </p>
               </div>
-              <div className="mt-4 pt-2.5 border-t border-slate-100 flex items-center justify-between text-xs text-blue-600 font-semibold group-hover:text-blue-700">
+              <div className="mt-4 pt-3 border-t border-[#E5EAF2] flex items-center justify-between text-xs text-blue-600 font-bold group-hover:text-blue-700">
                 <span>Read Tutorial</span>
                 <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
               </div>
