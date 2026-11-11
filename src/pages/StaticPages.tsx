@@ -4,6 +4,7 @@ import { SEO } from '../components/common/SEO';
 import { ShieldCheck, CheckCircle2, Lock, Zap, AlertCircle, Send, Loader2, MessageSquare, RotateCcw } from 'lucide-react';
 import { SITE_URL } from '../config/site';
 import { Link } from '../context/RouterContext';
+import { AdSenseBanner } from '../components/common/AdSenseBanner';
 
 const getStaticBreadcrumbSchema = (name: string, path: string) => ({
   '@context': 'https://schema.org',
@@ -202,6 +203,8 @@ export function AboutPage() {
           </div>
         </section>
       </div>
+
+      <AdSenseBanner className="mt-8 sm:mt-10" />
     </div>
   );
 }
@@ -282,6 +285,8 @@ export function PrivacyPage() {
           </p>
         </div>
       </div>
+
+      <AdSenseBanner className="mt-8 sm:mt-10" />
     </div>
   );
 }
@@ -348,6 +353,8 @@ export function TermsPage() {
           </p>
         </div>
       </div>
+
+      <AdSenseBanner className="mt-8 sm:mt-10" />
     </div>
   );
 }
@@ -421,6 +428,8 @@ export function DisclaimerPage() {
           </ul>
         </div>
       </div>
+
+      <AdSenseBanner className="mt-8 sm:mt-10" />
     </div>
   );
 }
@@ -924,6 +933,8 @@ export function ContactPage() {
           </div>
         </div>
       </div>
+
+      <AdSenseBanner className="mt-12" />
     </div>
   );
 }

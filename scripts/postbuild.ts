@@ -485,5 +485,12 @@ ${sitemapUrls
 fs.writeFileSync(path.join(publicDir, 'sitemap.xml'), sitemapXml);
 fs.writeFileSync(path.join(distDir, 'sitemap.xml'), sitemapXml);
 
+if (fs.existsSync(path.join(publicDir, 'ads.txt'))) {
+  fs.copyFileSync(path.join(publicDir, 'ads.txt'), path.join(distDir, 'ads.txt'));
+}
+if (fs.existsSync(path.join(publicDir, 'robots.txt'))) {
+  fs.copyFileSync(path.join(publicDir, 'robots.txt'), path.join(distDir, 'robots.txt'));
+}
+
 console.log(`Generated static routes: ${generatedCount} pages + 404.html in dist.`);
 console.log(`Generated sitemap.xml with ${sitemapUrls.length} verified production URLs in public/ and dist/.`);
