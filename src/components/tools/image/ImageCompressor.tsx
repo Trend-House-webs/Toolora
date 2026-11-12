@@ -125,7 +125,7 @@ export function ImageCompressor() {
             <ImageDropzone
               onImageSelected={handleSelectFile}
               accept="image/jpeg,image/jpg,image/png,image/webp,image/bmp"
-              title="Select JPG, PNG or WebP image to compress"
+              title="Select JPG, PNG, WebP or BMP image to compress"
               subtitle="Drag & drop your file here, or click to browse. Processing runs locally in browser memory without server uploads."
             />
           </div>
@@ -397,7 +397,7 @@ export function ImageCompressor() {
         {/* Section 2: Supported Formats */}
         <div className="space-y-3 pt-4 border-t border-slate-200">
           <h2 className="text-lg sm:text-xl font-bold text-slate-900 tracking-tight">
-            Supported Image Formats: JPG, PNG, and WebP
+            Supported Image Formats: JPG, PNG, WebP, and BMP
           </h2>
           <p>
             Different image formats use fundamentally different compression strategies:
@@ -411,6 +411,9 @@ export function ImageCompressor() {
             </li>
             <li>
               <strong>WebP:</strong> Modern web image standard offering superior predictive intra-frame compression. Check the <em>Convert to WebP</em> toggle to convert bulky JPEGs or PNGs to lightweight WebP assets for faster website delivery.
+            </li>
+            <li>
+              <strong>BMP:</strong> Uncompressed bitmap raster format. Uncompressed BMP bitmaps are decoded directly in browser memory and efficiently compressed into optimized JPEG or modern WebP format, drastically slashing file weight.
             </li>
           </ul>
         </div>
