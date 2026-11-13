@@ -64,6 +64,7 @@ assert('Build Output', 'robots.txt exists in dist and public', fs.existsSync(pat
 // Suite 2: Sitemap & Canonical Integrity
 // -------------------------------------------------------------
 const sitemapContent = fs.readFileSync(path.join(distDir, 'sitemap.xml'), 'utf8');
+const publicSitemapContent = fs.readFileSync(path.join('public', 'sitemap.xml'), 'utf8');
 const sitemapUrls = Array.from(sitemapContent.matchAll(/<loc>(.*?)<\/loc>/g)).map((m) => m[1]);
 
 assert('Sitemap', 'Sitemap contains exactly 80 URLs', sitemapUrls.length === 80, `Found ${sitemapUrls.length}`);
@@ -80,21 +81,37 @@ for (const u of sitemapUrls) {
 }
 assert('Sitemap', 'All subpage sitemap URLs follow strict non-trailing slash canonical format', invalidCanonicalSitemap === 0);
 
+const expectedSitemapSet = new Set(expectedRoutes.map((r) => (r === '' ? `${SITE_URL}/` : `${SITE_URL}/${r}`)));
+const missingFromSitemap = Array.from(expectedSitemapSet).filter((u) => !uniqueUrls.has(u));
+const unexpectedInSitemap = sitemapUrls.filter((u) => !expectedSitemapSet.has(u));
+assert(
+  'Sitemap',
+  'Sitemap URLs match 1:1 with all 80 expected canonical routes (and exclude 404)',
+  missingFromSitemap.length === 0 && unexpectedInSitemap.length === 0 && !uniqueUrls.has(`${SITE_URL}/404`),
+  `Missing: ${missingFromSitemap.length}, Unexpected: ${unexpectedInSitemap.length}`
+);
+assert('Sitemap', 'public/sitemap.xml and dist/sitemap.xml are identical', sitemapContent === publicSitemapContent);
+
 // Verify canonical links in HTML and setLink helper attribute assignment
 let canonicalTagErrors = 0;
+let canonicalHrefMismatches = 0;
 let brokenRelAttrCount = 0;
 for (const r of expectedRoutes) {
   const filePath = r === '' ? path.join(distDir, 'index.html') : path.join(distDir, r, 'index.html');
   const content = fs.readFileSync(filePath, 'utf8');
+  const expectedCanonical = r === '' ? `${SITE_URL}/` : `${SITE_URL}/${r}`;
   const canonicalMatches = Array.from(content.matchAll(/<link rel="canonical" href="(.*?)" \/>/g));
   if (canonicalMatches.length !== 1) {
     canonicalTagErrors++;
+  } else if (canonicalMatches[0][1] !== expectedCanonical) {
+    canonicalHrefMismatches++;
   }
   if (content.includes('canonical="canonical"') || content.includes('<link rel="rel"')) {
     brokenRelAttrCount++;
   }
 }
 assert('Canonical Integrity', 'Every route HTML has exactly one canonical link tag', canonicalTagErrors === 0, `${canonicalTagErrors} pages with missing/duplicate canonical`);
+assert('Canonical Integrity', 'Every route HTML canonical href matches its exact expected canonical URL', canonicalHrefMismatches === 0, `${canonicalHrefMismatches} mismatches`);
 assert('Canonical Integrity', 'Zero malformed canonical="canonical" attributes in generated HTML', brokenRelAttrCount === 0);
 
 // Unit test for SEO setLink helper logic
@@ -115,8 +132,10 @@ assert('Canonical Integrity', 'SEO setLink helper sets rel="canonical" attribute
 // Suite 3: Robots.txt & Indexing Directives
 // -------------------------------------------------------------
 const robotsContent = fs.readFileSync(path.join(distDir, 'robots.txt'), 'utf8');
+const publicRobotsContent = fs.readFileSync(path.join('public', 'robots.txt'), 'utf8');
 assert('Robots.txt', 'Allows all user agents', robotsContent.includes('User-agent: *') && robotsContent.includes('Allow: /'));
 assert('Robots.txt', 'Links to production sitemap', robotsContent.includes(`Sitemap: ${SITE_URL}/sitemap.xml`));
+assert('Robots.txt', 'public/robots.txt and dist/robots.txt are identical', robotsContent === publicRobotsContent);
 
 let accidentalNoindex = 0;
 for (const r of expectedRoutes) {
@@ -135,6 +154,7 @@ assert('Robots.txt', '404 page contains noindex, nofollow', notFoundContent.incl
 // Suite 4: Route Resolution & Prerender Headings
 // -------------------------------------------------------------
 let missingH1Count = 0;
+let multipleOrEmptyH1Count = 0;
 let emptyBodyCount = 0;
 for (const r of expectedRoutes) {
   const filePath = r === '' ? path.join(distDir, 'index.html') : path.join(distDir, r, 'index.html');
@@ -142,12 +162,18 @@ for (const r of expectedRoutes) {
   if (!content.includes('<h1')) {
     missingH1Count++;
   }
+  const h1Matches = Array.from(content.matchAll(/<h1[^>]*>([\s\S]*?)<\/h1>/g));
+  const h1Text = h1Matches[0] ? h1Matches[0][1].replace(/<[^>]+>/g, '').trim() : '';
+  if (h1Matches.length !== 1 || h1Text.length === 0) {
+    multipleOrEmptyH1Count++;
+  }
   const rootDiv = (content.match(/<div id="root">([\s\S]*?)<\/div>/) || [])[1];
   if (!rootDiv || rootDiv.length === 0) {
     emptyBodyCount++;
   }
 }
 assert('SSR / Prerendering', 'All 80 routes have an H1 tag in static HTML', missingH1Count === 0);
+assert('SSR / Prerendering', 'All 80 routes have exactly one non-empty H1 heading', multipleOrEmptyH1Count === 0, `${multipleOrEmptyH1Count} routes failed`);
 assert('SSR / Prerendering', 'All 80 routes have prerendered DOM inside root container', emptyBodyCount === 0);
 
 // Check that no tool pages contain Suspense fallback or aborted server rendering
@@ -166,6 +192,39 @@ for (const r of expectedRoutes) {
 assert('SSR / Prerendering', 'Zero Suspense abort template comments in prerendered HTML', suspenseAbortCount === 0, `${suspenseAbortCount} files contain Suspense abort comments`);
 assert('SSR / Prerendering', 'Zero loading skeletons in prerendered tool workspaces', loadingSkeletonCount === 0, `${loadingSkeletonCount} files contain loading skeleton`);
 
+// Verify all 63 tool pages render their dedicated workspace and educational sections without fallback
+let unrenderedToolWorkspaces = 0;
+for (const tool of TOOLS) {
+  const toolHtml = fs.readFileSync(path.join(distDir, 'tools', tool.slug, 'index.html'), 'utf8');
+  const rawLabel = tool.slug === 'fraction-calculator' ? 'Fraction Calculator with Steps Workspace' : `${tool.name} Workspace`;
+  const escapedLabel = rawLabel.replace(/&/g, '&amp;');
+  if (
+    (!toolHtml.includes(rawLabel) && !toolHtml.includes(escapedLabel)) ||
+    toolHtml.includes('Loading tool components...') ||
+    toolHtml.includes('Page Not Found')
+  ) {
+    unrenderedToolWorkspaces++;
+  }
+}
+assert('SSR / Prerendering', 'All 63 tool pages render their dedicated interactive workspace in static HTML', unrenderedToolWorkspaces === 0, `${unrenderedToolWorkspaces} failed`);
+
+// Verify all 4 guide pages and all 4 category pages render their dedicated content
+let unrenderedGuidesOrCategories = 0;
+for (const guide of GUIDES) {
+  const guideHtml = fs.readFileSync(path.join(distDir, 'guides', guide.slug, 'index.html'), 'utf8');
+  if (!guideHtml.includes('<article') || !guideHtml.includes('Key Takeaways')) {
+    unrenderedGuidesOrCategories++;
+  }
+}
+for (const cat of CATEGORIES) {
+  const catHtml = fs.readFileSync(path.join(distDir, 'category', cat.slug, 'index.html'), 'utf8');
+  const escapedCatTitle = cat.title.replace(/&/g, '&amp;');
+  if (!catHtml.includes(cat.title) && !catHtml.includes(escapedCatTitle)) {
+    unrenderedGuidesOrCategories++;
+  }
+}
+assert('SSR / Prerendering', 'All 4 guide pages and 4 category pages prerender complete article and directory DOM', unrenderedGuidesOrCategories === 0);
+
 // Verify representative tool workspaces contain actual interactive/structural DOM
 const representativeChecks = [
   { path: 'tools/word-counter', mustContain: '<textarea', desc: 'Word Counter contains interactive textarea in initial HTML' },
@@ -182,12 +241,13 @@ for (const check of representativeChecks) {
   assert('SSR / Prerendering', check.desc, fileContent.includes(check.mustContain));
 }
 
-// Verify legacy redirect in vercel.json
+// Verify legacy redirect and clean URL settings in vercel.json
 const vercelConfig = JSON.parse(fs.readFileSync('vercel.json', 'utf8'));
 const hasLegacyRedirect = vercelConfig.redirects?.some(
   (r: any) => r.source === '/tool/:slug' && r.destination === '/tools/:slug' && r.permanent === true
 );
 assert('Legacy Redirects', 'vercel.json contains permanent 301 redirect from /tool/:slug to /tools/:slug', Boolean(hasLegacyRedirect));
+assert('Legacy Redirects', 'vercel.json enforces cleanUrls: true and trailingSlash: false', vercelConfig.cleanUrls === true && vercelConfig.trailingSlash === false);
 
 // -------------------------------------------------------------
 // Suite 5: Metadata Uniqueness & OpenGraph
@@ -196,12 +256,28 @@ const titleMap = new Map<string, string>();
 const descMap = new Map<string, string>();
 let titleDups = 0;
 let descDups = 0;
+let emptyOrMalformedMeta = 0;
+let ogTwitterSyncErrors = 0;
 
 for (const r of expectedRoutes) {
   const filePath = r === '' ? path.join(distDir, 'index.html') : path.join(distDir, r, 'index.html');
   const content = fs.readFileSync(filePath, 'utf8');
+  const expectedCanonical = r === '' ? `${SITE_URL}/` : `${SITE_URL}/${r}`;
   const title = (content.match(/<title>(.*?)<\/title>/) || [])[1];
   const desc = (content.match(/<meta name="description" content="(.*?)"/) || [])[1];
+  const ogUrl = (content.match(/<meta property="og:url" content="(.*?)"/) || [])[1];
+  const ogTitle = (content.match(/<meta property="og:title" content="(.*?)"/) || [])[1];
+  const ogDesc = (content.match(/<meta property="og:description" content="(.*?)"/) || [])[1];
+  const twTitle = (content.match(/<meta name="twitter:title" content="(.*?)"/) || [])[1];
+  const twDesc = (content.match(/<meta name="twitter:description" content="(.*?)"/) || [])[1];
+
+  if (!title || title.trim().length < 10 || !desc || desc.trim().length < 50) {
+    emptyOrMalformedMeta++;
+  }
+
+  if (ogUrl !== expectedCanonical || ogTitle !== title || ogDesc !== desc || twTitle !== title || twDesc !== desc) {
+    ogTwitterSyncErrors++;
+  }
 
   if (titleMap.has(title)) {
     titleDups++;
@@ -217,6 +293,8 @@ for (const r of expectedRoutes) {
 }
 assert('Metadata', 'Zero duplicate page titles across all 80 pages', titleDups === 0, `${titleDups} duplicates`);
 assert('Metadata', 'Zero duplicate meta descriptions across all 80 pages', descDups === 0, `${descDups} duplicates`);
+assert('Metadata', 'All 80 pages have non-empty, properly bounded title and meta description tags', emptyOrMalformedMeta === 0, `${emptyOrMalformedMeta} invalid`);
+assert('Metadata', 'All 80 pages synchronize OpenGraph (og:url, og:title, og:description) and Twitter cards with page metadata', ogTwitterSyncErrors === 0, `${ogTwitterSyncErrors} out of sync`);
 
 // -------------------------------------------------------------
 // Suite 6: Structured Data (JSON-LD) Validation
@@ -224,6 +302,14 @@ assert('Metadata', 'Zero duplicate meta descriptions across all 80 pages', descD
 let schemaErrors = 0;
 let totalSchemas = 0;
 
+function extractSchemaTypes(parsed: any): string[] {
+  if (Array.isArray(parsed['@graph'])) {
+    return parsed['@graph'].map((item: any) => item['@type']);
+  }
+  return parsed['@type'] ? [parsed['@type']] : [];
+}
+
+let routeTypeSchemaErrors = 0;
 for (const r of expectedRoutes) {
   const filePath = r === '' ? path.join(distDir, 'index.html') : path.join(distDir, r, 'index.html');
   const content = fs.readFileSync(filePath, 'utf8');
@@ -236,11 +322,31 @@ for (const r of expectedRoutes) {
   try {
     const parsed = JSON.parse(schemaMatch[1]);
     if (!parsed['@context']) schemaErrors++;
+    const types = extractSchemaTypes(parsed);
+    if (r === '') {
+      if (!types.includes('WebSite') || !types.includes('Organization')) routeTypeSchemaErrors++;
+    } else if (r.startsWith('tools/')) {
+      if (!types.includes('WebApplication') || !types.includes('BreadcrumbList') || !types.includes('FAQPage')) {
+        routeTypeSchemaErrors++;
+      }
+    } else if (r.startsWith('guides/')) {
+      if (!types.includes('Article') || !types.includes('BreadcrumbList')) routeTypeSchemaErrors++;
+    } else if (r.startsWith('category/')) {
+      if (!types.includes('CollectionPage') || !types.includes('BreadcrumbList')) routeTypeSchemaErrors++;
+    } else {
+      if (!types.includes('BreadcrumbList')) routeTypeSchemaErrors++;
+    }
   } catch {
     schemaErrors++;
   }
 }
 assert('Structured Data', 'All 80 canonical pages have valid Schema.org JSON-LD', schemaErrors === 0 && totalSchemas === 80);
+assert(
+  'Structured Data',
+  'All 80 pages contain route-appropriate Schema.org types (WebSite/Organization, WebApplication/FAQPage, Article, CollectionPage, BreadcrumbList)',
+  routeTypeSchemaErrors === 0,
+  `${routeTypeSchemaErrors} route schema mismatches`
+);
 
 // -------------------------------------------------------------
 // Suite 7: Internal Links Verification
@@ -260,7 +366,45 @@ for (const match of linkMatches) {
     brokenLinksCount++;
   }
 }
-assert('Internal Linking', 'All 420 markdown links map to valid canonical routes', brokenLinksCount === 0, `${brokenLinksCount} broken`);
+assert('Internal Linking', `All ${linkMatches.length} markdown links map to valid canonical routes`, brokenLinksCount === 0, `${brokenLinksCount} broken`);
+
+// Verify all rendered <a href="/..."> links in all 80 prerendered HTML files resolve to valid canonical routes
+let brokenDomHrefCount = 0;
+let totalDomHrefCount = 0;
+for (const r of expectedRoutes) {
+  const filePath = r === '' ? path.join(distDir, 'index.html') : path.join(distDir, r, 'index.html');
+  const content = fs.readFileSync(filePath, 'utf8');
+  const hrefMatches = Array.from(content.matchAll(/<a[^>]+href="(\/[^"]*)"/g));
+  for (const m of hrefMatches) {
+    totalDomHrefCount++;
+    const targetPath = m[1].split('#')[0].split('?')[0];
+    if (targetPath && !validRoutesSet.has(targetPath)) {
+      brokenDomHrefCount++;
+    }
+  }
+}
+assert('Internal Linking', `All ${totalDomHrefCount} rendered DOM <a href> links across all 80 HTML files resolve to valid canonical routes`, brokenDomHrefCount === 0, `${brokenDomHrefCount} broken DOM links`);
+
+// Verify all relatedSlugs in TOOLS and tool references in GUIDES point to valid registered tools
+const validToolSlugs = new Set(TOOLS.map((t) => t.slug));
+let invalidRegistryRefCount = 0;
+for (const t of TOOLS) {
+  for (const rel of t.relatedSlugs || []) {
+    if (!validToolSlugs.has(rel)) invalidRegistryRefCount++;
+  }
+}
+for (const g of GUIDES) {
+  if (!validToolSlugs.has(g.primaryTool.slug) || !validRoutesSet.has(g.primaryTool.path)) {
+    invalidRegistryRefCount++;
+  }
+  for (const ft of g.featuredTools || []) {
+    if (!validToolSlugs.has(ft.slug) || !validRoutesSet.has(ft.path)) invalidRegistryRefCount++;
+  }
+  for (const rt of g.relatedTools || []) {
+    if (!validToolSlugs.has(rt.slug) || !validRoutesSet.has(rt.path)) invalidRegistryRefCount++;
+  }
+}
+assert('Internal Linking', 'All tool relatedSlugs and guide featuredTools/relatedTools reference valid registered tools', invalidRegistryRefCount === 0, `${invalidRegistryRefCount} invalid references`);
 
 // -------------------------------------------------------------
 // Suite 8: Tool Math, Calculation & Utility Logic Tests
