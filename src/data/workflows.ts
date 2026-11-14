@@ -176,7 +176,6 @@ export const WORKFLOW_KITS: WorkflowKit[] = [
       'grade-calculator',
       'marks-percentage-calculator',
       'average-calculator',
-      'percentage-calculator',
     ],
     steps: [
       {

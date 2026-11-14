@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 320" width="960" height="320" fill="none" role="img" aria-labelledby="pc-modes-title pc-modes-desc">
+  <title id="pc-modes-title">Three percentage calculation methods: percentage of a number, part as a percentage of a whole, and percentage change.</title>
+  <desc id="pc-modes-desc">Visual comparison of Mode 1 (What is X% of Y?), Mode 2 (X is what % of Y?), and Mode 3 (Percentage change from Initial to Final value) with formulas, diagrams, and worked examples.</desc>
+  <rect width="960" height="320" rx="20" fill="#F5F8FF" stroke="#DBEAFE" stroke-width="2" />
+
+  <!-- Card 1: Mode 1 — What is X% of Y? -->
+  <g transform="translate(24, 24)">
+    <rect width="290" height="272" rx="16" fill="#FFFFFF" stroke="#BFDBFE" stroke-width="1.5" />
+    <rect x="20" y="20" width="76" height="26" rx="8" fill="#EFF6FF" />
+    <text x="58" y="37" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11.5" font-weight="700" fill="#2563EB">MODE 01</text>
+
+    <text x="20" y="70" font-family="system-ui, -apple-system, sans-serif" font-size="15.5" font-weight="700" fill="#1E293B">What is X% of Y?</text>
+    <text x="20" y="90" font-family="system-ui, -apple-system, sans-serif" font-size="11.5" fill="#475569">Find a percentage portion of a number</text>
+
+    <!-- Visual Bar Diagram: 20% of 150 = 30 -->
+    <rect x="20" y="106" width="250" height="38" rx="8" fill="#F8FAFC" stroke="#E2E8F0" />
+    <text x="30" y="121" font-family="system-ui, -apple-system, sans-serif" font-size="10" font-weight="600" fill="#64748B">Whole Y = 150</text>
+    <text x="260" y="121" text-anchor="end" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10" font-weight="700" fill="#2563EB">20% = 30</text>
+    <rect x="30" y="128" width="230" height="8" rx="4" fill="#E2E8F0" />
+    <rect x="30" y="128" width="46" height="8" rx="4" fill="#2563EB" />
+
+    <!-- Formula Pill -->
+    <rect x="20" y="156" width="250" height="40" rx="10" fill="#EFF6FF" stroke="#BFDBFE" />
+    <text x="145" y="172" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="9.5" font-weight="700" fill="#1D4ED8">FORMULA</text>
+    <text x="145" y="188" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" font-weight="700" fill="#1E3A8A">Result = (X ÷ 100) × Y</text>
+
+    <!-- Example & Answer -->
+    <rect x="20" y="208" width="250" height="46" rx="10" fill="#F8FAFC" stroke="#E2E8F0" />
+    <text x="32" y="226" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" fill="#475569">(20 ÷ 100) × 150</text>
+    <text x="32" y="244" font-family="system-ui, -apple-system, sans-serif" font-size="11.5" font-weight="700" fill="#1E293B">20% of 150 = <tspan fill="#2563EB" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">30</tspan></text>
+  </g>
+
+  <!-- Card 2: Mode 2 — X is what % of Y? -->
+  <g transform="translate(335, 24)">
+    <rect width="290" height="272" rx="16" fill="#FFFFFF" stroke="#BFDBFE" stroke-width="1.5" />
+    <rect x="20" y="20" width="76" height="26" rx="8" fill="#EFF6FF" />
+    <text x="58" y="37" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11.5" font-weight="700" fill="#2563EB">MODE 02</text>
+
+    <text x="20" y="70" font-family="system-ui, -apple-system, sans-serif" font-size="15.5" font-weight="700" fill="#1E293B">X is what % of Y?</text>
+    <text x="20" y="90" font-family="system-ui, -apple-system, sans-serif" font-size="11.5" fill="#475569">Compare a part X against a whole Y</text>
+
+    <!-- Visual Bar Diagram: 45 of 180 = 25% -->
+    <rect x="20" y="106" width="250" height="38" rx="8" fill="#F8FAFC" stroke="#E2E8F0" />
+    <text x="30" y="121" font-family="system-ui, -apple-system, sans-serif" font-size="10" font-weight="600" fill="#64748B">Part X = 45 / Whole Y = 180</text>
+    <text x="260" y="121" text-anchor="end" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10" font-weight="700" fill="#2563EB">25%</text>
+    <rect x="30" y="128" width="230" height="8" rx="4" fill="#E2E8F0" />
+    <rect x="30" y="128" width="57.5" height="8" rx="4" fill="#2563EB" />
+
+    <!-- Formula Pill -->
+    <rect x="20" y="156" width="250" height="40" rx="10" fill="#EFF6FF" stroke="#BFDBFE" />
+    <text x="145" y="172" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="9.5" font-weight="700" fill="#1D4ED8">FORMULA</text>
+    <text x="145" y="188" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" font-weight="700" fill="#1E3A8A">Percentage = (X ÷ Y) × 100</text>
+
+    <!-- Example & Answer -->
+    <rect x="20" y="208" width="250" height="46" rx="10" fill="#F8FAFC" stroke="#E2E8F0" />
+    <text x="32" y="226" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" fill="#475569">(45 ÷ 180) × 100</text>
+    <text x="32" y="244" font-family="system-ui, -apple-system, sans-serif" font-size="11.5" font-weight="700" fill="#1E293B">45 of 180 = <tspan fill="#2563EB" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">25%</tspan></text>
+  </g>
+
+  <!-- Card 3: Mode 3 — % Increase / Decrease -->
+  <g transform="translate(646, 24)">
+    <rect width="290" height="272" rx="16" fill="#FFFFFF" stroke="#A7F3D0" stroke-width="1.5" />
+    <rect x="20" y="20" width="76" height="26" rx="8" fill="#ECFDF5" />
+    <text x="58" y="37" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11.5" font-weight="700" fill="#059669">MODE 03</text>
+
+    <text x="20" y="70" font-family="system-ui, -apple-system, sans-serif" font-size="15.5" font-weight="700" fill="#1E293B">% Increase or Decrease</text>
+    <text x="20" y="90" font-family="system-ui, -apple-system, sans-serif" font-size="11.5" fill="#475569">Measure change from Initial to Final</text>
+
+    <!-- Visual Bar Diagram: 120 -> 150 (+25%) -->
+    <rect x="20" y="106" width="250" height="38" rx="8" fill="#F8FAFC" stroke="#E2E8F0" />
+    <text x="30" y="121" font-family="system-ui, -apple-system, sans-serif" font-size="10" font-weight="600" fill="#64748B">Initial 120 → Final 150</text>
+    <text x="260" y="121" text-anchor="end" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10" font-weight="700" fill="#059669">+30 (+25%)</text>
+    <rect x="30" y="128" width="184" height="8" rx="4" fill="#94A3B8" />
+    <rect x="214" y="128" width="46" height="8" rx="4" fill="#10B981" />
+
+    <!-- Formula Pill -->
+    <rect x="20" y="156" width="250" height="40" rx="10" fill="#ECFDF5" stroke="#A7F3D0" />
+    <text x="145" y="172" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="9.5" font-weight="700" fill="#047857">FORMULA</text>
+    <text x="145" y="188" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="700" fill="#065F46">((Final − Initial) ÷ Initial) × 100</text>
+
+    <!-- Example & Answer -->
+    <rect x="20" y="208" width="250" height="46" rx="10" fill="#F8FAFC" stroke="#E2E8F0" />
+    <text x="32" y="226" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" fill="#475569">((150 − 120) ÷ 120) × 100</text>
+    <text x="32" y="244" font-family="system-ui, -apple-system, sans-serif" font-size="11.5" font-weight="700" fill="#1E293B">120 to 150 = <tspan fill="#059669" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">+25%</tspan></text>
+  </g>
+</svg>
