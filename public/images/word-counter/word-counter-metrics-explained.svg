@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 400" width="960" height="400" fill="none" role="img" aria-labelledby="wc-metrics-title wc-metrics-desc">
+  <title id="wc-metrics-title">Word Counter metrics showing words, characters, sentences, paragraphs and reading time</title>
+  <desc id="wc-metrics-desc">Eight illustrated metric cards explaining Words, Characters with spaces, Characters without spaces, Sentences, Paragraphs, Reading time, Speaking time, and Word frequency in Toolora Word Counter.</desc>
+  <rect width="960" height="400" rx="20" fill="#F5F8FF" stroke="#DBEAFE" stroke-width="2" />
+
+  <!-- Row 1, Card 1: Words -->
+  <g transform="translate(24, 24)">
+    <rect width="216" height="164" rx="14" fill="#FFFFFF" stroke="#BFDBFE" stroke-width="1.5" />
+    <rect x="16" y="16" width="68" height="24" rx="6" fill="#EFF6FF" />
+    <text x="50" y="32" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="700" fill="#2563EB">/\s+/</text>
+    <text x="16" y="64" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="700" fill="#1E293B">Words</text>
+    <text x="16" y="86" font-family="system-ui, -apple-system, sans-serif" font-size="11.5" fill="#475569">Non-empty tokens separated</text>
+    <text x="16" y="103" font-family="system-ui, -apple-system, sans-serif" font-size="11.5" fill="#475569">by spaces, tabs, or newlines</text>
+    <text x="16" y="120" font-family="system-ui, -apple-system, sans-serif" font-size="11.5" fill="#475569">after outer trimming.</text>
+    <text x="16" y="146" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10.5" font-weight="600" fill="#2563EB">&quot;don&apos;t&quot; = 1 · &quot;a - b&quot; = 3</text>
+  </g>
+
+  <!-- Row 1, Card 2: Characters with spaces -->
+  <g transform="translate(256, 24)">
+    <rect width="216" height="164" rx="14" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5" />
+    <rect x="16" y="16" width="92" height="24" rx="6" fill="#F1F5F9" />
+    <text x="62" y="32" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="700" fill="#1E293B">text.length</text>
+    <text x="16" y="64" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="700" fill="#1E293B">Characters (With Spaces)</text>
+    <text x="16" y="86" font-family="system-ui, -apple-system, sans-serif" font-size="11.5" fill="#475569">Total UTF-16 code units,</text>
+    <text x="16" y="103" font-family="system-ui, -apple-system, sans-serif" font-size="11.5" fill="#475569">including letters, spaces,</text>
+    <text x="16" y="120" font-family="system-ui, -apple-system, sans-serif" font-size="11.5" fill="#475569">punctuation, and newlines.</text>
+    <text x="16" y="146" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10.5" font-weight="600" fill="#475569">160 SMS · 280 X · 1000 Meta</text>
+  </g>
+
+  <!-- Row 1, Card 3: Characters without spaces -->
+  <g transform="translate(488, 24)">
+    <rect width="216" height="164" rx="14" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5" />
+    <rect x="16" y="16" width="84" height="24" rx="6" fill="#F1F5F9" />
+    <text x="58" y="32" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="700" fill="#1E293B">No Spaces</text>
+    <text x="16" y="64" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="700" fill="#1E293B">Characters (No Spaces)</text>
+    <text x="16" y="86" font-family="system-ui, -apple-system, sans-serif" font-size="11.5" fill="#475569">UTF-16 code units remaining</text>
+    <text x="16" y="103" font-family="system-ui, -apple-system, sans-serif" font-size="11.5" fill="#475569">after all spaces, tabs, and</text>
+    <text x="16" y="120" font-family="system-ui, -apple-system, sans-serif" font-size="11.5" fill="#475569">line breaks are removed.</text>
+    <text x="16" y="146" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10.5" font-weight="600" fill="#475569">Strips /\s+/g whitespace</text>
+  </g>
+
+  <!-- Row 1, Card 4: Sentences -->
+  <g transform="translate(720, 24)">
+    <rect width="216" height="164" rx="14" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5" />
+    <rect x="16" y="16" width="68" height="24" rx="6" fill="#FEF3C7" />
+    <text x="50" y="32" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="700" fill="#B45309">.  !  ?</text>
+    <text x="16" y="64" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="700" fill="#1E293B">Sentences</text>
+    <text x="16" y="86" font-family="system-ui, -apple-system, sans-serif" font-size="11.5" fill="#475569">Detected by terminal</text>
+    <text x="16" y="103" font-family="system-ui, -apple-system, sans-serif" font-size="11.5" fill="#475569">punctuation (. ! ?) followed</text>
+    <text x="16" y="120" font-family="system-ui, -apple-system, sans-serif" font-size="11.5" fill="#475569">by space or end of text.</text>
+    <text x="16" y="146" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10.5" font-weight="600" fill="#B45309">Note: &quot;Dr.&quot; can split</text>
+  </g>
+
+  <!-- Row 2, Card 5: Paragraphs -->
+  <g transform="translate(24, 212)">
+    <rect width="216" height="164" rx="14" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5" />
+    <rect x="16" y="16" width="68" height="24" rx="6" fill="#F1F5F9" />
+    <text x="50" y="32" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="700" fill="#1E293B">/\n+/</text>
+    <text x="16" y="64" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="700" fill="#1E293B">Paragraphs</text>
+    <text x="16" y="86" font-family="system-ui, -apple-system, sans-serif" font-size="11.5" fill="#475569">Non-empty text blocks</text>
+    <text x="16" y="103" font-family="system-ui, -apple-system, sans-serif" font-size="11.5" fill="#475569">separated by one or more</text>
+    <text x="16" y="120" font-family="system-ui, -apple-system, sans-serif" font-size="11.5" fill="#475569">newline breaks.</text>
+    <text x="16" y="146" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10.5" font-weight="600" fill="#475569">Blank lines are ignored</text>
+  </g>
+
+  <!-- Row 2, Card 6: Reading Time -->
+  <g transform="translate(256, 212)">
+    <rect width="216" height="164" rx="14" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5" />
+    <rect x="16" y="16" width="84" height="24" rx="6" fill="#EFF6FF" />
+    <text x="58" y="32" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="700" fill="#2563EB">225 WPM</text>
+    <text x="16" y="64" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="700" fill="#1E293B">Reading Time (Estimate)</text>
+    <text x="16" y="86" font-family="system-ui, -apple-system, sans-serif" font-size="11.5" fill="#475569">Silent reading estimate from</text>
+    <text x="16" y="103" font-family="system-ui, -apple-system, sans-serif" font-size="11.5" fill="#475569">word count and adjustable</text>
+    <text x="16" y="120" font-family="system-ui, -apple-system, sans-serif" font-size="11.5" fill="#475569">speed (100–450 WPM).</text>
+    <text x="16" y="146" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10.5" font-weight="600" fill="#2563EB">ceil((words / WPM) × 60)s</text>
+  </g>
+
+  <!-- Row 2, Card 7: Speaking Time -->
+  <g transform="translate(488, 212)">
+    <rect width="216" height="164" rx="14" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5" />
+    <rect x="16" y="16" width="84" height="24" rx="6" fill="#FEF3C7" />
+    <text x="58" y="32" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="700" fill="#B45309">130 WPM</text>
+    <text x="16" y="64" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="700" fill="#1E293B">Speaking Time (Estimate)</text>
+    <text x="16" y="86" font-family="system-ui, -apple-system, sans-serif" font-size="11.5" fill="#475569">Spoken script estimate from</text>
+    <text x="16" y="103" font-family="system-ui, -apple-system, sans-serif" font-size="11.5" fill="#475569">word count and adjustable</text>
+    <text x="16" y="120" font-family="system-ui, -apple-system, sans-serif" font-size="11.5" fill="#475569">pace (90–220 WPM).</text>
+    <text x="16" y="146" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10.5" font-weight="600" fill="#B45309">390w ≈ 3m · 742w ≈ 5m 43s</text>
+  </g>
+
+  <!-- Row 2, Card 8: Word Frequency -->
+  <g transform="translate(720, 212)">
+    <rect width="216" height="164" rx="14" fill="#FFFFFF" stroke="#A7F3D0" stroke-width="1.5" />
+    <rect x="16" y="16" width="90" height="24" rx="6" fill="#ECFDF5" />
+    <text x="61" y="32" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="700" fill="#059669">Frequency</text>
+    <text x="16" y="64" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="700" fill="#1E293B">Word Frequency</text>
+    <text x="16" y="86" font-family="system-ui, -apple-system, sans-serif" font-size="11.5" fill="#475569">English-oriented list of</text>
+    <text x="16" y="103" font-family="system-ui, -apple-system, sans-serif" font-size="11.5" fill="#475569">repeated words with stop-word</text>
+    <text x="16" y="120" font-family="system-ui, -apple-system, sans-serif" font-size="11.5" fill="#475569">filter, search, and sorting.</text>
+    <text x="16" y="146" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10.5" font-weight="600" fill="#059669">+ Flesch Reading Ease est.</text>
+  </g>
+</svg>

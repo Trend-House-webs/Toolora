@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 280" width="960" height="280" fill="none" role="img" aria-labelledby="wc-workflow-title wc-workflow-desc">
+  <title id="wc-workflow-title">How Toolora Word Counter analyzes text and displays live word counts</title>
+  <desc id="wc-workflow-desc">Four-step workflow showing how text input is trimmed and split on whitespace to produce live word, character, sentence, and paragraph counts alongside word goal tracking.</desc>
+  <rect width="960" height="280" rx="20" fill="#F5F8FF" stroke="#DBEAFE" stroke-width="2" />
+
+  <!-- Step 1 Card -->
+  <g transform="translate(24, 28)">
+    <rect width="204" height="224" rx="16" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5" />
+    <rect x="16" y="16" width="32" height="32" rx="8" fill="#EFF6FF" />
+    <text x="32" y="37" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14" font-weight="700" fill="#2563EB">01</text>
+    <!-- Document Icon -->
+    <rect x="156" y="16" width="32" height="32" rx="8" fill="#F8FAFC" stroke="#E2E8F0" />
+    <path d="M168 24h8l4 4v12a2 2 0 0 1-2 2h-10a2 2 0 0 1-2-2V26a2 2 0 0 1 2-2z" stroke="#2563EB" stroke-width="1.5" fill="none"/>
+    <path d="M170 32h8M170 36h6" stroke="#2563EB" stroke-width="1.5" stroke-linecap="round"/>
+
+    <text x="16" y="74" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="700" fill="#1E293B">1. Type or Paste Text</text>
+    <text x="16" y="96" font-family="system-ui, -apple-system, sans-serif" font-size="11.5" fill="#475569">Enter draft text, click Load</text>
+    <text x="16" y="113" font-family="system-ui, -apple-system, sans-serif" font-size="11.5" fill="#475569">Sample Text, or import a</text>
+    <text x="16" y="130" font-family="system-ui, -apple-system, sans-serif" font-size="11.5" fill="#475569">UTF-8 .txt file up to 5 MB.</text>
+
+    <rect x="16" y="150" width="172" height="56" rx="10" fill="#F8FAFC" stroke="#E2E8F0" />
+    <text x="26" y="171" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10.5" fill="#1E293B">&quot;Essay draft text...&quot;</text>
+    <text x="26" y="191" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10" fill="#64748B">Input: .txt / clipboard</text>
+  </g>
+
+  <!-- Arrow 1 -> 2 -->
+  <g transform="translate(232, 132)">
+    <path d="M0 8h16m0 0-5-5m5 5-5 5" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <!-- Step 2 Card -->
+  <g transform="translate(254, 28)">
+    <rect width="204" height="224" rx="16" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5" />
+    <rect x="16" y="16" width="32" height="32" rx="8" fill="#EFF6FF" />
+    <text x="32" y="37" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14" font-weight="700" fill="#2563EB">02</text>
+    <!-- Code/Split Icon -->
+    <rect x="156" y="16" width="32" height="32" rx="8" fill="#F8FAFC" stroke="#E2E8F0" />
+    <path d="M169 28l-4 4 4 4M175 28l4 4-4 4" stroke="#2563EB" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <text x="16" y="74" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="700" fill="#1E293B">2. Toolora Analyzes</text>
+    <text x="16" y="96" font-family="system-ui, -apple-system, sans-serif" font-size="11.5" fill="#475569">Outer spaces are trimmed</text>
+    <text x="16" y="113" font-family="system-ui, -apple-system, sans-serif" font-size="11.5" fill="#475569">and tokens split at spaces,</text>
+    <text x="16" y="130" font-family="system-ui, -apple-system, sans-serif" font-size="11.5" fill="#475569">tabs, and line breaks.</text>
+
+    <rect x="16" y="150" width="172" height="56" rx="10" fill="#EFF6FF" stroke="#BFDBFE" />
+    <text x="26" y="171" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10.5" font-weight="600" fill="#1D4ED8">trimmed.split(/\s+/)</text>
+    <text x="26" y="191" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10" fill="#1E40AF">In-browser JS engine</text>
+  </g>
+
+  <!-- Arrow 2 -> 3 -->
+  <g transform="translate(462, 132)">
+    <path d="M0 8h16m0 0-5-5m5 5-5 5" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <!-- Step 3 Card -->
+  <g transform="translate(484, 28)">
+    <rect width="204" height="224" rx="16" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5" />
+    <rect x="16" y="16" width="32" height="32" rx="8" fill="#EFF6FF" />
+    <text x="32" y="37" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14" font-weight="700" fill="#2563EB">03</text>
+    <!-- Live Counter Icon -->
+    <rect x="156" y="16" width="32" height="32" rx="8" fill="#F8FAFC" stroke="#E2E8F0" />
+    <path d="M164 36v-6M172 36V26M180 36v-9" stroke="#10B981" stroke-width="2" stroke-linecap="round"/>
+
+    <text x="16" y="74" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="700" fill="#1E293B">3. View Live Counts</text>
+    <text x="16" y="96" font-family="system-ui, -apple-system, sans-serif" font-size="11.5" fill="#475569">Updates words, characters</text>
+    <text x="16" y="113" font-family="system-ui, -apple-system, sans-serif" font-size="11.5" fill="#475569">(with &amp; without spaces),</text>
+    <text x="16" y="130" font-family="system-ui, -apple-system, sans-serif" font-size="11.5" fill="#475569">sentences, and paragraphs.</text>
+
+    <rect x="16" y="150" width="82" height="56" rx="10" fill="#EFF6FF" stroke="#BFDBFE" />
+    <text x="57" y="170" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="9.5" font-weight="700" fill="#1D4ED8">WORDS</text>
+    <text x="57" y="193" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="15" font-weight="700" fill="#2563EB">742</text>
+
+    <rect x="106" y="150" width="82" height="56" rx="10" fill="#F8FAFC" stroke="#E2E8F0" />
+    <text x="147" y="170" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="9.5" font-weight="700" fill="#475569">READ TIME</text>
+    <text x="147" y="193" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" font-weight="700" fill="#1E293B">3m 18s</text>
+  </g>
+
+  <!-- Arrow 3 -> 4 -->
+  <g transform="translate(692, 132)">
+    <path d="M0 8h16m0 0-5-5m5 5-5 5" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <!-- Step 4 Card -->
+  <g transform="translate(714, 28)">
+    <rect width="222" height="224" rx="16" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5" />
+    <rect x="16" y="16" width="32" height="32" rx="8" fill="#ECFDF5" />
+    <text x="32" y="37" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14" font-weight="700" fill="#10B981">04</text>
+    <!-- Target Check Icon -->
+    <rect x="174" y="16" width="32" height="32" rx="8" fill="#ECFDF5" stroke="#A7F3D0" />
+    <path d="M184 32l4 4 8-8" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <text x="16" y="74" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="700" fill="#1E293B">4. Set Goals &amp; Review</text>
+    <text x="16" y="96" font-family="system-ui, -apple-system, sans-serif" font-size="11.5" fill="#475569">Track essay word targets,</text>
+    <text x="16" y="113" font-family="system-ui, -apple-system, sans-serif" font-size="11.5" fill="#475569">character limits, WPM pace,</text>
+    <text x="16" y="130" font-family="system-ui, -apple-system, sans-serif" font-size="11.5" fill="#475569">and repeated vocabulary.</text>
+
+    <rect x="16" y="150" width="190" height="56" rx="10" fill="#F8FAFC" stroke="#E2E8F0" />
+    <text x="26" y="170" font-family="system-ui, -apple-system, sans-serif" font-size="10.5" font-weight="700" fill="#1E293B">Goal: 742 / 750w (99%)</text>
+    <rect x="26" y="180" width="170" height="8" rx="4" fill="#DBEAFE" />
+    <rect x="26" y="180" width="166" height="8" rx="4" fill="#10B981" />
+    <text x="26" y="200" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="9.5" fill="#059669">8 words remaining</text>
+  </g>
+</svg>

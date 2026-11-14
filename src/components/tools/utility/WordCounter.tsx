@@ -970,175 +970,252 @@ export function WordCounter() {
       </div>
 
       {/* 6. Detailed Guides, Counting Methodology & Editorial Documentation */}
-      <div className="pt-8 border-t border-slate-200 space-y-10">
-        {/* Section 1: Free Online Word Counter for Essays and Documents */}
-        <div className="space-y-3">
-          <h2 className="text-xl font-bold text-slate-900 tracking-tight sm:text-2xl">
-            Free Online Word Counter for Essays, Articles, and Documents
-          </h2>
-          <p className="text-sm text-slate-600 leading-relaxed font-normal">
-            Toolora Word Counter is a fast, intuitive, and <strong>free online word counter</strong> engineered for students, academic researchers, copywriters, and content creators. Whether you need a dependable <strong>essay word counter</strong> to hit assignment thresholds or an accurate <strong>word count checker</strong> for publishing submissions, this tool tallies words, characters with spaces, characters without whitespace, sentences, and paragraphs in real time directly inside your browser.
-          </p>
-          <p className="text-sm text-slate-600 leading-relaxed font-normal">
-            Because calculations execute client-side in local browser memory, your manuscripts, articles, and private notes are never uploaded to remote servers or shared with external AI services. For additional formatting and document auditing tasks, seamlessly pair this tool with our connected utilities: inspect strict platform limits with <Link to="/tools/character-counter" className="font-semibold text-blue-600 hover:underline">Character Counter</Link>, analyze sentence readability and structure with <Link to="/tools/sentence-counter" className="font-semibold text-blue-600 hover:underline">Sentence Counter</Link>, normalize irregular spacing and blank lines using <Link to="/tools/text-cleaner" className="font-semibold text-blue-600 hover:underline">Text Cleaner</Link>, eliminate repeated rows with <Link to="/tools/remove-duplicate-lines" className="font-semibold text-blue-600 hover:underline">Remove Duplicate Lines</Link>, adjust letter casing with <Link to="/tools/text-case-converter" className="font-semibold text-blue-600 hover:underline">Text Case Converter</Link>, or calibrate keynote presentations with our <Link to="/tools/reading-time-calculator" className="font-semibold text-blue-600 hover:underline">Reading Time Calculator</Link>.
-          </p>
-        </div>
-
-        {/* Section 2: How Word Counting Works (Methodology & Verified Examples) */}
-        <div className="space-y-4">
-          <div className="space-y-2">
-            <h2 className="text-xl font-bold text-slate-900 tracking-tight sm:text-2xl">
-              How Word Counting Works: Whitespace Methodology & Verified Examples
+      <div className="pt-8 border-t border-slate-200 space-y-12">
+        {/* Section A: How does Toolora count words? + Visual 1 + Example Table */}
+        <section className="space-y-6" aria-labelledby="how-toolora-counts-words">
+          <div className="space-y-2.5">
+            <h2 id="how-toolora-counts-words" className="text-xl font-bold text-[#1E293B] tracking-tight sm:text-2xl">
+              How does Toolora count words?
             </h2>
             <p className="text-sm text-slate-600 leading-relaxed font-normal">
-              Our <strong>word count online</strong> engine calculates total words by first trimming leading and trailing whitespace and then splitting the text on contiguous whitespace clusters using the regular expression <code>/\s+/</code>. Any series of spaces, tabs, or line breaks acts as a boundary between distinct words, while multiple consecutive spaces collapse into a single delimiter without inflating the count.
+              When you use this online word counter to check word count online, the counter uses a transparent whitespace-based method in your browser rather than hidden editorial rules:
             </p>
           </div>
 
-          {/* Verified Examples Table */}
-          <div className="overflow-x-auto rounded-xl border border-slate-200/90 shadow-2xs">
-            <table className="w-full text-left text-xs sm:text-sm">
-              <thead className="bg-slate-50 border-b border-slate-200/90 text-slate-700 font-semibold">
-                <tr>
-                  <th scope="col" className="p-3 sm:p-3.5">Sample Input</th>
-                  <th scope="col" className="p-3 sm:p-3.5 text-center">Live Word Count</th>
-                  <th scope="col" className="p-3 sm:p-3.5">Counting Rule & Tokenization Behavior</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-slate-200/80 text-slate-600">
-                <tr className="hover:bg-slate-50/50 transition-colors">
-                  <td className="p-3 sm:p-3.5 font-mono text-slate-800 font-medium">hello world</td>
-                  <td className="p-3 sm:p-3.5 text-center font-mono font-bold text-blue-600">2 words</td>
-                  <td className="p-3 sm:p-3.5">Standard whitespace separation creates two distinct word tokens.</td>
-                </tr>
-                <tr className="hover:bg-slate-50/50 transition-colors">
-                  <td className="p-3 sm:p-3.5 font-mono text-slate-800 font-medium">state-of-the-art</td>
-                  <td className="p-3 sm:p-3.5 text-center font-mono font-bold text-blue-600">1 word</td>
-                  <td className="p-3 sm:p-3.5">Hyphenated compound terms without spaces are evaluated as a single unified token.</td>
-                </tr>
-                <tr className="hover:bg-slate-50/50 transition-colors">
-                  <td className="p-3 sm:p-3.5 font-mono text-slate-800 font-medium">input/output</td>
-                  <td className="p-3 sm:p-3.5 text-center font-mono font-bold text-blue-600">1 word</td>
-                  <td className="p-3 sm:p-3.5">Slash-delimited words without spaces are evaluated as a single word token.</td>
-                </tr>
-                <tr className="hover:bg-slate-50/50 transition-colors">
-                  <td className="p-3 sm:p-3.5 font-mono text-slate-800 font-medium">one &nbsp; two &nbsp; &nbsp; three</td>
-                  <td className="p-3 sm:p-3.5 text-center font-mono font-bold text-blue-600">3 words</td>
-                  <td className="p-3 sm:p-3.5">Multiple consecutive spaces collapse into one boundary; extra spacing does not inflate word count.</td>
-                </tr>
-                <tr className="hover:bg-slate-50/50 transition-colors">
-                  <td className="p-3 sm:p-3.5 font-mono text-slate-800 font-medium">don&apos;t</td>
-                  <td className="p-3 sm:p-3.5 text-center font-mono font-bold text-blue-600">1 word</td>
-                  <td className="p-3 sm:p-3.5">Contractions with internal apostrophes count as a single word.</td>
-                </tr>
-                <tr className="hover:bg-slate-50/50 transition-colors">
-                  <td className="p-3 sm:p-3.5 font-mono text-slate-800 font-medium">2026 $50.00</td>
-                  <td className="p-3 sm:p-3.5 text-center font-mono font-bold text-blue-600">2 words</td>
-                  <td className="p-3 sm:p-3.5">Standalone digits and currency figures separated by spaces count as words, matching Google Docs and Word.</td>
-                </tr>
-                <tr className="hover:bg-slate-50/50 transition-colors">
-                  <td className="p-3 sm:p-3.5 font-mono text-slate-800 font-medium">&quot; &nbsp; sample text &nbsp; &quot;</td>
-                  <td className="p-3 sm:p-3.5 text-center font-mono font-bold text-blue-600">2 words</td>
-                  <td className="p-3 sm:p-3.5">Leading and trailing whitespace is trimmed automatically before counting.</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-          <div className="p-3.5 rounded-xl bg-amber-50/70 border border-amber-200/80 text-xs text-amber-900 space-y-1">
-            <span className="font-bold block">Continuous-Script Languages Note:</span>
-            <p className="leading-relaxed">
-              Because this tool tokenizes words based on whitespace delimiters, continuous-script languages that do not separate words with spaces (such as Chinese, Japanese, or Thai) require language-specific morphological segmentation. For these languages, the <strong>Characters (No Spaces)</strong> card provides the most reliable length metric.
-            </p>
-          </div>
-        </div>
-
-        {/* Section 3: Characters With vs Without Spaces & Unicode Handling */}
-        <div className="space-y-4">
-          <h2 className="text-xl font-bold text-slate-900 tracking-tight sm:text-2xl">
-            Characters With Spaces vs. Without Spaces &amp; Unicode Handling
-          </h2>
-          <p className="text-sm text-slate-600 leading-relaxed font-normal">
-            Writers often encounter distinct character guidelines depending on whether an assignment or publisher measures raw keystroke volume or visible typography:
-          </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs sm:text-sm text-slate-700">
-            <div className="p-4 bg-slate-50 border border-slate-200/90 rounded-xl space-y-2">
-              <strong className="text-slate-900 block font-bold text-base">Characters with Spaces</strong>
-              <p className="text-slate-600 leading-relaxed">
-                Measures total JavaScript string length (UTF-16 code units), including alphanumeric letters, numbers, punctuation, spaces, tabs, and newline line breaks. This metric matches the keystroke length evaluated by cellular SMS protocols, SEO meta descriptions, and social media post limits.
-              </p>
-            </div>
-            <div className="p-4 bg-slate-50 border border-slate-200/90 rounded-xl space-y-2">
-              <strong className="text-slate-900 block font-bold text-base">Characters without Spaces</strong>
-              <p className="text-slate-600 leading-relaxed">
-                Strips all whitespace (spaces, tabs, newlines) using <code>text.replace(/\s+/g, &apos;&apos;)</code> and calculates only visible, printable characters. This metric is frequently required for translation invoicing, academic conference abstracts, and international language examinations.
-              </p>
-            </div>
-          </div>
-
-          <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-600 space-y-1">
-            <span className="font-bold text-slate-900 block">Technical Nuance: JavaScript UTF-16 Code Units vs. Emojis</span>
-            <p className="leading-relaxed">
-              In modern web browsers, string length is measured in 16-bit UTF-16 code units. Standard Latin characters, digits, and common punctuation use 1 code unit. However, characters beyond the Basic Multilingual Plane (such as emojis or rare historical scripts) require surrogate pairs (2 code units). Complex composite emojis—such as those with skin-tone modifiers or Zero-Width Joiner (ZWJ) family combinations—may register as 2 to 7+ code units in JavaScript.
-            </p>
-          </div>
-        </div>
-
-        {/* Section 4: What Toolora Word Counter Is and Is Not */}
-        <div className="space-y-3">
-          <h2 className="text-xl font-bold text-slate-900 tracking-tight sm:text-2xl">
-            What Toolora Word Counter Is and Is Not
-          </h2>
-          <p className="text-sm text-slate-600 leading-relaxed font-normal">
-            To set clear expectations for academic and professional workflows, here is an honest summary of our tool&apos;s capabilities and boundaries:
-          </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs sm:text-sm">
-            <div className="p-4 rounded-xl bg-emerald-50/70 border border-emerald-200/80 space-y-2">
-              <div className="font-bold text-emerald-900 flex items-center gap-1.5 text-sm">
-                <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-                What Toolora Word Counter Is
-              </div>
-              <ul className="space-y-1.5 text-emerald-800 list-disc list-inside">
-                <li>A fast, real-time client-side text statistics and volume counter.</li>
-                <li>An essay word counter with single target word goal tracking and progress indicators.</li>
-                <li>A dual character counter distinguishing total keystrokes from visible glyphs.</li>
-                <li>A presentation timer estimating silent reading and oral speaking durations.</li>
-                <li>An objective readability evaluator using standard English Flesch formulas.</li>
-                <li>A privacy-first browser utility with zero server file uploads.</li>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+            {/* Bullet Rules Card */}
+            <div className="lg:col-span-6 p-5 rounded-2xl bg-[#F5F8FF] border border-blue-200/80 space-y-3">
+              <h3 className="text-sm font-bold text-[#1E293B] flex items-center gap-2">
+                <FileText className="w-4 h-4 text-[#2563EB] shrink-0" />
+                <span>Whitespace Tokenization Rules</span>
+              </h3>
+              <ul className="space-y-2 text-xs sm:text-sm text-slate-700 leading-relaxed">
+                <li className="flex items-start gap-2.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#2563EB] mt-2 shrink-0" />
+                  <span>Leading and trailing whitespace is removed before counting (<code>text.trim()</code>).</span>
+                </li>
+                <li className="flex items-start gap-2.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#2563EB] mt-2 shrink-0" />
+                  <span>The remaining text is split at one or more whitespace characters, including spaces, tabs, and line breaks (<code>/\s+/</code>).</span>
+                </li>
+                <li className="flex items-start gap-2.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#2563EB] mt-2 shrink-0" />
+                  <span>Each non-empty token between whitespace boundaries counts as one word.</span>
+                </li>
+                <li className="flex items-start gap-2.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#2563EB] mt-2 shrink-0" />
+                  <span>Multiple consecutive spaces collapse into a single boundary and do not increase the word count.</span>
+                </li>
+                <li className="flex items-start gap-2.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#2563EB] mt-2 shrink-0" />
+                  <span>Hyphenated words and contractions without spaces count as one token.</span>
+                </li>
+                <li className="flex items-start gap-2.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#F59E0B] mt-2 shrink-0" />
+                  <span>Standalone punctuation separated by spaces (such as a spaced hyphen) counts as a separate token.</span>
+                </li>
               </ul>
             </div>
 
-            <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-2">
-              <div className="font-bold text-slate-900 flex items-center gap-1.5 text-sm">
-                <AlertCircle className="w-4 h-4 text-amber-600" />
-                What Toolora Word Counter Is Not
+            {/* Example Table */}
+            <div className="lg:col-span-6 space-y-2.5">
+              <div className="overflow-x-auto rounded-2xl border border-slate-200/90 bg-white shadow-2xs">
+                <table className="w-full text-left text-xs sm:text-sm">
+                  <thead className="bg-[#F5F8FF] border-b border-slate-200/90 text-[#1E293B] font-bold">
+                    <tr>
+                      <th scope="col" className="py-3 px-4">Text</th>
+                      <th scope="col" className="py-3 px-4 text-right">Word count</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-slate-200/80 text-slate-700">
+                    <tr className="hover:bg-slate-50/70 transition-colors">
+                      <td className="py-2.5 px-4 font-mono text-[#1E293B]"><code>hello world</code></td>
+                      <td className="py-2.5 px-4 text-right font-mono font-bold text-[#2563EB] tabular-nums">2</td>
+                    </tr>
+                    <tr className="hover:bg-slate-50/70 transition-colors">
+                      <td className="py-2.5 px-4 font-mono text-[#1E293B]"><code>state-of-the-art</code></td>
+                      <td className="py-2.5 px-4 text-right font-mono font-bold text-[#2563EB] tabular-nums">1</td>
+                    </tr>
+                    <tr className="hover:bg-slate-50/70 transition-colors">
+                      <td className="py-2.5 px-4 font-mono text-[#1E293B]"><code>input/output</code></td>
+                      <td className="py-2.5 px-4 text-right font-mono font-bold text-[#2563EB] tabular-nums">1</td>
+                    </tr>
+                    <tr className="hover:bg-slate-50/70 transition-colors">
+                      <td className="py-2.5 px-4 font-mono text-[#1E293B]"><code>don&apos;t</code></td>
+                      <td className="py-2.5 px-4 text-right font-mono font-bold text-[#2563EB] tabular-nums">1</td>
+                    </tr>
+                    <tr className="hover:bg-slate-50/70 transition-colors">
+                      <td className="py-2.5 px-4 font-mono text-[#1E293B]"><code>one   two</code></td>
+                      <td className="py-2.5 px-4 text-right font-mono font-bold text-[#2563EB] tabular-nums">2</td>
+                    </tr>
+                    <tr className="hover:bg-slate-50/70 transition-colors">
+                      <td className="py-2.5 px-4 font-mono text-[#1E293B]"><code>word - word</code></td>
+                      <td className="py-2.5 px-4 text-right font-mono font-bold text-[#2563EB] tabular-nums">3</td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
-              <ul className="space-y-1.5 text-slate-600 list-disc list-inside">
-                <li><strong>Not a Grammar Checker:</strong> It does not detect subject-verb agreement or tense errors.</li>
-                <li><strong>Not a Spell Checker:</strong> It does not flag typos or suggest alternate vocabulary.</li>
-                <li><strong>Not a Plagiarism Scanner:</strong> It does not compare your text against academic or online databases.</li>
-                <li><strong>Not an AI Detector:</strong> It does not predict whether copy was generated by an LLM.</li>
-                <li>For editorial revision and proofreading, we recommend pairing our counter with dedicated writing and grammar tools.</li>
-              </ul>
+              <p className="text-2xs text-slate-500 leading-relaxed">
+                Note: Because different programs apply different rules to hyphens, slashes, and dashes, this count does not always match Microsoft Word or Google Docs.
+              </p>
             </div>
           </div>
-        </div>
 
-        {/* Section 5: Target Word Goals & Pacing Controls */}
-        <div className="space-y-3">
-          <h2 className="text-xl font-bold text-slate-900 tracking-tight sm:text-2xl">
-            How to Use the Target Word Goal Tracker &amp; Pacing Controls
-          </h2>
-          <p className="text-sm text-slate-600 leading-relaxed font-normal">
-            When preparing term papers, university admissions essays, or article submissions, hitting a specific word count milestone is crucial. Toolora Word Counter includes a focused <strong>Target Word Goal</strong> tracker that supports a single target goal (e.g. 500, 1000, or 2000 words):
-          </p>
-          <ol className="list-decimal list-inside space-y-1.5 text-xs sm:text-sm text-slate-600 leading-relaxed">
-            <li>Click the <strong>Word Goals &amp; Character Limits</strong> tab beneath the editor toolbar.</li>
-            <li>Enter your numeric target (such as 750 words) or click one of the quick preset buttons (250w, 500w, 750w, 1000w, 2000w).</li>
-            <li>As you type or paste copy, watch the progress bar update in real time. It displays your percentage completion, how many words remain to reach the goal, and an overage tally if you surpass your target.</li>
-            <li>Switch to the <strong>Reading Speed &amp; Readability</strong> tab to adjust silent reading speed (default 225 WPM) or speaking pace (default 130 WPM) to evaluate oral speech timings accurately.</li>
-          </ol>
-        </div>
+          {/* Visual 1 — How Word Counting Works Infographic */}
+          <figure className="rounded-2xl border border-blue-200/80 bg-[#F5F8FF] p-3 sm:p-4 space-y-2.5">
+            <img
+              src="/images/word-counter/how-word-counting-works.svg"
+              alt="How Toolora Word Counter analyzes text and displays live word counts"
+              width={960}
+              height={280}
+              referrerPolicy="no-referrer"
+              className="w-full h-auto rounded-xl bg-white"
+            />
+            <figcaption className="text-xs text-slate-600 text-center">
+              How to use Toolora Word Counter: enter text, review live counts, and track a word goal in your browser.
+            </figcaption>
+          </figure>
+        </section>
+
+        {/* Section B: What does each result mean? + Visual 2 */}
+        <section className="space-y-6" aria-labelledby="what-each-result-means">
+          <div className="space-y-2">
+            <h2 id="what-each-result-means" className="text-xl font-bold text-[#1E293B] tracking-tight sm:text-2xl">
+              What does each result mean?
+            </h2>
+            <p className="text-sm text-slate-600 leading-relaxed font-normal">
+              Beyond basic word counting, this word and character counter calculates structural counts, pacing estimates, and English vocabulary statistics:
+            </p>
+          </div>
+
+          {/* Visual 2 — Word Counter Metrics Explained Infographic */}
+          <figure className="rounded-2xl border border-blue-200/80 bg-[#F5F8FF] p-3 sm:p-4 space-y-2.5">
+            <img
+              src="/images/word-counter/word-counter-metrics-explained.svg"
+              alt="Word Counter metrics showing words, characters, sentences, paragraphs and reading time"
+              width={960}
+              height={400}
+              loading="lazy"
+              referrerPolicy="no-referrer"
+              className="w-full h-auto rounded-xl bg-white"
+            />
+            <figcaption className="text-xs text-slate-600 text-center">
+              Summary of the eight core measurements and estimates calculated in the Toolora Word Counter workspace.
+            </figcaption>
+          </figure>
+
+          {/* Detailed Metric Cards Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 text-xs sm:text-sm">
+            <div className="p-4 rounded-2xl bg-white border border-slate-200/90 space-y-1.5">
+              <h3 className="font-bold text-[#1E293B] text-sm">Words</h3>
+              <p className="text-slate-600 leading-relaxed">
+                Counts non-empty whitespace-separated tokens after trimming outer whitespace. Multiple spaces, tabs, or line breaks between words do not add extra words.
+              </p>
+            </div>
+
+            <div className="p-4 rounded-2xl bg-white border border-slate-200/90 space-y-1.5">
+              <h3 className="font-bold text-[#1E293B] text-sm">Characters (with spaces)</h3>
+              <p className="text-slate-600 leading-relaxed">
+                Measures JavaScript string length (<code>text.length</code>) in 16-bit UTF-16 code units, including letters, digits, spaces, punctuation, and line breaks. For platform-specific byte checks, see <Link to="/tools/character-counter" className="font-semibold text-[#2563EB] hover:underline">Character Counter</Link>.
+              </p>
+            </div>
+
+            <div className="p-4 rounded-2xl bg-white border border-slate-200/90 space-y-1.5">
+              <h3 className="font-bold text-[#1E293B] text-sm">No Spaces</h3>
+              <p className="text-slate-600 leading-relaxed">
+                Measures the UTF-16 code unit count after all whitespace characters (<code>/\s+/g</code>) are removed. Because emojis and surrogate pairs can use 2 or more UTF-16 code units, this is not an exact visible-glyph count.
+              </p>
+            </div>
+
+            <div className="p-4 rounded-2xl bg-white border border-slate-200/90 space-y-1.5">
+              <h3 className="font-bold text-[#1E293B] text-sm">Sentences</h3>
+              <p className="text-slate-600 leading-relaxed">
+                Detects terminal <code>.</code>, <code>!</code>, and <code>?</code> followed by whitespace or the end of the text (or defaults to 1 sentence when words are present without punctuation). Abbreviations such as <code>Dr.</code> or <code>U.S.</code> may increase the count; see <Link to="/tools/sentence-counter" className="font-semibold text-[#2563EB] hover:underline">Sentence Counter</Link>.
+              </p>
+            </div>
+
+            <div className="p-4 rounded-2xl bg-white border border-slate-200/90 space-y-1.5">
+              <h3 className="font-bold text-[#1E293B] text-sm">Paragraphs</h3>
+              <p className="text-slate-600 leading-relaxed">
+                Counts non-empty text blocks separated by one or more newline characters (<code>/\n+/</code>). Empty blank lines between blocks are ignored and do not increase the paragraph count.
+              </p>
+            </div>
+
+            <div className="p-4 rounded-2xl bg-white border border-slate-200/90 space-y-1.5">
+              <h3 className="font-bold text-[#1E293B] text-sm">Reading &amp; Speaking Time (Estimates)</h3>
+              <p className="text-slate-600 leading-relaxed">
+                Calculated from your word count and selected words-per-minute speed: reading time defaults to 225 WPM (100–450 WPM) and speaking time defaults to 130 WPM (90–220 WPM). Compare multi-speed tables in <Link to="/tools/reading-time-calculator" className="font-semibold text-[#2563EB] hover:underline">Reading Time Calculator</Link>.
+              </p>
+            </div>
+
+            <div className="p-4 rounded-2xl bg-white border border-slate-200/90 space-y-1.5 sm:col-span-2 lg:col-span-3">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="space-y-1">
+                  <h3 className="font-bold text-[#1E293B] text-sm">Flesch Reading Ease (English Estimate)</h3>
+                  <p className="text-slate-600 leading-relaxed">
+                    Once your text has at least 10 words and 1 sentence, the tool computes an English-language readability estimate on a 0–100 scale using average sentence length and a heuristic English syllable counter. It is an estimate of surface sentence and word complexity, not a grammar or writing-quality grade.
+                  </p>
+                </div>
+                <div className="space-y-1">
+                  <h3 className="font-bold text-[#1E293B] text-sm">Word Frequency</h3>
+                  <p className="text-slate-600 leading-relaxed">
+                    An English-oriented frequency list that extracts lowercase alphanumeric and apostrophe words, with optional common stop-word exclusion (<code>the</code>, <code>is</code>, <code>and</code>), keyword search filtering, and sorting by Most Frequent or Alphabetical (A–Z).
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Section F & G: Why counts can differ between tools + Supported text, languages and privacy */}
+        <section className="grid grid-cols-1 lg:grid-cols-2 gap-6" aria-label="Word count comparison and technical boundaries">
+          <div className="p-5 sm:p-6 rounded-2xl bg-white border border-slate-200/90 space-y-3">
+            <h2 className="text-lg sm:text-xl font-bold text-[#1E293B] tracking-tight">
+              Why counts can differ between tools
+            </h2>
+            <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+              Different word counters and word processors apply different word-boundary rules. Because Toolora uses whitespace separation (<code>/\s+/</code>), punctuation, joined terms, and formatting can produce different results from another word processor:
+            </p>
+            <ul className="space-y-2 text-xs sm:text-sm text-slate-700 leading-relaxed">
+              <li className="flex items-start gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#2563EB] mt-2 shrink-0" />
+                <span>Unspaced slash-joined words (<code>input/output</code>) or em-dashes (<code>word—word</code>) count as 1 token here, whereas some word processors split them into 2 words.</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#2563EB] mt-2 shrink-0" />
+                <span>Spaced punctuation (<code>word - word</code>) counts as 3 tokens because the standalone hyphen is surrounded by spaces.</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#10B981] mt-2 shrink-0" />
+                <span>When an exact official count is required for an essay, exam, or publishing submission, always verify the final count in the specific counting system required by your school, publisher, or submission portal.</span>
+              </li>
+            </ul>
+          </div>
+
+          <div className="p-5 sm:p-6 rounded-2xl bg-[#F5F8FF] border border-blue-200/80 space-y-3">
+            <h2 className="text-lg sm:text-xl font-bold text-[#1E293B] tracking-tight">
+              Supported text, languages and privacy
+            </h2>
+            <ul className="space-y-2 text-xs sm:text-sm text-slate-700 leading-relaxed">
+              <li className="flex items-start gap-2">
+                <CheckCircle2 className="w-4 h-4 text-[#10B981] shrink-0 mt-0.5" />
+                <span><strong>Direct input &amp; .txt import:</strong> Type or paste text directly, or import plain UTF-8 <code>.txt</code> files up to 5 MB. PDF and DOCX documents are not directly imported by this component.</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <AlertCircle className="w-4 h-4 text-[#F59E0B] shrink-0 mt-0.5" />
+                <span><strong>Language boundaries:</strong> Chinese, Japanese, and Thai text cannot be reliably segmented into words through whitespace alone. Flesch Reading Ease and the word-frequency tokenizer are English-oriented, and sentence detection only recognizes <code>.</code>, <code>!</code>, and <code>?</code>.</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <ShieldCheck className="w-4 h-4 text-[#2563EB] shrink-0 mt-0.5" />
+                <span><strong>Browser processing &amp; Autosave:</strong> Counting runs in your browser. Optional Autosave stores your draft in browser local storage only when enabled, and you can click <strong>Erase Draft</strong> or <strong>Clear Text</strong> at any time—especially on a shared device.</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <Info className="w-4 h-4 text-slate-500 shrink-0 mt-0.5" />
+                <span><strong>Related formatting tools:</strong> Clean extra whitespace with <Link to="/tools/text-cleaner" className="font-semibold text-[#2563EB] hover:underline">Text Cleaner</Link> or remove repeated lines with <Link to="/tools/remove-duplicate-lines" className="font-semibold text-[#2563EB] hover:underline">Remove Duplicate Lines</Link>.</span>
+              </li>
+            </ul>
+          </div>
+        </section>
       </div>
     </div>
   );
