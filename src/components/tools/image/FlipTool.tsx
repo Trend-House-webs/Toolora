@@ -10,7 +10,6 @@ import {
   Plus,
   Archive,
   CheckCircle2,
-  ArrowRight,
   Sparkles,
 } from 'lucide-react';
 import { ImageDropzone } from './ImageDropzone';
@@ -542,107 +541,6 @@ export function FlipTool() {
           </>
         )}
       </div>
-
-      {/* Semantic Informational Sections for SEO & User Education */}
-      <section className="bg-slate-50/70 border border-slate-200/80 rounded-2xl p-6 sm:p-8 space-y-8 text-slate-700 text-sm leading-relaxed">
-        {/* Section 1: Flip Image Online & Mirror Tool Overview */}
-        <div className="space-y-3">
-          <h2 className="text-lg sm:text-xl font-bold text-slate-900 tracking-tight">
-            Flip Image Online: Mirror Single Photos or Bulk Process Image Batches
-          </h2>
-          <p>
-            The Toolora <strong>Flip Image</strong> tool allows you to flip photos online horizontally (mirror reflection across the vertical axis) or vertically (upside-down inversion across the horizontal axis) in seconds. Built with a fast HTML5 canvas engine and multi-file batch capability, you can upload multiple pictures simultaneously, apply batch transformations with a single click, and download the entire set individually or packaged into a clean ZIP archive.
-          </p>
-          <p>
-            Whether you are fixing a reversed smartphone front-camera selfie, preparing mirror-symmetric graphics for product mockups, or correcting inverted camera scans, all processing executes locally in your browser memory with zero image quality loss.
-          </p>
-        </div>
-
-        {/* Section 2: Difference between Flipping and Rotating */}
-        <div className="space-y-3 pt-4 border-t border-slate-200">
-          <h2 className="text-lg sm:text-xl font-bold text-slate-900 tracking-tight">
-            Difference Between Flipping and Rotating an Image
-          </h2>
-          <p>
-            Users frequently confuse flipping and rotating, but they perform mathematically distinct image transformations:
-          </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
-            <div className="p-4 bg-white rounded-xl border border-slate-200 space-y-1.5">
-              <span className="text-xs font-bold text-blue-600 uppercase tracking-wider block">Flipping (Mirror Reflection)</span>
-              <p className="text-xs text-slate-600 leading-relaxed">
-                Reflects pixel coordinates across a center mirror axis (<code className="bg-slate-100 px-1 py-0.5 rounded text-slate-800">scaleX(-1)</code> or <code className="bg-slate-100 px-1 py-0.5 rounded text-slate-800">scaleY(-1)</code>). Native width and height dimensions remain completely identical. Backward text becomes un-mirrored and left-to-right reading order is restored.
-              </p>
-            </div>
-            <div className="p-4 bg-white rounded-xl border border-slate-200 space-y-1.5">
-              <span className="text-xs font-bold text-slate-700 uppercase tracking-wider block">
-                <a href="/tools/rotate-image" className="hover:text-blue-600 underline">Rotating (Angular Turn)</a>
-              </span>
-              <p className="text-xs text-slate-600 leading-relaxed">
-                Turns an image radially around its pivot center by 90°, 180°, or 270°. On 90° or 270° turns, image width and height swap (e.g. a 1920×1080 landscape photo becomes a 1080×1920 portrait photo). Rotating does not un-reverse mirrored text.
-              </p>
-            </div>
-          </div>
-          <p className="text-xs text-slate-600">
-            If your image requires both turning sideways and horizontal mirroring, use our combined{' '}
-            <a href="/tools/rotate-flip-image" className="text-blue-600 font-semibold underline">Rotate & Flip Image</a> tool.
-          </p>
-        </div>
-
-        {/* Section 3: How to Mirror a Selfie Online */}
-        <div className="space-y-3 pt-4 border-t border-slate-200">
-          <h2 className="text-lg sm:text-xl font-bold text-slate-900 tracking-tight">
-            How to Mirror a Selfie or Reverse Backwards Text
-          </h2>
-          <ol className="list-decimal list-inside space-y-2 pl-1">
-            <li>
-              <strong>Upload Your Selfie:</strong> Select or drop your photo into the dropzone. You can upload one photo or select multiple files at once.
-            </li>
-            <li>
-              <strong>Click Flip Horizontal:</strong> Select <em>Flip Horizontal (Mirror Selfie)</em>. The live preview updates instantaneously, un-reversing typography on shirts, hats, and background signs.
-            </li>
-            <li>
-              <strong>Download Single or ZIP:</strong> Download the flipped image directly in high quality, or click <em>Download All as ZIP</em> to save an entire batch of mirrored photos in one archive.
-            </li>
-          </ol>
-        </div>
-
-        {/* Section 4: Connected Image Manipulation Tools */}
-        <div className="pt-4 border-t border-slate-200 space-y-3">
-          <h2 className="text-base font-bold text-slate-900">Connected Image Manipulation Tools</h2>
-          <div className="flex flex-wrap gap-2 text-xs">
-            <a
-              href="/tools/rotate-image"
-              className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-white border border-slate-200 hover:border-blue-400 hover:text-blue-600 font-medium transition-colors"
-            >
-              Rotate Image (90° / 180°) <ArrowRight className="w-3 h-3 text-slate-400" />
-            </a>
-            <a
-              href="/tools/rotate-flip-image"
-              className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-white border border-slate-200 hover:border-blue-400 hover:text-blue-600 font-medium transition-colors"
-            >
-              Rotate & Flip Image <ArrowRight className="w-3 h-3 text-slate-400" />
-            </a>
-            <a
-              href="/tools/crop-image"
-              className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-white border border-slate-200 hover:border-blue-400 hover:text-blue-600 font-medium transition-colors"
-            >
-              Crop Image <ArrowRight className="w-3 h-3 text-slate-400" />
-            </a>
-            <a
-              href="/tools/image-compressor"
-              className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-white border border-slate-200 hover:border-blue-400 hover:text-blue-600 font-medium transition-colors"
-            >
-              Image Compressor <ArrowRight className="w-3 h-3 text-slate-400" />
-            </a>
-            <a
-              href="/tools/image-resizer"
-              className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-white border border-slate-200 hover:border-blue-400 hover:text-blue-600 font-medium transition-colors"
-            >
-              Image Resizer <ArrowRight className="w-3 h-3 text-slate-400" />
-            </a>
-          </div>
-        </div>
-      </section>
     </div>
   );
 }

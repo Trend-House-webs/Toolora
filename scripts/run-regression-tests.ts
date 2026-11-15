@@ -326,7 +326,7 @@ for (const r of expectedRoutes) {
     if (r === '') {
       if (!types.includes('WebSite') || !types.includes('Organization')) routeTypeSchemaErrors++;
     } else if (r.startsWith('tools/')) {
-      if (!types.includes('WebApplication') || !types.includes('BreadcrumbList') || !types.includes('FAQPage')) {
+      if (!types.includes('WebApplication') || !types.includes('BreadcrumbList')) {
         routeTypeSchemaErrors++;
       }
     } else if (r.startsWith('guides/')) {
@@ -343,7 +343,7 @@ for (const r of expectedRoutes) {
 assert('Structured Data', 'All 80 canonical pages have valid Schema.org JSON-LD', schemaErrors === 0 && totalSchemas === 80);
 assert(
   'Structured Data',
-  'All 80 pages contain route-appropriate Schema.org types (WebSite/Organization, WebApplication/FAQPage, Article, CollectionPage, BreadcrumbList)',
+  'All 80 pages contain route-appropriate Schema.org types (WebSite/Organization, WebApplication, Article, CollectionPage, BreadcrumbList)',
   routeTypeSchemaErrors === 0,
   `${routeTypeSchemaErrors} route schema mismatches`
 );

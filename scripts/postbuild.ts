@@ -198,21 +198,6 @@ const toolPages: PageMetadata[] = TOOLS.map((tool) => {
     },
   ];
 
-  if (tool.faq && tool.faq.length > 0) {
-    schemas.push({
-      '@context': 'https://schema.org',
-      '@type': 'FAQPage',
-      mainEntity: tool.faq.map((item) => ({
-        '@type': 'Question',
-        name: item.question,
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: item.answer,
-        },
-      })),
-    });
-  }
-
   return {
     path: `tools/${tool.slug}`,
     title: tool.metaTitle || `${tool.name} — Toolora`,

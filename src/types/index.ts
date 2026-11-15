@@ -44,7 +44,8 @@ export interface ToolItem {
   practicalExample?: PracticalExample;
   metaTitle?: string;
   metaDescription?: string;
-  faq: FAQItem[];
+  usageGuide?: string;
+  faq?: FAQItem[];
   relatedSlugs: string[];
 }
 

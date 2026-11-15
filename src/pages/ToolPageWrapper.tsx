@@ -3,15 +3,11 @@ import { ToolItem } from '../types';
 import { getToolBySlug, TOOLS } from '../data/tools';
 import { Breadcrumbs } from '../components/common/Breadcrumbs';
 import { ToolCard } from '../components/common/ToolCard';
-import { FaqAccordion } from '../components/common/FaqAccordion';
 import { SEO } from '../components/common/SEO';
-import { ShieldCheck, Zap, Lock, CheckCircle2, Lightbulb, HelpCircle, ArrowRight, BookOpen } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { Link } from '../context/RouterContext';
 import { SITE_URL } from '../config/site';
-import { getGuidesForTool } from '../data/guides';
 import { AdSenseBanner } from '../components/common/AdSenseBanner';
-import { getWorkflowForTool } from '../data/workflows';
-import { WorkflowKit } from '../components/common/WorkflowKit';
 
 // Tool workspace components
 import { ImageCompressor } from '../components/tools/image/ImageCompressor';
@@ -64,7 +60,6 @@ import { PercentageIncreaseCalc } from '../components/tools/student/PercentageIn
 import { PercentageDecreaseCalc } from '../components/tools/student/PercentageDecreaseCalc';
 import { MarksPercentageCalc } from '../components/tools/student/MarksPercentageCalc';
 import { DateDifferenceCalc } from '../components/tools/student/DateDifferenceCalc';
-import { DateDifferenceEducationalContent } from '../components/tools/student/DateDifferenceEducationalContent';
 import { ReadingTimeCalc } from '../components/tools/student/ReadingTimeCalc';
 import { AverageCalc } from '../components/tools/student/AverageCalc';
 import { RandomNumberGen } from '../components/tools/student/RandomNumberGen';
@@ -347,9 +342,6 @@ export function ToolPageWrapper({ tool }: ToolPageWrapperProps) {
 
   const relatedTools = [...explicitRelated, ...fallbackRelated].slice(0, 4);
 
-  const relevantGuides = getGuidesForTool(tool.slug);
-  const activeWorkflow = getWorkflowForTool(tool.slug);
-
   // Schema.org WebApplication specification
   const webAppSchema = {
     '@context': 'https://schema.org',
@@ -406,7 +398,6 @@ export function ToolPageWrapper({ tool }: ToolPageWrapperProps) {
         description={tool.metaDescription || tool.description}
         canonicalPath={`/tools/${tool.slug}`}
         schema={[webAppSchema, breadcrumbSchema]}
-        faqItems={tool.faq}
       />
 
       {/* Breadcrumb Navigation: Home -> All Tools -> Category -> Tool */}
@@ -420,7 +411,7 @@ export function ToolPageWrapper({ tool }: ToolPageWrapperProps) {
         />
       </div>
 
-      {/* Header section with Single H1 */}
+      {/* Header section with Single H1 and short introduction */}
       <div className="max-w-3xl mb-8">
         <div className="flex items-center gap-2 text-2xs sm:text-xs font-bold text-blue-600 mb-2">
           <span>{categoryName.toUpperCase()}</span>
@@ -439,32 +430,6 @@ export function ToolPageWrapper({ tool }: ToolPageWrapperProps) {
         <p className="text-xs sm:text-sm text-slate-600 mt-2.5 leading-relaxed font-normal">
           {renderFormattedText(tool.detailedDescription || tool.description)}
         </p>
-
-        {/* Real browser trust markers */}
-        <div className="flex flex-wrap items-center gap-4 text-xs text-slate-600 mt-4 font-medium">
-          <span className="flex items-center gap-1.5 text-slate-700">
-            <ShieldCheck className="w-4 h-4 text-emerald-600" />
-            Client-Side Processing
-          </span>
-          <span aria-hidden="true" className="text-slate-300">·</span>
-          <span className="flex items-center gap-1.5">
-            <Zap className="w-4 h-4 text-amber-500" />
-            No Server File Uploads
-          </span>
-          <span aria-hidden="true" className="text-slate-300">·</span>
-          <span className="flex items-center gap-1.5">
-            <Lock className="w-4 h-4 text-blue-600" />
-            Free & Unlimited
-          </span>
-        </div>
-
-        {/* Direct Answer / Core Purpose Callout */}
-        {tool.directAnswer && tool.slug !== 'date-difference-calculator' && (
-          <div className="mt-5 p-4 rounded-2xl bg-blue-50/80 border border-blue-200/80 text-xs sm:text-sm text-slate-800 leading-relaxed flex items-start gap-3">
-            <div className="font-bold text-blue-700 shrink-0">Purpose:</div>
-            <div>{renderFormattedText(tool.directAnswer)}</div>
-          </div>
-        )}
       </div>
 
       {/* Primary Tool Workspace */}
@@ -474,253 +439,27 @@ export function ToolPageWrapper({ tool }: ToolPageWrapperProps) {
             ? 'Fraction Calculator with Steps Workspace'
             : `${tool.name} Workspace`
         }
-        className="mb-14"
+        className="mb-12"
       >
         {renderWorkspace()}
       </section>
 
-      {/* Non-intrusive Ad Placement (Separated from tool interactive workspace) */}
-      <AdSenseBanner className="mb-14" />
+      {/* Non-intrusive Ad Placement */}
+      <AdSenseBanner className="mb-12" />
 
-      {/* Dedicated Educational Content for Date Difference Calculator */}
-      {tool.slug === 'date-difference-calculator' && (
-        <DateDifferenceEducationalContent />
-      )}
-
-      {/* Generic Tool Sections (for all tools except date-difference-calculator) */}
-      {tool.slug !== 'date-difference-calculator' && (
-        <>
-          {/* How to Use Step-by-Step Guide */}
-          {tool.howToUse && tool.howToUse.length > 0 && (
-        <section className="mb-14 bg-white rounded-3xl border border-[#E5EAF2] p-6 sm:p-8 shadow-[0_2px_12px_rgba(15,23,42,0.03)]">
-          <h2 className="text-lg sm:text-xl font-extrabold text-slate-900 mb-6 flex items-center gap-2">
-            <span>How to Use {tool.name}</span>
-          </h2>
-          <div className={`grid grid-cols-1 ${tool.howToUse.length >= 4 ? 'sm:grid-cols-2 lg:grid-cols-4' : 'md:grid-cols-3'} gap-6`}>
-            {tool.howToUse.map((step) => (
-              <div key={step.step} className="relative flex flex-col space-y-2">
-                <div className="w-8 h-8 rounded-xl bg-blue-50 text-blue-600 font-bold text-sm flex items-center justify-center shrink-0">
-                  {step.step}
-                </div>
-                <h3 className="text-sm font-bold text-slate-900">
-                  {step.title}
-                </h3>
-                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
-                  {renderFormattedText(step.description)}
-                </p>
-              </div>
-            ))}
-          </div>
-        </section>
-      )}
-
-      {/* Supported Formats & Technical Limitations */}
-      {tool.technicalDetails && (
-        <section className="mb-14 bg-white rounded-3xl border border-[#E5EAF2] p-6 sm:p-8 shadow-[0_2px_12px_rgba(15,23,42,0.03)] space-y-5">
-          <div>
-            <h2 className="text-lg sm:text-xl font-extrabold text-slate-900 tracking-tight">
-              Supported Formats & Technical Limitations
-            </h2>
-            <p className="text-xs sm:text-sm text-slate-600 mt-1 font-normal">
-              Verified browser specifications, format handling, and processing boundaries for {tool.name}.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-1">
-            <div className="p-5 rounded-2xl bg-[#F8FAFC] border border-[#E5EAF2] space-y-2">
-              <span className="text-2xs font-bold text-slate-600 uppercase tracking-wider block">
-                Accepted Inputs
-              </span>
-              <ul className="space-y-1.5 text-xs text-slate-700">
-                {tool.technicalDetails.supportedInputs.map((input, idx) => (
-                  <li key={idx} className="flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 rounded-full bg-blue-600 shrink-0" />
-                    <span>{renderFormattedText(input)}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div className="p-5 rounded-2xl bg-[#F8FAFC] border border-[#E5EAF2] space-y-2">
-              <span className="text-2xs font-bold text-slate-600 uppercase tracking-wider block">
-                Output Handling
-              </span>
-              <p className="text-xs text-slate-700 leading-relaxed font-normal">
-                {renderFormattedText(tool.technicalDetails.outputFormat)}
-              </p>
-            </div>
-
-            <div className="p-5 rounded-2xl bg-[#F8FAFC] border border-[#E5EAF2] space-y-2">
-              <span className="text-2xs font-bold text-slate-600 uppercase tracking-wider block">
-                Processing Limitations
-              </span>
-              <ul className="space-y-1.5 text-xs text-slate-700">
-                {tool.technicalDetails.limitations.map((lim, idx) => (
-                  <li key={idx} className="flex items-start gap-2">
-                    <span className="w-1.5 h-1.5 rounded-full bg-amber-500 mt-1.5 shrink-0" />
-                    <span>{renderFormattedText(lim)}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* Practical Example */}
-      {tool.practicalExample && (
-        <section className="mb-14 p-6 sm:p-8 rounded-3xl bg-slate-900 text-white shadow-xs space-y-4 border border-slate-800">
-          <div className="flex items-center gap-2 text-2xs sm:text-xs font-bold uppercase tracking-wider text-blue-400">
-            <BookOpen className="w-4 h-4" />
-            <span>Practical Example: {tool.practicalExample.title}</span>
-          </div>
-          <div className="space-y-3 text-xs sm:text-sm text-slate-300 leading-relaxed">
-            <p>
-              <strong className="text-white">Scenario: </strong>
-              {renderFormattedText(tool.practicalExample.scenario)}
-            </p>
-            <p>
-              <strong className="text-white">Action: </strong>
-              {renderFormattedText(tool.practicalExample.action)}
-            </p>
-            <p className="p-4 rounded-xl bg-slate-800/90 text-emerald-300 border border-slate-700/80">
-              <strong className="text-emerald-200">Outcome: </strong>
-              {renderFormattedText(tool.practicalExample.result)}
-            </p>
-          </div>
-        </section>
-      )}
-
-      {/* Why Choose Toolora / Use Cases */}
-      {tool.whyUse && tool.whyUse.length > 0 && (
-        <section className="mb-14 bg-white rounded-3xl border border-[#E5EAF2] p-6 sm:p-8 shadow-[0_2px_12px_rgba(15,23,42,0.03)]">
-          <h2 className="text-lg sm:text-xl font-extrabold text-slate-900 mb-6">
-            Why Use Toolora for {tool.name}?
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {tool.whyUse.map((reason, idx) => (
-              <div key={idx} className="flex items-start gap-3 p-4 rounded-2xl bg-[#F8FAFC] border border-[#E5EAF2]">
-                <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                <p className="text-xs sm:text-sm text-slate-700 leading-relaxed font-normal">
-                  {renderFormattedText(reason)}
-                </p>
-              </div>
-            ))}
-          </div>
-        </section>
-      )}
-
-      {/* Pro Tips for Best Results */}
-      {tool.tips && tool.tips.length > 0 && (
-        <section className="mb-14 bg-amber-50/60 rounded-3xl border border-amber-200/70 p-6 sm:p-8">
-          <div className="flex items-center gap-2.5 mb-4">
-            <Lightbulb className="w-5 h-5 text-amber-600 shrink-0" />
-            <h2 className="text-base sm:text-lg font-bold text-amber-950">
-              Tips for Best Results
-            </h2>
-          </div>
-          <ul className="space-y-2.5 text-xs sm:text-sm text-amber-900/90 leading-relaxed">
-            {tool.tips.map((tip, idx) => (
-              <li key={idx} className="flex items-start gap-2.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-amber-500 mt-2 shrink-0" />
-                <span>{renderFormattedText(tip)}</span>
-              </li>
-            ))}
-          </ul>
-        </section>
-      )}
-
-      {/* Key Features */}
-      {tool.features && tool.features.length > 0 && (
-        <section className="mb-14 bg-white rounded-3xl border border-[#E5EAF2] p-6 sm:p-8 shadow-[0_2px_12px_rgba(15,23,42,0.03)]">
-          <h2 className="text-base sm:text-lg font-extrabold text-slate-900 mb-4">
-            Key Features of {tool.name}
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-            {tool.features.map((feat, idx) => (
-              <div key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-700">
-                <span className="w-1.5 h-1.5 rounded-full bg-blue-600 mt-2 shrink-0" />
-                <span>{feat}</span>
-              </div>
-            ))}
-          </div>
-        </section>
-      )}
-
-      {/* Connected Multi-Tool Workflow Kit */}
-      {activeWorkflow && (
-        <div className="mb-14">
-          <WorkflowKit workflow={activeWorkflow} currentToolSlug={tool.slug} />
-        </div>
-      )}
-
-      {/* FAQ Section with Accordion */}
-      {tool.faq && tool.faq.length > 0 && (
-        <section className="mb-14" aria-label="Frequently Asked Questions">
-          <FaqAccordion
-            items={tool.faq}
-            title={`Frequently Asked Questions about ${tool.name}`}
-          />
-        </section>
-      )}
-
-      {/* Relevant Step-by-Step Guides & Tutorials */}
-      {relevantGuides.length > 0 && (
-        <section className="mb-14 p-6 sm:p-8 rounded-3xl bg-white border border-[#E5EAF2] shadow-[0_2px_12px_rgba(15,23,42,0.03)]">
-          <div className="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-[#E5EAF2] mb-6">
-            <div>
-              <div className="inline-flex items-center gap-1.5 text-2xs sm:text-xs font-bold text-blue-600 uppercase tracking-wider mb-1">
-                <BookOpen className="w-3.5 h-3.5" />
-                <span>Helpful Guide & Tutorial</span>
-              </div>
-              <h2 className="text-lg sm:text-xl font-extrabold text-slate-900 tracking-tight">
-                Recommended Reading for This Workflow
-              </h2>
-            </div>
-            <Link
-              to="/guides"
-              className="text-xs sm:text-sm font-bold text-blue-600 hover:text-blue-700 flex items-center gap-1 group"
-            >
-              <span>All Guides</span>
-              <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
-            </Link>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {relevantGuides.map((guide) => (
-              <Link
-                key={guide.slug}
-                to={`/guides/${guide.slug}`}
-                className="group p-5 rounded-2xl bg-[#F8FAFC] border border-[#E5EAF2] hover:bg-white hover:border-blue-400 hover:shadow-xs transition-all flex flex-col justify-between cursor-pointer"
-              >
-                <div>
-                  <div className="flex items-center justify-between text-2xs text-slate-500 mb-2">
-                    <span className="font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded-md">{guide.categoryName}</span>
-                    <span className="font-medium text-slate-500">{guide.readTime}</span>
-                  </div>
-                  <h3 className="text-sm font-bold text-slate-900 group-hover:text-blue-600 transition-colors leading-snug">
-                    {guide.title}
-                  </h3>
-                  <p className="text-xs text-slate-600 mt-1.5 line-clamp-2 leading-relaxed font-normal">
-                    {guide.summary}
-                  </p>
-                </div>
-                <div className="mt-4 pt-3 border-t border-[#E5EAF2] flex items-center justify-between text-xs text-blue-600 font-bold group-hover:text-blue-700">
-                  <span>Read Tutorial</span>
-                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
-                </div>
-              </Link>
-            ))}
-          </div>
-        </section>
-      )}
-
-      {/* Secondary Ad Placement (Above related tools) */}
-      <AdSenseBanner className="mt-14 mb-8" />
+      {/* Short, Unique Tool-Specific Guide Paragraph */}
+      <section className="mb-12 bg-white rounded-2xl border border-[#E5EAF2] p-6 sm:p-7 shadow-[0_2px_12px_rgba(15,23,42,0.03)]">
+        <h2 className="text-lg sm:text-xl font-bold text-slate-900 mb-2.5">
+          How to Use {tool.name}
+        </h2>
+        <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
+          {renderFormattedText(tool.usageGuide || tool.detailedDescription || tool.description)}
+        </p>
+      </section>
 
       {/* Related Tools (Internal Linking) */}
       {relatedTools.length > 0 && (
-        <section className="mt-14 pt-10 border-t border-[#E5EAF2]">
+        <section className="pt-8 border-t border-[#E5EAF2]">
           <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
             <div>
               <h2 className="text-xl font-extrabold text-slate-900 tracking-tight sm:text-2xl">
@@ -745,8 +484,6 @@ export function ToolPageWrapper({ tool }: ToolPageWrapperProps) {
             ))}
           </div>
         </section>
-      )}
-        </>
       )}
     </div>
   );

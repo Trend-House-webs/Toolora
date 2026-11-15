@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Copy, Check, Scaling, ArrowRightLeft, Sparkles, Info, Monitor, Video } from 'lucide-react';
+import { Copy, Check, Scaling, ArrowRightLeft, Info, Monitor, Video } from 'lucide-react';
 
 export function AspectRatioCalc() {
   const [calcMode, setCalcMode] = useState<'findDim' | 'findRatio'>('findDim');
@@ -307,25 +307,8 @@ export function AspectRatioCalc() {
               {copied ? 'Copied' : 'Copy Aspect Ratio'}
             </button>
           </div>
-
-          {/* Worked Example Callout */}
-          <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-600 space-y-1">
-            <div className="font-semibold text-slate-800 flex items-center gap-1">
-              <Sparkles className="w-3.5 h-3.5 text-blue-600" />
-              <span>Worked Example: 1920 × 1080 = 16:9 Aspect Ratio</span>
-            </div>
-            <p>
-              To find the aspect ratio of 1920 × 1080 pixels, compute the Greatest Common Divisor (GCD) of 1920 and 1080, which is <strong>120</strong>. Dividing 1920 ÷ 120 = <strong>16</strong>, and 1080 ÷ 120 = <strong>9</strong>, giving the classic <strong>16:9</strong> widescreen standard (decimal factor 1.778).
-            </p>
-          </div>
         </div>
       )}
-
-      {/* Differentiation from General Ratio Calculator */}
-      <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 text-2xs text-slate-500">
-        <span className="font-semibold text-slate-700">Digital Media Proportion Note: </span>
-        Aspect ratio specifically relates image pixel width to height (W:H) for monitors, cameras, and video feeds. To solve general algebraic proportions or recipe scaling (A : B = C : D), use our general [Ratio Calculator](/tools/ratio-calculator).
-      </div>
     </div>
   );
 }
