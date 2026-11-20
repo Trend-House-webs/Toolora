@@ -24,6 +24,28 @@ export interface TechnicalDetails {
   limitations: string[];
 }
 
+export interface ToolVisualMetric {
+  label: string;
+  value: string;
+  subtext?: string;
+}
+
+export interface ToolVisualExample {
+  title: string;
+  caption: string;
+  inputLabel: string;
+  inputValue: string;
+  inputDetail: string;
+  processLabel: string;
+  processDetail: string;
+  outputLabel: string;
+  outputValue: string;
+  outputDetail: string;
+  metrics?: ToolVisualMetric[];
+  svgPath?: string;
+  svgAlt?: string;
+}
+
 export interface ToolItem {
   id: string;
   name: string;
@@ -42,6 +64,7 @@ export interface ToolItem {
   tips?: string[];
   technicalDetails?: TechnicalDetails;
   practicalExample?: PracticalExample;
+  visualExample?: ToolVisualExample;
   metaTitle?: string;
   metaDescription?: string;
   usageGuide?: string;

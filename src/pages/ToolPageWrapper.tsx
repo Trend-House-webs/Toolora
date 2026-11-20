@@ -1,10 +1,11 @@
 import React, { Suspense } from 'react';
 import { ToolItem } from '../types';
 import { getToolBySlug, TOOLS } from '../data/tools';
+import { getGuidesForTool } from '../data/guides';
 import { Breadcrumbs } from '../components/common/Breadcrumbs';
 import { ToolCard } from '../components/common/ToolCard';
 import { SEO } from '../components/common/SEO';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, BookOpen } from 'lucide-react';
 import { Link } from '../context/RouterContext';
 import { SITE_URL } from '../config/site';
 import { AdSenseBanner } from '../components/common/AdSenseBanner';
@@ -341,6 +342,7 @@ export function ToolPageWrapper({ tool }: ToolPageWrapperProps) {
   );
 
   const relatedTools = [...explicitRelated, ...fallbackRelated].slice(0, 4);
+  const relatedGuides = getGuidesForTool(tool.slug);
 
   // Schema.org WebApplication specification
   const webAppSchema = {
@@ -394,7 +396,7 @@ export function ToolPageWrapper({ tool }: ToolPageWrapperProps) {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
       {/* Dynamic SEO Tags & Structured Data */}
       <SEO
-        title={tool.metaTitle || `${tool.name} — Toolora`}
+        title={tool.metaTitle || `${tool.name} | Toolora`}
         description={tool.metaDescription || tool.description}
         canonicalPath={`/tools/${tool.slug}`}
         schema={[webAppSchema, breadcrumbSchema]}
@@ -414,7 +416,9 @@ export function ToolPageWrapper({ tool }: ToolPageWrapperProps) {
       {/* Header section with Single H1 and short introduction */}
       <div className="max-w-3xl mb-8">
         <div className="flex items-center gap-2 text-2xs sm:text-xs font-bold text-blue-600 mb-2">
-          <span>{categoryName.toUpperCase()}</span>
+          <Link to={categoryHref} className="hover:text-blue-800 transition-colors">
+            {categoryName.toUpperCase()}
+          </Link>
           {tool.badge && (
             <>
               <span aria-hidden="true" className="text-slate-300">·</span>
@@ -447,17 +451,214 @@ export function ToolPageWrapper({ tool }: ToolPageWrapperProps) {
       {/* Non-intrusive Ad Placement */}
       <AdSenseBanner className="mb-12" />
 
-      {/* Short, Unique Tool-Specific Guide Paragraph */}
-      <section className="mb-12 bg-white rounded-2xl border border-[#E5EAF2] p-6 sm:p-7 shadow-[0_2px_12px_rgba(15,23,42,0.03)]">
-        <h2 className="text-lg sm:text-xl font-bold text-slate-900 mb-2.5">
-          How to Use {tool.name}
-        </h2>
-        <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
-          {renderFormattedText(tool.usageGuide || tool.detailedDescription || tool.description)}
-        </p>
+      {/* Concise "How to Use" Section with 3-5 Tool-Specific Steps */}
+      <section
+        aria-labelledby="how-to-use-heading"
+        className="mb-10 bg-white rounded-2xl border border-[#E5EAF2] p-6 sm:p-8 shadow-[0_2px_12px_rgba(15,23,42,0.03)]"
+      >
+        <div className="max-w-3xl">
+          <h2 id="how-to-use-heading" className="text-lg sm:text-xl font-bold text-slate-900 mb-2.5">
+            How to Use {tool.name}
+          </h2>
+          <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
+            {renderFormattedText(tool.usageGuide || tool.detailedDescription || tool.description)}
+          </p>
+        </div>
+
+        {tool.howToUse && tool.howToUse.length > 0 && (
+          <ol className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-6">
+            {tool.howToUse.map((stepItem) => (
+              <li
+                key={stepItem.step}
+                className="bg-slate-50/80 rounded-xl border border-slate-200/80 p-4 flex flex-col justify-between"
+              >
+                <div>
+                  <div className="flex items-center gap-2.5 mb-2">
+                    <span className="w-6 h-6 rounded-md bg-blue-600 text-white text-xs font-bold flex items-center justify-center shrink-0 tabular-nums">
+                      {stepItem.step}
+                    </span>
+                    <h3 className="text-xs sm:text-sm font-bold text-slate-900 leading-snug">
+                      {stepItem.title}
+                    </h3>
+                  </div>
+                  <p className="text-xs text-slate-600 leading-relaxed">
+                    {renderFormattedText(stepItem.description)}
+                  </p>
+                </div>
+              </li>
+            ))}
+          </ol>
+        )}
       </section>
 
-      {/* Related Tools (Internal Linking) */}
+      {/* Lightweight Page-Specific Visual / Input-Output Example Card */}
+      {tool.visualExample && (
+        <section
+          aria-labelledby="visual-example-heading"
+          className="mb-12 bg-white rounded-2xl border border-[#E5EAF2] p-6 sm:p-8 shadow-[0_2px_12px_rgba(15,23,42,0.03)]"
+        >
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-5">
+            <div>
+              <span className="text-2xs font-bold uppercase tracking-wider text-blue-600 block mb-1">
+                Worked Input &amp; Output Example
+              </span>
+              <h2 id="visual-example-heading" className="text-lg sm:text-xl font-bold text-slate-900">
+                {tool.visualExample.title}
+              </h2>
+            </div>
+            <p className="text-xs text-slate-500 max-w-md">
+              {tool.visualExample.caption}
+            </p>
+          </div>
+
+          {/* 3-Stage Input -> Process -> Output Visual Diagram */}
+          <div className="grid grid-cols-1 lg:grid-cols-11 gap-3.5 items-stretch">
+            {/* Stage 1: Input */}
+            <div className="lg:col-span-4 rounded-xl bg-slate-50 border border-slate-200/90 p-4 flex flex-col justify-between">
+              <div>
+                <div className="flex items-center justify-between gap-2 mb-2">
+                  <span className="text-2xs font-bold uppercase tracking-wider text-slate-500">
+                    1. {tool.visualExample.inputLabel}
+                  </span>
+                  <span className="w-2 h-2 rounded-full bg-slate-400" aria-hidden="true" />
+                </div>
+                <div className="font-mono text-xs sm:text-sm font-bold text-slate-900 bg-white rounded-lg border border-slate-200/80 px-3 py-2.5 mb-2.5 break-words tabular-nums">
+                  {tool.visualExample.inputValue}
+                </div>
+              </div>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                {tool.visualExample.inputDetail}
+              </p>
+            </div>
+
+            {/* Flow Arrow SVG 1 */}
+            <div className="hidden lg:flex lg:col-span-1 items-center justify-center" aria-hidden="true">
+              <svg className="w-6 h-6 text-blue-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14m-5-5 5 5-5 5" />
+              </svg>
+            </div>
+
+            {/* Stage 2: Transformation / Formula */}
+            <div className="lg:col-span-2 rounded-xl bg-blue-50/60 border border-blue-200/80 p-4 flex flex-col justify-between">
+              <div>
+                <span className="text-2xs font-bold uppercase tracking-wider text-blue-700 block mb-2">
+                  2. {tool.visualExample.processLabel}
+                </span>
+                <p className="text-xs font-semibold text-slate-800 leading-relaxed">
+                  {tool.visualExample.processDetail}
+                </p>
+              </div>
+              <div className="mt-3 pt-2 border-t border-blue-200/60 text-2xs font-medium text-blue-700">
+                Client-side calculation
+              </div>
+            </div>
+
+            {/* Flow Arrow SVG 2 */}
+            <div className="hidden lg:flex lg:col-span-1 items-center justify-center" aria-hidden="true">
+              <svg className="w-6 h-6 text-emerald-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14m-5-5 5 5-5 5" />
+              </svg>
+            </div>
+
+            {/* Stage 3: Output */}
+            <div className="lg:col-span-3 rounded-xl bg-emerald-50/50 border border-emerald-200/90 p-4 flex flex-col justify-between">
+              <div>
+                <div className="flex items-center justify-between gap-2 mb-2">
+                  <span className="text-2xs font-bold uppercase tracking-wider text-emerald-800">
+                    3. {tool.visualExample.outputLabel}
+                  </span>
+                  <span className="w-2 h-2 rounded-full bg-emerald-500" aria-hidden="true" />
+                </div>
+                <div className="font-mono text-xs sm:text-sm font-bold text-emerald-950 bg-white rounded-lg border border-emerald-200/90 px-3 py-2.5 mb-2.5 break-words tabular-nums">
+                  {tool.visualExample.outputValue}
+                </div>
+              </div>
+              <p className="text-xs text-slate-700 leading-relaxed">
+                {tool.visualExample.outputDetail}
+              </p>
+            </div>
+          </div>
+
+          {/* Reference Metrics Strip */}
+          {tool.visualExample.metrics && tool.visualExample.metrics.length > 0 && (
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-4 pt-4 border-t border-slate-100">
+              {tool.visualExample.metrics.map((metric, idx) => (
+                <div key={idx} className="bg-slate-50/70 rounded-lg border border-slate-200/70 px-3.5 py-2.5">
+                  <span className="text-2xs font-semibold text-slate-500 block">
+                    {metric.label}
+                  </span>
+                  <span className="text-xs sm:text-sm font-bold text-slate-900 tabular-nums block mt-0.5">
+                    {metric.value}
+                  </span>
+                  {metric.subtext && (
+                    <span className="text-2xs text-slate-500 block mt-0.5">
+                      {metric.subtext}
+                    </span>
+                  )}
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* Optional Local SVG Diagram */}
+          {tool.visualExample.svgPath && (
+            <figure className="mt-6 pt-5 border-t border-slate-100">
+              <img
+                src={tool.visualExample.svgPath}
+                alt={tool.visualExample.svgAlt || `${tool.name} visual reference diagram`}
+                loading="lazy"
+                width={960}
+                height={420}
+                className="w-full h-auto rounded-xl border border-slate-200/80 bg-slate-50/40"
+              />
+            </figure>
+          )}
+        </section>
+      )}
+
+      {/* Contextual Tutorial Guides Link Block (when matching guides exist) */}
+      {relatedGuides.length > 0 && (
+        <section className="mb-12 bg-slate-50/90 rounded-2xl border border-[#E5EAF2] p-5 sm:p-6">
+          <div className="flex items-center justify-between gap-4 mb-3.5">
+            <div className="flex items-center gap-2">
+              <BookOpen className="w-4 h-4 text-blue-600 shrink-0" />
+              <h2 className="text-sm sm:text-base font-bold text-slate-900">
+                Step-by-Step Guides for {tool.name}
+              </h2>
+            </div>
+            <Link
+              to="/guides"
+              className="text-xs font-bold text-blue-600 hover:text-blue-800 flex items-center gap-1"
+            >
+              <span>All Guides</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {relatedGuides.map((guide) => (
+              <Link
+                key={guide.slug}
+                to={`/guides/${guide.slug}`}
+                className="group bg-white rounded-xl border border-slate-200/90 p-4 hover:border-blue-300 transition-colors flex flex-col justify-between"
+              >
+                <div>
+                  <span className="text-2xs font-bold uppercase tracking-wider text-blue-600">
+                    {guide.categoryName} · {guide.readTime}
+                  </span>
+                  <h3 className="text-xs sm:text-sm font-bold text-slate-900 group-hover:text-blue-600 transition-colors mt-1">
+                    {guide.title}
+                  </h3>
+                </div>
+                <p className="text-xs text-slate-600 mt-1.5 line-clamp-2">
+                  {guide.summary}
+                </p>
+              </Link>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* Related Tools (Internal Linking to Sibling Tools, Category & All Tools Directory) */}
       {relatedTools.length > 0 && (
         <section className="pt-8 border-t border-[#E5EAF2]">
           <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
@@ -466,16 +667,32 @@ export function ToolPageWrapper({ tool }: ToolPageWrapperProps) {
                 Related Free Tools
               </h2>
               <p className="text-xs sm:text-sm text-slate-600 mt-1 font-normal">
-                Explore more client-side utilities that pair well with {tool.name}.
+                Explore more browser-based tools in{' '}
+                <Link to={categoryHref} className="font-semibold text-blue-600 hover:text-blue-800 underline decoration-blue-200 underline-offset-2">
+                  {categoryName}
+                </Link>{' '}
+                or browse the complete{' '}
+                <Link to="/tools" className="font-semibold text-blue-600 hover:text-blue-800 underline decoration-blue-200 underline-offset-2">
+                  All Tools Directory
+                </Link>
+                .
               </p>
             </div>
-            <Link
-              to={categoryHref}
-              className="text-xs sm:text-sm font-bold text-blue-600 hover:text-blue-700 flex items-center gap-1 group"
-            >
-              <span>All {categoryName}</span>
-              <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
-            </Link>
+            <div className="flex items-center gap-4">
+              <Link
+                to={categoryHref}
+                className="text-xs sm:text-sm font-bold text-blue-600 hover:text-blue-700 flex items-center gap-1 group"
+              >
+                <span>All {categoryName}</span>
+                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+              </Link>
+              <Link
+                to="/tools"
+                className="text-xs sm:text-sm font-semibold text-slate-600 hover:text-slate-900 flex items-center gap-1"
+              >
+                <span>All 63 Tools</span>
+              </Link>
+            </div>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -488,3 +705,4 @@ export function ToolPageWrapper({ tool }: ToolPageWrapperProps) {
     </div>
   );
 }
+
