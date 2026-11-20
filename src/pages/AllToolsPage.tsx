@@ -52,68 +52,25 @@ export function AllToolsPage() {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 space-y-8">
       {/* SEO & Structured Data */}
       <SEO
-        title="All Free Online Tools Directory — Toolora"
-        description="Browse our complete directory of free online browser utilities. Fast, client-side, with zero sign-up or payments."
+        title="Free Online Tools Directory — All 63 Browser Utilities | Toolora"
+        description="Browse the complete Toolora directory of 63 free online tools. Search and filter image editors, PDF utilities, student calculators, and developer tools."
         canonicalPath="/tools"
         schema={breadcrumbSchema}
       />
 
       <Breadcrumbs items={[{ label: 'All Tools Directory' }]} />
 
-      {/* Category Jump Links & Short Descriptions */}
-      <section className="bg-white rounded-3xl border border-[#E5EAF2] p-6 sm:p-8 shadow-[0_2px_12px_rgba(15,23,42,0.03)] space-y-5">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-[#E5EAF2]">
-          <div>
-            <h2 className="text-base sm:text-lg font-extrabold text-slate-900">
-              Browse Tools by Category
-            </h2>
-            <p className="text-xs sm:text-sm text-slate-600 font-normal">
-              Jump directly to specialized category hubs or browse the unified index below.
-            </p>
-          </div>
-          <span className="text-xs font-semibold text-slate-500">
-            5 Dedicated Hubs
-          </span>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3.5">
-          {CATEGORIES.map((cat) => (
-            <Link
-              key={cat.id}
-              to={`/category/${cat.slug}`}
-              className="group p-4 bg-[#F8FAFC] rounded-2xl border border-[#E5EAF2] hover:bg-white hover:border-blue-400 hover:shadow-[0_4px_16px_rgba(37,99,235,0.06)] hover:-translate-y-0.5 transition-all flex flex-col justify-between cursor-pointer"
-            >
-              <div>
-                <div className="flex items-center justify-between gap-1 mb-2">
-                  <div className="font-bold text-xs sm:text-sm text-slate-900 group-hover:text-blue-600 transition-colors">
-                    {cat.title}
-                  </div>
-                  <span className="text-2xs font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded-md font-mono">
-                    {cat.count}
-                  </span>
-                </div>
-                <p className="text-xs text-slate-600 line-clamp-2 leading-relaxed font-normal">
-                  {cat.description}
-                </p>
-              </div>
-              <span className="text-xs font-bold text-blue-600 flex items-center gap-1 mt-4 group-hover:translate-x-0.5 transition-transform">
-                Explore Hub <ArrowRight className="w-3.5 h-3.5" />
-              </span>
-            </Link>
-          ))}
-        </div>
-      </section>
-
+      {/* Header & Directory Filter Controls */}
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-[#E5EAF2]">
         <div>
           <div className="text-2xs sm:text-xs font-bold text-blue-600 uppercase tracking-wider mb-2">
-            Complete Index
+            Complete Index · {TOOLS.length} Browser Utilities
           </div>
           <h1 className="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
-            All Free Online Tools ({TOOLS.length})
+            Free Online Tools Directory ({TOOLS.length})
           </h1>
           <p className="text-xs sm:text-sm text-slate-600 mt-2 leading-relaxed max-w-2xl font-normal">
-            Welcome to the complete Toolora tools directory. Browse online tools across image editing, PDF document assembly, student GPA calculators, and everyday utilities. This comprehensive browser utilities index and free web tools list runs client-side in your device memory with zero accounts, subscriptions, or server file uploads.
+            Use the category tabs or keyword filter to quickly locate any utility in the Toolora catalog—spanning {imageCount} image editors, {pdfCount} PDF tools, {studentCount} student and math calculators, and {utilityCount} developer and text utilities.
           </p>
         </div>
 
@@ -202,6 +159,50 @@ export function AllToolsPage() {
 
       {/* AdSense Unit (Between Tools Directory and Guides) */}
       <AdSenseBanner className="my-8" />
+
+      {/* Category Hubs Navigation */}
+      <section className="bg-white rounded-3xl border border-[#E5EAF2] p-6 sm:p-8 shadow-[0_2px_12px_rgba(15,23,42,0.03)] space-y-5">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-[#E5EAF2]">
+          <div>
+            <h2 className="text-base sm:text-lg font-extrabold text-slate-900">
+              Dedicated Category Hubs
+            </h2>
+            <p className="text-xs sm:text-sm text-slate-600 font-normal">
+              Visit specialized category hubs for selection guides and focused workflows.
+            </p>
+          </div>
+          <span className="text-xs font-semibold text-slate-500">
+            5 Category Hubs
+          </span>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3.5">
+          {CATEGORIES.map((cat) => (
+            <Link
+              key={cat.id}
+              to={`/category/${cat.slug}`}
+              className="group p-4 bg-[#F8FAFC] rounded-2xl border border-[#E5EAF2] hover:bg-white hover:border-blue-400 hover:shadow-[0_4px_16px_rgba(37,99,235,0.06)] hover:-translate-y-0.5 transition-all flex flex-col justify-between cursor-pointer"
+            >
+              <div>
+                <div className="flex items-center justify-between gap-1 mb-2">
+                  <div className="font-bold text-xs sm:text-sm text-slate-900 group-hover:text-blue-600 transition-colors">
+                    {cat.title}
+                  </div>
+                  <span className="text-2xs font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded-md font-mono">
+                    {cat.count}
+                  </span>
+                </div>
+                <p className="text-xs text-slate-600 line-clamp-2 leading-relaxed font-normal">
+                  {cat.description}
+                </p>
+              </div>
+              <span className="text-xs font-bold text-blue-600 flex items-center gap-1 mt-4 group-hover:translate-x-0.5 transition-transform">
+                Open Hub <ArrowRight className="w-3.5 h-3.5" />
+              </span>
+            </Link>
+          ))}
+        </div>
+      </section>
 
       {/* Practical Guides & Workflow Tutorials */}
       <section className="bg-white rounded-3xl border border-[#E5EAF2] p-8 sm:p-10 shadow-[0_2px_12px_rgba(15,23,42,0.03)] space-y-6">

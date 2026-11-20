@@ -8,6 +8,15 @@ import { SITE_URL } from '../config/site';
 import { Link } from '../context/RouterContext';
 
 export function GuidesPage() {
+  const collectionSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: 'Online Tool Guides — Free Browser Utility Tutorials | Toolora',
+    description:
+      'Practical online tool guides and tutorials. Learn how to compress photos, choose between JPG, PNG, and WebP, resize images cleanly, and convert files to PDF in your browser.',
+    url: `${SITE_URL}/guides`,
+  };
+
   const breadcrumbSchema = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
@@ -33,13 +42,12 @@ export function GuidesPage() {
         title="Online Tool Guides — Free Browser Utility Tutorials | Toolora"
         description="Practical online tool guides and tutorials. Learn how to compress photos, choose between JPG, PNG, and WebP, resize images cleanly, and convert files to PDF in your browser."
         canonicalPath="/guides"
-        schema={breadcrumbSchema}
+        schema={[collectionSchema, breadcrumbSchema]}
       />
 
       <div className="mb-6">
         <Breadcrumbs
           items={[
-            { label: 'Home', href: '/' },
             { label: 'Guides' },
           ]}
         />
@@ -49,13 +57,13 @@ export function GuidesPage() {
       <div className="max-w-3xl mb-12">
         <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 border border-blue-200/60 text-blue-700 text-xs font-bold mb-3 shadow-2xs">
           <BookOpen className="w-3.5 h-3.5" />
-          <span>Practical Knowledge Base</span>
+          <span>Practical Knowledge Base · {GUIDES.length} In-Depth Tutorials</span>
         </div>
         <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
           Online Tool Guides & Tutorials
         </h1>
         <p className="mt-3 text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
-          Explore practical online tool guides and how-to tutorials for everyday digital tasks. Learn how to compress photos without blurriness, compare JPG, PNG, and WebP image formats, rescale dimensions with locked proportions, and convert images into standardized PDF documents directly in your browser without server uploads.
+          Step-by-step tutorials explaining the technical mechanics behind everyday file tasks: how lossy and palette-quantized compression reduce image weight, when to pick JPG, PNG, or WebP, how bicubic downsampling preserves sharpness when resizing, and how to package multi-page photos into standardized A4 or US Letter PDFs locally in your browser.
         </p>
 
         <div className="flex flex-wrap items-center gap-4 text-xs text-slate-600 mt-4 font-medium">
@@ -66,7 +74,7 @@ export function GuidesPage() {
           <span aria-hidden="true" className="text-slate-300">·</span>
           <span>No Server File Uploads</span>
           <span aria-hidden="true" className="text-slate-300">·</span>
-          <span>Actionable Step-by-Step Solutions</span>
+          <span>Step-by-Step Comparison Tables & Examples</span>
         </div>
       </div>
 

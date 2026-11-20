@@ -4,10 +4,16 @@ export interface GuideStep {
   description: string;
 }
 
+export interface GuideSubsection {
+  subheading: string;
+  body: string;
+}
+
 export interface GuideSection {
   id: string;
   heading: string;
   paragraphs: string[];
+  subsections?: GuideSubsection[];
   keyPoints?: string[];
   callout?: {
     type: 'tip' | 'info';
@@ -155,7 +161,16 @@ export const GUIDES: GuideItem[] = [
           'Image compression operates through two distinct technical approaches: lossy compression and lossless compression. Choosing the right method depends on your asset type and intended use case.',
           'Standard lossless compression optimizes how pixel data is encoded and strips unneeded metadata tags without altering original pixel values (standardized in the [W3C PNG Specification](https://www.w3.org/TR/png/)). Pure lossless compression typically reduces file size by 10% to 30%, which is ideal for technical diagrams, icons, and graphics where exact line sharpness and mathematically identical pixels are mandatory.',
           'Lossy compression selectively discards subtle color variations and high-frequency details that human vision cannot readily distinguish in complex photographic scenes (the foundation of the [ITU-T T.81 / JPEG Standard](https://www.w3.org/Graphics/JPEG/itu-t81.pdf)). In our [Image Compressor](/tools/image-compressor), setting the quality parameter between 75% and 85% typically reduces file size by 50% to 75% on uncompressed originals while keeping pictures visually crisp. However, savings vary by input format, existing compression, and image detail—files that have already undergone aggressive compression will see much smaller savings.',
-          'How PNG Compression Works in Practice: Because standard lossless PNG compression yields modest savings, modern browser compression tools—including Toolora\'s [Image Compressor](/tools/image-compressor)—apply adaptive color quantization via UPNG when quality is set below 100%. This reduces 32-bit RGBA color variance down to an indexed palette of up to 256 colors while preserving transparent layers, followed by lossless DEFLATE encoding. While this quantization introduces subtle color reduction (making it technically lossy color indexing), it leaves graphic edges and transparent backgrounds crisp while slashing PNG file sizes by 40% to 70%. When set to 100% quality, the compressor executes pure lossless DEFLATE compression with zero color reduction.',
+        ],
+        subsections: [
+          {
+            subheading: 'Pure Lossless DEFLATE (100% PNG Quality)',
+            body: 'Preserves 100% of original RGBA pixel values and achieves 10%–30% byte reductions by optimizing data compression tables. Best for CAD drawings, medical diagrams, and pixel art.',
+          },
+          {
+            subheading: 'Adaptive Palette Quantization (<100% PNG Quality)',
+            body: 'In Toolora\'s [Image Compressor](/tools/image-compressor), setting PNG quality below 100% runs UPNG 8-bit palette quantization (up to 256 indexed colors) while keeping transparent edges sharp, cutting PNG size by 40%–70%.',
+          },
         ],
         table: {
           caption: 'Toolora Image Compression Approaches: Quality Slider vs. Target KB Cap',
@@ -177,10 +192,24 @@ export const GUIDES: GuideItem[] = [
         heading: 'Format Considerations: JPG, PNG, WebP, and BMP',
         paragraphs: [
           'Choosing the right format before compressing can significantly reduce file weight even before adjusting quality settings:',
-          '• JPG (JPEG): Best for continuous-tone photography, portraits, and natural scenery. Its discrete cosine transform (DCT) algorithms compress complex color gradations efficiently. Setting quality to 75%–85% provides the optimal balance between clarity and file weight.',
-          '• PNG: Essential for logos, user interface screenshots, and graphics requiring alpha transparency. Standard PNG uses lossless compression; when compressed below 100% quality, adaptive palette quantization slashes file weight while keeping transparent backgrounds crisp.',
-          '• WebP: Modern web format supporting predictive lossy compression, lossless encoding, and alpha transparency. Converting photos with [JPG to WebP](/tools/jpg-to-webp) often saves an additional 25% to 35% compared to standard JPEG compression (documented in [Google\'s WebP Documentation](https://developers.google.com/speed/webp)).',
-          '• BMP: Uncompressed raster bitmap format historically common on Windows. Because BMP files store raw pixel data without compression, they are often dozens of times larger than necessary. Compressing a BMP in Toolora decodes the bitmap raster in browser memory and efficiently encodes it to JPEG or WebP, frequently slashing file size by 85% to 95%.',
+        ],
+        subsections: [
+          {
+            subheading: 'JPG (JPEG) for Continuous-Tone Photos',
+            body: 'Uses discrete cosine transform (DCT) compression for portraits and natural scenery. Setting quality to 75%–85% in [Image Compressor](/tools/image-compressor) balances detail and small file size.',
+          },
+          {
+            subheading: 'PNG for Transparency & Crisp UI Text',
+            body: 'Supports full 8-bit alpha transparency. Use adaptive palette quantization in [Image Compressor](/tools/image-compressor) or convert via [PNG to WebP](/tools/png-to-webp) to shrink large files.',
+          },
+          {
+            subheading: 'WebP for Modern Web Delivery',
+            body: 'Supports both lossy and lossless compression with alpha transparency. Converting photos with [JPG to WebP](/tools/jpg-to-webp) saves an extra 25%–35% over standard JPEG.',
+          },
+          {
+            subheading: 'BMP Legacy Raster Bitmaps',
+            body: 'Stores uncompressed raw pixel arrays that are often 10× larger than needed. Converting with [BMP to JPG](/tools/bmp-to-jpg) or compressing in Toolora typically cuts file size by 85%–95%.',
+          },
         ],
       },
       {
@@ -420,11 +449,25 @@ export const GUIDES: GuideItem[] = [
         id: 'conversion-decision-flow',
         heading: 'How to Choose and Convert in Practice',
         paragraphs: [
-          'Follow this simple decision rule for your projects:',
-          '1. Need a transparent background? Choose WebP for the web using [PNG to WebP](/tools/png-to-webp), or PNG for desktop software compatibility using [WebP to PNG](/tools/webp-to-png). Test transparency anytime with the [Transparent Background Checker](/tools/transparent-background-checker).',
-          '2. High-detail real-world photo? Choose WebP for websites using [JPG to WebP](/tools/jpg-to-webp), or JPG for universal compatibility.',
-          '3. Software screenshot with fine text? Choose PNG to keep every letter sharp using [JPG to PNG](/tools/jpg-to-png), or lossless WebP.',
-          '4. Need to compress an existing JPG or PNG? Tune file weight directly with our in-browser [Image Compressor](/tools/image-compressor).',
+          'Follow this quick decision checklist when preparing images for websites, apps, or desktop workflows:',
+        ],
+        subsections: [
+          {
+            subheading: '1. Need a Transparent Background?',
+            body: 'Choose WebP for modern websites using [PNG to WebP](/tools/png-to-webp) to cut byte weight by 60%–80%, or PNG for legacy desktop editors via [WebP to PNG](/tools/webp-to-png). Audit alpha channels anytime with [Transparent Background Checker](/tools/transparent-background-checker).',
+          },
+          {
+            subheading: '2. Publishing Real-World Camera Photos?',
+            body: 'Choose WebP for web delivery via [JPG to WebP](/tools/jpg-to-webp) (25%–35% smaller), or standard JPG for universal email and print portal compatibility via [PNG to JPG](/tools/png-to-jpg).',
+          },
+          {
+            subheading: '3. Sharing UI Screenshots or Fine Text?',
+            body: 'Choose PNG via [JPG to PNG](/tools/jpg-to-png) or lossless WebP so sharp typography and 1-pixel borders never develop JPEG ringing artifacts.',
+          },
+          {
+            subheading: '4. Tuning Existing File Weight?',
+            body: 'Pass any existing JPG, PNG, WebP, or BMP through the [Image Compressor](/tools/image-compressor) to fine-tune visual quality without altering pixel dimensions.',
+          },
         ],
         keyPoints: [
           'Use [JPG to WebP](/tools/jpg-to-webp) when modernizing photo galleries for websites.',
@@ -508,9 +551,16 @@ export const GUIDES: GuideItem[] = [
         paragraphs: [
           'Direct Answer: Can you resize an image without losing quality? You can downscale (shrink) an image without noticeable quality loss by locking the aspect ratio and using interpolation resampling (such as bicubic filtering), because rich pixel data is being condensed into a tighter grid. However, you cannot upscale (enlarge) a raster image without losing sharpness, because software cannot invent optical camera details that were never captured. To resize cleanly: always start with your original high-resolution master file, lock proportional width and height (or use an aspect ratio calculator), and downscale directly to your intended display dimensions.',
           'If you need to resize a photo immediately, use our free [Image Resizer](/tools/image-resizer) with aspect ratio locking, or calculate proportional width and height with our [Aspect Ratio Calculator](/tools/aspect-ratio-calculator). Both tools run entirely in your web browser with zero server file uploads.',
-          'Digital photos are raster graphics composed of a finite grid of tiny colored squares called pixels. When you resize an image, you are altering that total pixel grid.',
-          'Downsampling (reducing pixel dimensions) combines adjacent pixels using interpolation algorithms like bicubic resampling. Because you are condensing rich visual information into a tighter grid, downscaled images typically look remarkably sharp and detailed.',
-          'Upscaling (enlarging pixel dimensions) does the exact opposite: it attempts to create new pixels where none existed before. Because the computer must mathematically guess intermediate color values, upscaled images look soft, fuzzy, or visibly pixelated. Resizing is an interpolation process that alters the raster grid; while downsampling preserves visual sharpness, raster resizing is not mathematically lossless.',
+        ],
+        subsections: [
+          {
+            subheading: 'Why Downsampling Keeps Edges Sharp',
+            body: 'When shrinking a 4000 × 3000 photo down to 1200 × 900, bicubic resampling averages surrounding pixel neighborhoods into a denser grid, preserving visual contrast and fine detail.',
+          },
+          {
+            subheading: 'Why Upscaling Causes Pixelation & Blur',
+            body: 'Enlarging a 400 × 300 thumbnail to 1200 × 900 stretches each pixel across 9× its original area. Interpolation can smooth stair-stepping, but it cannot recover uncaptured camera detail.',
+          },
         ],
         table: {
           caption: 'Downscaling vs. Upscaling: Pixel Grid Mechanics & Visual Sharpness',
@@ -538,7 +588,7 @@ export const GUIDES: GuideItem[] = [
         ],
         keyPoints: [
           'Keep the Aspect Ratio Lock enabled in the [Image Resizer](/tools/image-resizer).',
-          'If your target layout requires a different shape (e.g., turning a 4:3 landscape into a 1:1 square), crop the image first before resizing.',
+          'If your target layout requires a different shape (e.g., turning a 4:3 landscape into a 1:1 square), crop the image first with [Crop Image](/tools/crop-image) before resizing.',
           'Use the [Aspect Ratio Calculator](/tools/aspect-ratio-calculator) to preview dimensions across standard screen ratios.',
         ],
       },
@@ -681,18 +731,27 @@ export const GUIDES: GuideItem[] = [
         id: 'why-convert-to-pdf',
         heading: 'Why Convert Images to PDF Format?',
         paragraphs: [
-          'Direct Answer: How to convert images to PDF cleanly? To convert images to a standardized PDF on any device without software installation, load your JPG, PNG, or WebP files into an in-browser PDF generator, choose page dimensions (such as standard A4, US Letter, or Fit to Image), set margins, and export. In-browser processing packages your images into an ISO 32000-compliant document locally in memory without transmitting private documents to cloud servers.',
+          'Direct Answer: How to convert images to PDF cleanly? To convert images to a standardized PDF on any device without software installation, load your JPG, PNG, or WebP files into an in-browser PDF generator, choose page dimensions (such as standard A4, US Letter, or Fit to Image), set margins (0, 5, 10, or 20 mm), and export. In-browser processing packages your images into an ISO 32000-compliant document locally in memory without transmitting private documents to cloud servers.',
           'While image formats like JPG and PNG are designed for visual display, PDF (Portable Document Format, standardized internationally under [ISO 32000](https://www.iso.org/standard/75822.html)) is designed for document preservation and universal interchange.',
           'When you send someone an image, their photo viewer might scale it unpredictably, rotate it according to differing orientation metadata, or split it onto multiple paper pages when printed. PDF locks down page boundaries, margins, and resolution so the document looks identical on every phone, tablet, computer, and printer.',
-          'Toolora offers three dedicated utilities for this conversion: the versatile [Image to PDF](/tools/image-to-pdf) tool for compiling multiple photos with page and margin controls, the focused [JPG to PDF](/tools/jpg-to-pdf) converter for quick photo packaging, and the [PNG to PDF](/tools/png-to-pdf) tool for crisp digital screenshots.',
+        ],
+        subsections: [
+          {
+            subheading: 'Standardized Print & Portal Geometry',
+            body: 'Choose A4 (210 × 297 mm) for international academic and government portals, US Letter (8.5 × 11 in) for North American offices, or Fit to Image for exact pixel-dimension digital portfolios.',
+          },
+          {
+            subheading: 'Multi-Page Packet Consolidation',
+            body: 'Instead of attaching 6 separate receipt photos or homework scans that can be viewed out of sequence, [Image to PDF](/tools/image-to-pdf) binds every page into one numbered document.',
+          },
         ],
         table: {
           caption: 'Toolora PDF Conversion Options: Comparing Focused Tools & Settings',
           headers: ['Tool Name', 'Primary Input Focus', 'Key Settings & Controls', 'Supported Formats', 'Recommended Context'],
           rows: [
-            ['[Image to PDF](/tools/image-to-pdf)', 'Multi-image packets & scanned papers', 'A4 / US Letter / Fit sizing, Portrait/Landscape, Margins, Page Reordering', 'JPG, PNG, WebP', 'Academic assignments, visa document packets, multi-receipt expenses'],
-            ['[JPG to PDF](/tools/jpg-to-pdf)', 'Camera photos & smartphone captures', 'Rapid 1-click photo packaging into standardized document pages', 'JPEG / JPG', 'Single or multiple mobile photos without requiring layout adjustments'],
-            ['[PNG to PDF](/tools/png-to-pdf)', 'Digital screenshots & graphic diagrams', 'Preserves crisp line art, text, and vector boundaries', 'PNG', 'Technical reports, software screenshots, digital receipts, code snippets'],
+            ['[Image to PDF](/tools/image-to-pdf)', 'Multi-image packets & scanned papers', 'A4 / US Letter / Fit sizing, Portrait/Landscape, Margins (0–20 mm), Page Reordering', 'JPG, PNG, WebP', 'Academic assignments, visa document packets, multi-receipt expenses'],
+            ['[JPG to PDF](/tools/jpg-to-pdf)', 'Camera photos & smartphone captures', 'A4 / US Letter / Fit sizing, Auto/Portrait/Landscape, Margins (0–20 mm), Reordering', 'JPEG / JPG', 'Camera scans of receipts, ID cards, and physical paperwork'],
+            ['[PNG to PDF](/tools/png-to-pdf)', 'Digital screenshots & transparent graphics', 'Composites transparent alpha areas onto clean white pages with layout controls', 'PNG', 'Technical reports, software screenshots, digital receipts, diagrams'],
           ],
         },
         keyPoints: [
@@ -725,27 +784,27 @@ export const GUIDES: GuideItem[] = [
           {
             step: 1,
             title: 'Select the Best Conversion Tool',
-            description: 'Open [Image to PDF](/tools/image-to-pdf) for full layout configuration, [JPG to PDF](/tools/jpg-to-pdf) for standard camera photos, or [PNG to PDF](/tools/png-to-pdf) for digital screenshots.',
+            description: 'Open [Image to PDF](/tools/image-to-pdf) for mixed JPG/PNG/WebP batches, [JPG to PDF](/tools/jpg-to-pdf) for JPEG camera photos, or [PNG to PDF](/tools/png-to-pdf) for digital screenshots.',
           },
           {
             step: 2,
-            title: 'Drop Your JPG, PNG, or WebP Files',
-            description: 'Upload your image files into the tool dropzone. Toolora supports JPG, PNG, and WebP graphics simultaneously.',
+            title: 'Drop Your Image Files',
+            description: 'Select or drag your images into the dropzone. All files load directly into browser memory.',
           },
           {
             step: 3,
             title: 'Arrange Page Ordering',
-            description: 'Verify the sequence of your photos. Drag thumbnails or use page reorder arrows so documents read in the proper order.',
+            description: 'Verify the sequence of your photos and use the Move Left / Move Right buttons so pages read in the proper order.',
           },
           {
             step: 4,
             title: 'Configure Page Sizing & Margins',
-            description: 'Select your preferred paper size (A4, US Letter, or Fit to Image), set orientation (Portrait or Landscape), and choose margin spacing.',
+            description: 'Select your preferred paper size (A4, US Letter, or Fit to Image), set orientation (Auto, Portrait, or Landscape), and choose margin spacing (0, 5, 10, or 20 mm).',
           },
           {
             step: 5,
             title: 'Generate and Download Your PDF',
-            description: 'Click Generate PDF. The document is built instantaneously in local browser memory and ready to save to your device.',
+            description: 'Click Generate & Download PDF. The document is built instantaneously in local browser memory and saved to your device.',
           },
         ],
       },
@@ -758,7 +817,7 @@ export const GUIDES: GuideItem[] = [
         practicalScenario: {
           title: 'Academic Assignment Submission',
           scenario: 'A student has 4 smartphone photos of handwritten math problem sets. The submission portal accepts only one PDF file under 10 MB.',
-          solution: 'Upload all 4 homework photos simultaneously into [Image to PDF](/tools/image-to-pdf), arrange their sequence with the reorder buttons, choose A4 portrait sizing with clean margins, and click Generate PDF. (If you already have separate PDF exports to combine, use [Merge PDF](/tools/merge-pdf)).',
+          solution: 'Upload all 4 homework photos simultaneously into [Image to PDF](/tools/image-to-pdf), arrange their sequence with the reorder buttons, choose A4 portrait sizing with 10 mm margins, and click Generate & Download PDF. (If you already have separate PDF exports to combine, use [Merge PDF](/tools/merge-pdf)).',
           result: 'A single, cleanly organized 4-page PDF document that professors can read and annotate without managing multiple image files.',
         },
       },
@@ -773,7 +832,7 @@ export const GUIDES: GuideItem[] = [
           '[Rotate PDF](/tools/rotate-pdf): Fix upside-down or sideways pages that were scanned at an awkward angle.',
           '[Split PDF](/tools/split-pdf): Extract specific pages if you only need to submit a portion of a larger packet.',
           '[PDF Metadata Viewer](/tools/pdf-metadata-viewer): Inspect total page count and verify file properties before submission.',
-          '[PDF Page Counter](/tools/pdf-page-counter): Check exact page counts across submitted files.',
+          '[PDF Page Counter](/tools/pdf-page-counter): Check exact page counts and per-page millimeter/inch dimensions across submitted files.',
         ],
       },
     ],

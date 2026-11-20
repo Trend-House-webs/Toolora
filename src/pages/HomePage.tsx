@@ -74,7 +74,7 @@ export function HomePage({ onOpenSearchModal }: HomePageProps) {
     <div className="space-y-16 sm:space-y-20 lg:space-y-24 pb-16">
       {/* Dynamic SEO Tags & Structured Data */}
       <SEO
-        title="Toolora — Everyday tools, made simple."
+        title="Toolora — Free Online Tools for Images, PDFs & Calculators"
         description={SITE_DESCRIPTION}
         canonicalPath="/"
         schema={[websiteSchema, organizationSchema]}
@@ -86,7 +86,7 @@ export function HomePage({ onOpenSearchModal }: HomePageProps) {
           {/* Subtle Top Kicker */}
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 border border-blue-200/60 text-xs font-semibold text-blue-700 shadow-2xs">
             <Sparkles className="w-3.5 h-3.5 text-blue-600" />
-            <span>100% Free · Client-Side Execution · Zero Sign-Up</span>
+            <span>{TOOLS.length} Free Browser Tools · Client-Side Execution · No Sign-Up</span>
           </div>
 
           <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-[1.12]">
@@ -94,11 +94,11 @@ export function HomePage({ onOpenSearchModal }: HomePageProps) {
           </h1>
 
           <p className="text-sm sm:text-base lg:text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed font-normal">
-            Toolora offers a comprehensive collection of free browser tools—including image tools online, free online calculators, and online utility tools. Process photos, assemble PDF documents, calculate academic marks, and format text directly in your web browser with zero sign-up or server file uploads.
+            Compress and convert images, merge and split PDFs, calculate academic grades and percentages, and format text or developer data directly in your web browser—with zero account sign-up and no server file uploads.
           </p>
 
           {/* Primary Tool Search Bar */}
-          <div className="max-w-2xl mx-auto pt-2">
+          <div className="max-w-2xl mx-auto pt-2 space-y-3">
             <form
               onSubmit={handleHeroSubmit}
               className="relative flex items-center shadow-[0_4px_24px_rgba(37,99,235,0.08)] rounded-2xl bg-white border border-[#E5EAF2] hover:border-blue-400 focus-within:border-blue-600 focus-within:ring-4 focus-within:ring-blue-500/10 transition-all p-1.5 sm:p-2"
@@ -108,7 +108,7 @@ export function HomePage({ onOpenSearchModal }: HomePageProps) {
                 type="text"
                 value={heroSearch}
                 onChange={(e) => setHeroSearch(e.target.value)}
-                placeholder="Search any tool (e.g. Image Compressor, Word Counter, GPA, PDF)..."
+                placeholder="Search any tool (e.g. Image Compressor, Word Counter, GPA, Merge PDF)..."
                 className="w-full py-2.5 px-3 min-h-[44px] text-xs sm:text-sm text-slate-900 placeholder:text-slate-400 bg-transparent focus:outline-hidden"
                 aria-label="Search tools"
               />
@@ -120,10 +120,34 @@ export function HomePage({ onOpenSearchModal }: HomePageProps) {
                 <ArrowRight className="w-4 h-4 hidden sm:inline" />
               </button>
             </form>
+
+            {/* Quick Popular Tool Jump Links */}
+            <div className="flex items-center justify-center flex-wrap gap-2 text-2xs sm:text-xs text-slate-500">
+              <span className="font-semibold text-slate-600">Quick launch:</span>
+              <Link to="/tools/image-compressor" className="text-slate-700 hover:text-blue-600 underline decoration-slate-300 hover:decoration-blue-500 transition-colors">
+                Image Compressor
+              </Link>
+              <span aria-hidden="true" className="text-slate-300">·</span>
+              <Link to="/tools/merge-pdf" className="text-slate-700 hover:text-blue-600 underline decoration-slate-300 hover:decoration-blue-500 transition-colors">
+                Merge PDF
+              </Link>
+              <span aria-hidden="true" className="text-slate-300">·</span>
+              <Link to="/tools/word-counter" className="text-slate-700 hover:text-blue-600 underline decoration-slate-300 hover:decoration-blue-500 transition-colors">
+                Word Counter
+              </Link>
+              <span aria-hidden="true" className="text-slate-300">·</span>
+              <Link to="/tools/percentage-calculator" className="text-slate-700 hover:text-blue-600 underline decoration-slate-300 hover:decoration-blue-500 transition-colors">
+                Percentage Calculator
+              </Link>
+              <span aria-hidden="true" className="text-slate-300">·</span>
+              <Link to="/tools/gpa-calculator" className="text-slate-700 hover:text-blue-600 underline decoration-slate-300 hover:decoration-blue-500 transition-colors">
+                GPA Calculator
+              </Link>
+            </div>
           </div>
 
           {/* Real Trust Markers */}
-          <div className="pt-2 text-xs text-slate-600 font-medium flex items-center justify-center flex-wrap gap-x-5 gap-y-2">
+          <div className="pt-1 text-xs text-slate-600 font-medium flex items-center justify-center flex-wrap gap-x-5 gap-y-2">
             <span className="flex items-center gap-1.5">
               <CheckCircle2 className="w-3.5 h-3.5 text-blue-600" />
               Free to use
@@ -162,7 +186,7 @@ export function HomePage({ onOpenSearchModal }: HomePageProps) {
                   <div className="font-bold text-xs sm:text-sm text-slate-900 group-hover:text-blue-600 transition-colors">
                     Image Tools
                   </div>
-                  <div className="text-2xs text-slate-600 mt-1 line-clamp-1 font-normal">
+                  <div className="text-2xs text-slate-600 mt-1 leading-snug font-normal">
                     Compress, resize & convert
                   </div>
                 </div>
@@ -183,7 +207,7 @@ export function HomePage({ onOpenSearchModal }: HomePageProps) {
                   <div className="font-bold text-xs sm:text-sm text-slate-900 group-hover:text-blue-600 transition-colors">
                     PDF Tools
                   </div>
-                  <div className="text-2xs text-slate-600 mt-1 line-clamp-1 font-normal">
+                  <div className="text-2xs text-slate-600 mt-1 leading-snug font-normal">
                     Merge, split & convert to PDF
                   </div>
                 </div>
@@ -204,7 +228,7 @@ export function HomePage({ onOpenSearchModal }: HomePageProps) {
                   <div className="font-bold text-xs sm:text-sm text-slate-900 group-hover:text-blue-600 transition-colors">
                     Student Tools
                   </div>
-                  <div className="text-2xs text-slate-600 mt-1 line-clamp-1 font-normal">
+                  <div className="text-2xs text-slate-600 mt-1 leading-snug font-normal">
                     GPA, grades & math solvers
                   </div>
                 </div>
@@ -225,7 +249,7 @@ export function HomePage({ onOpenSearchModal }: HomePageProps) {
                   <div className="font-bold text-xs sm:text-sm text-slate-900 group-hover:text-blue-600 transition-colors">
                     Daily Utilities
                   </div>
-                  <div className="text-2xs text-slate-600 mt-1 line-clamp-1 font-normal">
+                  <div className="text-2xs text-slate-600 mt-1 leading-snug font-normal">
                     UUIDs, timestamps & JSON
                   </div>
                 </div>
@@ -244,10 +268,10 @@ export function HomePage({ onOpenSearchModal }: HomePageProps) {
                     <Layers className="w-4 h-4" />
                   </div>
                   <div className="font-bold text-xs sm:text-sm text-slate-900 group-hover:text-blue-600 transition-colors">
-                    Productivity Hub
+                    Cross-Index Hub
                   </div>
-                  <div className="text-2xs text-slate-600 mt-1 line-clamp-1 font-normal">
-                    Unified productivity index
+                  <div className="text-2xs text-slate-600 mt-1 leading-snug font-normal">
+                    Calculators & text utilities
                   </div>
                 </div>
                 <div className="text-2xs font-semibold text-blue-600 mt-3 flex items-center gap-1">

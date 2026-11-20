@@ -34,8 +34,8 @@ interface PageMetadata {
 const staticPages: PageMetadata[] = [
   {
     path: 'tools',
-    title: 'All Free Online Tools Directory — Toolora',
-    description: 'Browse our complete directory of free online browser utilities. Fast, client-side, with zero sign-up or payments.',
+    title: 'Free Online Tools Directory — All 63 Browser Utilities | Toolora',
+    description: 'Browse the complete Toolora directory of 63 free online tools. Search and filter image editors, PDF utilities, student calculators, and developer tools.',
     priority: '0.9',
     changefreq: 'daily',
     schema: {

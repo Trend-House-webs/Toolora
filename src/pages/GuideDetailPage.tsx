@@ -133,14 +133,12 @@ export function GuideDetailPage({ guide }: GuideDetailPageProps) {
       <div className="mb-6">
         <Breadcrumbs
           items={[
-            { label: 'Home', href: '/' },
             { label: 'Guides', href: '/guides' },
             { label: guide.title },
           ]}
         />
       </div>
 
-      {/* Article Header */}
       {/* Article Header */}
       <header className="mb-10 pb-8 border-b border-[#E5EAF2]">
         <div className="flex flex-wrap items-center gap-2.5 mb-4 text-xs">
@@ -234,12 +232,34 @@ export function GuideDetailPage({ guide }: GuideDetailPageProps) {
             </Link>
           </div>
         )}
+
+        {/* Quick Table of Contents Jump Bar */}
+        {guide.sections.length > 0 && (
+          <nav aria-label="Article sections" className="mt-6 p-4 sm:p-5 rounded-2xl bg-[#F8FAFC] border border-[#E5EAF2]">
+            <div className="text-2xs font-bold uppercase tracking-wider text-slate-500 mb-2.5">
+              In This Guide
+            </div>
+            <ol className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2 text-xs">
+              {guide.sections.map((sec, idx) => (
+                <li key={sec.id}>
+                  <a
+                    href={`#${sec.id}`}
+                    className="text-slate-700 hover:text-blue-600 font-medium transition-colors inline-flex items-start gap-1.5 leading-snug"
+                  >
+                    <span className="font-mono text-2xs font-bold text-blue-600 mt-0.5 shrink-0">{idx + 1}.</span>
+                    <span>{sec.heading}</span>
+                  </a>
+                </li>
+              ))}
+            </ol>
+          </nav>
+        )}
       </header>
 
       {/* Guide Content Sections */}
       <article className="space-y-12">
         {guide.sections.map((section) => (
-          <section key={section.id} id={section.id} className="scroll-mt-20">
+          <section key={section.id} id={section.id} className="scroll-mt-24">
             <h2 className="text-xl sm:text-2xl font-bold text-slate-900 mb-4 tracking-tight">
               {section.heading}
             </h2>
@@ -250,6 +270,25 @@ export function GuideDetailPage({ guide }: GuideDetailPageProps) {
                 <p key={pIdx}>{renderFormattedText(para)}</p>
               ))}
             </div>
+
+            {/* Structured H3 Subsections */}
+            {section.subsections && section.subsections.length > 0 && (
+              <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {section.subsections.map((sub, sIdx) => (
+                  <div
+                    key={sIdx}
+                    className="p-4 sm:p-5 rounded-2xl bg-white border border-[#E5EAF2] shadow-2xs space-y-1.5"
+                  >
+                    <h3 className="text-sm sm:text-base font-bold text-slate-900">
+                      {sub.subheading}
+                    </h3>
+                    <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
+                      {renderFormattedText(sub.body)}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            )}
 
             {/* Key Bullet Points */}
             {section.keyPoints && section.keyPoints.length > 0 && (

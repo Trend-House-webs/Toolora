@@ -51,10 +51,10 @@ export function AboutPage() {
         <section className="p-6 sm:p-8 bg-white rounded-2xl border border-slate-200/90 shadow-xs space-y-4">
           <h2 className="text-xl font-bold text-slate-900">Our Mission & Purpose</h2>
           <p>
-            The web was conceived to empower people with accessible, friction-free utilities. Yet today, basic everyday digital tasks—such as resizing a photo, calculating a weighted semester grade, converting an image format, or merging PDF documents—are all too often locked behind mandatory account registrations, monthly paywalls, intrusive advertisements, or remote upload queues.
+            The web was conceived to empower people with accessible, friction-free utilities. Yet today, basic everyday digital tasks—such as resizing a photo, calculating a weighted semester grade, converting an image format, or merging PDF documents—are often locked behind mandatory account registrations, subscription paywalls, or remote upload queues.
           </p>
           <p>
-            <strong>Toolora</strong> was created to offer an open, respectful alternative: a suite of <strong>Toolora free tools</strong> and fast <strong>Toolora browser utilities</strong> that anyone can use instantly. You do not need to create an account, enter a password, provide a credit card, or wait in server queues to get everyday tasks done.
+            <strong>Toolora</strong> was created to provide an open, straightforward alternative: a catalog of 63 browser-based utilities that anyone can use without creating an account, entering a password, or uploading personal files to remote processing servers.
           </p>
         </section>
 
@@ -62,15 +62,15 @@ export function AboutPage() {
         <section className="p-6 sm:p-8 bg-white rounded-2xl border border-slate-200/90 shadow-xs space-y-4">
           <h2 className="text-xl font-bold text-slate-900">How It Works: In-Browser Client-Side Processing</h2>
           <p>
-            Unlike conventional online utility platforms that transmit your files and personal documents to external cloud servers for processing, Toolora executes tool logic directly on your local device. We leverage modern web standards including the <strong>HTML5 Canvas API</strong>, <strong>WebAssembly</strong>, and the browser's native JavaScript engine.
+            Unlike traditional online utility sites that transmit your files and documents to external cloud servers for processing, Toolora executes tool logic directly on your local device using standard web APIs—including the <strong>HTML5 Canvas API</strong>, <strong>Web Crypto API</strong>, <strong>pdf-lib</strong>, and the browser's native JavaScript engine.
           </p>
           <p>
-            When you compress an image, convert graphics between formats, or assemble a PDF document, your computer or phone CPU handles the computation locally in active browser memory. Your files are not uploaded to Toolora servers.
+            When you compress an image, convert graphics between formats, or assemble a PDF document, your computer or mobile browser performs the computation locally in active memory. Your files are not uploaded to Toolora servers.
           </p>
           <div className="p-4 bg-slate-50 rounded-xl border border-slate-200/80 text-xs sm:text-sm text-slate-600 space-y-2">
             <p className="font-semibold text-slate-900">Accurate Technical Boundaries:</p>
             <p>
-              While tool operations (such as photo compression, PDF merging, and mathematical calculations) run client-side in browser memory without server file uploads, visiting any web page inherently involves standard internet protocol communication. Our hosting infrastructure receives technical connection requests (such as your IP address and browser type to deliver web assets), and web typography is served via Google Fonts. For complete transparency, read our <Link to="/privacy" className="text-blue-600 hover:underline font-semibold">Privacy Policy</Link>.
+              While tool operations (such as photo compression, PDF merging, and mathematical calculations) run client-side in browser memory without server file uploads, visiting any web page inherently involves standard internet protocol communication. Our hosting infrastructure receives technical connection requests (such as your IP address and browser type to deliver web assets), and web typography is served via Google Fonts. For complete details, read our <Link to="/privacy" className="text-blue-600 hover:underline font-semibold">Privacy Policy</Link>.
             </p>
           </div>
         </section>
@@ -97,9 +97,9 @@ export function AboutPage() {
         {/* Toolora Online Tools Category Navigation Hub */}
         <section className="p-6 sm:p-8 bg-white rounded-2xl border border-slate-200/90 shadow-xs space-y-6">
           <div>
-            <h2 className="text-xl font-bold text-slate-900">Explore Toolora Online Tools</h2>
+            <h2 className="text-xl font-bold text-slate-900">Explore Toolora Categories</h2>
             <p className="text-xs sm:text-sm text-slate-600 mt-1">
-              Browse our complete catalog of browser-based utilities or jump directly to specialized category suites:
+              Browse our catalog of browser-based utilities across four specialized tool suites:
             </p>
           </div>
 
@@ -110,10 +110,10 @@ export function AboutPage() {
             >
               <div>
                 <h3 className="text-sm font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
-                  Image Tools Suite
+                  Image Tools (22)
                 </h3>
                 <p className="text-xs text-slate-600 mt-1.5 leading-relaxed">
-                  Compress, resize, convert between JPG, PNG, and WebP, crop, and inspect image DPI without server uploads.
+                  Compress, resize, convert between JPG, PNG, WebP, and BMP, crop, rotate, and inspect image DPI without server uploads.
                 </p>
               </div>
               <span className="text-xs font-semibold text-blue-600 mt-3 inline-flex items-center gap-1">
@@ -127,10 +127,10 @@ export function AboutPage() {
             >
               <div>
                 <h3 className="text-sm font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
-                  PDF Tools Suite
+                  PDF Tools (7)
                 </h3>
                 <p className="text-xs text-slate-600 mt-1.5 leading-relaxed">
-                  Merge multiple documents, extract page ranges, rotate orientations, inspect metadata, and convert photos to PDF.
+                  Merge multiple documents, extract page ranges, rotate orientations, inspect metadata, and convert JPG or PNG photos to PDF.
                 </p>
               </div>
               <span className="text-xs font-semibold text-blue-600 mt-3 inline-flex items-center gap-1">
@@ -144,10 +144,10 @@ export function AboutPage() {
             >
               <div>
                 <h3 className="text-sm font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
-                  Student & Math Tools
+                  Student & Academic Tools (18)
                 </h3>
                 <p className="text-xs text-slate-600 mt-1.5 leading-relaxed">
-                  Toolora image and math tools including GPA and CGPA calculators, weighted grade targets, fractions, and ratios.
+                  Semester GPA and cumulative CGPA calculators, weighted course grade targets, percentages, fractions with steps, ratios, and study timers.
                 </p>
               </div>
               <span className="text-xs font-semibold text-blue-600 mt-3 inline-flex items-center gap-1">
@@ -161,10 +161,10 @@ export function AboutPage() {
             >
               <div>
                 <h3 className="text-sm font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
-                  Daily & Text Utilities
+                  Daily & Text Utilities (16)
                 </h3>
                 <p className="text-xs text-slate-600 mt-1.5 leading-relaxed">
-                  Fast developer utilities including RFC 4122 UUID generators, Unix timestamp converters, JSON formatters, and text cleaners.
+                  Word and character counters, text cleaners, JSON formatters, Base64 and URL encoders, RFC 4122 UUIDs, passwords, and unit converters.
                 </p>
               </div>
               <span className="text-xs font-semibold text-blue-600 mt-3 inline-flex items-center gap-1">
@@ -175,13 +175,13 @@ export function AboutPage() {
 
           <div className="pt-4 border-t border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <span className="text-xs text-slate-500">
-              Looking for our comprehensive searchable index?
+              Looking for our complete searchable catalog?
             </span>
             <Link
               to="/tools"
               className="inline-flex items-center gap-1 text-xs sm:text-sm font-semibold text-blue-600 hover:text-blue-700 hover:underline"
             >
-              Explore All Free Online Tools ({SITE_URL ? 'Full Directory' : 'Directory'}) →
+              Explore All 63 Tools in Directory →
             </Link>
           </div>
         </section>
@@ -190,7 +190,7 @@ export function AboutPage() {
         <section className="p-6 sm:p-8 bg-slate-50 rounded-2xl border border-slate-200/90 space-y-3">
           <h2 className="text-base sm:text-lg font-bold text-slate-900">Have Feedback or Tool Suggestions?</h2>
           <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-            Toolora is continuously expanded based on real everyday workflows. If there is a calculation, document manipulation, or file formatting task you would like to see automated, we welcome your feedback.
+            Toolora is continuously refined based on real everyday workflows. If there is a calculation, document manipulation, or file formatting task you would like to see added or improved, we welcome your feedback.
           </p>
           <div className="pt-2">
             <Link
@@ -239,14 +239,14 @@ export function PrivacyPage() {
         <div>
           <h2 className="text-base font-bold text-slate-900 mb-2">1. Tool File & Data Handling (Browser-Based Processing)</h2>
           <p>
-            When you use our utilities (such as Image Compressor, PDF Merge, GPA Calculator, or Text Formatter), your files and text inputs are loaded directly into your local browser memory. Toolora operates no server-side file processing infrastructure; your files, photos, academic entries, and calculation inputs are not uploaded to our servers. All computational operations take place via native browser technologies including HTML5 Canvas, WebAssembly, and local JavaScript engines.
+            When you use our utilities (such as Image Compressor, Merge PDF, GPA Calculator, or Word Counter), your files and text inputs are loaded directly into your local browser memory. Toolora operates no server-side file processing infrastructure; your files, photos, academic entries, and calculation inputs are not uploaded to our servers. All computational operations take place via native browser technologies including HTML5 Canvas, Web Crypto, and local JavaScript execution.
           </p>
         </div>
 
         <div>
           <h2 className="text-base font-bold text-slate-900 mb-2">2. Local Storage Usage</h2>
           <p>
-            Certain convenience tools (such as the GPA Calculator and CGPA Calculator) allow you to save coursework data within your browser's local storage (LocalStorage) on your device so your semester entries remain available across visits. This data is stored strictly on your local device and is not synchronized to any server. You can remove it at any time by clearing your browser cache and local storage.
+            Certain tools (such as the GPA Calculator, CGPA Calculator, and the opt-in Autosave Draft toggle in the Word Counter) allow you to save entries within your browser's local storage (<code>localStorage</code>) on your device so your coursework or draft remains available across browser reloads. This data is stored strictly on your local device and is never transmitted to any server. You can clear it at any time using the reset/clear controls inside the tool or by clearing your browser site data.
           </p>
         </div>
 
